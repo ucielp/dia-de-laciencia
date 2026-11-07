@@ -428,11 +428,11 @@ SC.push({
     function fillBig(i){
       const r=T.reveals[i];
       big.replaceChildren(pic(APP,r.id,400,330),
-        el("div",{},el("div",{class:"nm"},cap(T.names[r.id]),el("span",{class:"tag",text:"lo saca el adulto"})),strip(APP,T.dna[r.id],104,14)));
+        el("div",{},el("div",{class:"nm"},cap(T.names[r.id])),strip(APP,T.dna[r.id],104,14)));
     }
     function setText(s){
       if(s===0){ title.innerHTML="¿Quién tiene <b>solo 1 diferencia</b>?"; msg.innerHTML="Cada grupo busca a su pareja."; }
-      else if(s===1){ title.innerHTML="¡Las <b>parejas</b>! Solo 1 diferencia"; msg.innerHTML="Ahora el adulto saca <b>otros animales</b>…"; }
+      else if(s===1){ title.innerHTML="¡Las <b>parejas</b>! Solo 1 diferencia"; msg.innerHTML="Ahora llegan <b>otros animales</b>…"; }
       else if(s>=LAST){ title.innerHTML="¡El <span>árbol de la vida</span>!"; msg.innerHTML="<b>Menos diferencias</b> = familia más cercana."; }
       else { const r=T.reveals[revOf(s)];
         if(isQ(s)){ title.innerHTML=r.q; msg.innerHTML="Mirad vuestra tira y contad las diferencias."; }
