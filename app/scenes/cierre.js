@@ -49,7 +49,7 @@
     for(let r=0;r<reps;r++) groups.forEach(g=>track.append(item(g)));
     track.style.animationDuration=Math.max(30,groups.length*5)+"s";
     root.append(el("div",{class:"ci-dogs"},track));
-    root.append(el("img",{class:"ci-logo",src:"img/elm.png",alt:"Institut-Escola Lluís Millet"}),el("p",{class:"ci-bye",text:"¡Gracias!"}));
+    root.append(el("img",{class:"ci-logo",src:"img/elm.png",alt:"Institut-Escola Lluís Millet"}),el("p",{class:"ci-bye",text:"¡Gracias!"}),el("a",{href:"profes.html",target:"_blank",text:"Para los profes →",style:{position:"absolute",left:"40px",bottom:"30px",fontFamily:"var(--body)",fontSize:"28px",color:"var(--grey)",textDecoration:"none"}}));
     box.append(root);
     let step=0, timers=[];
     function reveal(){ cards.forEach((c,i)=>c.classList.toggle("on",i<step)); if(step===3) confetti(); }

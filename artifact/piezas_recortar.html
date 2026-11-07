@@ -66,7 +66,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16p
 
 <div class="toolbar">
   <h1>Piezas del perro geométrico para recortar</h1>
-  <p>Hojas A4 a tamaño real, en estilo papel recortado. Primero, una hoja que explica a los niños cómo buscar sus piezas. Después, 75 cuerpos, 75 orejas y 75 colas, 25 de cada color. Recortad cada pieza por la línea gris de fuera. Las piezas no llevan marca: cada color va a su compartimento, marcado con un gomet.</p>
+  <p>Hojas A4 a tamaño real, en estilo papel recortado. Primero, una hoja que explica a los niños cómo buscar sus piezas. Después, las piezas justas para las 52 hojas «Mi ADN secreto» (print/hojas_adn_secreto.html) más 2 de repuesto de cada color. Recortad cada pieza por la línea gris de fuera. Las piezas no llevan marca: cada color va a su compartimento, marcado con un gomet.</p>
+  <p id="need"></p>
 </div>
 <div class="pages" id="pages"></div>
 
@@ -82,7 +83,7 @@ const GHEX={rojo:"#E04B3A",azul:"#2453C7",amarillo:"#F2C230"};
 const KEYS=["rojo","azul","amarillo"];
 const COAT={rojo:{m:"#B98A62",b:"#EAD9C2",name:"marrón"},azul:{m:"#F4F1EA",b:"#E3DED3",name:"dálmata"},amarillo:{m:"#E2B65C",b:"#F3DFB0",name:"dorado"}};
 const DARK="#5A3E2B", NOSE="#3B2A20", SPOT="#3A3A40";
-const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#C98A3E"};
+const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#BF7A34"};
 const TAILC={rojo:"#D9C3A0",azul:"#E59AAE",amarillo:"#8C6A4A"};
 
 const coat=k=>[R(80,138,14,38,5,COAT[k].m),R(100,138,14,38,5,COAT[k].m),R(134,138,14,38,5,COAT[k].m),R(152,138,14,38,5,COAT[k].m),
@@ -90,15 +91,17 @@ const coat=k=>[R(80,138,14,38,5,COAT[k].m),R(100,138,14,38,5,COAT[k].m),R(134,13
   ...(k==="azul"?[R(110,104,12,10,3,SPOT),R(140,116,10,9,3,SPOT),R(60,64,9,8,3,SPOT)]:[]),
   LN("M26 100 L40 100",DARK,3)];
 const EYES=[[60,76]];
+const EARC_FOLD="#8F5A24";
+// iguales que app/core.js: caída · redonda · doblada (punta caída hacia delante)
 const EARS={rojo:{n:"caídas",s:[R(70,58,16,40,7,EARC.rojo)]},
-            azul:{n:"de punta",s:[P("M64 60 L74 30 L88 60 Z",EARC.azul)]},
-            amarillo:{n:"hacia atrás",s:[P("M68 60 L106 50 L88 78 Z",EARC.amarillo)]}};
+            azul:{n:"redondas",s:[P("M72 54 H96 L98 60 A16 16 0 1 1 72 76 Z",EARC.azul)]},
+            amarillo:{n:"dobladas",s:[P("M70 66 L72 40 L62 50 Q60 44 66 36 Q74 26 86 26 Q92 28 92 38 L96 66 Z",EARC.amarillo),P("M72 40 L62 50 Q60 44 66 36 Q74 26 86 26 L88 38 Z",EARC_FOLD)]}};
 const TAILS={rojo:{n:"pompón",s:[L("M164 104 L180 80",TAILC.rojo,7),C(183,72,11,TAILC.rojo)]},
              azul:{n:"rizada",s:[C(176,96,15,TAILC.azul),LN("M176 96 q5 -1 4 5 q-2 6 -9 4 q-8 -3 -6 -11 q3 -10 14 -8",  "#B4566F",3)]},
              amarillo:{n:"larga",s:[L("M164 104 L196 70",TAILC.amarillo,8)]}};
 const PIECE={coat:k=>coat(k),ears:k=>EARS[k].s,tail:k=>TAILS[k].s};
 const NAME={coat:k=>COAT[k].name,ears:k=>EARS[k].n,tail:k=>TAILS[k].n};
-const VB={coat:[8,50,166,134],ears:[58,22,56,84],tail:[154,54,50,64]};
+const VB={coat:[8,50,166,134],ears:[50,19,60,89],tail:[154,54,50,64]};
 const assembled=(e,c,t)=>[...coat(c),...EARS[e].s,...TAILS[t].s];
 
 let uid=0;
@@ -128,67 +131,47 @@ function draw(shapes,o){
 
 const PARTS={
  coat:{label:"Cuerpo",cols:2,cw:95,ch:66,per:8},
- ears:{label:"Orejas",cols:6,cw:31.6,ch:42,per:36},
+ ears:{label:"Orejas",cols:6,cw:31.6,ch:44,per:36},
  tail:{label:"Cola",cols:7,cw:27,ch:32,per:56}
 };
-const PER_COLOR=25;
+// Recuento de print/hojas_adn_secreto.html (52 hojas, semilla 20261107) + 2 de repuesto por color.
+const USED={ears:{rojo:17,azul:17,amarillo:18},coat:{rojo:17,azul:17,amarillo:18},tail:{rojo:17,azul:18,amarillo:17}};
+const SPARE=2;
 
 function examplePage(){
-  const ex=["azul","rojo","azul"]; // orejas de punta, cuerpo marrón, cola rizada
-  const slot=(part,k)=>`<div class="slot">${draw(PIECE[part](k),{vb:VB[part],mono:true,mm:part==="coat"?0.11:0.2,label:PARTS[part].label})}<i class="gomet" style="background:${GHEX[k]}"></i><span>${PARTS[part].label.toLowerCase()}</span></div>`;
+  const ex=["amarillo","rojo","azul"]; // orejas dobladas, cuerpo marrón, cola rizada
+  const ICON={ears:"rojo",coat:"rojo",tail:"amarillo"}; // icono fijo gris, como en la hoja ADN
+  const slot=(part,k)=>`<div class="slot">${draw(PIECE[part](ICON[part]),{vb:VB[part],mono:true,mm:part==="coat"?0.11:0.2,label:PARTS[part].label})}<i class="gomet" style="background:${GHEX[k]}"></i><span>${PARTS[part].label.toLowerCase()}</span></div>`;
   const col=(part,want)=>`<div class="col"><span class="lab"><i style="background:${GHEX[want]}"></i>${PARTS[part].label}</span><div class="opts">${KEYS.map(k=>`<div class="cup ${k===want?"yes":"no"}">${draw(PIECE[part](k),{vb:VB[part],eyes:part==="coat",mm:part==="coat"?0.14:0.24,label:PARTS[part].label+" "+NAME[part](k)})}<i class="g" style="background:${GHEX[k]}"></i></div>`).join("")}</div></div>`;
   return `<section class="page ex">
     <h2>¿Cómo encuentro mis piezas?</h2>
     <div class="step"><h3><span class="n">1</span>Mira tu ADN secreto</h3>
-      <p class="say">Tu tarjeta tiene 3 gomets: uno para las orejas, otro para el cuerpo y otro para la cola.</p>
+      <p class="say">Tu hoja tiene 3 gomets: uno para las orejas, otro para el cuerpo y otro para la cola.</p>
       <div class="card">${slot("ears",ex[0])}${slot("coat",ex[1])}${slot("tail",ex[2])}</div></div>
     <div class="step"><h3><span class="n">2</span>Coge las piezas del vaso de tu color</h3>
       <p class="say">En tu mesa hay un vaso de orejas, uno de cuerpos y uno de colas. Cada vaso tiene 3 compartimentos con un gomet. Coge la pieza del compartimento de tu color.</p>
       <div class="cols">${col("ears",ex[0])}${col("coat",ex[1])}${col("tail",ex[2])}</div></div>
     <div class="step"><h3><span class="n">3</span>Pega el cuerpo y, encima, las orejas y la cola</h3>
-      <div class="final">${draw(assembled(...ex),{vb:[8,22,196,160],eyes:true,mm:0.27,label:"Perro montado"})}<span class="name">Mi perro se llama<br>________________</span></div></div>
+      <div class="final">${draw(assembled(...ex),{vb:[8,22,196,160],eyes:true,mm:0.27,label:"Perro montado"})}<span class="name">¡Listo!<br>Pégalo en «Pega aquí tu perro».</span></div></div>
   </section>`;
 }
 function piecePages(part){
   const p=PARTS[part], list=[];
-  KEYS.forEach(k=>{for(let i=0;i<PER_COLOR;i++) list.push(k);});
+  KEYS.forEach(k=>{for(let i=0;i<USED[part][k]+SPARE;i++) list.push(k);});
+  const tot=KEYS.map(k=>`${k} ${USED[part][k]+SPARE}`).join(" · ");
   const n=Math.ceil(list.length/p.per); let html="";
   for(let pg=0;pg<n;pg++){
     const items=list.slice(pg*p.per,(pg+1)*p.per);
     const colors=[...new Set(items)].map(k=>`<i style="background:${GHEX[k]}"></i>`).join("");
     const cells=items.map(k=>`<div class="cell" style="width:${p.cw}mm;height:${p.ch}mm">${draw(PIECE[part](k),{vb:VB[part],eyes:part==="coat",contour:true,label:`${p.label} ${NAME[part](k)}`})}</div>`).join("");
-    html+=`<section class="page"><div class="ph"><b>${p.label} · ${colors}</b><span>hoja ${pg+1} de ${n} · recorta por la línea gris</span></div>
+    html+=`<section class="page"><div class="ph"><b>${p.label} · ${colors}</b><span>hoja ${pg+1} de ${n} · ${tot} (${SPARE} de repuesto por color) · recorta por la línea gris</span></div>
       <div class="grid" style="grid-template-columns:repeat(${p.cols},${p.cw}mm)">${cells}</div></section>`;
   }
   return html;
 }
-// ---------- Tarjetas «ADN secreto»: 74, equilibradas (máx. 25 de cada color en cada posición) ----------
-function combos74(){
-  const all=[]; for(const a of KEYS)for(const b of KEYS)for(const c of KEYS) all.push([a,b,c]);
-  const list=[...all,...all]; // 54: cada combinación 2 veces
-  const cnt=[{},{},{}]; list.forEach(x=>x.forEach((k,i)=>cnt[i][k]=(cnt[i][k]||0)+1));
-  let i=0;
-  while(list.length<74){ // añade combinaciones sin pasar de 25 por color y posición
-    const x=all[(i*7)%27]; i++;
-    if(x.every((k,j)=>cnt[j][k]<25)){ list.push(x); x.forEach((k,j)=>cnt[j][k]++); }
-  }
-  // orden mezclado (determinista) para que los gemelos caigan en mesas distintas
-  let seed=7; const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
-  for(let j=list.length-1;j>0;j--){ const r=Math.floor(rnd()*(j+1)); [list[j],list[r]]=[list[r],list[j]]; }
-  return list;
+function render(){
+  document.getElementById("pages").innerHTML=examplePage()+piecePages("coat")+piecePages("ears")+piecePages("tail");
+  document.getElementById("need").textContent="A recortar: "+["coat","ears","tail"].map(p=>PARTS[p].label+" "+KEYS.map(k=>`${k} ${USED[p][k]}+${SPARE}`).join(", ")).join(" · ");
 }
-function cardPages(){
-  const list=combos74(), per=18, n=Math.ceil(list.length/per); let html="";
-  const ICON={ears:"rojo",coat:"rojo",tail:"amarillo"}; // icono fijo: no delata qué pieza toca
-  const slot=(part,k)=>`<div class="aslot">${draw(PIECE[part](ICON[part]),{vb:VB[part],mono:true,mm:part==="coat"?0.075:0.13,label:PARTS[part].label})}<i class="ring" style="border-color:${GHEX[k]};background:${GHEX[k]}22"></i><span>${PARTS[part].label.toLowerCase()}</span></div>`;
-  for(let pg=0;pg<n;pg++){
-    const items=list.slice(pg*per,(pg+1)*per);
-    const cells=items.map((x,j)=>`<div class="cell adn" style="width:63.3mm;height:44mm"><div class="at"><b>Mi ADN secreto</b><span>nº ${pg*per+j+1}</span></div><div class="arow">${slot("ears",x[0])}${slot("coat",x[1])}${slot("tail",x[2])}</div></div>`).join("");
-    html+=`<section class="page"><div class="ph"><b>Tarjetas de ADN secreto</b><span>hoja ${pg+1} de ${n} · pega en cada círculo un gomet de ese color · recorta por los puntos</span></div>
-      <div class="grid" style="grid-template-columns:repeat(3,63.3mm)">${cells}</div></section>`;
-  }
-  return html;
-}
-function render(){ document.getElementById("pages").innerHTML=examplePage()+cardPages()+piecePages("coat")+piecePages("ears")+piecePages("tail"); }
 render();
 </script>

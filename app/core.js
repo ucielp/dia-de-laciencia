@@ -86,18 +86,21 @@ function paperSVG(shapes,opts={}){
 
 // ---------- Perro geométrico (idéntico a las piezas impresas) ----------
 const COAT={rojo:{m:"#B98A62",b:"#EAD9C2",n:"marrón"},azul:{m:"#F4F1EA",b:"#E3DED3",n:"dálmata"},amarillo:{m:"#E2B65C",b:"#F3DFB0",n:"dorado"}};
-const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#C98A3E"};
+const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#BF7A34"}, EARFOLD="#8F5A24";
 const TAILC={rojo:"#D9C3A0",azul:"#E59AAE",amarillo:"#8C6A4A"};
 const dogParts={
   coat:k=>[R(80,138,14,38,5,COAT[k].m),R(100,138,14,38,5,COAT[k].m),R(134,138,14,38,5,COAT[k].m),R(152,138,14,38,5,COAT[k].m),
     R(72,94,96,50,12,COAT[k].m),R(86,130,66,9,4,COAT[k].b),R(36,58,54,50,12,COAT[k].m),R(16,84,32,24,8,COAT[k].b),C(20,88,6,"#3B2A20"),
     ...(k==="azul"?[R(110,104,12,10,3,"#3A3A40"),R(140,116,10,9,3,"#3A3A40"),R(60,64,9,8,3,"#3A3A40")]:[]),
     LN("M26 100 L40 100")],
-  ears:{rojo:[R(70,58,16,40,7,EARC.rojo)],azul:[P("M64 60 L74 30 L88 60 Z",EARC.azul)],amarillo:[P("M68 60 L106 50 L88 78 Z",EARC.amarillo)]},
+  // rojo: caída (tira larga) · azul: redonda (lóbulo circular que cuelga detrás del ojo) · amarillo: doblada (triángulo de pie con la punta caída hacia delante)
+  ears:{rojo:[R(70,58,16,40,7,EARC.rojo)],
+        azul:[P("M72 54 H96 L98 60 A16 16 0 1 1 72 76 Z",EARC.azul)],
+        amarillo:[P("M70 66 L72 40 L62 50 Q60 44 66 36 Q74 26 86 26 Q92 28 92 38 L96 66 Z",EARC.amarillo),P("M72 40 L62 50 Q60 44 66 36 Q74 26 86 26 L88 38 Z",EARFOLD)]},
   tail:{rojo:[L("M164 104 L180 80",TAILC.rojo,7),C(183,72,11,TAILC.rojo)],
         azul:[C(176,96,15,TAILC.azul),LN("M176 96 q5 -1 4 5 q-2 6 -9 4 q-8 -3 -6 -11 q3 -10 14 -8","#B4566F",3)],
         amarillo:[L("M164 104 L196 70",TAILC.amarillo,8)]},
-  names:{ears:{rojo:"caídas",azul:"de punta",amarillo:"hacia atrás"},coat:{rojo:"marrón",azul:"dálmata",amarillo:"dorado"},tail:{rojo:"pompón",azul:"rizada",amarillo:"larga"}},
+  names:{ears:{rojo:"caídas",azul:"redondas",amarillo:"dobladas"},coat:{rojo:"marrón",azul:"dálmata",amarillo:"dorado"},tail:{rojo:"pompón",azul:"rizada",amarillo:"larga"}},
   eyes:[[60,76]], vb:"4 20 200 165"
 };
 const DOG_NAMES=["Croqueta","Pulga","Churro","Galleta","Turrón","Rayo","Bombón","Pipa","Canela","Fideo","Trufa","Mochi","Chispa","Bigotes","Coco","Nube","Patata","Lenteja","Garbanzo","Pimienta","Merengue","Rosquilla","Tofu","Calcetín","Peluche","Tornado","Magdalena"];

@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><title>Tarjeta recuerdo</title>
+<html lang="ca"><head><meta charset="utf-8"><title>Tarjeta recuerdo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap">
 <style>
 /* Tarjeta recuerdo (solo una clase): el pin se clava en «pin aquí» y el llavero se ata por el agujero.
-   4 tarjetas de 95×138 mm por A4 con marcas de corte. Página 1: variante «medalla». Página 2: variante «matraz». */
+   Variante «matraz»: pin en el líquido del matraz, agujero del llavero arriba a la izquierda. Tarjeta blanca (sin fondo).
+   24 tarjetas = 6 hojas A4 de 4 tarjetas de 95×138 mm con marcas de corte. */
 @page{size:A4;margin:0}
 *{box-sizing:border-box}
 html,body{margin:0;background:#ecebe6}
@@ -36,7 +37,7 @@ h2 em{font-style:normal}
 .A .name{margin-bottom:3mm}
 
 /* Variante B: matraz */
-.B .in{background:#EAF6FC;border:0.5mm solid #BFE3F4;padding:6mm 6mm 4.5mm;justify-content:space-between}
+.B .in{background:transparent;padding:6mm 6mm 4.5mm;justify-content:space-between}
 .B h2{margin:0 0 0 9mm;padding-left:2mm}
 .B h2 em{color:#29ABE2}
 .B .msg{text-align:center;margin:0}
@@ -90,7 +91,7 @@ function dna(x,y,s){ // hélice 24×60
     <path d="M4 2 C4 16 20 16 20 30 S4 44 4 58" fill="none" stroke="#29ABE2" stroke-width="3.6" stroke-linecap="round"/>
     <path d="M20 2 C20 16 4 16 4 30 S20 44 20 58" fill="none" stroke="#F7931E" stroke-width="3.6" stroke-linecap="round"/></g></g>`;
 }
-// perro geométrico (mismas formas que app/core.js): orejas de punta, pelaje dálmata, cola pompón
+// perro geométrico (mismas formas que app/core.js): orejas redondas, pelaje dálmata, cola pompón
 function dog(x,y,s){
   const m="#F4F1EA", b="#E3DED3", sp="#3A3A40";
   return `<g transform="translate(${x} ${y}) scale(${s}) translate(-4 -20)"><g class="pc">
@@ -100,7 +101,7 @@ function dog(x,y,s){
     <rect x="36" y="58" width="54" height="50" rx="12" fill="${m}"/><rect x="16" y="84" width="32" height="24" rx="8" fill="${b}"/>
     <circle cx="20" cy="88" r="6" fill="#3B2A20"/>
     <rect x="110" y="104" width="12" height="10" rx="3" fill="${sp}"/><rect x="140" y="116" width="10" height="9" rx="3" fill="${sp}"/><rect x="60" y="64" width="9" height="8" rx="3" fill="${sp}"/>
-    <path d="M64 60 L74 30 L88 60 Z" fill="#4A4E5C" stroke="#4A4E5C" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M72 54 H96 L98 60 A16 16 0 1 1 72 76 Z" fill="#4A4E5C" stroke="#4A4E5C" stroke-width="2" stroke-linejoin="round"/>
     <path d="M164 104 L180 80" stroke="#D9C3A0" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="183" cy="72" r="11" fill="#D9C3A0"/></g>
     <path d="M26 100 L40 100" stroke="#5A3E2B" stroke-width="3" stroke-linecap="round"/>
     <circle cx="60" cy="76" r="8.5" fill="#FFFDF6"/><circle cx="58.5" cy="77" r="4.6" fill="#2A2A30"/></g>`;
@@ -110,9 +111,7 @@ const HELIX=`<svg viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg"><path d
 const HOLE=`<svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><g class="pc"><circle cx="11" cy="11" r="9.5" fill="#F7931E"/></g><circle cx="11" cy="11" r="5" fill="#fff" stroke="#1F2A44" stroke-width=".7" stroke-dasharray="1.6 1.2"/><path d="M9 11h4M11 9v4" stroke="#1F2A44" stroke-width=".6"/></svg>`;
 // diana para el pin (diámetro en unidades = mm)
 const pinTarget=(cx,cy,r,ring)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="${ring}" stroke-width=".7" stroke-dasharray="2 1.4"/>
-  <path d="M${cx-2.2} ${cy}h4.4M${cx} ${cy-2.2}v4.4" stroke="#1F2A44" stroke-width=".45"/>
-  <text x="${cx}" y="${cy-r*0.42}" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="4.6" fill="#1F2A44">pin aquí</text>
-  <text x="${cx}" y="${cy+r*0.62}" text-anchor="middle" font-family="Nunito Sans" font-size="2.6" fill="#6D6E71">en la cruz</text>`;
+  <path d="M${cx-2.2} ${cy}h4.4M${cx} ${cy-2.2}v4.4" stroke="#1F2A44" stroke-width=".45"/>`;
 
 function medal(){ // 38×46 mm
   const cx=19, cy=18, n=18; let pts="";
@@ -151,25 +150,24 @@ function illB(){ // 83×64 mm: gran matraz con la diana del pin en el líquido
     ${star(22,8,2.3,"#F2C230")}${star(62,6,1.8,"#E59AAE")}${star(27,16,1.2,"#29ABE2")}
   </svg>`;
 }
-const foot=()=>`<div class="foot"><img src="${LOGO}" alt="Institut-Escola Lluís Millet"><b>${HELIX}Día de la Ciencia</b></div>`;
-const MSG="Haz preguntas, observa y nunca dejes de investigar.";
+const foot=()=>`<div class="foot"><img src="${LOGO}" alt="Institut-Escola Lluís Millet"><b>${HELIX}Dia de la Ciència</b></div>`;
+const MSG="Fes preguntes, observa i no deixis mai d'investigar.";
 function cardA(){
   return `<div class="in">
     <div class="hole" style="left:50%;top:2mm;transform:translateX(-50%)">${HOLE}</div>
-    <span class="hole" style="left:calc(50% + 7mm);top:5.6mm">llavero</span>
+    
     ${illA()}
-    <h2>¡Todos podemos<br>ser <em>científicos</em>!</h2>
+    <h2>Tots podem<br>ser <em>científics</em>!</h2>
     <div class="mid">${medal()}<p class="msg">${MSG}</p></div>
     <div class="name">Nombre: <i></i></div>
     ${foot()}</div>`;
 }
 function cardB(){
   return `<div class="in">
-    <div class="hole" style="left:3mm;top:3mm;flex-direction:column;gap:0.6mm">${HOLE}<span>llavero</span></div>
-    <h2>¡Todos podemos<br>ser <em>científicos</em>!</h2>
+    <div class="hole" style="left:3mm;top:3mm;flex-direction:column;gap:0.6mm">${HOLE}</div>
+    <h2>Tots podem<br>ser <em>científics</em>!</h2>
     ${illB()}
-    <p class="msg">Haz preguntas, observa<br>y nunca dejes de investigar.</p>
-    <div class="name">Nombre: <i></i></div>
+    <p class="msg">Fes preguntes, observa<br>i no deixis mai d'investigar.</p>
     ${foot()}</div>`;
 }
 function marks(){
@@ -189,6 +187,7 @@ function sheet(fn,cls){
     h+=`<div class="card ${cls}" style="left:${X0+i*(CW+GX)}mm;top:${Y0+j*(CH+GY)}mm">${fn()}</div>`;
   return `<section class="sheet">${marks()}${h}</section>`;
 }
-document.getElementById("pages").innerHTML=sheet(cardA,"A")+sheet(cardB,"B");
+const SHEETS=6; // 6 hojas × 4 = 24 tarjetas
+document.getElementById("pages").innerHTML=Array.from({length:SHEETS},()=>sheet(cardB,"B")).join("");
 </script>
 </body></html>

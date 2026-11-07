@@ -23,7 +23,14 @@ window.NOTES = {
 
   portada:
     "«¿Y yo?» (pausa) «Soy Uciel… ¡y soy científico!»\n\n" +
-    "«Mi ciencia mezcla un poco de medicina y un poco de ordenadores.» El perro ladra una vez: «nos acompañará luego».",
+    "«Mi ciencia mezcla un poco de medicina y un poco de ordenadores.» El perro ladra una vez: «nos acompañará luego».\n\n" +
+    "Ensayar la señal de silencio: «¡Científicos!» → «¡A observar!» + mano arriba. Luego → mi equipo.",
+
+  equipo:
+    "(1 minuto, 2 pulsaciones.) Sale mi foto: «Pero no trabajo solo. Tengo un equipo en la UIC, una universidad de Barcelona.»\n\n" +
+    "→ Aparecen uno a uno: Nicolás, Jorge, Clara, Santiago, Fernando y Júlia. Decir los nombres mientras salen. «Cada uno sabe cosas distintas y nos ayudamos.»\n\n" +
+    "→ Foto del equipo enseñando sus pósteres: «Cuando descubrimos algo, se lo contamos a otros científicos.» Todos juntos: «¡La ciencia se hace en EQUIPO!» (como vosotros hoy en vuestras estaciones).\n\n" +
+    "Clara está haciendo su doctorado (se está formando para ser científica). Todos los nombres: solo el nombre de pila.",
 
   "mi-trabajo":
     "«Vamos a hacer zoom dentro de vosotros»: piel → células → núcleo → ADN.\n\n" +

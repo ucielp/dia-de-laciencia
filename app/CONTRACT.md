@@ -1,6 +1,6 @@
 # Contrato de la app «Científicos por un día»
 
-App de una sola página para el proyector, clase de ciencia para unos 70 niños de 6–7 años (**no escribir nunca el número de niños en pantalla**) (1º y 2º de primaria, Institut-Escola Lluís Millet, El Masnou). Todo en **español**, frases muy cortas, letra enorme. La presenta un científico que investiga **ARN, genómica, bioinformática e IA**.
+App de una sola página para el proyector, clase de ciencia para 52 niños de 6–7 años (**no escribir nunca el número de niños en pantalla**) (1º y 2º de primaria, Institut-Escola Lluís Millet, El Masnou). Todo en **español**, frases muy cortas, letra enorme. La presenta un científico que investiga **ARN, genómica, bioinformática e IA**.
 
 ## Archivos y quién los escribe
 | Archivo | Autor |
@@ -47,6 +47,7 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 | 25 | no-solo | «La ciencia es mucho más que experimentos» (transición) | ciencia.js |
 | 30 | ambitos | ¿Qué hace la ciencia? tarjetas; las DOS ÚLTIMAS son medicina y ordenadores/IA; hay una de historia | ciencia.js |
 | 35 | portada | Logo del cole, «Hola, soy Uciel y soy científico» (ahora va DESPUÉS de ámbitos) | portada.js |
+| 37 | equipo | Mi equipo en la UIC: fotos, «La ciencia se hace en equipo» | portada.js |
 | 40 | mi-trabajo | Lo que yo hago: niño → célula → ADN → 4 letras (colores del modelo) → «yo estudio estas letras y lo combino con IA» (sin ARN) | ciencia.js |
 | 50 | receta | El ADN es una receta (ejemplo: panellets) → la receta del perro (3 gomets) | perro.js |
 | 52 | familia-perro | Historia: mamá perra y papá perro → los cachorros reciben cada parte de mamá o de papá. Nos parecemos a nuestros padres | perro.js |
