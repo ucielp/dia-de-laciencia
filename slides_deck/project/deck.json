@@ -1,0 +1,17 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-11-04T17:00:00Z"},
+  "lists": "css",
+  "title": "Ideas Día de la Ciencia",
+  "order": ["cover", "resumen", "div-si", "germen", "monstruos", "perro", "detectives", "piezas-ia", "quickdraw", "div-quizas", "teachable", "papa-robot", "chihuahua", "animated", "scroobly", "blob-opera", "huellas", "robot"],
+  "sections": {
+    "s1": {"description": "Portada y resumen de las 14 ideas", "start": "cover"},
+    "s2": {"description": "Las 6 ideas marcadas con sí", "start": "div-si"},
+    "s3": {"description": "Las 8 ideas marcadas con quizás", "start": "div-quizas"}
+  },
+  "faces": {
+    "fredoka": {"family": "Fredoka", "href": "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap"},
+    "nunito-sans": {"family": "Nunito Sans", "href": "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap"}
+  },
+  "designSystems": []
+}

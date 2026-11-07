@@ -1,0 +1,17 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-11-05T10:00:00Z"},
+  "lists": "css",
+  "title": "Ideas Mark Rober",
+  "order": ["cover", "resumen", "huevo", "oobleck", "ardilla", "feria", "mario", "juego"],
+  "sections": {
+    "s1": {"description": "Portada y resumen de las 5 ideas sacadas de vídeos de Mark Rober", "start": "cover"},
+    "s2": {"description": "Una diapositiva por idea", "start": "huevo"},
+    "s3": {"description": "Ideas de juego para después", "start": "juego"}
+  },
+  "faces": {
+    "fredoka": {"family": "Fredoka", "href": "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap"},
+    "nunito-sans": {"family": "Nunito Sans", "href": "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap"}
+  },
+  "designSystems": []
+}

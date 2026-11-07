@@ -1,0 +1,335 @@
+<title>Ciencia para 74</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: plan sugerido arriba; tablero de cartas por tema con gomets sí / quizás / no; barra fija con recuento y filtros. */
+:root{
+  --bg:#f6f4ee; --card:#fffdf8; --ink:#1d2433; --muted:#5d6577; --line:#e3ded2;
+  --accent:#2453c7; --si:#16a34a; --no:#dc2626; --qz:#e0a800; --chip:#efeadf; --plan:#e8eefc;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14171f; --card:#1c2130; --ink:#e9ecf3; --muted:#9aa3b5; --line:#2c3344;
+  --accent:#7fa2ff; --si:#3ccf74; --no:#ff6b6b; --qz:#f5c542; --chip:#262c3c; --plan:#1d2742; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171f; --card:#1c2130; --ink:#e9ecf3; --muted:#9aa3b5; --line:#2c3344;
+  --accent:#7fa2ff; --si:#3ccf74; --no:#ff6b6b; --qz:#f5c542; --chip:#262c3c; --plan:#1d2742; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 60px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,38px);line-height:1.1;margin:0 0 6px;text-wrap:balance}
+.lede{color:var(--muted);max-width:68ch;margin:0}
+.plan{margin-top:18px;background:var(--plan);border-radius:14px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.plan h3{font-family:var(--display);font-weight:600;font-size:17px;margin:0 0 6px}
+.plan ol{margin:0;padding-left:20px;font-size:14px}
+.plan li{margin:2px 0}
+.plan .t{color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.count{display:flex;gap:10px;font-variant-numeric:tabular-nums;font-weight:700;flex-wrap:wrap}
+.count span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.filters button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 11px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.status{font-size:12px;color:var(--muted);width:100%}
+h2{font-family:var(--display);font-weight:600;font-size:21px;margin:30px 0 10px;text-wrap:balance}
+h2 small{font-family:var(--body);font-weight:400;font-size:13px;color:var(--muted);margin-left:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:8px;min-width:0;transition:opacity .2s}
+.card[data-d="si"]{border-color:var(--si);box-shadow:inset 0 0 0 1px var(--si)}
+.card[data-d="no"]{opacity:.5}
+.card[data-d="quizas"]{border-color:var(--qz)}
+.name{font-weight:700;font-size:17px;line-height:1.3;margin:0}
+.star{color:var(--qz)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;background:var(--chip);color:var(--ink)}
+.tag.todos{color:var(--accent)}
+.what{margin:0;font-size:14.5px}
+.sci{margin:0;font-size:14px;color:var(--accent);font-weight:700}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted)}
+details{font-size:13px;color:var(--muted)}
+details summary{cursor:pointer;color:var(--accent)}
+details p{margin:6px 0 0}
+details a{color:var(--accent);word-break:break-all}
+.vote{display:flex;gap:6px;margin-top:auto;padding-top:4px}
+.vote button{flex:1;font:inherit;font-weight:700;font-size:14px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);padding:6px 0;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;gap:6px}
+.vote button .dot{width:10px;height:10px}
+.vote button[aria-pressed="true"][data-v="si"]{background:var(--si);border-color:var(--si);color:#fff}
+.vote button[aria-pressed="true"][data-v="no"]{background:var(--no);border-color:var(--no);color:#fff}
+.vote button[aria-pressed="true"][data-v="quizas"]{background:var(--qz);border-color:var(--qz);color:#1d2433}
+.note{font:inherit;font-size:13px;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);padding:5px 8px}
+button:focus-visible,.note:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="wrap">
+  <h1>Ciencia para 74: ideas que se juegan con el cuerpo</h1>
+  <p class="lede">18 actividades de ADN, ARN, IA y evolución para 74 niños de 6 y 7 años. Todas se explican en un minuto y usan material barato, y en la mayoría participan todos a la vez. Las ★ son las que más recomiendan las fuentes y los agentes. Marca sí, quizás o no; con las del sí preparo las diapositivas.</p>
+
+  <section class="plan" aria-label="Dos sesiones de ejemplo">
+    <div>
+      <h3>Ejemplo A · todo en el gimnasio, 40 min</h3>
+      <ol>
+        <li>El baile de la receta <span class="t">5 min</span></li>
+        <li>¿Qué ha cambiado? (el ADN humano) <span class="t">10 min</span></li>
+        <li>El teléfono del ARN <span class="t">10 min</span></li>
+        <li>Adivina mi regla (IA) <span class="t">8 min</span></li>
+        <li>¡El último en pie! <span class="t">7 min</span></li>
+      </ol>
+    </div>
+    <div>
+      <h3>Ejemplo B · gimnasio + mesas, 45 min</h3>
+      <ol>
+        <li>¡El último en pie! <span class="t">7 min</span></li>
+        <li>De la biblioteca a la cocina (ARN → proteína) <span class="t">15 min</span></li>
+        <li>Pájaros hambrientos o el perro del ADN <span class="t">15 min</span></li>
+        <li>La red neuronal humana (IA) <span class="t">8 min</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="count" aria-live="polite">
+      <span><i class="dot" style="background:var(--si)"></i><b id="nSi">0</b> sí</span>
+      <span><i class="dot" style="background:var(--qz)"></i><b id="nQz">0</b> quizás</span>
+      <span><i class="dot" style="background:var(--no)"></i><b id="nNo">0</b> no</span>
+      <span style="color:var(--muted);font-weight:400"><b id="nPend">0</b> sin mirar</span>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar">
+      <button id="f-all" data-f="all" aria-pressed="true">Todas</button>
+      <button id="f-top" data-f="top" aria-pressed="false">★ Recomendadas</button>
+      <button id="f-todos" data-f="todos" aria-pressed="false">Los 74 a la vez</button>
+      <button id="f-mesas" data-f="mesas" aria-pressed="false">En mesas</button>
+      <button id="f-pend" data-f="pend" aria-pressed="false">Sin mirar</button>
+      <button id="f-si" data-f="si" aria-pressed="false">Sí</button>
+      <button id="f-quizas" data-f="quizas" aria-pressed="false">Quizás</button>
+    </div>
+    <div class="status" id="status">Conectando…</div>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script>
+const IDEAS = [
+// ADN y familia
+{id:"baile",group:"ADN: la receta y la familia",name:"El baile de la receta",top:true,fmt:"todos",
+ what:"Se proyecta una fila de 6 cartas de colores. Cada color es un movimiento: rojo salto, azul palmada, verde giro, amarillo tocarse la cabeza. Todos la «leen» bailando. Luego cambias una carta y sale otro baile.",
+ how:"Los 74 de pie a la vez.",time:"5 min",mat:"4 cartulinas de colores o una diapositiva",
+ sci:"El ADN es una lista de instrucciones: si cambias una, sale otra cosa.",
+ why:"Movimiento puro. Sirve para empezar y, cambiando una carta, también para cerrar.",
+ note:"Es una adaptación: no hay versión publicada para primaria.",src:"https://www.genome.gov/26525978/genes-in-motion"},
+{id:"pie",group:"ADN: la receta y la familia",name:"¡El último en pie!",top:true,fmt:"todos",
+ what:"Todos de pie. Se enseña una tarjeta con un rasgo: pecas, pelo rizado, enrollar la lengua, lóbulo pegado, pulgar izquierdo encima al cruzar las manos. Quien no lo tiene se sienta, hasta que queda uno solo.",
+ how:"Los 74 a la vez. Se juega 2 o 3 veces barajando y cada vez gana otro.",time:"5–10 min",mat:"8–10 tarjetas A4 (Utah las tiene dibujadas y en español)",
+ sci:"Todos tenemos una mezcla de rasgos y no hay dos personas iguales.",
+ why:"Suspense de eliminación, cero preparación, y todos se miran la lengua y las orejas.",
+ note:"Enrollar la lengua o el lóbulo no son de un solo gen dominante. Mejor decir «en esto somos distintos; algunas cosas vienen de la familia», no «esto es un gen».",
+ src:"https://teach.genetics.utah.edu/content/heredity/files/Family-Traits-Trivia.pdf"},
+{id:"familia",group:"ADN: la receta y la familia",name:"¿Quién es mi mamá?",top:false,fmt:"todos",
+ what:"Cada niño recibe una foto de un animal adulto o de una cría: cebra, panda, pingüino… Se buscan por el gimnasio, si quieres haciendo el ruido del animal. Cuando se encuentran, dicen en qué se parecen y en qué no.",
+ how:"Los 74 a la vez: unas 8 familias con 4 o 5 copias cada una.",time:"10 min",mat:"74 fotos impresas",
+ sci:"Las crías se parecen a sus padres, pero no son exactamente iguales.",
+ why:"Corretear con un objetivo, y lo de los ruidos les encanta.",
+ src:"https://www.generationgenius.com/wp-content/uploads/2019/06/LP-introduction-to-traits-k2.pdf"},
+{id:"vasos",group:"ADN: la receta y la familia",name:"Los vasos de mamá y papá",top:false,fmt:"mesas",
+ what:"Un vaso «Mamá» y un vaso «Papá», cada uno con 6 pompones de colores. Con los ojos cerrados se sacan 3 de cada vaso: ese es el hijo. Se devuelven y se saca un hermano, que sale distinto.",
+ how:"Como demostración delante, con voluntarios y el resto gritando colores, o un par de vasos por mesa.",time:"10 min",mat:"2 vasos y 12 pompones por mesa",
+ sci:"Recibimos mitad de mamá y mitad de papá, pero a cada hermano le toca una mezcla distinta.",
+ why:"El sorteo a ciegas y el «¡me salió distinto que a mi hermano!».",
+ note:"Simplificación: el original tiene tres generaciones y hoja de trabajo.",
+ src:"https://teach.genetics.utah.edu/content/heredity/files/Generations-of-Traits_TG.pdf"},
+{id:"perro",group:"ADN: la receta y la familia",name:"El perro del ADN (el que ya tenías)",top:true,fmt:"mesas",
+ what:"Tira de 4 gomets de colores → tabla → cada niño dibuja el perro que sale de su receta. Al final se busca si hay dos perros iguales.",
+ how:"En mesas, todos con el mismo material.",time:"15–20 min",mat:"Gomets de 4 colores, folios, la tabla proyectada",
+ sci:"El ADN es una receta: cada color decide un trocito del perro.",
+ why:"Dibujan, se llevan algo a casa, y es lo que ya probaste con tus hijos.",
+ note:"Variante rápida: en vez de gomets, tirar un dado 3 veces. Una versión parecida es el «bebé extraterrestre» con moneda de la Universidad de Edimburgo.",
+ src:"https://vet.ed.ac.uk/sites/default/files/2024-09/Alien%20Babies%20Researcher%20Guidance.pdf"},
+// ARN y proteínas
+{id:"celula",group:"ARN: el mensaje que sale del núcleo",name:"La célula gigante",top:false,fmt:"todos",
+ what:"Unos 50 niños de la mano en un círculo son la membrana. En el centro, 8 son el núcleo y guardan «el libro» (el ADN). Junto a la pared, otros 16 son las cocinas. La membrana abre una puerta para la comida y la cierra si llega un virus (un adulto).",
+ how:"Los 74 a la vez, cada uno con un papel.",time:"5 min",mat:"Cinta de carrocero y un libro o una caja con «ADN»",
+ sci:"Estás hecho de millones de casitas, las células, y en el centro de cada una hay un libro de instrucciones.",
+ why:"Ven la célula desde dentro, y monta el escenario para el teléfono y para la cocina.",
+ note:"Sola enseña poco: úsala para arrancar.",
+ src:"https://ukri.org/wp-content/uploads/2022/02/BBSRC-140214-Discovering-DNA-English-version.pdf"},
+{id:"telefono",group:"ARN: el mensaje que sale del núcleo",name:"El teléfono del ARN",top:true,fmt:"todos",
+ what:"Filas de unos 10. El primero ve una tarjeta de «ADN» con 3 o 4 gestos (saltar, nariz, aplauso, pisotón) y se los pasa al siguiente haciéndolos, sin hablar. El último los hace delante de todos: esa es la proteína. Se compara con el original: lo que cambió es una mutación.",
+ how:"7 u 8 filas a la vez, un adulto cada 2 o 3 filas. Pueden competir a ver cuál llega sin errores.",time:"10 min",mat:"8 tarjetas con iconos (muchos aún no leen)",
+ sci:"El ADN no sale del núcleo: manda una copia, el ARN. Si se copia mal, el cuerpo construye otra cosa.",
+ why:"Es el teléfono roto, que ya conocen, y los errores dan risa.",
+ note:"El original es de secundaria. Con gestos en vez de palabras funciona a los 6 años.",
+ src:"https://www.teachengineering.org/activities/view/uoh_mutations_lesson01_activity1"},
+{id:"cocina",group:"ARN: el mensaje que sale del núcleo",name:"De la biblioteca a la cocina",top:true,fmt:"mesas",
+ what:"En el «núcleo» hay un libro de recetas que no se puede sacar. Cada receta es una fila de 5 puntos de colores. Un mensajero la copia en un post-it (eso es el ARN), corre a su mesa y allí construyen la torre en ese orden. Al final se compara con la receta original.",
+ how:"8 equipos de 9, turnando copistas, mensajeros y constructores, con 2 o 3 recetas por equipo.",time:"12–15 min",mat:"Por equipo: unos 20 bloques de 4 colores (Duplo o vasos), post-its y rotuladores",
+ sci:"El ADN es el libro y se queda guardado. El ARN es la copia que llega a la cocina, donde se construye la proteína.",
+ why:"Corren, copian y construyen, y cuenta la historia completa de tu trabajo. Si una torre sale distinta: ¡mutación!",
+ note:"Adaptado del juego de bloques de EMBL, que usa tripletes; aquí 1 color = 1 bloque.",
+ src:"https://www.embl.org/ells/teachingbase/building-blocks/"},
+{id:"proteina",group:"ARN: el mensaje que sale del núcleo",name:"La proteína humana que se dobla",top:false,fmt:"todos",
+ what:"Cada niño lleva un gomet de color. Un adulto lee un «mensaje de ARN» («azul, rojo, rojo, verde…») y se van dando la mano en ese orden hasta formar una cadena. Luego la cadena se dobla en una forma (círculo, U, espiral): esa es la proteína.",
+ how:"3 o 4 cadenas de unos 20 niños.",time:"8 min",mat:"Gomets de 4 colores",
+ sci:"Las proteínas son cadenas de piezas que se doblan y forman tu pelo o tus músculos.",
+ why:"Ellos son la proteína, y el plegado tiene sorpresa.",
+ note:"Hay que decir qué hace cada forma («esta tira como un músculo») o se queda abstracto.",
+ src:"https://socialsci.libretexts.org/Bookshelves/Anthropology/Biological_Anthropology/Explorations_Lab_and_Activities_Manual/03%3A_Molecular_Biology_and_Genetics/3.02%3A_Protein_Synthesis-_One_Act_Play"},
+// Bioinformática y evolución
+{id:"cambiado",group:"Comparar ADN y evolución",name:"¿Qué ha cambiado? El ADN humano",top:true,fmt:"todos",
+ what:"8 niños salen delante con cartulinas de colores: cada color es una letra (A, T, C, G). Todos miran la fila y cierran los ojos. Tú cambias a un niño de sitio o le cambias la cartulina: una mutación. Los demás la buscan. Después se ponen dos filas, una junto a la otra, y se buscan las diferencias, como hace un programa de alineamiento.",
+ how:"Los 74 buscan a la vez. Se rota quién sale delante (6 rondas, unos 48 niños).",time:"10 min",mat:"16 cartulinas A4 de 4 colores",
+ sci:"El ADN es una fila de letras. Los científicos encuentran los cambios comparando filas.",
+ why:"Es el juego de «¿qué falta?» con sus compañeros como piezas, y es lo más parecido a tu trabajo.",
+ note:"Adaptación: no hay versión publicada exacta. La base es «1 color = 1 letra» de Your Genome, sin cuentas.",
+ src:"https://www.yourgenome.org/activities/sequence-bracelets"},
+{id:"polillas",group:"Comparar ADN y evolución",name:"Pájaros hambrientos",top:true,fmt:"mesas",
+ what:"Sobre una hoja de periódico o de color hay «polillas» de papel de varios colores; algunas son del mismo papel que el fondo. Los niños son pájaros y en 15 segundos cogen todas las que ven, de una en una. Luego se cuentan qué colores han sobrevivido.",
+ how:"12 mesas de 6 con el mismo material; un adulto da las rondas con un silbato.",time:"15 min",mat:"Periódico, cartulinas de colores, perforadora y un vaso por niño",
+ sci:"Los bichos que se parecen a su sitio no los ven los pájaros, y por eso tienen más hijitos.",
+ why:"Cacería contra reloj, y la sorpresa («¡no veía las de periódico!») llega sola.",
+ src:"https://www.generationgenius.com/wp-content/uploads/diy-activities/modelo-de-seleccion-natural-diy-es.pdf"},
+{id:"picos",group:"Comparar ADN y evolución",name:"El bufé de los picos",top:false,fmt:"mesas",
+ what:"Cada niño tiene un «pico»: pinza de ropa, cuchara, palillos o pajita. En el centro hay «comida»: macarrones, garbanzos, pompones. En 30 segundos cada uno mete en su vaso lo que pueda. Se compara qué pico va mejor con cada comida.",
+ how:"12 o 13 mesas de 6, con un pico distinto por niño.",time:"15–20 min",mat:"Cosas de casa o de un bazar (unos 15 €). Sin frutos secos.",
+ sci:"Cada pájaro tiene el pico que le sirve para su comida.",
+ why:"Competir con las manos; la diferencia entre picos se ve sin explicarla.",
+ note:"A los 6 años entienden «cada pico sirve para algo». La selección natural, solo de pasada.",
+ src:"https://www.audubon.org/es/news/para-que-es-ese-pico"},
+{id:"arbolfam",group:"Comparar ADN y evolución",name:"Busca a tu familia por el ADN",top:false,fmt:"todos",
+ what:"Cada niño tiene un animal y una tira de 6 cuadraditos de colores, su «ADN». Buscan a quien tenga la tira más parecida y se juntan: gato con león, perro con lobo, gallina con T-rex. Al final tú ordenas los grupos en un árbol.",
+ how:"Los 74 a la vez: 10–12 familias con pequeñas variaciones en la tira.",time:"15–20 min",mat:"74 tarjetas impresas",
+ sci:"Los animales que son familia tienen el ADN parecido.",
+ why:"Las sorpresas, como que la gallina es prima del dinosaurio.",
+ note:"Lleva más preparación, y el árbol lo tiene que dibujar un adulto.",
+ src:"https://www.yourgenome.org/wp-content/uploads/2024/11/Classify_Activity-Guide.pdf"},
+// IA
+{id:"regla",group:"IA: cómo aprende una máquina",name:"Adivina mi regla",top:true,fmt:"todos",
+ what:"Vas poniendo niños a la izquierda o a la derecha según una regla secreta («lleva algo azul»). Tras 6–8 ejemplos, la clase señala con el brazo a qué lado irá cada nuevo, y al final adivinan la regla. Remate: un caso dudoso (azul solo en los calcetines).",
+ how:"Los 74 predicen a la vez; unos 15–20 salen como «datos».",time:"8–10 min",mat:"Nada",
+ sci:"La máquina no sabe la regla: la adivina mirando muchos ejemplos.",
+ why:"Los ejemplos son ellos mismos, y hay un misterio que resolver.",
+ note:"Adaptado de Day of AI (1º, «Learning from Patterns»).",
+ src:"https://dayofai.org/units/grade-1-learning-from-patterns"},
+{id:"red",group:"IA: cómo aprende una máquina",name:"La red neuronal humana",top:true,fmt:"todos",
+ what:"Se proyecta un animal. Cada grupo es una neurona que vigila una sola cosa: plumas, bigotes, 4 patas, pico. Si la ven, se ponen de pie. Tú eres la neurona final y dices «¡GATO!» o «¡PÁJARO!» según quién esté de pie. Al final, una foto trampa (un zorro, un perro disfrazado) y la red se equivoca.",
+ how:"5 o 6 grupos de 12–15 niños, todos activos en cada imagen.",time:"10–15 min",mat:"Proyector, 8–10 fotos y un cartel con un dibujo por grupo",
+ sci:"Cada neurona mira un trocito y juntas deciden qué es.",
+ why:"Se levantan y se sientan todo el rato, y cuando la red falla es muy gracioso.",
+ note:"Sin números ni pesos: solo una capa. El «entrenar» a los 6 años no se entiende.",
+ src:"https://www.raspberrypi.org/blog/do-you-have-some-rope-then-lets-teach-about-ai-concepts/"},
+{id:"monos",group:"IA: cómo aprende una máquina",name:"¿Muerde o no muerde?",top:false,fmt:"todos",
+ what:"«Somos cuidadores del zoo». Se proyectan monos ya separados en «muerde» y «no muerde», y la clase busca la pista (¿sonríe?). Luego, monos nuevos: todos votan agachados si muerde y de pie si no. Al final, un mono que nunca habían visto y nadie sabe qué decir.",
+ how:"Los 74 votan con el cuerpo a la vez.",time:"15 min",mat:"Las 20 cartas de AI Unplugged, proyectadas",
+ sci:"La máquina aprende de lo que ya conoce, y con algo muy raro se lía.",
+ why:"Hay peligro (¡muerden!) y caras de monos.",
+ note:"Hacerlo en voz alta con toda la clase, no por parejas como en el original.",
+ src:"https://computingeducation.de/aiunplugged-en.pdf"},
+{id:"arbolia",group:"IA: cómo aprende una máquina",name:"El árbol de preguntas en el suelo",top:false,fmt:"todos",
+ what:"En el suelo, con cinta, un árbol de 2 o 3 preguntas (¿Tiene plumas? → ¿Vuela?) que acaba en aros. Cada niño tiene un animal y recorre el árbol hasta su aro. Luego llegan los raros: pingüino, murciélago, ballena.",
+ how:"Todos con tarjeta; salen por oleadas de 15 mientras el resto grita «¡sí!» o «¡no!».",time:"15–20 min",mat:"Cinta de carrocero, 5–6 aros, tarjetas de animales",
+ sci:"La máquina hace preguntas de sí o no, una tras otra, hasta decidir.",
+ why:"Se mueven, cada uno tiene su animal, y se discute a gritos por el murciélago.",
+ note:"Recorrer un árbol ya hecho funciona; construirlo ellos, no.",
+ src:"https://actua.ca/learning-hub/20-ai-questions"},
+{id:"patron",group:"IA: cómo aprende una máquina",name:"La palabra secreta del ADN",top:false,fmt:"todos",
+ what:"Se proyectan tiras de ADN de colores. Las de las flores rojas comparten un trocito (verde-verde-azul) y las de las blancas no. Los niños lo buscan, y luego predicen a mano alzada el color de la flor de tiras nuevas. Una con un color cambiado les hace dudar.",
+ how:"Los 74 a la vez, con el proyector.",time:"10 min",mat:"Una diapositiva",
+ sci:"La máquina busca un trocito que se repite, como cuando buscas a Wally.",
+ why:"Es buscar a Wally, y es literalmente lo que hace tu laboratorio.",
+ note:"Diseño propio: no hay actividad publicada así. Con colores, no letras, y tiras de 8–10 cuadrados.",
+ src:"https://barefootcomputing.org/ages-5---7"}
+];
+
+let dec = {}, filter = "all", db = null;
+const $ = s => document.querySelector(s);
+function el(tag, attrs={}, ...kids){
+  const e = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) { if (k==="text") e.textContent=v; else e.setAttribute(k,v); }
+  kids.forEach(k => k && e.append(k));
+  return e;
+}
+function counts(){
+  const v = IDEAS.map(i=>dec[i.id]?.d);
+  $("#nSi").textContent = v.filter(x=>x==="si").length;
+  $("#nQz").textContent = v.filter(x=>x==="quizas").length;
+  $("#nNo").textContent = v.filter(x=>x==="no").length;
+  $("#nPend").textContent = v.filter(x=>!x).length;
+}
+function visible(i){
+  const d = dec[i.id]?.d;
+  if (filter==="pend") return !d;
+  if (filter==="si" || filter==="quizas") return d===filter;
+  if (filter==="top") return i.top;
+  if (filter==="todos" || filter==="mesas") return i.fmt===filter;
+  return true;
+}
+function card(i){
+  const d = dec[i.id]?.d || "";
+  const c = el("article",{class:"card","data-d":d});
+  const n = el("h3",{class:"name",text:i.name});
+  if (i.top) n.append(el("span",{class:"star",text:" ★","aria-label":"recomendada"}));
+  const tags = el("div",{class:"tags"},
+    el("span",{class:"tag "+i.fmt,text:i.fmt==="todos"?"Los 74 a la vez":"En mesas"}),
+    el("span",{class:"tag",text:i.time}));
+  c.append(n, tags, el("p",{class:"what",text:i.what}), el("p",{class:"sci",text:"«"+i.sci+"»"}));
+  const meta = el("div",{class:"meta"});
+  meta.append(el("span",{text:"Cómo con 74: "+i.how}), el("span",{text:"Material: "+i.mat}));
+  c.append(meta);
+  const det = el("details",{}, el("summary",{text:"Por qué engancha, ojo y fuente"}));
+  [["Por qué engancha",i.why],["Ojo",i.note]].filter(x=>x[1]).forEach(([k,v])=>{ const p=el("p"); p.append(el("b",{text:k+": "}), v); det.append(p); });
+  const ps = el("p"); ps.append(el("b",{text:"Fuente: "}), el("a",{href:i.src,target:"_blank",rel:"noopener",text:i.src})); det.append(ps);
+  c.append(det);
+  const vote = el("div",{class:"vote"});
+  [["si","Sí"],["quizas","Quizás"],["no","No"]].forEach(([v,l])=>{
+    const b = el("button",{type:"button","data-v":v,"aria-pressed":String(d===v),id:`b-${i.id}-${v}`});
+    b.append(el("i",{class:"dot",style:`background:var(--${v==="quizas"?"qz":v})`}), l);
+    b.onclick = () => save(i.id, {d: d===v ? "" : v, note: dec[i.id]?.note || ""});
+    vote.append(b);
+  });
+  c.append(vote);
+  const note = el("input",{class:"note",id:`n-${i.id}`,placeholder:"Nota (opcional)",value:dec[i.id]?.note||""});
+  note.addEventListener("change", ()=> save(i.id, {d: dec[i.id]?.d||"", note: note.value.trim()}));
+  c.append(note);
+  return c;
+}
+function render(){
+  const list = $("#list"); list.replaceChildren();
+  for (const g of [...new Set(IDEAS.map(i=>i.group))]){
+    const items = IDEAS.filter(i=>i.group===g && visible(i));
+    if (!items.length) continue;
+    const h = el("h2",{text:g}); h.append(el("small",{text:`${items.length} ideas`}));
+    const grid = el("div",{class:"grid"}); items.forEach(i=>grid.append(card(i)));
+    list.append(h, grid);
+  }
+  if (!list.children.length) list.append(el("p",{class:"lede",text:"No hay ideas con este filtro."}));
+  counts();
+}
+async function save(id, val){
+  dec[id] = val; render();
+  try { localStorage.setItem("c74-dec", JSON.stringify(dec)); } catch(e){}
+  if (!db) return;
+  try { await db.doc("decisions/"+id).set({...val, at: Date.now()}); $("#status").textContent = "Guardado. Claude puede leer tus elecciones."; }
+  catch(e){ $("#status").textContent = "No se pudo guardar en línea ("+(e.code||e.message)+"). Queda guardado solo en este navegador."; }
+}
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{
+  filter=b.dataset.f;
+  document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+  render();
+});
+try { dec = JSON.parse(localStorage.getItem("c74-dec")||"{}"); } catch(e){ dec = {}; }
+render();
+(async()=>{
+  const timer = setTimeout(()=>{ if(!db) $("#status").textContent="Sin conexión al guardado en línea: tus elecciones quedan solo en este navegador."; }, 10000);
+  db = await window.claude?.use?.("db") ?? null;
+  if (!db){ clearTimeout(timer); $("#status").textContent="Sin guardado en línea: tus elecciones quedan solo en este navegador."; return; }
+  db.collection("decisions").onSnapshot(snap=>{
+    clearTimeout(timer);
+    const docs = snap.docs || snap;
+    docs.forEach(d=>{ const v = d.data ? d.data() : d; if (d.id) dec[d.id] = {d:v.d||"", note:v.note||""}; });
+    if (document.activeElement?.classList?.contains("note")) counts(); else render();
+    $("#status").textContent = "Guardado en línea activo: Claude puede leer tus elecciones.";
+  }, ()=>{ clearTimeout(timer); $("#status").textContent="No se pudo leer el guardado en línea; uso este navegador."; });
+})();
+</script>

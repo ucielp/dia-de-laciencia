@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Laboratorio de perros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;700;800&display=swap">
+<style>
+/* Laboratorio de perros para casa: página sola para móvil/tablet. Reutiliza el perro de core.js (APP.dog). */
+:root{
+  --blue:#29ABE2; --orange:#F7931E; --green:#7AC143; --grey:#6D6E71;
+  --ink:#1F2A44; --inkSoft:#4A5265; --paper:#FFFDF7; --cream:#F6F1E6; --sand:#EFE5D2;
+  --display:"Fredoka",ui-rounded,system-ui,sans-serif;
+  --body:"Nunito Sans",ui-sans-serif,system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html{background:#EFE5D2}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 22%,#FFFFFF 0,#F6F1E6 55%,#EFE5D2 100%);color:var(--ink);font-family:var(--body)}
+.core-host{display:none}
+main{max-width:640px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+h1{margin:4px 0 0;font-family:var(--display);font-weight:700;font-size:clamp(30px,8vw,46px);line-height:1.05;text-align:center}
+h1 span{color:var(--orange)}
+.strip{align-self:center;display:flex;gap:10px;background:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 4px 0 rgba(90,74,48,.08)}
+.strip i{width:34px;height:34px;border-radius:50%;background:#E7E0D0;box-shadow:inset 0 -4px 0 rgba(0,0,0,.12)}
+.dog{position:relative;width:100%;aspect-ratio:200/165;max-height:34vh;max-width:calc(34vh*200/165);margin:0 auto}
+.dog>div{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,1.5,.4,1),opacity .3s}
+.dog svg{width:100%;height:100%;display:block}
+.dog.wig{animation:wig .5s ease 2}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+.name{margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(26px,7vw,40px);min-height:1.2em}
+.desc{margin:-8px 0 0;text-align:center;font-size:17px;color:var(--inkSoft);min-height:1.3em}
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{background:#fff;border-radius:22px;padding:10px 12px;display:grid;grid-template-columns:84px 1fr;align-items:center;box-shadow:0 4px 0 rgba(90,74,48,.08)}
+.lab{display:flex;flex-direction:column;align-items:center;font-family:var(--display);font-weight:600;font-size:18px}
+.lab svg{height:34px;width:auto}
+.btns{display:flex;justify-content:space-around;gap:10px}
+.g{width:64px;height:64px;border-radius:50%;border:none;cursor:pointer;box-shadow:inset 0 -6px 0 rgba(0,0,0,.16),0 4px 10px rgba(0,0,0,.18);transition:transform .15s;-webkit-tap-highlight-color:transparent}
+.g.sel{outline:6px solid var(--ink);outline-offset:4px;transform:scale(1.06)}
+.g:focus-visible{outline:5px solid var(--blue);outline-offset:4px}
+.act{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.act button{font-family:var(--display);font-weight:600;font-size:22px;border:none;border-radius:20px;padding:14px 10px;color:#fff;cursor:pointer;box-shadow:inset 0 -5px 0 rgba(0,0,0,.15)}
+.act button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.foot{margin:6px 0 0;text-align:center;font-size:15px;color:var(--inkSoft)}
+</style>
+</head>
+<body>
+<!-- core.js espera estos elementos del proyector; aquí quedan ocultos y vacíos -->
+<div class="core-host" aria-hidden="true">
+  <div id="viewport"><div id="stage"></div><aside id="notes" hidden></aside></div>
+  <button id="prev"></button><button id="next"></button><div id="dots"></div><span id="where"></span>
+  <button id="notesBtn"></button><button id="mute"></button><button id="fullBtn"></button>
+</div>
+
+<main>
+  <h1>Laboratorio de <span>perros</span></h1>
+  <div class="strip" id="strip" aria-label="ADN del perro"><i></i><i></i><i></i></div>
+  <div class="dog" id="dog"></div>
+  <p class="name" id="name"></p>
+  <p class="desc" id="desc"></p>
+  <div class="rows" id="rows"></div>
+  <div class="act">
+    <button id="rand" style="background:var(--blue)">¡Al azar!</button>
+    <button id="clear" style="background:var(--grey)">Borrar</button>
+  </div>
+  <p class="foot">Elige un color para las orejas, el cuerpo y la cola. ¡Hay 27 perros distintos!</p>
+</main>
+
+<script src="core.js"></script>
+<script>
+(function(){
+"use strict";
+const APP=window.APP, {el,GOMET,KEYS,dog,audio,paperSVG}=APP, P=dog.parts;
+const ORDER=["ears","coat","tail"], LABEL={ears:"Orejas",coat:"Cuerpo",tail:"Cola"};
+const VB={coat:"8 50 166 134",ears:"58 22 56 84",tail:"154 54 50 64"};
+const gray=sh=>sh.map(s=>Object.assign({},s,{c:s.t==="ln"?"#C9C1B0":"#DCD4C4"}));
+function part(which,k,opts={}){
+  let sh=which==="coat"?P.coat(k):which==="ears"?P.ears[k]:P.tail[k];
+  if(opts.gray) sh=gray(sh);
+  return paperSVG(sh,{vb:opts.vb||P.vb,eyes:(which==="coat"&&!opts.gray)?P.eyes:[]});
+}
+const st={ears:null,coat:null,tail:null};
+const dogBox=document.getElementById("dog"), nameEl=document.getElementById("name"), descEl=document.getElementById("desc");
+const dots=[...document.querySelectorAll("#strip i")];
+const layer={coat:el("div"),ears:el("div"),tail:el("div")}; dogBox.append(layer.coat,layer.ears,layer.tail);
+const btns={}; const rows=document.getElementById("rows");
+ORDER.forEach(p=>{
+  btns[p]={};
+  const b=el("div",{class:"btns"},...KEYS.map(k=>{const x=el("button",{class:"g",style:{background:GOMET[k]},"aria-label":`${LABEL[p]} ${k}`,onclick:()=>set(p,k)});btns[p][k]=x;return x;}));
+  rows.append(el("div",{class:"row"},el("div",{class:"lab"},el("div",{html:part(p,"rojo",{gray:true,vb:VB[p]})}),el("span",{text:LABEL[p]})),b));
+});
+let timers=[];
+const complete=()=>ORDER.every(p=>st[p]);
+function draw(changed){
+  ORDER.forEach((p,i)=>{
+    const k=st[p];
+    layer[p].innerHTML=k?part(p,k):part(p,"rojo",{gray:true});
+    layer[p].style.opacity=k?1:0.6;
+    dots[i].style.background=k?GOMET[k]:"#E7E0D0";
+    KEYS.forEach(c=>btns[p][c].classList.toggle("sel",c===k));
+  });
+  if(changed&&!APP.reduced()){ const L=layer[changed]; L.style.transform="translateY(-40px) scale(1.05)"; requestAnimationFrame(()=>requestAnimationFrame(()=>{L.style.transform="none";})); }
+  if(complete()){ nameEl.textContent=dog.name(st.ears,st.coat,st.tail); descEl.textContent=`Orejas ${P.names.ears[st.ears]} · pelaje ${P.names.coat[st.coat]} · cola ${P.names.tail[st.tail]}`; }
+  else { nameEl.textContent=""; descEl.textContent="Elige un color para cada parte"; }
+}
+function set(p,k){
+  const was=complete(); st[p]=k; draw(p);
+  if(complete()&&!was) timers.push(setTimeout(()=>{audio.bark(0.9+Math.random()*0.3);dogBox.classList.add("wig");setTimeout(()=>dogBox.classList.remove("wig"),1000);},350));
+}
+function reset(){ timers.forEach(clearTimeout); timers=[]; ORDER.forEach(p=>st[p]=null); draw(); }
+document.getElementById("clear").onclick=reset;
+document.getElementById("rand").onclick=()=>{ reset(); ORDER.forEach((p,i)=>timers.push(setTimeout(()=>set(p,KEYS[Math.floor(Math.random()*3)]),i*220))); };
+draw();
+})();
+</script>
+</body>
+</html>

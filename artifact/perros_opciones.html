@@ -1,0 +1,160 @@
+<title>Opciones de perro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap">
+<style>
+/* Layout: una tarjeta por diseño de perro (papel recortado): fila de 4 perros montados y, debajo, sus 9 piezas pequeñas. */
+:root{
+  --bg:#f4efe4; --ink:#1f2a44; --muted:#5b6478; --line:#e0d8c6; --card:#fbf6ec; --panel:#efe5d2; --accent:#2453c7;
+  --g-rojo:#E04B3A; --g-azul:#2453C7; --g-amarillo:#F2C230;
+  --display:"Fredoka",ui-rounded,system-ui,sans-serif;
+  --body:"Nunito Sans",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151925;--ink:#e9ecf3;--muted:#9aa3b5;--line:#2c3344;--card:#1c2232;--accent:#8fb0ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151925;--ink:#e9ecf3;--muted:#9aa3b5;--line:#2c3344;--card:#1c2232;--accent:#8fb0ff;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.5vw,42px);line-height:1.1;margin:0 0 8px;text-wrap:balance}
+.lede{color:var(--muted);max-width:75ch;margin:0}
+.opt{margin-top:32px;display:flex;flex-direction:column;gap:10px}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.letter{font-family:var(--display);font-weight:700;font-size:18px;color:var(--bg);background:var(--ink);border-radius:999px;padding:0 13px}
+h2{font-family:var(--display);font-weight:600;font-size:26px;margin:0}
+.desc{margin:0;color:var(--muted);max-width:75ch}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.dogs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:700px){.dogs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+figure svg{width:100%;max-width:230px;height:auto;display:block}
+.strip{display:flex;gap:4px;background:rgba(255,255,255,.8);border-radius:999px;padding:3px 8px}
+.dot{display:inline-block;width:15px;height:15px;border-radius:50%}
+.pieces{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;border-top:1px dashed rgba(31,42,68,.25);padding-top:10px}
+@media (max-width:700px){.pieces{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.pc{display:flex;flex-direction:column;align-items:center;min-width:0}
+.pc svg{width:100%;max-width:90px;height:62px;display:block}
+.pc span{font-size:12px;color:#3a3f4d;text-align:center;line-height:1.2;display:flex;align-items:center;gap:3px}
+.pc .dot{width:10px;height:10px}
+.note{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;max-width:80ch}
+.note b{font-family:var(--display);font-weight:600}
+</style>
+
+<div class="wrap">
+  <h1>¿Qué perro os gusta más?</h1>
+  <p class="lede">Cinco diseños en papel recortado, todos con las mismas 3 partes (orejas, pelaje, cola) y los mismos 3 colores de gomet. En cada uno: los tres perros «puros» (todo rojo, todo azul, todo amarillo), uno mezclado y, debajo, sus 9 piezas. Los de perfil se reconocen mejor como perro por el hocico.</p>
+  <div id="list"></div>
+  <p class="note"><b>Más simple para buscar:</b> en estos diseños las piezas ya no llevan círculo de color. Cada mesa tiene 3 cajitas o vasos (orejas, pelaje, cola) con un gomet pegado en cada compartimento, y el niño coge su pieza del compartimento de su color. Así las piezas quedan limpias y las orejas y la cola se pegan encima del pelaje.</p>
+</div>
+
+<script>
+const E=(cx,cy,rx,ry,c,rot)=>({t:"e",cx,cy,rx,ry,c,rot});
+const C=(cx,cy,r,c)=>({t:"c",cx,cy,r,c});
+const R=(x,y,w,h,rx,c,rot)=>({t:"r",x,y,w,h,rx,c,rot});
+const P=(d,c)=>({t:"p",d,c});
+const L=(d,c,w)=>({t:"l",d,c,w});           // trazo grueso con color
+const LN=d=>({t:"ln",d});                     // línea fina oscura (boca)
+const COL={rojo:"#E04B3A",azul:"#2453C7",amarillo:"#F2C230"};
+const K=["rojo","azul","amarillo"];
+// Colores de papel (apagados)
+const COAT={rojo:{m:"#B98A62",b:"#EAD9C2",name:"marrón"},azul:{m:"#F4F1EA",b:"#E3DED3",name:"dálmata"},amarillo:{m:"#E2B65C",b:"#F3DFB0",name:"dorado"}};
+const DARK="#5A3E2B", NOSE="#3B2A20", SPOT="#3A3A40";
+const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#C98A3E"};
+const TAILC={rojo:"#D9C3A0",azul:"#E59AAE",amarillo:"#8C6A4A"};
+
+const DESIGNS=[
+ {id:"A",name:"Frontal",desc:"El que ya teníais, simplificado: sin collar ni círculos. Cabeza redonda de frente.",
+  vb:"10 10 180 190",
+  coat:k=>[E(100,155,40,32,COAT[k].m),E(100,163,24,19,COAT[k].b),E(80,184,12,8,COAT[k].m),E(120,184,12,8,COAT[k].m),C(100,90,48,COAT[k].m),
+    ...(k==="azul"?[C(128,60,6,SPOT),C(84,62,5,SPOT),C(74,160,6,SPOT),C(128,166,6,SPOT)]:[]),
+    E(100,112,22,16,COAT[k].b),E(100,104,9,7,NOSE),LN("M92 116 Q100 124 108 116")],
+  eyes:[[82,88],[118,88]],
+  ears:{rojo:{n:"caídas",behind:false,s:[E(54,96,14,30,EARC.rojo,18),E(146,96,14,30,EARC.rojo,-18)]},
+        azul:{n:"de punta",behind:true,s:[P("M56 76 L60 22 L94 52 Z",EARC.azul),P("M144 76 L140 22 L106 52 Z",EARC.azul)]},
+        amarillo:{n:"de lado",behind:true,s:[P("M62 60 L18 52 L50 88 Z",EARC.amarillo),P("M138 60 L182 52 L150 88 Z",EARC.amarillo)]}},
+  tail:{rojo:{n:"pompón",s:[L("M136 158 Q158 154 160 134",TAILC.rojo,8),C(161,124,15,TAILC.rojo)]},
+        azul:{n:"rizada",s:[L("M136 160 Q174 162 172 134 Q170 114 154 120 Q144 128 156 136",TAILC.azul,11)]},
+        amarillo:{n:"larga",s:[L("M136 158 Q166 150 176 116",TAILC.amarillo,9)]}}},
+ {id:"B",name:"De perfil, de pie",desc:"Perro de lado con hocico largo y cuatro patas. El que más se lee como perro a esta edad.",
+  vb:"0 20 200 170",
+  coat:k=>[R(76,126,13,50,6,COAT[k].m),R(96,128,13,48,6,COAT[k].m),R(134,126,13,50,6,COAT[k].m),R(152,124,13,52,6,COAT[k].m),
+    E(120,116,52,30,COAT[k].m),E(116,132,34,11,COAT[k].b),C(64,84,28,COAT[k].m),E(38,96,20,13,COAT[k].b),C(20,92,6,NOSE),
+    ...(k==="azul"?[C(124,104,6,SPOT),C(150,116,5,SPOT),C(102,120,5,SPOT),C(66,66,4,SPOT)]:[]),
+    LN("M28 104 Q36 109 44 104")],
+  eyes:[[60,78]],
+  ears:{rojo:{n:"caídas",s:[E(80,92,10,22,EARC.rojo,-20)]},
+        azul:{n:"de punta",s:[P("M66 62 L76 32 L90 64 Z",EARC.azul)]},
+        amarillo:{n:"hacia atrás",s:[P("M70 64 L108 52 L88 82 Z",EARC.amarillo)]}},
+  tail:{rojo:{n:"pompón",s:[L("M168 106 Q182 92 180 72",TAILC.rojo,7),C(180,62,12,TAILC.rojo)]},
+        azul:{n:"rizada",s:[L("M168 108 Q196 102 190 80 Q186 66 174 74 Q168 80 176 86",TAILC.azul,9)]},
+        amarillo:{n:"larga",s:[L("M168 106 Q190 98 196 66",TAILC.amarillo,8)]}}},
+ {id:"C",name:"De perfil, sentado",desc:"Sentado mirando al lado. Más compacto: cabe mejor en el folio y las piezas son grandes.",
+  vb:"10 20 190 175",
+  coat:k=>[E(128,160,24,17,COAT[k].m),E(112,136,32,40,COAT[k].m),R(84,128,12,50,6,COAT[k].m),R(100,130,12,48,6,COAT[k].m),
+    E(100,132,13,24,COAT[k].b),C(80,74,28,COAT[k].m),E(54,86,19,12,COAT[k].b),C(37,82,6,NOSE),
+    ...(k==="azul"?[C(124,120,6,SPOT),C(130,150,5,SPOT),C(84,56,4,SPOT)]:[]),
+    LN("M44 94 Q52 99 58 94")],
+  eyes:[[76,68]],
+  ears:{rojo:{n:"caídas",s:[E(95,78,10,22,EARC.rojo,-15)]},
+        azul:{n:"de punta",s:[P("M80 52 L90 22 L104 54 Z",EARC.azul)]},
+        amarillo:{n:"hacia atrás",s:[P("M84 54 L120 44 L100 72 Z",EARC.amarillo)]}},
+  tail:{rojo:{n:"pompón",s:[L("M146 168 Q172 168 176 148",TAILC.rojo,7),C(178,138,12,TAILC.rojo)]},
+        azul:{n:"rizada",s:[L("M146 168 Q178 172 176 150 Q174 136 162 142 Q156 148 164 152",TAILC.azul,9)]},
+        amarillo:{n:"larga",s:[L("M146 170 Q176 178 196 158",TAILC.amarillo,8)]}}},
+ {id:"D",name:"Geométrico",desc:"Hecho de rectángulos y triángulos. El más fácil de recortar; más «juguete» que realista.",
+  vb:"0 20 200 165",
+  coat:k=>[R(80,138,14,38,5,COAT[k].m),R(100,138,14,38,5,COAT[k].m),R(134,138,14,38,5,COAT[k].m),R(152,138,14,38,5,COAT[k].m),
+    R(72,94,96,50,12,COAT[k].m),R(86,130,66,9,4,COAT[k].b),R(36,58,54,50,12,COAT[k].m),R(16,84,32,24,8,COAT[k].b),C(20,88,6,NOSE),
+    ...(k==="azul"?[R(110,104,12,10,3,SPOT),R(140,116,10,9,3,SPOT),R(60,64,9,8,3,SPOT)]:[]),
+    LN("M26 100 L40 100")],
+  eyes:[[60,76]],
+  ears:{rojo:{n:"caídas",s:[R(70,58,16,40,7,EARC.rojo)]},
+        azul:{n:"de punta",s:[P("M64 60 L74 30 L88 60 Z",EARC.azul)]},
+        amarillo:{n:"hacia atrás",s:[P("M68 60 L106 50 L88 78 Z",EARC.amarillo)]}},
+  tail:{rojo:{n:"pompón",s:[L("M166 102 L180 80",TAILC.rojo,7),C(183,72,11,TAILC.rojo)]},
+        azul:{n:"rizada",s:[L("M166 104 Q194 98 188 76 Q184 64 174 70 Q168 76 176 82",TAILC.azul,9)]},
+        amarillo:{n:"larga",s:[L("M166 104 L196 70",TAILC.amarillo,8)]}}},
+ {id:"E",name:"Cabeza grande, de frente",desc:"Solo cabeza y un cuerpo pequeño, con hocico alargado hacia abajo. Muy expresivo y con piezas grandes.",
+  vb:"10 5 180 195",
+  coat:k=>[E(100,168,30,22,COAT[k].m),E(84,188,10,6,COAT[k].m),E(116,188,10,6,COAT[k].m),E(100,82,52,48,COAT[k].m),
+    E(100,118,26,26,COAT[k].b),E(100,104,12,9,NOSE),LN("M100 113 L100 124 M88 126 Q100 134 112 126"),
+    ...(k==="azul"?[C(70,64,7,SPOT),C(132,58,6,SPOT),C(92,166,5,SPOT)]:[])],
+  eyes:[[80,80],[120,80]],
+  ears:{rojo:{n:"caídas",s:[E(46,92,16,36,EARC.rojo,15),E(154,92,16,36,EARC.rojo,-15)]},
+        azul:{n:"de punta",behind:true,s:[P("M54 58 L56 6 L92 40 Z",EARC.azul),P("M146 58 L144 6 L108 40 Z",EARC.azul)]},
+        amarillo:{n:"de lado",behind:true,s:[P("M58 62 L12 50 L44 92 Z",EARC.amarillo),P("M142 62 L188 50 L156 92 Z",EARC.amarillo)]}},
+  tail:{rojo:{n:"pompón",s:[L("M126 172 Q148 170 152 152",TAILC.rojo,7),C(154,142,12,TAILC.rojo)]},
+        azul:{n:"rizada",s:[L("M126 174 Q160 178 158 156 Q156 142 144 148 Q138 154 146 158",TAILC.azul,9)]},
+        amarillo:{n:"larga",s:[L("M126 172 Q154 166 166 136",TAILC.amarillo,8)]}}}
+];
+
+let uid=0;
+function el(s,k){
+  const f=` filter="url(#sh${k})"`;
+  if(s.t==="e") return `<ellipse cx="${s.cx}" cy="${s.cy}" rx="${s.rx}" ry="${s.ry}" fill="${s.c}"${s.rot?` transform="rotate(${s.rot} ${s.cx} ${s.cy})"`:""}${f}/>`;
+  if(s.t==="c") return `<circle cx="${s.cx}" cy="${s.cy}" r="${s.r}" fill="${s.c}"${f}/>`;
+  if(s.t==="r") return `<rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="${s.rx}" fill="${s.c}"${f}/>`;
+  if(s.t==="p") return `<path d="${s.d}" fill="${s.c}" stroke="${s.c}" stroke-width="2" stroke-linejoin="round"${f}/>`;
+  if(s.t==="l") return `<path d="${s.d}" fill="none" stroke="${s.c}" stroke-width="${s.w}" stroke-linecap="round"${f}/>`;
+  return `<path d="${s.d}" fill="none" stroke="${DARK}" stroke-width="3" stroke-linecap="round"/>`;
+}
+function eyes(list){return list.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8.5" fill="#FFFDF6"/><circle cx="${x-1.5}" cy="${y+1}" r="4.6" fill="#2A2A30"/>`).join("");}
+function svg(shapes,vb,label,eyeList){
+  const k=++uid;
+  return `<svg viewBox="${vb}" role="img" aria-label="${label}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sh${k}" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="1.5" dy="2.5" stdDeviation="1.2" flood-color="#5a4a30" flood-opacity="0.45"/></filter></defs>${shapes.map(s=>el(s,k)).join("")}${eyeList?eyes(eyeList):""}</svg>`;
+}
+function dog(d,e,c,t){
+  const ear=d.ears[e];
+  const shapes=[...d.tail[t].s,...(ear.behind?ear.s:[]),...d.coat(c),...(ear.behind?[]:ear.s)];
+  return svg(shapes,d.vb,`Perro ${d.name}: orejas ${ear.n}, pelaje ${COAT[c].name}, cola ${d.tail[t].n}`,d.eyes);
+}
+const strip=a=>`<span class="strip">${a.map(g=>`<i class="dot" style="background:${COL[g]}"></i>`).join("")}</span>`;
+const EX=[["rojo","rojo","rojo"],["azul","azul","azul"],["amarillo","amarillo","amarillo"],["azul","amarillo","rojo"]];
+
+document.getElementById("list").innerHTML=DESIGNS.map(d=>{
+  const dogs=EX.map(([e,c,t])=>`<figure>${strip([e,c,t])}${dog(d,e,c,t)}</figure>`).join("");
+  const pcs=[...K.map(k=>`<div class="pc">${svg(d.ears[k].s,d.vb,"Orejas "+d.ears[k].n)}<span><i class="dot" style="background:${COL[k]}"></i>orejas ${d.ears[k].n}</span></div>`),
+             ...K.map(k=>`<div class="pc">${svg(d.coat(k),d.vb,"Pelaje "+COAT[k].name,d.eyes)}<span><i class="dot" style="background:${COL[k]}"></i>${COAT[k].name}</span></div>`),
+             ...K.map(k=>`<div class="pc">${svg(d.tail[k].s,d.vb,"Cola "+d.tail[k].n)}<span><i class="dot" style="background:${COL[k]}"></i>cola ${d.tail[k].n}</span></div>`)].join("");
+  return `<section class="opt"><div class="head"><span class="letter">${d.id}</span><h2>${d.name}</h2></div><p class="desc">${d.desc}</p>
+    <div class="panel"><div class="dogs">${dogs}</div><div class="pieces">${pcs}</div></div></section>`;
+}).join("");
+</script>

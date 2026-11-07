@@ -1,0 +1,17 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-11-05T19:30:00Z"},
+  "lists": "css",
+  "title": "Ciencia para 74",
+  "order": ["cover", "plan", "div-si", "pie", "perro", "telefono", "polillas", "arbolfam", "regla", "div-quizas", "red", "monos", "arbolia"],
+  "sections": {
+    "s1": {"description": "Portada y plan de la sesión con las ideas elegidas", "start": "cover"},
+    "s2": {"description": "Las 6 ideas marcadas con sí", "start": "div-si"},
+    "s3": {"description": "Las 3 ideas marcadas con quizás", "start": "div-quizas"}
+  },
+  "faces": {
+    "fredoka": {"family": "Fredoka", "href": "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap"},
+    "nunito-sans": {"family": "Nunito Sans", "href": "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap"}
+  },
+  "designSystems": []
+}

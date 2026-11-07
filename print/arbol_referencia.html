@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Árbol de referencia · Busca a tu familia por el ADN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700;800&display=swap">
+<style>
+/* Hoja para los adultos (2 A4 verticales): árbol con las 15 tiras, parejas, orden en que el adulto saca los animales y tabla de diferencias. */
+@page{size:A4 portrait;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+body{font-family:"Nunito Sans",system-ui,sans-serif;color:#1F2A44;font-size:3.6mm;line-height:1.35;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:12mm 13mm;page-break-after:always;break-after:page;overflow:hidden;position:relative;background:#FFFDF7}
+.page:last-child{page-break-after:auto;break-after:auto}
+h1,h2{font-family:"Fredoka",sans-serif;margin:0}
+h1{font-size:8.5mm;font-weight:700;line-height:1.1}
+h1 span{color:#F7931E}
+h2{font-size:5.2mm;font-weight:600;margin:4mm 0 1.5mm}
+.sub{color:#4A5265;font-size:3.8mm;margin-top:1mm}
+.warn{margin-top:4mm;border:1.2mm solid #7B5EA7;background:#F3EEFA;border-radius:4mm;padding:3mm 5mm;font-family:"Fredoka",sans-serif;font-size:5.2mm;font-weight:600;line-height:1.25}
+.warn b{color:#7B5EA7}
+.tree{margin-top:4mm;position:relative}
+.row{position:absolute;left:0;height:12mm;display:flex;align-items:center;gap:2.5mm}
+.row .ic{width:15mm;height:12mm}
+.row .ic svg{width:100%;height:100%;display:block}
+.row .nm{width:36mm;font-family:"Fredoka",sans-serif;font-weight:600;font-size:4.3mm}
+.row.ad .nm{color:#7B5EA7}
+.row .ad-tag{font-size:2.6mm;font-weight:800;color:#fff;background:#7B5EA7;border-radius:2mm;padding:.3mm 1.5mm;margin-left:1mm;vertical-align:middle}
+.st{display:flex;gap:.9mm}
+.sq{width:7.2mm;height:7.2mm;border-radius:1.3mm;color:#fff;font-family:"Fredoka",sans-serif;font-weight:700;font-size:4.8mm;line-height:7.2mm;text-align:center}
+.sq.dif{outline:.6mm solid #1F2A44;outline-offset:.3mm}
+svg.br{position:absolute;left:0;top:0;overflow:visible}
+.legend{margin-top:2mm;color:#4A5265;font-size:3.2mm}
+table{border-collapse:collapse;width:100%}
+.steps{font-size:3.3mm;line-height:1.25}.steps td,.steps th{border-bottom:.3mm solid #E2D6BE;padding:1.1mm 1.6mm;vertical-align:top;text-align:left}
+.steps th{font-family:"Fredoka",sans-serif;font-weight:600;font-size:3.6mm;color:#6D6E71}
+.steps td.n{font-family:"Fredoka",sans-serif;font-weight:700;font-size:5.5mm;color:#F7931E;width:7mm}
+.steps .ani{display:flex;align-items:center;gap:2mm;font-family:"Fredoka",sans-serif;font-weight:600;font-size:4.2mm;white-space:nowrap}
+.steps .ani svg{width:11mm;height:9mm}.steps .sq{width:4.6mm;height:4.6mm;font-size:3.2mm;line-height:4.6mm;border-radius:.9mm}.steps .st{gap:.6mm;margin-top:.5mm}
+.steps .q{font-weight:800}
+.steps .msg{font-family:"Fredoka",sans-serif;font-weight:500;font-size:3.6mm;color:#1F2A44}
+.pairs{display:flex;flex-wrap:wrap;gap:2mm 3mm}
+.pair{display:flex;align-items:center;gap:1mm;border:.4mm solid #E2D6BE;border-radius:3mm;padding:1mm 2.5mm 1mm 1mm;background:#fff;font-family:"Fredoka",sans-serif;font-weight:600;font-size:3.8mm}
+.pair svg{width:10mm;height:8mm}
+.dist td,.dist th{width:11mm;height:5.5mm;text-align:center;font-family:"Fredoka",sans-serif;font-weight:600;font-size:3.3mm;border:.25mm solid #fff}
+.dist th{font-size:2.9mm;font-weight:600;color:#4A5265;line-height:1.05}
+.dist th.r{text-align:right;padding-right:1.5mm;width:20mm;white-space:nowrap}
+.dist th.ad,.dist th.r.ad{color:#7B5EA7}
+.foot{position:absolute;left:13mm;right:13mm;bottom:7mm;font-size:2.8mm;color:#A39B8B;display:flex;justify-content:space-between}
+@media screen{body{background:#555}.page{margin:8mm auto;box-shadow:0 2mm 8mm rgba(0,0,0,.4)}}
+</style>
+<script>document.addEventListener("DOMContentLoaded",function(e){e.stopPropagation();});</script>
+<script src="../app/core.js"></script>
+<script src="../app/art/species.js"></script>
+<script src="../app/data/tree.js"></script>
+</head>
+<body>
+<section class="page" id="p1">
+  <h1>Árbol de referencia <span>(para los adultos)</span></h1>
+  <div class="sub">Actividad 2 «Busca a tu familia por el ADN». Niños: 10 grupos (10 carteles). Su única tarea: encontrar el grupo con <b>solo 1 diferencia</b> y juntarse en pareja.</div>
+  <div class="warn">Estos 5 carteles <b>NO se reparten</b>: <b>murciélago, T-rex, cocodrilo, rana y tiburón</b> los guarda un adulto y los saca uno a uno al final (borde morado de rayas).</div>
+  <div class="tree" id="tree"></div>
+  <div class="legend">A azul · T rojo · G verde · C naranja. Rama naranja: mamíferos · verde: aves y dinosaurios · gris: el resto. Las parejas se unen con 1 diferencia; los números de las ramas = en qué paso el adulto saca ese animal (ver página 2).</div>
+  <div class="foot"><span>Día de la Ciencia · Actividad 2</span><span>1 / 2</span></div>
+</section>
+<section class="page" id="p2">
+  <h1>Paso a paso <span>en clase</span></h1>
+  <h2>0 · Las parejas (los niños)</h2>
+  <div class="pairs" id="pairs"></div>
+  <h2>1–5 · El adulto saca los animales (en este orden)</h2>
+  <table class="steps" id="steps"><tr><th></th><th>Animal</th><th>Qué preguntar</th><th>Quién responde</th><th>Mensaje</th></tr></table>
+  <h2>Tabla de diferencias</h2>
+  <table class="dist" id="dist"></table>
+  <div class="foot"><span>Día de la Ciencia · Actividad 2</span><span>2 / 2</span></div>
+</section>
+<script>
+(function(){
+  var T=window.TREE, S=window.SPECIES, MM=3.7795;   // px por mm
+  function stripH(id,ref){ return '<div class="st">'+T.dna[id].split("").map(function(c,i){
+    var d=ref&&T.dna[ref][i]!==c; return '<div class="sq'+(d?' dif':'')+'" style="background:'+T.colors[c]+'">'+c+'</div>';}).join("")+'</div>'; }
+  var isAd=function(id){return T.adults.indexOf(id)>=0;};
+  // ---------- página 1: árbol ----------
+  var tree=document.getElementById("tree"), ROWH=13.2, X_ATT=106, LV=11.4; // mm
+  var rowY=function(id){return T.leaves.indexOf(id)*ROWH+6;};
+  T.leaves.forEach(function(id){
+    var r=document.createElement("div"); r.className="row"+(isAd(id)?" ad":""); r.style.top=(rowY(id)-6)+"mm";
+    r.innerHTML='<div class="ic">'+S.byId[id].svg()+'</div><div class="nm">'+T.names[id]+(isAd(id)?'<span class="ad-tag">ADULTO</span>':'')+'</div>'+stripH(id);
+    tree.appendChild(r);
+  });
+  tree.style.height=(T.leaves.length*ROWH)+"mm";
+  var COL={prim:"#E08A2E",perros:"#E08A2E",gatos:"#E08A2E",cet:"#E08A2E",mam:"#E08A2E",aves:"#5FA040",dino:"#5FA040",arco:"#7D9A5A",amn:"#7B7E86",tetra:"#7B7E86",vert:"#7B7E86"};
+  var isN=function(id){return !!T.nodes[id];};
+  var nx=function(id){return isN(id)?X_ATT+T.nodes[id].level*LV:X_ATT;};
+  var ny=function(id){ if(!isN(id)) return rowY(id); var ys=T.nodes[id].children.map(ny); return (Math.min.apply(0,ys)+Math.max.apply(0,ys))/2; };
+  var s='';
+  Object.keys(T.nodes).forEach(function(id){
+    var n=T.nodes[id], x=nx(id), ys=n.children.map(ny), c=COL[id];
+    n.children.forEach(function(ch){ s+='<path d="M'+nx(ch)*MM+' '+ny(ch)*MM+' H'+x*MM+'" stroke="'+c+'" stroke-width="5" stroke-linecap="round" fill="none"/>'; });
+    s+='<path d="M'+x*MM+' '+Math.min.apply(0,ys)*MM+' V'+Math.max.apply(0,ys)*MM+'" stroke="'+c+'" stroke-width="5" stroke-linecap="round" fill="none"/>';
+    s+=n.reveal===0?'<circle cx="'+x*MM+'" cy="'+ny(id)*MM+'" r="5" fill="'+c+'"/>':'<circle cx="'+x*MM+'" cy="'+ny(id)*MM+'" r="9" fill="'+c+'"/><text x="'+x*MM+'" y="'+(ny(id)*MM+4.5)+'" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="13" fill="#fff">'+n.reveal+'</text>';
+    if(n.level>1) s+='<text x="'+(x*MM+12)+'" y="'+(ny(id)*MM-6)+'" font-family="Fredoka" font-weight="600" font-size="12" fill="'+c+'">'+n.name+'</text>';
+  });
+  tree.insertAdjacentHTML("beforeend",'<svg class="br" width="'+184*MM+'" height="'+T.leaves.length*ROWH*MM+'">'+s+'</svg>');
+  // ---------- página 2 ----------
+  var P=document.getElementById("pairs");
+  T.pairs.forEach(function(p){
+    P.insertAdjacentHTML("beforeend",'<div class="pair">'+S.byId[p[0]].svg()+T.names[p[0]]+' + '+S.byId[p[1]].svg()+T.names[p[1]]+' <span style="color:#4E8F2A">· 1</span></div>');
+  });
+  var msgs=["El murciélago se parece a todos los mamíferos (2)… pero no tanto como perro y lobo (1). Es un mamífero.",
+            "¡Las aves son dinosaurios!",
+            "El cocodrilo es primo de las aves y los dinosaurios.",
+            "La rana está más lejos de todos: es un anfibio.",
+            "El tiburón es el más lejano de todos: es un pez. ¡Ya está el árbol entero!"];
+  var asks=["¿Quién tiene 2 diferencias con el murciélago?","¿Quién tiene 2 diferencias con el T-rex?","¿Quién tiene 3 diferencias con el cocodrilo?","¿Quién tiene pocas diferencias con la rana?","¿Y con el tiburón?"];
+  var who=["Los 8 mamíferos (las 4 parejas de mamíferos): todos 2. Gallina y pingüino: 6.","Gallina y pingüino (2). Todos los demás: 3 o más.","Gallina, pingüino y T-rex (3). Los demás: 4 o más.","Nadie cerca: 4 o 5 con todos.","Nadie cerca: 5 o 6 con todos."];
+  var st=document.getElementById("steps");
+  T.reveals.forEach(function(r,i){
+    st.insertAdjacentHTML("beforeend",'<tr><td class="n">'+(i+1)+'</td><td><div class="ani">'+S.byId[r.id].svg()+T.names[r.id]+'</div>'+stripH(r.id)+'</td><td class="q">«'+asks[i]+'»</td><td>'+who[i]+'</td><td class="msg">'+msgs[i]+'</td></tr>');
+  });
+  // tabla de distancias
+  var D=document.getElementById("dist"), L=T.leaves, h='<tr><th></th>'+L.map(function(b){return '<th class="'+(isAd(b)?'ad':'')+'">'+T.names[b].replace("hipopótamo","hipo-<br>pótamo").replace("chimpancé","chim-<br>pancé").replace("murciélago","murcié-<br>lago")+'</th>';}).join("")+'</tr>';
+  var bgc=["#1F2A44","#7AC143","#B9DD8F","#F6E3A6","#F1D2B0","#E9DFD0","#F2EEE7"];
+  L.forEach(function(a){
+    h+='<tr><th class="r '+(isAd(a)?'ad':'')+'">'+T.names[a]+'</th>'+L.map(function(b){ var d=T.diff(a,b);
+      return '<td style="background:'+bgc[d]+';color:'+(d===0?'#1F2A44':'#1F2A44')+'">'+(a===b?'':d)+'</td>';}).join("")+'</tr>';
+  });
+  D.innerHTML=h;
+})();
+</script>
+</body>
+</html>

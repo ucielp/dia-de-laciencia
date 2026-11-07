@@ -1,0 +1,16 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-11-05T21:05:00Z"},
+  "lists": "css",
+  "title": "Estilos de dibujo (respaldo)",
+  "order": ["cover", "e1", "e2", "e3", "e4", "e5"],
+  "sections": {
+    "s1": {"description": "Portada", "start": "cover"},
+    "s2": {"description": "Los 5 estilos de prueba con animales y piezas del perro", "start": "e1"}
+  },
+  "faces": {
+    "fredoka": {"family": "Fredoka", "href": "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap"},
+    "nunito-sans": {"family": "Nunito Sans", "href": "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap"}
+  },
+  "designSystems": []
+}

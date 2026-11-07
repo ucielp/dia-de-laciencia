@@ -1,0 +1,258 @@
+<title>Estilos de animales</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap">
+<style>
+/* Layout: los dos estilos elegidos (animales + piezas del perro), y debajo una hoja A4 de recorte de muestra por estilo. */
+:root{
+  --bg:#f7f5ef; --ink:#1f2a44; --muted:#5b6478; --line:#e4dfd2; --accent:#2453c7; --card:#fffdf8;
+  --g-rojo:#E04B3A; --g-azul:#2453C7; --g-amarillo:#F2C230;
+  --display:"Fredoka",ui-rounded,system-ui,sans-serif;
+  --body:"Nunito Sans",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151925; --ink:#e9ecf3; --muted:#9aa3b5; --line:#2c3344; --accent:#8fb0ff; --card:#1c2232; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151925; --ink:#e9ecf3; --muted:#9aa3b5; --line:#2c3344; --accent:#8fb0ff; --card:#1c2232; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.5vw,42px);line-height:1.1;margin:0 0 8px;text-wrap:balance}
+.lede{color:var(--muted);max-width:75ch;margin:0}
+.rule{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center}
+.rule b{font-family:var(--display);font-weight:600}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:4px}
+.style{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.num{font-family:var(--display);font-weight:700;font-size:15px;color:var(--bg);background:var(--ink);border-radius:999px;padding:1px 11px}
+h2{font-family:var(--display);font-weight:600;font-size:26px;margin:0}
+.desc{margin:0;color:var(--muted);max-width:75ch}
+.panel{border-radius:18px;border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:14px}
+.animals{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.animals{grid-template-columns:repeat(3,minmax(0,1fr))}}
+figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+figure svg{width:100%;height:auto;max-width:170px;display:block}
+.cap{font-family:var(--display);font-weight:500;font-size:15px;color:#3a3f4d;text-align:center;line-height:1.2}
+.dogrow{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;border-top:1px dashed rgba(31,42,68,.25);padding-top:14px}
+@media (max-width:860px){.dogrow{grid-template-columns:1fr}}
+.sub{font-family:var(--display);font-weight:600;font-size:17px;color:#3a3f4d;margin:0 0 6px}
+.pieces{display:grid;grid-template-columns:72px repeat(3,minmax(0,1fr));gap:4px 8px;align-items:center}
+.pieces .lab{font-family:var(--display);font-weight:600;font-size:14px;color:#3a3f4d}
+.pieces .hd{text-align:center}
+.pieces .hd .dot{width:22px;height:22px;margin:0;border:2px solid rgba(255,255,255,.9);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pc{display:flex;flex-direction:column;align-items:center;min-width:0}
+.pc svg{width:100%;max-width:130px;height:100px;display:block}
+.pc .cap{font-size:13px}
+.examples{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end}
+.strip{display:flex;gap:4px;justify-content:center;background:rgba(255,255,255,.75);border-radius:999px;padding:3px 8px;margin-bottom:2px}
+.strip .dot{width:16px;height:16px;margin:0}
+/* Hojas A4 de muestra (595 x 842 px = A4 a 72 ppp) */
+.sheets-title{margin-top:56px}
+.sheets{margin-top:14px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.scroll{overflow-x:auto;max-width:100%}
+.sheetwrap{display:flex;flex-direction:column;gap:8px}
+.sheetwrap .sub{color:var(--ink)}
+.sheet{width:595px;height:842px;box-sizing:border-box;background:#ffffff;color:#1f2a44;box-shadow:0 2px 10px rgba(0,0,0,.18);padding:26px 28px;display:flex;flex-direction:column;gap:8px;font-family:var(--body)}
+.sheet .top{display:flex;justify-content:space-between;align-items:baseline}
+.sheet .top b{font-family:var(--display);font-weight:600;font-size:18px}
+.sheet .top span{font-size:12px;color:#5b6478}
+.sheet .lbl{font-family:var(--display);font-weight:600;font-size:12px;color:#5b6478;margin:2px 0 0}
+.cells{display:grid;border-top:1.5px dashed #8a8f9c;border-left:1.5px dashed #8a8f9c}
+.cell{position:relative;border-right:1.5px dashed #8a8f9c;border-bottom:1.5px dashed #8a8f9c;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cell svg{width:100%;height:100%;display:block}
+.cell .gm{position:absolute;left:7px;top:7px;width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.cell .nm{position:absolute;right:7px;bottom:4px;font-size:10px;color:#8a8f9c;font-family:var(--display)}
+.cell.info{flex-direction:column;gap:4px;padding:8px;text-align:center;font-size:12px;color:#5b6478;background:#fbfaf6}
+.cell.info b{font-family:var(--display);font-size:14px;color:#1f2a44}
+.cell.info .strip{background:#eef0f4}
+.foot{margin-top:40px;color:var(--muted);font-size:14px;max-width:75ch}
+</style>
+
+<div class="wrap">
+  <h1>Kawaii o papel recortado</h1>
+  <p class="lede">Los dos estilos que más os gustan, con los perros simplificados: menos detalles encima de otros, collar sencillo y cola de pompón de caniche. Debajo, una hoja de recorte de muestra por estilo. Los otros 3 estilos están guardados en las diapositivas de respaldo.</p>
+  <div class="rule">
+    <span><b>1er gomet → Orejas</b></span>
+    <span><b>2º gomet → Pelaje</b></span>
+    <span><b>3er gomet → Cola</b></span>
+    <span><i class="dot" style="background:var(--g-rojo)"></i>rojo <i class="dot" style="background:var(--g-azul);margin-left:10px"></i>azul <i class="dot" style="background:var(--g-amarillo);margin-left:10px"></i>amarillo</span>
+  </div>
+  <div id="styles"></div>
+
+  <section class="sheets-title">
+    <div class="head"><h2>Hoja de recorte de muestra: mesa 1</h2></div>
+    <p class="desc">Una hoja A4 por mesa con las 15 piezas de sus 5 niños. Todo se corta en línea recta por los puntos. Cada pieza lleva el círculo del color de su gomet, para que la encuentren sin mirar ninguna tabla. Las tarjetas de «ADN secreto» con los gomets irían en otra hoja.</p>
+  </section>
+  <div class="sheets" id="sheets"></div>
+
+  <p class="foot">Son dibujos vectoriales hechos por mí: se imprimen nítidos a cualquier tamaño. En la hoja real, las piezas miden unos 6 cm (pelaje), 6 × 3 cm (orejas) y 3,5 cm (cola).</p>
+</div>
+
+<script>
+// ---------- Geometría (viewBox 200x200). Roles: main, belly, dark, accent, accent2, white, line, leg, spout, stroke. s.c = color propio [h,s,l] ----------
+const E=(cx,cy,rx,ry,r,rot,c)=>({t:"ellipse",cx,cy,rx,ry,r,rot,c});
+const C=(cx,cy,rr,r,c)=>({t:"circle",cx,cy,rr,r,c});
+const P=(d,r,c,w)=>({t:"path",d,r,c,w});
+
+// ---- Perro por piezas (simplificado) ----
+const GOMETS={rojo:"var(--g-rojo)",azul:"var(--g-azul)",amarillo:"var(--g-amarillo)"};
+const GHEX={rojo:"#E04B3A",azul:"#2453C7",amarillo:"#F2C230"};
+const EARS={
+ rojo:{name:"caídas",behind:false,shapes:[E(56,94,15,30,"x",18,[24,45,32]),E(144,94,15,30,"x",-18,[24,45,32])]},
+ azul:{name:"de punta",behind:true,shapes:[P("M54 78 L58 20 L94 50 Z","x",[220,14,30]),P("M146 78 L142 20 L106 50 Z","x",[220,14,30])]},
+ amarillo:{name:"dobladas",behind:false,shapes:[P("M56 64 Q66 30 98 44 L74 84 Z","x",[25,65,42]),P("M144 64 Q134 30 102 44 L126 84 Z","x",[25,65,42])]}
+};
+const COATS={
+ rojo:{name:"marrón",main:[30,55,60],belly:[36,60,88],pat:[]},
+ azul:{name:"dálmata",main:[40,12,97],belly:[40,12,91],pat:[C(128,60,6,"x",[220,15,22]),C(86,58,5,"x",[220,15,22]),C(72,162,6,"x",[220,15,22]),C(128,166,6,"x",[220,15,22])]},
+ amarillo:{name:"dorado",main:[40,85,62],belly:[45,85,86],pat:[]}
+};
+const TAILS={
+ rojo:{name:"pompón",shapes:[P("M134 156 Q158 152 160 132","stroke",[42,40,84],8),C(161,122,15,"x",[42,40,92])]},
+ azul:{name:"rizada",shapes:[P("M134 158 Q174 162 172 134 Q170 114 154 120 Q144 128 156 136","stroke",[345,65,72],11)]},
+ amarillo:{name:"larga",shapes:[E(160,136,7,30,"x",35,[30,40,45])]}
+};
+function coatShapes(k){
+  const co=COATS[k];
+  return [E(100,155,40,32,"x",0,co.main),E(100,163,24,19,"x",0,co.belly),E(80,184,12,8,"x",0,co.main),E(120,184,12,8,"x",0,co.main),
+    C(100,90,48,"x",co.main),...co.pat,E(100,112,22,16,"x",0,co.belly),E(100,104,9,7,"x",0,[24,40,25]),P("M92 116 Q100 124 108 116","line"),
+    P("M66 134 Q100 148 134 134 L134 142 Q100 156 66 142 Z","x",[2,75,52])];
+}
+function dogShapes(e,co,t){
+  const ears=EARS[e];
+  return [...TAILS[t].shapes,...(ears.behind?ears.shapes:[]),...coatShapes(co),...(ears.behind?[]:ears.shapes)];
+}
+const DOG_EYES=[[82,88],[118,88]];
+
+// ---- Especies ----
+const ANIMALS=[
+ {id:"perro",name:"Perro",eyes:DOG_EYES,col:{dark:[24,45,32]},shapes:dogShapes("rojo","rojo","amarillo")},
+ {id:"gato",name:"Gato",eyes:[[82,90],[118,90]],
+  col:{main:[28,85,62],belly:[36,80,90],dark:[22,80,42],accent:[345,70,80],accent2:[345,70,80]},
+  shapes:[P("M132 170 Q180 168 170 120 Q166 106 157 116 Q164 150 128 156 Z","main"),E(100,155,38,32,"main"),E(100,163,22,19,"belly"),
+   E(82,185,11,7,"belly"),E(118,185,11,7,"belly"),
+   P("M56 74 L62 26 L94 52 Z","main"),P("M144 74 L138 26 L106 52 Z","main"),P("M65 60 L67 38 L84 53 Z","accent"),P("M135 60 L133 38 L116 53 Z","accent"),
+   C(100,92,46,"main"),P("M90 50 L92 62 M100 47 L100 61 M110 50 L108 62","line"),
+   E(100,110,18,12,"belly"),P("M94 104 L106 104 L100 110 Z","accent"),P("M92 116 Q100 121 100 111 Q100 121 108 116","line"),
+   P("M58 106 L80 108 M58 116 L80 114 M142 106 L120 108 M142 116 L120 114","line")]},
+ {id:"gallina",name:"Gallina",eyes:[[84,96],[116,96]],
+  col:{main:[42,35,96],belly:[38,50,84],dark:[30,20,30],accent:[4,80,56],accent2:[33,95,55]},
+  shapes:[P("M88 178 L86 196 M112 178 L114 196","leg"),P("M150 118 Q184 98 174 138 Q188 136 168 160 Z","main"),
+   C(88,70,12,"accent"),C(101,63,13,"accent"),C(114,70,12,"accent"),E(100,130,58,56,"main"),
+   E(142,140,17,26,"belly",-20),P("M91 106 L109 106 L100 119 Z","accent2"),E(100,126,6,9,"accent")]},
+ {id:"trex",name:"T-rex",eyes:[[80,80],[120,80]],
+  col:{main:[130,42,52],belly:[62,65,80],dark:[130,40,25],accent:[25,85,58],accent2:[25,85,58]},
+  shapes:[P("M128 162 Q186 166 192 138 Q170 150 132 140 Z","main"),E(100,156,40,32,"main"),E(100,161,24,21,"belly"),
+   E(80,185,13,8,"main"),E(120,185,13,8,"main"),
+   P("M76 52 L84 30 L96 46 Z","accent"),P("M95 44 L105 22 L115 44 Z","accent"),P("M114 46 L126 30 L130 54 Z","accent"),
+   E(100,86,52,44,"main"),P("M66 108 Q100 130 134 108","line"),P("M80 114 L84 122 L88 116 Z M112 116 L116 122 L120 114 Z","white"),
+   C(92,99,2.6,"dark"),C(108,99,2.6,"dark"),E(72,148,9,5,"main",-35),E(128,148,9,5,"main",35)]},
+ {id:"ballena",name:"Ballena",eyes:[[56,114],[88,116]],
+  col:{main:[210,60,55],belly:[200,50,86],dark:[215,55,36],accent:[195,85,72],accent2:[195,85,72]},
+  shapes:[P("M80 68 Q76 42 60 36 M86 68 Q86 38 86 28 M92 68 Q96 42 112 36","spout"),C(60,33,6,"accent"),C(86,24,6,"accent"),C(112,33,6,"accent"),
+   P("M158 112 Q184 80 196 92 Q186 110 172 120 Q190 128 194 148 Q178 148 158 130 Z","main"),E(95,126,80,55,"main"),
+   E(92,152,62,24,"belly"),P("M52 150 L136 150 M58 161 L128 161","line"),
+   P("M40 134 Q60 146 80 138","line")]},
+ {id:"tiburon",name:"Tiburón",eyes:[[52,112],[82,112]],
+  col:{main:[205,16,60],belly:[210,20,95],dark:[210,22,40],accent:[210,22,40],accent2:[210,22,40]},
+  shapes:[P("M156 120 L194 84 L184 125 L196 162 Z","main"),P("M88 78 L112 36 L126 82 Z","main"),E(95,125,78,48,"main"),
+   E(88,146,60,22,"belly"),P("M100 150 L130 174 L134 148 Z","dark"),P("M138 110 Q133 120 138 132 M147 108 Q142 120 147 134","line"),
+   P("M36 134 Q60 152 86 138","line"),P("M44 139 L48 147 L52 142 Z M60 144 L64 152 L68 145 Z M74 142 L77 149 L81 141 Z","white")]}
+];
+
+// ---------- Estilos elegidos ----------
+const STYLES=[
+ {id:"kawaii",n:1,name:"Kawaii",desc:"Redondito, colores pastel, ojos enormes con brillos y mofletes rosas.",
+  bg:"#FFF0F6",outline:"#5a4038",sw:4.5,eye:"kawaii",col:([h,s,l])=>[h,s*0.75,l+(100-l)*0.38]},
+ {id:"papel",n:3,name:"Papel recortado",desc:"Formas sin contorno con sombra suave, como cartulinas recortadas y pegadas.",
+  bg:"#F1E8D6",outline:null,sw:0,eye:"paper",paper:true,col:([h,s,l])=>[h,s*0.7,l*0.97]}
+];
+
+const hsl=a=>`hsl(${a[0].toFixed(0)} ${a[1].toFixed(0)}% ${a[2].toFixed(0)}%)`;
+let uid=0;
+function shape(s,fill,stroke,sw,extra=""){
+  const st=`fill="${fill}" stroke="${stroke||"none"}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"${extra}`;
+  if(s.t==="circle") return `<circle cx="${s.cx}" cy="${s.cy}" r="${s.rr}" ${st}/>`;
+  if(s.t==="ellipse") return `<ellipse cx="${s.cx}" cy="${s.cy}" rx="${s.rx}" ry="${s.ry}" ${st}${s.rot?` transform="rotate(${s.rot} ${s.cx} ${s.cy})"`:""}/>`;
+  return `<path d="${s.d}" ${st}/>`;
+}
+function eyes(list,st,k){
+  return list.map(([x,y])=>{
+    if(st.eye==="kawaii") return `<ellipse cx="${x}" cy="${y}" rx="9" ry="11" fill="#3b2b2b"/><circle cx="${x-3}" cy="${y-4}" r="3.6" fill="#fff"/><circle cx="${x+3}" cy="${y+4}" r="1.7" fill="#fff"/><ellipse cx="${x+(x<100?-5:5)}" cy="${y+17}" rx="8" ry="4.5" fill="#ff8fb1" opacity="0.6"/>`;
+    return `<circle cx="${x}" cy="${y}" r="9.5" fill="#fffdf6" filter="url(#sh${k})"/><circle cx="${x+1.5}" cy="${y+1}" r="5" fill="#2a2a30"/>`;
+  }).join("");
+}
+function draw(a,st,vb="-6 -6 212 212",label){
+  const k=++uid, c={};
+  for(const r in (a.col||{})) c[r]=hsl(st.col(a.col[r]));
+  c.white="#ffffff";
+  const fillOf=s=> s.c? hsl(st.col(s.c)) : c[s.r];
+  const darkBase=(a.col&&a.col.dark)||[24,40,25];
+  const lineCol=st.outline||hsl([darkBase[0],darkBase[1],Math.max(18,darkBase[2]-8)]);
+  const defs=`<defs><filter id="sh${k}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1.5" dy="2.5" stdDeviation="1.2" flood-color="#5a4a30" flood-opacity="0.45"/></filter></defs>`;
+  const isStroke=r=>r==="line"||r==="leg"||r==="spout"||r==="stroke";
+  const strokeOf=s=> s.r==="leg"? [c.accent2,6] : s.r==="spout"? [c.accent,6] : s.r==="stroke"? [fillOf(s),s.w] : [lineCol, st.sw?Math.max(2.5,st.sw*0.8):3];
+  const outlined=s=> s.r==="stroke" && st.outline ? shape(s,"none",st.outline,s.w+st.sw*2) : "";
+  let body="";
+  if(st.paper){
+    body+=a.shapes.map(s=>isStroke(s.r)?shape(s,"none",...strokeOf(s),s.r==="stroke"?` filter="url(#sh${k})"`:""):shape(s,fillOf(s),"none",0,` filter="url(#sh${k})"`)).join("");
+  } else {
+    body+=a.shapes.map(s=>isStroke(s.r)?outlined(s)+shape(s,"none",...strokeOf(s)):shape(s,fillOf(s),st.outline,st.sw)).join("");
+  }
+  if(a.eyes) body+=eyes(a.eyes,st,k);
+  const g = st.paper? `<g transform="rotate(-3 100 100)">${body}</g>` : body;
+  return `<svg viewBox="${vb}" role="img" aria-label="${label||a.name} en estilo ${st.name}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">${defs}${g}</svg>`;
+}
+
+const PARTS=[
+ {key:"ears",label:"Orejas",vb:"30 8 140 126",opt:k=>({name:"Orejas "+EARS[k].name,shapes:EARS[k].shapes,col:{dark:[24,45,32]}}),nm:k=>EARS[k].name},
+ {key:"coat",label:"Pelaje",vb:"40 30 120 170",opt:k=>({name:"Pelaje "+COATS[k].name,shapes:coatShapes(k),eyes:DOG_EYES,col:{dark:[24,45,32]}}),nm:k=>COATS[k].name},
+ {key:"tail",label:"Cola",vb:"122 92 82 92",opt:k=>({name:"Cola "+TAILS[k].name,shapes:TAILS[k].shapes,col:{dark:[24,45,32]}}),nm:k=>TAILS[k].name}
+];
+const KEYS=["rojo","azul","amarillo"];
+const EXAMPLES=[["rojo","rojo","rojo"],["azul","azul","azul"],["amarillo","amarillo","amarillo"]];
+const dogObj=(e,co,t)=>({name:`Perro de orejas ${EARS[e].name}, pelaje ${COATS[co].name} y cola ${TAILS[t].name}`,shapes:dogShapes(e,co,t),eyes:DOG_EYES,col:{dark:[24,45,32]}});
+const stripHTML=arr=>`<span class="strip">${arr.map(g=>`<i class="dot" style="background:${GOMETS[g]}"></i>`).join("")}</span>`;
+
+const root=document.getElementById("styles");
+STYLES.forEach(st=>{
+  const sec=document.createElement("section"); sec.className="style";
+  sec.innerHTML=`<div class="head"><span class="num">${st.n}</span><h2>${st.name}</h2></div><p class="desc">${st.desc}</p>`;
+  const panel=document.createElement("div"); panel.className="panel"; panel.style.background=st.bg;
+  const animals=`<div class="animals">${ANIMALS.map(a=>`<figure>${draw(a,st)}<span class="cap">${a.name}</span></figure>`).join("")}</div>`;
+  let table=`<div class="pieces"><span></span>${KEYS.map(k=>`<span class="hd"><i class="dot" style="background:${GOMETS[k]}" aria-label="gomet ${k}"></i></span>`).join("")}`;
+  PARTS.forEach(p=>{
+    table+=`<span class="lab">${p.label}</span>`;
+    KEYS.forEach(k=>{ table+=`<div class="pc">${draw(p.opt(k),st,p.vb)}<span class="cap">${p.nm(k)}</span></div>`; });
+  });
+  table+=`</div>`;
+  const ex=`<div class="examples">${EXAMPLES.map(([e,co,t])=>`<figure>${stripHTML([e,co,t])}${draw(dogObj(e,co,t),st)}</figure>`).join("")}</div>`;
+  panel.innerHTML=animals+`<div class="dogrow"><div><p class="sub">Las 9 piezas del perro</p>${table}</div><div><p class="sub">Tres perros de ejemplo</p>${ex}</div></div>`;
+  sec.append(panel); root.append(sec);
+});
+
+// ---------- Hoja de recorte de muestra (mesa 1: 5 niños) ----------
+const MESA=[["rojo","azul","amarillo"],["azul","rojo","rojo"],["amarillo","amarillo","azul"],["rojo","rojo","azul"],["azul","amarillo","rojo"]];
+const order={rojo:0,azul:1,amarillo:2};
+const pick=i=>MESA.map(m=>m[i]).sort((a,b)=>order[a]-order[b]);
+function cell(part,k,st,h){
+  const p=PARTS.find(x=>x.key===part);
+  return `<div class="cell" style="height:${h}px"><i class="gm" style="background:${GHEX[k]}"></i>${draw(p.opt(k),st,p.vb)}<span class="nm">${p.label.toLowerCase()}</span></div>`;
+}
+const sheets=document.getElementById("sheets");
+STYLES.forEach(st=>{
+  const ears=pick(0), coats=pick(1), tails=pick(2);
+  const ex=MESA[0];
+  const html=`<div class="sheetwrap"><p class="sub">${st.n} · ${st.name}</p><div class="scroll"><div class="sheet">
+    <div class="top"><b>Mesa 1 · piezas del perro</b><span>✂ recorta por la línea de puntos</span></div>
+    <p class="lbl">PELAJE</p>
+    <div class="cells" style="grid-template-columns:repeat(3,1fr)">${coats.map(k=>cell("coat",k,st,180)).join("")}
+      <div class="cell info" style="height:180px"><b>Así queda</b>${stripHTML(ex)}<div style="width:120px;height:120px">${draw(dogObj(...ex),st)}</div></div></div>
+    <p class="lbl">OREJAS</p>
+    <div class="cells" style="grid-template-columns:repeat(3,1fr)">${ears.map(k=>cell("ears",k,st,86)).join("")}
+      <div class="cell info" style="height:86px"><b>1 gomet = 1 pieza</b>Busca la pieza con el círculo de tu color</div></div>
+    <p class="lbl">COLA</p>
+    <div class="cells" style="grid-template-columns:repeat(5,1fr)">${tails.map(k=>cell("tail",k,st,96)).join("")}</div>
+  </div></div></div>`;
+  sheets.insertAdjacentHTML("beforeend",html);
+});
+</script>
