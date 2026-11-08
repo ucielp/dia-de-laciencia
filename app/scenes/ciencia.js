@@ -1,8 +1,13 @@
-/* Escenas de ciencia (agente «ciencia»): misterio (5), experimento (8), no-solo (25), ambitos (30), mi-trabajo (40).
+/* Escenas de ciencia (agente «ciencia»): misterio (5), experimento (8), metodo (9), no-solo (25), ambitos (30), mi-trabajo (40).
    Todo dibujado con SVG/CSS/canvas en estilo papel recortado. Ver CONTRACT.md. */
 (function(){
 "use strict";
 const SC=window.SCENES=window.SCENES||[];
+/* VÍDEO de las familias preparando el experimento en casa: paso OPCIONAL al final de la escena «experimento».
+   Cómo añadirlo: guarda el vídeo como  app/video/experimento.mp4  (MP4 H.264 + AAC; mejor < 50 MB para Vercel).
+   Si el archivo no existe o no se puede cargar, ese paso se SALTA solo (no aparece nada en pantalla).
+   Para usar otro nombre, cambia solo esta ruta (relativa a index.html). */
+const EXPERIMENT_VIDEO="video/experimento.mp4";
 let UID=0;
 /* Colores del modelo físico de ADN (letra siempre en blanco) */
 const BASE={A:"#2F6BD8",T:"#E0245E",G:"#1E9A57",C:"#F28A1E"};
@@ -152,6 +157,15 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   .fx-swap{position:absolute;left:22px;bottom:20px;width:62px;height:62px;border-radius:50%;border:none;background:rgba(31,42,68,.07);cursor:pointer;opacity:.45;padding:9px}
   .fx-swap:hover,.fx-swap:focus-visible{opacity:1}
   .fx-swap svg{width:100%;height:100%;display:block}
+  .fx-vid{position:absolute;inset:0;z-index:30;background:radial-gradient(circle at 50% 55%,#FFF8EA 0,#F4E6CC 70%,#E9D4AE 100%);display:none}
+  .fx-vid.on{display:block;animation:fxVidIn .5s cubic-bezier(.3,1.3,.5,1) both}
+  @keyframes fxVidIn{from{opacity:0;transform:scale(.94)}}
+  .fx-vid h1{position:absolute;left:0;right:0;top:44px;margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:96px;line-height:1;color:var(--ink)}
+  .fx-vid h1 b{color:var(--orange);font-weight:700}
+  .fx-vframe{position:absolute;left:50%;top:180px;width:1440px;height:852px;margin-left:-720px;box-sizing:border-box;padding:24px;background:#FFFDF7;border-radius:22px;transform:rotate(-1deg);box-shadow:0 10px 0 rgba(90,74,48,.14),0 24px 50px rgba(90,74,48,.28)}
+  .fx-vframe::before,.fx-vframe::after{content:"";position:absolute;top:-24px;width:200px;height:52px;background:rgba(242,194,48,.78);border-radius:4px;z-index:2}
+  .fx-vframe::before{left:80px;transform:rotate(-6deg)}.fx-vframe::after{right:80px;transform:rotate(5deg)}
+  .fx-vframe video{display:block;width:1392px;height:804px;object-fit:contain;background:#1F2A44;border-radius:12px;cursor:pointer}
   @media (prefers-reduced-motion:reduce){.fx *{animation:none!important}}
   `));
   const root=el("div",{class:"fx"}); box.append(root);
@@ -180,6 +194,17 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   const swap=el("button",{class:"fx-swap",title:"Cambiar nombres de ingredientes (tecla I)","aria-label":"Cambiar nombres de ingredientes",
     html:`<svg viewBox="0 0 48 48"><path d="M10 18 A15 15 0 0 1 38 14" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M38 6 V15 H29" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 30 A15 15 0 0 1 10 34" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M10 42 V33 H19" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`});
   root.append(cv,left,cup1,cup2,soapB,swap);
+  /* Paso opcional: vídeo de las familias (EXPERIMENT_VIDEO). Solo existe si el archivo carga; si no, se salta. */
+  let vidOK=false;
+  const video=el("video",{preload:"auto",playsinline:true,"aria-label":"Vídeo: así preparasteis el experimento en casa"});
+  video.addEventListener("loadeddata",()=>{ vidOK=true; });
+  video.addEventListener("error",()=>{ vidOK=false; });
+  video.addEventListener("click",ev=>{ ev.stopPropagation(); if(video.paused){ const p=video.play(); if(p&&p.catch) p.catch(()=>{}); } else video.pause(); });
+  const vidBox=el("div",{class:"fx-vid"},el("h1",{html:"¡Así lo hicisteis <b>en casa</b>!"}),el("div",{class:"fx-vframe"},video));
+  root.append(vidBox);
+  try{ video.src=EXPERIMENT_VIDEO; }catch(e){ vidOK=false; }
+  function showVid(){ vidBox.classList.add("on"); fizz(0); try{ video.currentTime=0; }catch(e){} const p=video.play(); if(p&&p.catch) p.catch(()=>{}); }
+  function hideVid(){ vidBox.classList.remove("on"); try{ video.pause(); }catch(e){} fizz(0.045); }
 
   /* ---- Mundo: bote, líquido, burbujas, espuma ---- */
   const JX0=1170,JX1=1610,JXC=1390,JTOP=390,JBOT=910,WALL=14,LIQ=170,TLMAX=JBOT+16-JTOP;
@@ -402,9 +427,143 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   root.addEventListener("click",()=>APP.next());
   enter(1);
   return {
-    next(){ if(step<3){ pourTm.clear(); step++; enter(1); return true; } return false; },
-    prev(){ if(step>0){ pourTm.clear(); step--; enter(-1); return true; } return false; },
-    destroy(){ cancelAnimationFrame(raf); tm.clear(); pourTm.clear(); fizzStop(); window.removeEventListener("keydown",onKey); }
+    next(){ if(step<3){ pourTm.clear(); step++; enter(1); return true; }
+      if(step===3&&vidOK){ step=4; showVid(); return true; } return false; },
+    prev(){ if(step===4){ step=3; hideVid(); return true; }
+      if(step>0){ pourTm.clear(); step--; enter(-1); return true; } return false; },
+    destroy(){ cancelAnimationFrame(raf); tm.clear(); pourTm.clear(); fizzStop(); window.removeEventListener("keydown",onKey);
+      try{ video.pause(); video.removeAttribute("src"); video.load(); }catch(e){} }
+  };
+}});
+
+/* =====================================================================================
+   9 · MÉTODO CIENTÍFICO: ciclo de 5 pasos (observar → preguntar → imaginar → probar → ¿qué ha pasado?)
+   unido a la espuma que acabamos de hacer. Cada pulsación revela un paso; la última cierra el círculo.
+   ===================================================================================== */
+const MC_ICON={
+  obs:`<path d="M8 50 Q50 12 92 50 Q50 88 8 50Z" fill="#FFFDF7" %F%/><circle cx="50" cy="50" r="21" fill="#2453C7"/><circle cx="50" cy="50" r="10" fill="#1F2A44"/><circle cx="43" cy="43" r="5" fill="#fff"/>`,
+  ask:`<path d="M12 24 Q12 12 24 12 H76 Q88 12 88 24 V58 Q88 70 76 70 H46 L28 88 L31 70 H24 Q12 70 12 58Z" fill="#FFFDF7" %F%/><text x="50" y="61" text-anchor="middle" font-family="Fredoka,sans-serif" font-weight="700" font-size="54" fill="#F7931E">?</text>`,
+  idea:`<path d="M50 6 V14 M18 20 L24 26 M82 20 L76 26 M8 50 H16 M92 50 H84" stroke="#FFFDF7" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="44" r="25" fill="#FFFDF7" %F%/><path d="M40 70 Q38 60 31 54 L69 54 Q62 60 60 70Z" fill="#FFFDF7"/><rect x="38" y="68" width="24" height="9" rx="3" fill="#6D6E71" %F%/><rect x="40" y="79" width="20" height="9" rx="3" fill="#6D6E71" %F%/><path d="M44 54 V46 M56 54 V46 M44 46 Q50 36 56 46" stroke="#F7931E" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+  test:`<path d="M40 30 V46 L20 82 Q16 90 26 90 H74 Q84 90 80 82 L60 46 V30Z" fill="#E3F4FB" %F%/><path d="M30 66 H70 L80 82 Q84 90 74 90 H26 Q16 90 20 82Z" fill="#29ABE2"/>
+    <circle cx="42" cy="22" r="11" fill="#FFFDF7" %F%/><circle cx="56" cy="18" r="13" fill="#FFFDF7" %F%/><circle cx="50" cy="8" r="8" fill="#FFFDF7" %F%/><circle cx="64" cy="30" r="8" fill="#FFFDF7" %F%/><circle cx="36" cy="34" r="7" fill="#FFFDF7" %F%/>
+    <circle cx="40" cy="78" r="3.5" fill="#FFFDF7"/><circle cx="56" cy="74" r="2.5" fill="#FFFDF7"/><circle cx="62" cy="82" r="3" fill="#FFFDF7"/>`,
+  done:`<rect x="20" y="16" width="60" height="76" rx="8" fill="#FFFDF7" %F%/><rect x="36" y="9" width="28" height="15" rx="5" fill="#6D6E71" %F%/><path d="M32 54 L45 67 L69 38" stroke="#1E9A57" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 80 H68" stroke="#E2D6BE" stroke-width="5" stroke-linecap="round"/>`
+};
+SC.push({id:"metodo",title:"El método científico",order:9,mount(box,APP){
+  const {el}=APP, red=APP.reduced(), tm=timers();
+  const CX=620, CY=610, R=360, ND=190;
+  const STEPS=[
+    {k:"obs", c:"#29ABE2", label:"Observar", name:"Observar", say:"Miramos con <b>mucha atención</b>.", say2:"Un bote, dos ingredientes…"},
+    {k:"ask", c:"#F7931E", label:"Preguntar", name:"Preguntar", say:"¿Qué pasará <b>si los mezclamos</b>?"},
+    {k:"idea",c:"#E0A800", label:"Imaginar", name:"Imaginar", word:"hipótesis", say:"Yo creo que…<br>¡saldrán <b>burbujas</b>!"},
+    {k:"test",c:"#7AC143", label:"Probar", name:"Probar", word:"experimento", say:"¡Lo mezclamos<br>y <b>miramos</b>!"},
+    {k:"done",c:"#E04B3A", label:"¿Qué ha pasado?", name:"¿Qué ha pasado?", word:"conclusión", say:"¡Espuma! El jabón<br><b>atrapó el gas</b>."}
+  ];
+  const ang=i=>(-90+72*i)*Math.PI/180;
+  const pos=i=>[CX+R*Math.cos(ang(i)),CY+R*Math.sin(ang(i))];
+  box.append(styleEl(APP,`
+  .mc{position:absolute;inset:0;background:radial-gradient(circle at 32% 56%,#FFF8EA 0,#F6EBD6 55%,#EDDDBF 100%);overflow:hidden;cursor:pointer}
+  .mc-title{position:absolute;left:80px;top:34px;margin:0;font-family:var(--display);font-weight:700;font-size:84px;line-height:1;color:var(--ink)}
+  .mc-title b{color:var(--orange);font-weight:700}
+  .mc-svg{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none;overflow:visible}
+  .mc-arc{fill:none;stroke:#4A5265;stroke-width:14;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s ease-out}
+  .mc-head{opacity:0;transition:opacity .2s .5s}
+  .mc-a.on .mc-arc{stroke-dashoffset:0}.mc-a.on .mc-head{opacity:1}
+  .mc-n{position:absolute;width:${ND}px;height:${ND}px;margin:-${ND/2}px 0 0 -${ND/2}px;transform:scale(0);opacity:0;transition:transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+  .mc-n.on{transform:scale(1);opacity:1}
+  .mc-n.cur{transform:scale(1.14)}
+  .mc-disc{position:absolute;inset:0;border-radius:50%;background:var(--c);box-shadow:0 7px 0 rgba(90,74,48,.16),0 14px 26px rgba(90,74,48,.24)}
+  .mc-n.cur .mc-disc{box-shadow:0 0 0 12px #FFFDF7,0 0 0 20px var(--c),0 14px 30px rgba(90,74,48,.3)}
+  .mc-n svg{position:absolute;left:20px;top:16px;width:150px;height:150px}
+  .mc-num{position:absolute;left:-8px;top:-8px;width:58px;height:58px;border-radius:50%;background:#FFFDF7;color:var(--ink);font-family:var(--display);font-weight:700;font-size:40px;line-height:58px;text-align:center;box-shadow:0 4px 0 rgba(90,74,48,.15)}
+  .mc-lab{position:absolute;left:50%;top:${ND-30}px;transform:translateX(-50%);white-space:nowrap;background:#FFFDF7;color:var(--ink);font-family:var(--display);font-weight:600;font-size:40px;line-height:1;padding:9px 22px 11px;border-radius:999px;box-shadow:0 4px 0 rgba(90,74,48,.14)}
+  .mc-n.pulse .mc-disc{animation:mcPulse .7s ease-out}
+  @keyframes mcPulse{40%{transform:scale(1.16)}}
+  .mc-jar{position:absolute;left:${CX-150}px;top:${CY-150}px;width:300px;height:300px}
+  .mc-jar svg{width:100%;height:100%;overflow:visible;display:block}
+  .mc-foam{transform-box:fill-box;transform-origin:50% 100%;transform:scale(0);transition:transform .9s cubic-bezier(.3,1.5,.5,1)}
+  .mc.foam .mc-foam{transform:none}
+  .mc-ring{fill:none;stroke:#D8C7A6;stroke-width:6;stroke-dasharray:4 22;stroke-linecap:round}
+  .mc-p{position:absolute;left:1140px;top:250px;width:720px}
+  .mc-p h2{margin:0 0 26px;font-family:var(--display);font-weight:700;font-size:100px;line-height:1.02;color:var(--c,var(--ink))}
+  .mc-p h2 b{color:var(--orange);font-weight:700}
+  .mc-word{display:inline-flex;align-items:center;gap:14px;margin:0 0 30px;padding:12px 30px 14px;border-radius:999px;background:var(--c);color:#fff;font-family:var(--display);font-weight:600;font-size:48px;line-height:1;box-shadow:0 5px 0 rgba(90,74,48,.15)}
+  .mc-word small{font-size:40px;font-weight:500;opacity:.9}
+  .mc-say{margin:0 0 18px;font-family:var(--display);font-weight:500;font-size:64px;line-height:1.12;color:var(--ink)}
+  .mc-say b{color:var(--c,var(--orange));font-weight:700}
+  .mc-in{animation:mcIn .5s cubic-bezier(.3,1.5,.6,1) both}
+  @keyframes mcIn{from{opacity:0;transform:translateX(50px) scale(.94)}}
+  @media (prefers-reduced-motion:reduce){.mc *{animation:none!important;transition:none!important}}
+  `));
+  const root=el("div",{class:"mc"}); box.append(root);
+  // anillo punteado de fondo + flechas (arcos) entre pasos
+  const M=26*Math.PI/180; // margen angular para no tocar los círculos
+  let arcs="";
+  for(let i=0;i<5;i++){
+    const a0=ang(i)+M, a1=ang(i+1)-M-0.06;
+    const x0=CX+R*Math.cos(a0), y0=CY+R*Math.sin(a0), x1=CX+R*Math.cos(a1), y1=CY+R*Math.sin(a1);
+    const tx=-Math.sin(a1), ty=Math.cos(a1), nx=Math.cos(a1), ny=Math.sin(a1); // tangente (sentido horario) y normal
+    const hx=x1+tx*30, hy=y1+ty*30;
+    const head=`${(hx).toFixed(1)},${(hy).toFixed(1)} ${(x1+nx*20-tx*4).toFixed(1)},${(y1+ny*20-ty*4).toFixed(1)} ${(x1-nx*20-tx*4).toFixed(1)},${(y1-ny*20-ty*4).toFixed(1)}`;
+    arcs+=`<g class="mc-a" data-i="${i}"><path class="mc-arc" pathLength="1" d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}"/><polygon class="mc-head" points="${head}" fill="#4A5265" stroke="#4A5265" stroke-width="6" stroke-linejoin="round"/></g>`;
+  }
+  const svgEl=APP.svg(`<svg class="mc-svg" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><circle class="mc-ring" cx="${CX}" cy="${CY}" r="${R}"/>${arcs}</svg>`);
+  const arcEls=[...svgEl.querySelectorAll(".mc-a")];
+  // bote de la espuma en el centro (la espuma aparece en «Probar»)
+  const jar=el("div",{class:"mc-jar",html:paper("0 0 300 300",`
+    <ellipse cx="150" cy="282" rx="120" ry="14" fill="rgba(90,74,48,.18)"/>
+    <g class="mc-foam">${[[80,84,40],[124,62,46],[176,64,44],[218,88,38],[150,30,34],[100,40,26],[200,36,24],[60,120,26],[240,124,24]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#FFFFFF" stroke="#D5E4EE" stroke-width="4" %F%/>`).join("")}
+      <path d="M56 100 Q50 170 48 200" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" fill="none"/><path d="M244 104 Q252 160 254 210" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" fill="none"/></g>
+    <rect x="70" y="96" width="160" height="182" rx="34" fill="rgba(214,238,248,.85)" %F%/>
+    <path d="M78 176 H222 V244 Q222 270 196 270 H104 Q78 270 78 244Z" fill="#9FD5EE"/>
+    <path d="M96 116 V240" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+    <rect x="62" y="88" width="176" height="22" rx="11" fill="#CDE9F5" %F%/>
+    <circle cx="130" cy="222" r="7" fill="#fff"/><circle cx="168" cy="236" r="5" fill="#fff"/><circle cx="186" cy="204" r="6" fill="#fff"/>`,"",2)});
+  root.append(el("h1",{class:"mc-title",html:"¿Cómo trabaja un <b>científico</b>?"}),svgEl,jar);
+  const nodes=STEPS.map((S,i)=>{
+    const [x,y]=pos(i);
+    const n=el("div",{class:"mc-n",style:{left:x.toFixed(0)+"px",top:y.toFixed(0)+"px"}},
+      el("div",{class:"mc-disc"}),APP.svg(paper("0 0 100 100",MC_ICON[S.k],"",1)),el("div",{class:"mc-num",text:String(i+1)}),el("div",{class:"mc-lab",text:S.label}));
+    n.style.setProperty("--c",S.c); root.append(n); return n;
+  });
+  const panel=el("div",{class:"mc-p"}); root.append(panel);
+  function renderPanel(s){
+    panel.replaceChildren(); panel.style.removeProperty("--c");
+    const d=k=>({style:{animationDelay:(k*0.15)+"s"}});
+    if(s===0){
+      panel.append(el("h2",Object.assign({class:"mc-in",html:"Sigue unos <b>pasos</b>…"},d(0))),
+        el("p",Object.assign({class:"mc-say mc-in",html:"¡como con la <b>espuma</b>!"},d(1))));
+    }else if(s<=5){
+      const S=STEPS[s-1]; panel.style.setProperty("--c",S.c);
+      panel.append(el("h2",Object.assign({class:"mc-in",text:S.name},d(0))));
+      if(S.word) panel.append(el("div",Object.assign({class:"mc-word mc-in"},d(1)),el("small",{text:"Se llama"}),el("span",{text:S.word})));
+      panel.append(el("p",Object.assign({class:"mc-say mc-in",html:S.say},d(2))));
+      if(S.say2) panel.append(el("p",Object.assign({class:"mc-say mc-in",text:S.say2},d(3))));
+    }else{
+      panel.append(el("h2",Object.assign({class:"mc-in",html:"¡Es el <b>método científico</b>!"},d(0))),
+        el("p",Object.assign({class:"mc-say mc-in",html:"Y al final…<br>¡una <b>pregunta nueva</b>!"},d(1))));
+    }
+  }
+  let step=0;
+  function chase(){ // al cerrar el círculo, los pasos «laten» uno tras otro, en bucle
+    if(red) return;
+    nodes.forEach((n,i)=>tm.set(()=>{ n.classList.remove("pulse"); void n.offsetWidth; n.classList.add("pulse"); },i*380));
+    tm.set(chase,5*380+900);
+  }
+  function apply(s,dir){
+    step=s; tm.clear();
+    nodes.forEach((n,i)=>{ n.classList.toggle("on",i<s||s===6); n.classList.toggle("cur",s<=5&&i===s-1); n.classList.remove("pulse"); });
+    arcEls.forEach((a,i)=>a.classList.toggle("on",(i<s-1)||s===6));
+    root.classList.toggle("foam",s>=4);
+    renderPanel(s);
+    if(s===6){ if(dir>0&&!red) APP.audio.win(); tm.set(chase,red?0:900); }
+  }
+  apply(0,1);
+  root.addEventListener("click",()=>APP.next());
+  return {
+    next(){ if(step<6){ apply(step+1,1); return true; } return false; },
+    prev(){ if(step>0){ apply(step-1,-1); return true; } return false; },
+    destroy(){ tm.clear(); }
   };
 }});
 
@@ -701,6 +860,19 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
   @keyframes mtEyes{0%,100%{transform:translateX(-10px)}50%{transform:translateX(6px)}}
   .mt-bulb{animation:mtBulb 1s steps(2) infinite}
   @keyframes mtBulb{50%{fill:#E04B3A}}
+  .mt-count{position:absolute;left:50%;top:196px;transform:translateX(-50%);display:flex;align-items:center;gap:22px;white-space:nowrap}
+  .mt-count .mt-tile{position:relative;width:76px;height:76px;font-size:52px;border-radius:18px}
+  .mt-num{font-family:var(--display);font-weight:700;font-size:132px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;margin-left:14px;min-width:880px;text-align:right}
+  .mt-unit{font-family:var(--display);font-weight:600;font-size:64px;color:#6B4BA0}
+  .mt-case{position:absolute;top:378px;width:500px;height:540px;box-sizing:border-box;border-radius:18px;background:#A9774E;padding:18px 18px 0;box-shadow:0 8px 0 rgba(90,74,48,.18),0 18px 34px rgba(90,74,48,.25)}
+  .mt-shelf{position:relative;height:113px;margin-bottom:16px;background:#7A5236;border-radius:8px;display:flex;align-items:flex-end;gap:3px;padding:0 6px;overflow:hidden;box-shadow:inset 0 -12px 0 #C8956A}
+  .mt-shelf:last-child{margin-bottom:0}
+  .mt-bk{flex:none;border-radius:5px 5px 2px 2px;margin-bottom:12px;box-shadow:inset -5px 0 0 rgba(0,0,0,.14);position:relative}
+  .mt-bk::before{content:"";position:absolute;left:3px;right:6px;top:14px;height:7px;border-radius:3px;background:rgba(255,255,255,.75)}
+  .mt-bk::after{content:"";position:absolute;left:3px;right:6px;bottom:14px;height:5px;border-radius:3px;background:rgba(255,255,255,.45)}
+  .mt-pill{position:absolute;left:50%;top:944px;transform:translateX(-50%);display:flex;align-items:center;gap:26px;white-space:nowrap;background:#FFFDF7;border-radius:999px;padding:14px 22px 14px 44px;box-shadow:0 7px 0 rgba(90,74,48,.14),0 16px 30px rgba(90,74,48,.2);font-family:var(--display);font-weight:600;font-size:64px;line-height:1;color:var(--ink);opacity:0}
+  .mt-pill b{color:var(--orange);font-weight:700}
+  .mt-pill .mt-tag{font-size:46px;font-weight:600;color:#fff;background:#6B4BA0;border-radius:999px;padding:12px 28px}
   @media (prefers-reduced-motion:reduce){.mt *{animation:none!important}}
   `));
   const root=el("div",{class:"mt"}); box.append(root);
@@ -808,6 +980,30 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
   const bonds=SEQ.map((b,i)=>el("div",{class:"mt-bond",style:{left:(TX0+i*118+46)+"px",top:(TY+110)+"px"}}));
   const legend=el("div",{class:"mt-leg"},...["A","C","G","T"].map(b=>tile(b)));
 
+  /* ---------- L4b: biblioteca — 3.000 millones de letras ≈ 1.000 libros gordos = una biblioteca entera ---------- */
+  const LIBbg=paper("0 0 1920 1080",`<rect width="1920" height="1080" fill="#FBF1E2"/>${[[120,190,110],[1800,170,130],[60,700,70],[1870,640,60]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F5E4CB"/>`).join("")}<rect x="0" y="905" width="1920" height="175" fill="#EAD7B8"/>`);
+  const libNum=el("span",{class:"mt-num",text:"0"});
+  const libCount=el("div",{class:"mt-count"},...["A","C","G","T"].map(b=>tile(b)),libNum,el("span",{class:"mt-unit",text:"letras"}));
+  const libBooks=[], BKC=[BASE.A,BASE.T,BASE.G,BASE.C];
+  const cases=[0,1,2].map(ci=>{
+    const cs=el("div",{class:"mt-case",style:{left:(150+ci*560)+"px"}});
+    for(let r=0;r<4;r++){
+      const sh=el("div",{class:"mt-shelf"}); let w=6, k=0;
+      while(true){ const bw=22+((ci*7+r*5+k*11)%4)*4, bh=78+((ci*3+r*7+k*13)%5)*6; if(w+bw+3>458) break;
+        const b=el("div",{class:"mt-bk",style:{width:bw+"px",height:bh+"px",background:BKC[(ci+r*3+k*5+(k>>1))%4]}}); sh.append(b); libBooks.push(b); w+=bw+3; k++; }
+      cs.append(sh);
+    }
+    return cs;
+  });
+  const libPill=el("div",{class:"mt-pill"},el("div",{html:"En libros… ¡una <b>biblioteca entera</b>!"}),el("span",{class:"mt-tag",text:"≈ 1.000 libros gordos"}));
+  const LIB_N=3000000000, LIB_FILL=3400, LIB_START=700;
+  let libT0=-1e9, libShown=-1;
+  const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".");
+  function drawLib(now){
+    const p=Math.max(0,Math.min(1,(now-libT0-LIB_START)/LIB_FILL)), v=p>=1?LIB_N:Math.round(LIB_N*Math.pow(p,2.2)/1000)*1000;
+    if(v!==libShown){ libShown=v; libNum.textContent=fmt(v); }
+  }
+
   /* ---------- L5: yo estudio estas letras (doble hilera que pasa bajo una lupa) ---------- */
   const L5bg=paper("0 0 1920 1080",`<rect width="1920" height="1080" fill="#F5EEFB"/>${[[200,250,150],[1720,230,180],[1600,940,160],[260,930,130]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#EADFF7"/>`).join("")}`);
   const SEQ2="ATGCGTACCTAGGCATTGCA".split("");
@@ -879,7 +1075,8 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
     {el:mk(L1),focal:L1focal,ban:"¡Millones de <b>células</b>!",zoom:"×100",trans:"zoom"},
     {el:mk(L2),focal:[1000,600],ban:"Una célula… ¡y su <b>núcleo</b>!",zoom:"×1.000",trans:"zoom"},
     {el:mk(L3bg,helixCv),focal:[960,630],ban:()=>{ const f=document.createDocumentFragment(); f.append(APP.svg(book),el("span",{html:"El ADN: un <b>libro de instrucciones</b>"})); return f; },zoom:"×100.000",trans:"zoom"},
-    {el:mk(L4bg,...bonds,...topT,...botT,legend),focal:[960,600],ban:"Escrito con <b>solo 4 letras</b>",zoom:"×1.000.000",trans:"zoom"},
+    {el:mk(L4bg,...bonds,...topT,...botT,legend),focal:[960,600],ban:"Escrito con <b>solo 4 letras</b>",zoom:"×1.000.000",trans:"zoom",letters:true},
+    {el:mk(LIBbg,libCount,...cases,libPill),ban:"Tu ADN tiene <b>muchísimas</b> letras…",trans:"slide",lib:true},
     {el:mk(L5bg,strip,handle,mag),ban:"Yo estudio <b>estas letras</b>",trans:"slide"},
     {el:mk(L7bg,rainCv,nn),ban:"…y lo combino con la <b>inteligencia artificial</b>",two:true,trans:"slide"}
   ];
@@ -894,7 +1091,16 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
   }
   function enter(i,dir){
     const fast=red||dir<0;
-    if(i===4){
+    if(LV[i].lib){
+      if(fast){ libT0=-1e9; libPill.style.opacity=1; return; }
+      libT0=performance.now(); libShown=-1; libPill.style.opacity=0;
+      const N=libBooks.length;
+      libBooks.forEach((b,k)=>keep(b.animate([{opacity:0,transform:"translateY(-70px) rotate(-8deg)"},{opacity:1,transform:"none"}],{duration:380,delay:LIB_START+k/N*LIB_FILL,easing:"cubic-bezier(.3,1.4,.6,1)",fill:"backwards"})));
+      keep(libPill.animate([{opacity:0,transform:"translateX(-50%) scale(.6)"},{opacity:1,transform:"translateX(-50%)"}],{duration:550,delay:LIB_START+LIB_FILL+300,easing:"cubic-bezier(.3,1.6,.5,1)",fill:"backwards"}));
+      lvTm.set(()=>{ libPill.style.opacity=1; },LIB_START+LIB_FILL+300);
+      lvTm.set(()=>APP.audio.ok(),LIB_START+LIB_FILL+300);
+    }
+    if(LV[i].letters){
       const d0=fast?0:900;
       topT.forEach((t,k)=>keep(t.animate([{transform:"none"},{transform:`translateY(-120px) rotate(${k%2?4:-4}deg)`}],{duration:fast?1:600,delay:fast?0:d0+k*70,easing:"cubic-bezier(.3,1.5,.6,1)",fill:"forwards"})));
       botT.forEach((t,k)=>keep(t.animate([{transform:"none"},{transform:`translateY(120px) rotate(${k%2?-4:4}deg)`}],{duration:fast?1:600,delay:fast?0:d0+k*70,easing:"cubic-bezier(.3,1.5,.6,1)",fill:"forwards"})));
@@ -943,10 +1149,12 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
     enter(n,dir);
   }
 
+  const LIBL=LV.find(L=>L.lib), RAINL=LV[LV.length-1];
   let raf=0, t0=performance.now();
   const loop=now=>{
     if(LV[3].el.style.display!=="none") drawHelix(red?0.6:(now-t0)/1000*1.3);
-    if(LV[6].el.style.display!=="none") drawRain(now);
+    if(LIBL.el.style.display!=="none") drawLib(now);
+    if(RAINL.el.style.display!=="none") drawRain(now);
     raf=requestAnimationFrame(loop);
   };
   raf=requestAnimationFrame(loop);

@@ -25,12 +25,16 @@ h1{margin:4px 0 0;font-family:var(--display);font-weight:700;font-size:clamp(30p
 h1 span{color:var(--orange)}
 .strip{align-self:center;display:flex;gap:10px;background:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 4px 0 rgba(90,74,48,.08)}
 .strip i{width:34px;height:34px;border-radius:50%;background:#E7E0D0;box-shadow:inset 0 -4px 0 rgba(0,0,0,.12)}
-.dog{position:relative;width:100%;aspect-ratio:200/165;max-height:34vh;max-width:calc(34vh*200/165);margin:0 auto}
+.dog{position:relative;width:100%;aspect-ratio:200/165;max-height:28vh;max-width:calc(28vh*200/165);margin:0 auto}
 .dog>div{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,1.5,.4,1),opacity .3s}
 .dog svg{width:100%;height:100%;display:block}
 .dog.wig{animation:wig .5s ease 2}
 @keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
-.name{margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(26px,7vw,40px);min-height:1.2em}
+.ask{margin:-6px 0 0;text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(19px,5.2vw,26px);line-height:1.2;color:var(--inkSoft)}
+.ask b{display:block;color:var(--ink)}
+.name{margin:0;align-self:center;min-width:72%;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(30px,8.4vw,46px);line-height:1.05;color:var(--orange);background:#fff;border-radius:22px;padding:8px 18px 12px;box-shadow:0 4px 0 rgba(90,74,48,.08),0 10px 24px rgba(90,74,48,.10)}
+.name small{display:block;font-size:.5em;font-weight:600;color:var(--ink)}
+.name.wait{color:#B9AF9A;font-size:clamp(22px,6vw,30px);padding:12px 18px}
 .desc{margin:-8px 0 0;text-align:center;font-size:17px;color:var(--inkSoft);min-height:1.3em}
 .rows{display:flex;flex-direction:column;gap:10px}
 .row{background:#fff;border-radius:22px;padding:10px 12px;display:grid;grid-template-columns:84px 1fr;align-items:center;box-shadow:0 4px 0 rgba(90,74,48,.08)}
@@ -43,7 +47,11 @@ h1 span{color:var(--orange)}
 .act{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .act button{font-family:var(--display);font-weight:600;font-size:22px;border:none;border-radius:20px;padding:14px 10px;color:#fff;cursor:pointer;box-shadow:inset 0 -5px 0 rgba(0,0,0,.15)}
 .act button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
-.foot{margin:6px 0 0;text-align:center;font-size:15px;color:var(--inkSoft)}
+.pres{align-self:center;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:7px 14px;box-shadow:0 4px 0 rgba(31,42,68,.18)}
+.pres:hover{background:#FFF6E8}
+.pres:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+.pres svg{flex:none}
+.foot{margin:2px 0 0;text-align:center;font-size:15px;color:var(--inkSoft)}
 </style>
 </head>
 <body>
@@ -55,7 +63,9 @@ h1 span{color:var(--orange)}
 </div>
 
 <main>
+  <a class="pres" href="./"><svg width="30" height="24" viewBox="0 0 30 24" aria-hidden="true"><rect x="1" y="1" width="28" height="18" rx="3" fill="#29ABE2"/><path d="M12 6 L20 10 L12 14 Z" fill="#fff"/><rect x="11" y="20" width="8" height="3" rx="1.5" fill="#1F2A44"/></svg>Ver la presentación de la clase</a>
   <h1>Laboratorio de <span>perros</span></h1>
+  <p class="ask"><b>¿Cómo se llama tu perro?</b> Elige sus 3 colores</p>
   <div class="strip" id="strip" aria-label="ADN del perro"><i></i><i></i><i></i></div>
   <div class="dog" id="dog"></div>
   <p class="name" id="name"></p>
@@ -65,7 +75,7 @@ h1 span{color:var(--orange)}
     <button id="rand" style="background:var(--blue)">¡Al azar!</button>
     <button id="clear" style="background:var(--grey)">Borrar</button>
   </div>
-  <p class="foot">Elige un color para las orejas, el cuerpo y la cola. ¡Hay 27 perros distintos!</p>
+  <p class="foot">Mira la tarjeta «ADN secreto» de tu perro y elige sus colores: orejas, cuerpo y cola. Cada perro tiene su propio nombre.</p>
 </main>
 
 <script src="core.js"></script>
@@ -102,8 +112,9 @@ function draw(changed){
     KEYS.forEach(c=>btns[p][c].classList.toggle("sel",c===k));
   });
   if(changed&&!APP.reduced()){ const L=layer[changed]; L.style.transform="translateY(-40px) scale(1.05)"; requestAnimationFrame(()=>requestAnimationFrame(()=>{L.style.transform="none";})); }
-  if(complete()){ nameEl.textContent=dog.name(st.ears,st.coat,st.tail); descEl.textContent=`Orejas ${P.names.ears[st.ears]} · pelaje ${P.names.coat[st.coat]} · cola ${P.names.tail[st.tail]}`; }
-  else { nameEl.textContent=""; descEl.textContent="Elige un color para cada parte"; }
+  nameEl.classList.toggle("wait",!complete());
+  if(complete()){ nameEl.replaceChildren(el("small",{text:"Se llama:"}),dog.name(st.ears,st.coat,st.tail)); descEl.textContent=`Orejas ${P.names.ears[st.ears]} · pelaje ${P.names.coat[st.coat]} · cola ${P.names.tail[st.tail]}`; }
+  else { nameEl.textContent="Se llama: …"; descEl.textContent="Elige un color para cada parte"; }
 }
 function set(p,k){
   const was=complete(); st[p]=k; draw(p);

@@ -8,7 +8,7 @@ Para leer el día antes. En la app, la tecla **N** abre las notas de cada pantal
 
 ## 1. La idea en una frase
 
-Empezamos **en silencio** con un frasco que echa espuma, y descubren que la ciencia es hacer preguntas. Después aprenden que el ADN es una receta, que los cachorros heredan la receta de mamá y papá, fabrican **su propio perro** con su receta secreta y, al final, descubren comparando ADN que **todos los animales son familia**. Se llevan su perro de papel a casa.
+Empezamos **en silencio** con un frasco que echa espuma, y descubren que la ciencia es hacer preguntas y comprobarlas (el **método científico**). Después aprenden que el ADN es una receta, que los cachorros heredan la receta de mamá y papá, fabrican **su propio perro** con su receta secreta (su nombre secreto lo descubren en casa) y, al final, descubren comparando ADN que **todos los animales son familia**. Se llevan su perro de papel a casa.
 
 ---
 
@@ -20,23 +20,24 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 |---|---|---|---|
 | 0–2 | **misterio** («?») | Entran y se sientan en el suelo, en semicírculo. Los profes los colocan por clases. Uciel ya está junto al frasco, callado. | ⏵ suelo, delante |
 | 2–6 | **misterio** | **Experimento de la espuma en silencio.** Latido de suspense. Cuando desborda: «¿Qué ha pasado?». | suelo |
-| 6–9 | **experimento** | Por qué sale la espuma: dos ingredientes → gas → el jabón lo atrapa en burbujas. | suelo |
-| 9–10 | **no-solo** | Transición: la ciencia es mucho más. | suelo |
-| 10–13 | **ambitos** | Naturaleza, espacio, química, historia… y medicina + ordenadores/IA juntas. | suelo |
-| 13–14 | **portada** | «¿Y yo? Soy Uciel y soy científico». Se ensaya la señal de silencio. | suelo |
-| 14–15 | **equipo** | «Tengo un equipo en la UIC»: fotos del equipo, una a una. «¡La ciencia se hace en equipo!» | suelo |
-| 15–18 | **mi-trabajo** | Zoom: niño → célula → núcleo → ADN. Señalar el **modelo físico de ADN**. 4 letras + IA. | suelo |
-| 18–20 | **receta** | Receta de los panellets → el ADN es una receta → la receta del perro: 3 gomets, 27 perros. | suelo |
-| 20–23 | **familia-perro** | Mamá Canela y papá Bruno: cada parte del cachorro viene de mamá o de papá. | suelo |
-| 23–25 | **como-buscar** | Cómo se hace el perro (Uciel lo hace en directo con una hoja y piezas). | suelo |
-| 25–27 | (cambio) | Van a sus **10 estaciones**. La hoja «ADN secreto» ya está allí, boca abajo. | ⏵ estaciones |
-| 27–37 | **laboratorio** | **Actividad 1.** Cada uno pega su perro y le pone nombre. Los que acaban vienen a dictar sus 3 colores y su perro sale en la pantalla. | estaciones |
-| 37–40 | **laboratorio** | Todos miran: gemelos, un ladrido, QR «haz tu perro en casa». Los profes recogen las hojas. | estaciones |
+| 6–8 | **experimento** | Por qué sale la espuma: dos ingredientes → gas → el jabón lo atrapa en burbujas. | suelo |
+| 8–10 | **metodo** | El método científico en 5 pasos, con la espuma: observar, preguntar, imaginar (hipótesis), probar, conclusión. | suelo |
+| 10–11 | **no-solo** | Transición: la ciencia es mucho más. | suelo |
+| 11–13 | **ambitos** | Naturaleza, espacio, química, historia… y medicina + ordenadores/IA juntas. | suelo |
+| 13–14 | **portada** | «¿Y yo? Soy Uciel y soy científico» (con mi foto). Se ensaya la señal de silencio. | suelo |
+| 14–15 | **equipo** | «Tengo un equipo en la UIC»: el Grupo de Biología Computacional del ARN, uno a uno, y la foto del congreso. «¡La ciencia se hace en equipo!» | suelo |
+| 15–18 | **mi-trabajo** | Zoom: niño → célula → núcleo → ADN. Señalar el **modelo físico de ADN**. 4 letras → biblioteca (3.000 millones de letras) → IA. | suelo |
+| 18–20 | **receta** | Receta de los panellets → el ADN es una receta con trozos → la receta del perro: 3 gomets. | suelo |
+| 20–22 | **familia-perro** | Mamá Canela y papá Bruno: cada parte del cachorro viene de mamá o de papá. | suelo |
+| 22–24 | **como-buscar** | Cómo se hace el perro (Uciel lo hace en directo con una hoja y piezas). | suelo |
+| 24–26 | (cambio) | Van a sus **10 estaciones**. La hoja «ADN secreto» ya está allí, boca abajo. | ⏵ estaciones |
+| 26–37 | **laboratorio** | **Actividad 1.** Cada uno pega su perro. Los que acaban vienen a dictar sus 3 colores: su perro sale en la pantalla con su nombre secreto. | estaciones |
+| 37–40 | **laboratorio** | Todos miran: gemelos, un ladrido, QR «descubre el nombre de tu perro en casa». Los profes recogen las hojas. | estaciones |
 | 40–42 | **parientes** | ADN parecido = familia cercana. Contar diferencias casilla a casilla. | estaciones (sentados) |
 | 42–44 | **busca-familia** | Cada estación es un animal: se abren los sobres (cartel + tira). Instrucciones. | ⏵ de pie |
 | 44–47 | **busca-familia** | **Actividad 2.** Buscan el grupo con solo 1 diferencia y se juntan en pareja. | de pie, todo el gimnasio |
 | 47–54 | **arbol** | Se dibujan las 5 parejas. El adulto saca uno a uno los 5 carteles morados. | de pie, en parejas |
-| 54–60 | **cierre** | Sentados otra vez. Desfile de perros. «Hoy habéis sido científicos». Aplauso. | ⏵ suelo |
+| 54–60 | **cierre** | Sentados otra vez. Las 3 ideas del día. Desfile de perros. «Hoy habéis sido científicos». Aplauso. | ⏵ suelo |
 
 **Lo que se protege siempre:** la espuma del principio, el pegado del perro (actividad 1) y el cierre. Lo que se recorta si vamos tarde está en el apartado 7.
 
@@ -67,21 +68,33 @@ Pantalla: un «?» gigante. Pulsar una vez y empieza el **latido de suspense**.
 
 **Trucos:** frasco grande y transparente **en una mesa alta**, sobre bandeja y con un fondo liso detrás (los de atrás ven poco desde el suelo). Si el frasco es ancho, cargar mucho o meter una botella dentro. Gotas de colorante por las paredes de dentro = espuma a franjas. **Los niños, a 2 m como mínimo.**
 
-### 3.2 experimento (min 6–9)
+### 3.2 experimento (min 6–8)
 
 Ir paso a paso con la pantalla (tecla **I** para enseñar los ingredientes):
 > «Hemos mezclado **dos ingredientes**. Al mezclarse hacen un **gas**, como el aire: no se ve, pero hace burbujitas.»
 > «El **jabón** atrapa el gas dentro de burbujas, como una pompa. Muchísimas burbujas juntas son **espuma**… ¡y ya no caben en el frasco!»
 > «¿Y si no ponemos jabón?» *(que voten)* «Solo burbujea. Los científicos hacen preguntas… y lo comprueban.»
 
+**Vídeo (opcional):** si existe `app/video/experimento.mp4`, la pantalla tiene un paso más al final: «¡Mirad! Así lo preparasteis en casa.» Clic en el vídeo para pausarlo. Si no hay vídeo, este paso no sale.
+
 Si la opción B: un adulto puede pasar un poco de espuma para que la toquen al final de la clase («¿está fría o calentita?»), no ahora.
 
-### 3.3 no-solo (min 9–10)
+### 3.3 metodo (min 8–10)
+
+El ciclo de 5 pasos aparece poco a poco. Cada paso se cuenta con la espuma que acaban de ver.
+
+> «¿Cómo trabaja un científico? Sigue unos pasos… ¡como con la espuma!»
+> «1) **Observar**: un bote, dos ingredientes… 2) **Preguntar**: ¿qué pasará si los mezclamos?»
+> «3) **Imaginar**: “Yo creo que… ¡saldrán burbujas!”. Eso se llama **hipótesis**. ¿Qué creíais vosotros?»
+> «4) **Probar**: lo mezclamos y miramos. Es el **experimento**. 5) ¿Qué ha pasado? ¡Espuma! Es la **conclusión**.»
+> «¡Es el **método científico**! Y con lo que aprendemos… ¡nos hacemos una pregunta nueva!» *(¿Y si no ponemos jabón?)*
+
+### 3.4 no-solo (min 10–11)
 
 > «Esto ha sido un experimento. ¡Pero la ciencia es mucho más que experimentos!»
 > «¿Dónde creéis que trabajan los científicos?» *(1–2 respuestas y avanzar)*
 
-### 3.4 ambitos (min 10–13)
+### 3.5 ambitos (min 11–13)
 
 Una tarjeta cada vez, con una frase y una pregunta de manos arriba (los despierta).
 
@@ -95,23 +108,23 @@ Una tarjeta cada vez, con una frase y una pregunta de manos arriba (los despiert
 
 Cierre: «¡La ciencia está en todas partes!»
 
-### 3.5 portada (min 13–14)
+### 3.6 portada (min 13–14)
 
-> «¿Y yo?» *(pausa)* «Soy Uciel… ¡y soy **científico**!»
-> «Mi ciencia mezcla un poco de medicina y un poco de ordenadores.» *(el perro ladra una vez)* «Este perro nos acompañará luego.»
+> «¿Y yo?» *(pausa)* «Soy Uciel… ¡y soy **científico**!» *(señalar mi foto en la pantalla)*
+> «Mi ciencia mezcla un poco de medicina y un poco de ordenadores.»
 > «Los científicos necesitan silencio para pensar. Cuando yo diga “¡Científicos!”, vosotros decís “¡A observar!” y levantáis la mano. ¿Probamos?» *(ensayar dos veces: la segunda, más bajito)*
 
-### 3.6 equipo (min 14–15)
+### 3.7 equipo (min 14–15)
 
 Un minuto, dos pulsaciones. Es el puente entre «soy científico» y «lo que hago».
 
-1. Sale **mi foto** en grande: «Pero yo no trabajo solo. Tengo un **equipo** en la UIC, una universidad de Barcelona.»
-2. → Aparecen **uno a uno**: Nicolás, Jorge, Clara, Santiago, Fernando y Júlia. Decir cada nombre mientras sale (solo el nombre). «Cada uno sabe cosas distintas, y nos ayudamos.»
-3. → Foto del equipo enseñando sus **pósteres** en la UIC: «Cuando descubrimos algo, se lo contamos a otros científicos.» Que lo digan todos: **«¡La ciencia se hace en equipo!»** «Hoy vosotros también vais a trabajar en equipo, en vuestras estaciones.»
+1. Al entrar: «Pero yo no trabajo solo. Tengo un **equipo** en la UIC, una universidad de Barcelona. Somos el **Grupo de Biología Computacional del ARN**.»
+2. → Aparecen **uno a uno** (somos 8 contándome a mí): Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia. Decir cada nombre mientras sale (solo el nombre). «Cada uno sabe cosas distintas, y nos ayudamos.»
+3. → **Foto del congreso**: «Y en los congresos nos juntamos con muchísimos científicos de otros sitios.» Que lo digan todos: **«¡La ciencia se hace en equipo!»** «Hoy vosotros también vais a trabajar en equipo, en vuestras estaciones.»
 
 Ojo: la Clara del equipo es una **doctoranda** del grupo, no la Clara del cole. Si algún niño lo pregunta: «¡Es otra Clara!».
 
-### 3.7 mi-trabajo (min 15–18)
+### 3.8 mi-trabajo (min 15–18)
 
 En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) y dicen «¡zooooom!».
 
@@ -119,16 +132,17 @@ En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) 
 2. **Núcleo.** «Dentro de cada célula hay una cajita. Se llama núcleo.»
 3. **ADN.** «Y dentro… ¡el ADN!» Aquí **señalar el modelo físico de ADN** (a la vista, junto a la pantalla): «Las dos cintas, la roja y la azul, son los lados. Los palitos de colores son las **letras**, que se dan la mano.»
 4. **4 letras.** «Solo hay 4 letras: **A azul, T roja, G verde, C naranja**. ¡Decidlas conmigo!» Señalar en el modelo una A con su T y una G con su C: «Siempre van juntas».
-5. **IA.** «Yo estudio estas letras… y como son muchísimas, lo combino con **inteligencia artificial**: ordenadores que me ayudan a encontrar pistas.»
+5. **Biblioteca.** «¿Cuántas letras creéis que tiene vuestro ADN?» *(esperar números)* «¡**3.000 millones**! Si las escribiéramos en libros… ¡una **biblioteca** entera, unos **mil libros** gordos!»
+6. **IA.** «Yo estudio estas letras… y como son tantísimas, lo combino con **inteligencia artificial**: ordenadores que me ayudan a encontrar pistas.»
 
-### 3.8 receta (min 18–20)
+### 3.9 receta (min 18–20)
 
-> «¿Conocéis los **panellets**? Para hacerlos hace falta una receta: almendra, azúcar, huevo y piñones. Si cambias la receta, salen otros dulces.»
-> «Nuestro cuerpo también tiene una receta: **el ADN**. Dice cómo es nuestro pelo, nuestros ojos…»
-> «Un perro de papel es más fácil: su receta son **3 gomets**. Orejas, cuerpo y cola. Rojo, azul o amarillo.»
-> «¿Cuántos perros distintos salen?» *(que digan números)* «¡27! Y vosotros sois muchos más… ¿habrá dos perros iguales?» *(«¡Sí!»)* «Lo vamos a comprobar.»
+> «Una receta dice cómo hacer algo. ¿Conocéis los **panellets**? Llevan almendra, azúcar, huevo y piñones. Vuestro **ADN** es la receta… ¡de vosotros!»
+> → «El ADN es muy largo y tiene **trozos**. Un trozo decide el color del pelo, otro la forma de las orejas, otro el color de los ojos… ¡y muchas cosas más! **Cada trozo del ADN decide una cosa.**»
+> → «Nuestros perros son más sencillos: su ADN solo tiene **3 trozos = 3 gomets**: orejas, cuerpo (el pelo) y cola.»
+> → «Cada color es una pieza distinta: **rojo, azul o amarillo**.»
 
-### 3.9 familia-perro (min 20–23)
+### 3.10 familia-perro (min 20–22)
 
 > «Esta es **mamá Canela** y este es **papá Bruno**. Cada uno tiene su receta. ¡Tienen cachorros!»
 > «Las orejas vienen de… ¡papá! El cuerpo de… ¡mamá!» *(que lo digan ellos mirando los colores)* «Cada parte viene de mamá o de papá.»
@@ -136,45 +150,46 @@ En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) 
 > «Con nosotros pasa lo mismo: nuestra receta es mitad de mamá y mitad de papá. Por eso nos parecemos a ellos… ¡y no a un perro!»
 > «Hoy cada uno de vosotros va a tener un cachorro. ¡Su receta está en vuestra tarjeta secreta!»
 
-### 3.10 como-buscar (min 23–25)
+### 3.11 como-buscar (min 22–24)
 
 Uciel lo hace **en directo** con una hoja y piezas de verdad, levantándolas bien alto, mientras la pantalla lo enseña.
 
 > «Vuestra hoja tiene arriba la tarjeta **ADN secreto**. ¡No la enseñéis!»
-> «1) Mirad el color de las orejas, el cuerpo y la cola. 2) De cada vaso, coged **una** pieza de vuestro color. 3) Pegad abajo, en **“Pega aquí tu perro”**: primero el cuerpo, luego las orejas y la cola. 4) ¡Ponedle **nombre**!»
+> «1) Mirad el color de las orejas, el cuerpo y la cola. 2) De cada vaso, coged **una** pieza de vuestro color. 3) Pegad abajo, en **“Pega aquí tu perro”**: primero el cuerpo, luego las orejas y la cola.»
+> «4) Cada perro tiene un **nombre secreto**… ¡no os lo digo! Lo descubriréis en casa, en el **Laboratorio de perros**.»
 
 Repetir con los dedos, todos juntos: **«Orejas, cuerpo, cola»** ×2.
 
 Instrucción de cambio (muy clara, una sola vez):
 > «Cuando yo diga “¡al laboratorio!”, cada clase va con su profe a su sitio. Andando, como científicos, no como cohetes. La hoja está boca abajo: **no se le da la vuelta hasta que yo diga “ADN secreto”**.»
 
-### 3.11 laboratorio (min 27–40) · ACTIVIDAD 1
+### 3.12 laboratorio (min 26–40) · ACTIVIDAD 1
 
-**Durante el pegado (min 27–37):**
+**Durante el pegado (min 26–37):**
 - Cuando todos están sentados: «¿Preparados? 3, 2, 1… **¡ADN secreto!**» Le dan la vuelta a la hoja.
 - Uciel y los adultos van por las estaciones. Lo más típico: cogen dos piezas, se equivocan de vaso o pegan las orejas debajo del cuerpo. Se ayuda sin hacerlo por ellos.
-- **Los que acaban primero** vienen al portátil (en fila, con un adulto) y dictan: «¿Orejas? ¿Cuerpo? ¿Cola?». Clic en los 3 colores → el perro sale y ladra. **«Añadir a la clase»** (saldrá en el desfile del cierre) y **«Borrar»** para el siguiente.
+- **Los que acaban primero** vienen al portátil (en fila, con un adulto) y dictan: «¿Orejas? ¿Cuerpo? ¿Cola?». Clic en los 3 colores → el perro sale, ladra y aparece su nombre: leerlo en voz alta, «¡Se llama…!». **«Añadir a la clase»** (saldrá en el desfile del cierre) y **«Borrar»** para el siguiente.
 - Un adulto apunta el nombre del niño **detrás de la hoja**.
 
 **Todos juntos (min 37–40).** Señal de silencio. Manos fuera de la mesa.
 
 > «¿Quién tiene un perro con las **orejas rojas**? ¡Manos arriba!» *(luego: cuerpo amarillo, cola azul)*
-> «Vamos a ver uno. Dime tus colores.» → clic → el perro **ladra**. «¿Cómo se llama tu perro?» *(risas con el nombre)*
+> «Vamos a ver uno. ¿Orejas? ¿Cuerpo? ¿Cola?» → clic → el perro **ladra**. Leer su nombre en voz alta: «¡Se llama…!» *(risas con el nombre)*
 
 **Gemelos** (casi todos los perros están 2 veces en las hojas, así que salen seguro):
 > «¿Alguien más tiene este perro? ¡Levantadlo!» «¡Son **gemelos**! ¿Por qué? Porque tienen **la misma receta**. Hay gemelos de verdad en las personas: tienen el mismo ADN. ¿Conocéis a alguno?»
 
-**QR:** «¿Queréis hacer perros en casa? Con este código lo podéis hacer con vuestra familia.» (El QR solo aparece si hay internet; si no, los profes pasan el enlace: `dia-de-la-ciencia.vercel.app/lab.html`.)
+**QR:** «En casa, con este código, podéis descubrir **el nombre de vuestro perro** y ver otra vez esta presentación.» (La página del laboratorio tiene un enlace a la presentación. El QR solo aparece si hay internet; si no, los profes pasan el enlace: `dia-de-la-ciencia.vercel.app/lab.html`.)
 
 Al terminar, **cada profe recoge las hojas de su clase** en una pila, con el nombre detrás. Así no se pisan en la actividad 2 y se las dan en clase.
 
-### 3.12 parientes (min 40–42)
+### 3.13 parientes (min 40–42)
 
 > «Vuestro ADN tiene muchas partes. Unas dicen cómo son las orejas, el pelo y la cola: por eso vuestros perros eran distintos. Otra parte dice “soy un perro”: es igual en **todos** los perros.»
 > «Perro y lobo: ¿cuántas casillas distintas?» *(contar en voz alta con ellos)* «¡Solo 1! Parientes muy cercanos. Perro y gallina: ¡6! Familia lejana.»
 > «**Menos diferencias = más familia.**»
 
-### 3.13 busca-familia (min 42–47) · ACTIVIDAD 2
+### 3.14 busca-familia (min 42–47) · ACTIVIDAD 2
 
 Los adultos abren los sobres y dan **un cartel y una tira por estación** mientras Uciel habla. Las tiras son **letras de ADN** (A, T, G, C) con los colores del modelo.
 
@@ -187,7 +202,7 @@ Parejas correctas: **humano + chimpancé, perro + lobo, gato + león, ballena + 
 
 **Los 5 carteles de borde morado (murciélago, T-rex, cocodrilo, rana, tiburón) NO se reparten:** los guarda un adulto para el árbol.
 
-### 3.14 arbol (min 47–54)
+### 3.15 arbol (min 47–54)
 
 Primer → la pantalla dibuja las 5 parejas. Luego el adulto saca cada cartel morado, uno a uno, y lo enseña bien alto. Para cada animal: primer → la **pregunta** (los niños cuentan diferencias con su tira), segundo → la **respuesta** y la rama.
 
@@ -204,20 +219,20 @@ Pregunta final, todos de la mano:
 
 Tiras, por si hay que comprobar algo (A azul, T roja, G verde, C naranja): humano GTATAC · chimpancé GCATAC · perro CGTCAC · lobo CGTAAC · gato CGATCG · león CGATCA · ballena TGGTAC · hipopótamo TGCTAC · gallina AACGGG · pingüino AACGGT · *murciélago CGATAC · T-rex AACGAC · cocodrilo TACGCA · rana TAACAG · tiburón ATGCTA* (en cursiva, los del adulto). Árbol y tabla de diferencias para los adultos: `imprimir/arbol_referencia.pdf`.
 
-### 3.15 cierre (min 54–60)
+### 3.16 cierre (min 54–60)
 
-Se sueltan las manos, se dejan los carteles en el suelo y todos se sientan. Señal de silencio.
+Se sueltan las manos, se dejan los carteles en el suelo y todos se sientan. Señal de silencio. La pantalla enseña **las 3 ideas a la vez**.
 
-> «Hoy habéis hecho tres cosas de científicos:
-> **una**, hacer preguntas con la espuma;
-> **dos**, leer una receta de ADN y fabricar un perro;
-> **tres**, comparar ADN y descubrir que con ADN parecido somos familia cercana.»
+> «Hoy habéis sido científicos:
+> **uno**, habéis hecho preguntas (¡y las habéis comprobado!);
+> **dos**, habéis visto que el ADN es una receta con muchos trozos;
+> **tres**, habéis descubierto que si el ADN se parece, la familia es cercana.»
 > *(contarlo con los dedos, todos a la vez)*
 > «¿Qué es el ADN?» → «¡Una receta!»
 > «¡Mirad, aquí están vuestros perros!» *(desfile de los perros añadidos)* «¿Veis a los gemelos?»
 > «Y lo habéis hecho **en equipo**, como mi equipo de la UIC.»
 > «Hoy **habéis sido científicos**. Un aplauso para vosotros… y otro para vuestros profes.»
-> «Vuestro perro de papel os lo vais a llevar a casa. Esta noche, explicadle a alguien de vuestra familia cuál es su receta secreta.»
+> «Vuestro perro de papel os lo vais a llevar a casa. Esta noche, explicadle a alguien de vuestra familia cuál es su receta secreta… ¡y descubrid juntos cómo se llama!»
 
 Si sobra un minuto: «¿Alguien tiene una pregunta para un científico?» (2 o 3 como mucho).
 
@@ -229,13 +244,12 @@ Si sobra un minuto: «¿Alguien tiene una pregunta para un científico?» (2 o 3
 
 | Persona | Qué hace |
 |---|---|
-| **Uciel** | Presenta y lleva el ritmo. Hace la espuma. Lleva el portátil en el laboratorio (clics de perros). |
-| **Pareja de Uciel** | Portátil y mando (empieza el latido y avanza las pantallas si Uciel está con los niños). Graba la espuma con el móvil. **Controla el tiempo**: avisa a Uciel a los min 25, 40 y 50. |
+| **Uciel** | Presenta y lleva el ritmo con el mando de presentaciones. Hace la espuma (deja el portátil en el latido antes de empezar). Lleva el portátil en el laboratorio (clics de perros). Mira el reloj en los min 24, 40 y 50. |
 | **Profe de la clase de 19** | Mantiene el orden al entrar (hasta la portada). Actividad 1: estaciones 1–4. Recoge las hojas de su clase. |
 | **Profe de la clase de 16** | Actividad 1: estaciones 5–7. Recoge las hojas de su clase. Actividad 2: **guarda los 5 carteles morados** y los saca uno a uno en el árbol. |
 | **Profe de la clase de 17** | Actividad 1: estaciones 8–10. Recoge las hojas de su clase. Niños que necesiten ir al baño; en la actividad 2, ayuda a los grupos que se pierdan. |
 
-Si falta un profe: la pareja de Uciel ocupa su sitio en las estaciones y Uciel lleva él mismo el portátil.
+Si falta un profe: los otros dos se reparten sus estaciones.
 
 ### Las 10 estaciones (clave de toda la logística)
 
@@ -250,7 +264,7 @@ Si falta un profe: la pareja de Uciel ocupa su sitio en las estaciones y Uciel l
 
 ### Las hojas «ADN secreto»
 - `imprimir/hojas_adn_secreto.pdf`: **2 hojas por A4** (cortar por la mitad). Cada media hoja tiene arriba la tarjeta ADN secreto y abajo la zona «Pega aquí tu perro». Ya no se usan las tarjetas sueltas antiguas.
-- Son **52 hojas** (una por niño), ya mezcladas: unas 17–18 de cada color en cada parte (las cifras exactas, en el PDF), y casi todos los 27 perros salen 2 veces, así que **habrá gemelos seguro**. Repartirlas en orden: unas 5 por estación (las de la clase de 19, 4–5).
+- Son **52 hojas** (una por niño), ya mezcladas: unas 17–18 de cada color en cada parte (las cifras exactas, en el PDF), y casi todos los perros salen 2 veces, así que **habrá gemelos seguro**. Repartirlas en orden: unas 5 por estación (las de la clase de 19, 4–5).
 - En cada estación, poner en los vasos **las piezas de sus hojas** (mirar los colores de las hojas al montar los vasos).
 - Hojas y piezas de reserva en una caja junto al portátil.
 
@@ -306,8 +320,8 @@ Si falta un profe: la pareja de Uciel ocupa su sitio en las estaciones y Uciel l
 
 ## 6. El recuerdo para llevarse
 
-- **Su perro de papel**, en su hoja «ADN secreto»: receta arriba, perro y nombre del perro abajo, nombre del niño detrás. Lo recoge cada profe y lo devuelve en clase (así no se pierde en el gimnasio).
-- El QR del laboratorio para hacer perros en casa con la familia.
+- **Su perro de papel**, en su hoja «ADN secreto»: receta arriba, perro abajo, nombre del niño detrás. Lo recoge cada profe y lo devuelve en clase (así no se pierde en el gimnasio).
+- El QR del laboratorio: en casa, con la familia, descubren **el nombre secreto de su perro** y pueden volver a ver la presentación.
 - La frase para casa: «Mi perro tiene la receta rojo, rojo, azul. El ADN es una receta».
 
 ---
@@ -318,6 +332,7 @@ Si falta un profe: la pareja de Uciel ocupa su sitio en las estaciones y Uciel l
 - **No hay proyector o se cuelga la app:** la clase funciona sin pantalla. Lo importante es físico: el frasco, el modelo de ADN, las hojas, las piezas y los carteles.
   - **misterio:** no hace falta pantalla: el silencio y el frasco bastan.
   - **ambitos** y **mi-trabajo:** contarlos con gestos y el modelo de ADN. Zoom: «Tú → abre la mano: células → dentro, una cajita → dentro, el ADN con 4 letras».
+  - **metodo:** contar los 5 pasos con los dedos (observar, preguntar, imaginar, probar, conclusión).
   - **familia-perro:** con dos perros de papel (mamá y papá) y montar un cachorro con piezas delante de todos.
   - **laboratorio:** Uciel levanta un perro de papel y pregunta «¿Quién tiene el mismo?». Gemelos con las hojas.
   - **arbol:** las parejas se forman igual. El adulto saca los carteles morados y Uciel hace las preguntas en voz alta; los grupos que responden se acercan al animal.
@@ -325,13 +340,14 @@ Si falta un profe: la pareja de Uciel ocupa su sitio en las estaciones y Uciel l
 - Llevar la app también en un **USB**, por si hay que usar el ordenador del cole.
 
 ### Si se acaba el tiempo (recortar en este orden)
-1. **equipo:** pasar directo a la foto del grupo y la frase (ahorra 30 s).
-2. **ambitos:** solo 3 tarjetas + medicina/IA, 1 minuto (ahorra 2 min).
-3. **mi-trabajo:** célula → ADN (modelo) → 4 letras → IA, sin preguntas (ahorra 2 min).
-4. **familia-perro:** un solo cachorro, sin el hermano (ahorra 1–2 min).
-5. **laboratorio en pantalla:** solo un perro y los gemelos; sin dictado de los que acaban antes (ahorra 2 min).
-6. **parientes:** se junta con busca-familia en una sola explicación (ahorra 2 min).
-7. **arbol:** murciélago y T-rex con pregunta; cocodrilo, rana y tiburón los saca el adulto seguidos y Uciel dice la respuesta directamente (ahorra 3 min).
+1. **metodo:** pasar los 5 pasos seguidos, sin preguntar «¿qué creíais vosotros?» (ahorra 1 min).
+2. **equipo:** decir el nombre del grupo y pasar directo a la foto del congreso y la frase (ahorra 30 s).
+3. **ambitos:** solo 3 tarjetas + medicina/IA, 1 minuto (ahorra 1 min).
+4. **mi-trabajo:** célula → ADN (modelo) → 4 letras → IA, sin preguntas; la **biblioteca** se dice en una frase, sin esperar números (ahorra 1–2 min).
+5. **familia-perro:** un solo cachorro, sin el hermano (ahorra 1–2 min).
+6. **laboratorio en pantalla:** solo un perro y los gemelos; sin dictado de los que acaban antes (ahorra 2 min).
+7. **parientes:** se junta con busca-familia en una sola explicación (ahorra 2 min).
+8. **arbol:** murciélago y T-rex con pregunta; cocodrilo, rana y tiburón los saca el adulto seguidos y Uciel dice la respuesta directamente (ahorra 3 min).
 
 **No se recorta nunca:** la espuma del principio, el pegado del perro (actividad 1) ni el cierre.
 

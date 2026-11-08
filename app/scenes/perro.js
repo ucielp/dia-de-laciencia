@@ -60,9 +60,31 @@ function ingredientSVG(APP,kind){
   return APP.paperSVG(m,{vb:"0 6 100 90"});
 }
 
+/* Cara de niño/a en papel recortado. hi = parte destacada ("pelo"|"orejas"|"ojos"); el resto en gris suave. */
+function faceSVG(APP,hi){
+  const {C,E,P,LN}=APP;
+  const on=k=>!hi||hi===k;
+  const skin=hi?"#EEE6D6":"#F2C9A0", ear=on("orejas")?"#F2C9A0":"#E4DBC9";
+  const hair=on("pelo")?"#7A4A2A":"#D3CABA";
+  const iris=on("ojos")?"#3E8F5A":"#BDB4A2";
+  const sh=[
+    E(40,112,16,22,ear),E(160,112,16,22,ear),
+    C(100,110,58,skin),
+    P("M42 104 Q38 40 100 36 Q162 40 158 104 Q150 74 124 68 Q100 84 64 76 Q50 86 42 104 Z",hair),
+    E(78,114,12,13,"#FFFFFF"),E(122,114,12,13,"#FFFFFF"),
+    C(78,116,9,iris),C(122,116,9,iris),C(78,116,3.5,"#1F2A44"),C(122,116,3.5,"#1F2A44"),
+    LN("M86 144 Q100 156 114 144",hi?"#BDB4A2":"#B5523B",4)
+  ];
+  if(on("orejas")&&hi) sh.push(LN("M36 104 Q44 112 38 122","#D49A72",3),LN("M164 104 Q156 112 162 122","#D49A72",3));
+  return APP.paperSVG(sh,{vb:"14 26 172 150",label:hi?`Cara: ${hi}`:"Cara"});
+}
+function arrowSVG(color){
+  return `<svg viewBox="0 0 60 100" width="60" height="100" aria-hidden="true"><path d="M30 4 V74" stroke="${color}" stroke-width="10" stroke-linecap="round"/><path d="M8 62 L30 94 L52 62 Z" fill="${color}" stroke="${color}" stroke-width="6" stroke-linejoin="round"/></svg>`;
+}
+
 /* ---------------- 50 · receta ---------------- */
 S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
-  const {el,KEYS,dog,audio,T}=APP;
+  const {el,KEYS,T}=APP;
   box.append(css(APP,BASE_CSS+`
     .rc{position:absolute;inset:0;background:linear-gradient(160deg,#FFF8EA,#F3EBDB)}
     .rc-stage{position:absolute;left:0;right:0;top:290px;bottom:40px}
@@ -73,28 +95,50 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
     .rc-ing div{display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--display);font-weight:500;font-size:40px;color:var(--ink)}
     .rc-ing svg{width:90px;height:80px}
     .rc-dna{display:grid;grid-template-columns:repeat(6,92px);gap:14px;margin-top:40px}
-    .rc-dna i{width:92px;height:92px;border-radius:14px;display:flex;align-items:center;justify-content:center;font:700 56px var(--display);font-style:normal;color:#fff;box-shadow:2px 4px 0 rgba(90,74,48,.18)}
+    .rc-dna i,.rc-chunk i{width:92px;height:92px;border-radius:14px;display:flex;align-items:center;justify-content:center;font:700 56px var(--display);font-style:normal;color:#fff;box-shadow:2px 4px 0 rgba(90,74,48,.18)}
     .rc-arrow{position:absolute;left:868px;top:250px;font:700 120px var(--display);color:var(--orange)}
-    .rc-adn{display:flex;gap:70px;padding:50px 80px;align-items:flex-end}
-    .rc-slot{display:flex;flex-direction:column;align-items:center;gap:16px}
-    .rc-slot svg{height:120px;width:auto}
-    .rc-slot b{font-family:var(--display);font-weight:600;font-size:48px;color:var(--ink)}
+    .rc-back{position:absolute;left:90px;right:90px;top:52px;height:12px;border-radius:6px;background:#D8CFBD}
+    .rc-col{position:absolute;top:0;width:420px;margin-left:-210px;display:flex;flex-direction:column;align-items:center}
+    .rc-chunk{display:flex;gap:8px;padding:12px;background:#fff;border-radius:24px;border-bottom:16px solid var(--c);box-shadow:0 6px 0 rgba(90,74,48,.08)}
+    .rc-chunk i{width:66px;height:66px;font-size:42px;border-radius:12px}
+    .rc-chunk.more i{opacity:.4}
+    .rc-col .ar{margin:6px 0 2px}
+    .rc-t{width:300px;height:280px;background:#fff;border-radius:36px;border:8px solid var(--c);box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 8px 0 rgba(90,74,48,.10),0 18px 40px rgba(90,74,48,.12)}
+    .rc-t svg{width:240px;height:auto}
+    .rc-t.dogp{position:relative}
+    .rc-t.dogp svg{width:250px;height:auto}
+    .rc-t.dogp .pz-gomet{position:absolute;right:-30px;top:-30px}
+    .rc-t .dots{font:700 120px var(--display);color:#BDB29C;line-height:1}
+    .rc-l{margin:16px 0 0;text-align:center;font-family:var(--display);font-weight:600;font-size:50px;line-height:1.05;color:var(--ink)}
+    .rc-l small{display:block;font-size:40px;font-weight:500;color:var(--inkSoft)}
     .rc-grid{display:grid;grid-template-columns:220px repeat(3,300px);gap:14px 30px;align-items:center}
     .rc-grid .lab{font-family:var(--display);font-weight:600;font-size:52px;color:var(--ink)}
     .rc-grid .hd{display:flex;justify-content:center}
     .rc-grid .pc{display:flex;justify-content:center;align-items:center;height:150px;background:#fff;border-radius:26px;box-shadow:0 4px 0 rgba(90,74,48,.08)}
     .rc-grid .pc svg{height:120px;width:auto;max-width:260px}
-    .rc-math{font-family:var(--display);font-weight:700;font-size:120px;color:var(--ink);display:flex;gap:30px;align-items:center}
-    .rc-27{display:grid;grid-template-columns:repeat(9,170px);gap:8px 14px}
-    .rc-27 div svg{width:170px;height:auto;display:block}
   `));
   const root=el("div",{class:"rc"});
   const title=el("h2",{class:"pz-title"}), sub=el("p",{class:"pz-sub"}), stage=el("div",{class:"rc-stage"});
   root.append(title,sub,stage); box.append(root);
   let step=0, timers=[];
   const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
-  const BASES=[["A","#2F6BD8"],["T","#E0245E"],["G","#1E9A57"],["C","#F28A1E"]];
-  function render(fwd){
+  const BASES={A:"#2F6BD8",T:"#E0245E",G:"#1E9A57",C:"#F28A1E"};
+  const chunk=(seq,more)=>el("div",{class:"rc-chunk"+(more?" more":"")},...seq.split("").map(b=>el("i",{text:b,style:{background:BASES[b]}})));
+  /* Una tira de ADN partida en trozos; cada trozo → flecha → lo que decide. cols: [{x,seq,color,card,label,more}] */
+  function trozos(cols){
+    stage.append(el("div",{class:"rc-back"}));
+    cols.forEach((c,i)=>{
+      const col=el("div",{class:"rc-col",style:{left:c.x+"px"}},
+        chunk(c.seq,c.more),el("div",{class:"ar",html:arrowSVG(c.more?"#BDB29C":c.color)}),c.card,el("p",{class:"rc-l",html:c.label}));
+      col.style.setProperty("--c",c.color);
+      col.querySelector(".rc-t").style.setProperty("--c",c.color);
+      stage.append(col);
+      if(APP.reduced()) return;
+      col.style.opacity=0;
+      later(()=>{col.style.opacity=1;col.classList.add("pz-in");},300+i*700);
+    });
+  }
+  function render(){
     timers.forEach(clearTimeout); timers=[]; stage.replaceChildren();
     if(step===0){
       title.innerHTML="Tu ADN es una <span>receta</span>"; sub.textContent="Una receta dice cómo hacer algo. Tu ADN dice cómo eres tú.";
@@ -105,19 +149,29 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
       const seq="ATGCCATAGGCTTACGATCAGTCA".split("");
       const card2=el("div",{class:"rc-card pz-in",style:{left:"1030px",top:"0px",width:"780px",padding:"40px 60px",animationDelay:APP.reduced()?"0s":".35s"}},
         el("p",{class:"rc-big",text:"Receta de una persona"}),
-        el("div",{class:"rc-dna"},...seq.map(b=>{const c=BASES.find(x=>x[0]===b)[1]; return el("i",{text:b,style:{background:c}});})));
+        el("div",{class:"rc-dna"},...seq.map(b=>el("i",{text:b,style:{background:BASES[b]}}))));
       stage.append(card,el("div",{class:"rc-arrow",text:"→"}),card2);
     } else if(step===1){
-      title.innerHTML="La receta de un <span>perro</span>"; sub.textContent="Solo 3 gomets: orejas, cuerpo y cola";
-      const c=el("div",{class:"rc-card rc-adn pz-in",style:{left:"400px",top:"40px"}});
-      stage.append(c);
-      ORDER.forEach((p,i)=>{
-        const slot=el("div",{class:"rc-slot"},el("div",{html:part(APP,p,"rojo",{gray:true,vb:VB[p]})}),gomet(APP,["rojo","azul","amarillo"][i],150),el("b",{text:LABEL[p]}));
-        if(APP.reduced()){ c.append(slot); return; }
-        slot.style.opacity=0; c.append(slot);
-        later(()=>{slot.style.opacity=1;slot.classList.add("pz-in");},400+i*500);
-      });
+      title.innerHTML="Cada <span>trozo</span> del ADN decide una cosa"; sub.textContent="Un trozo decide el pelo, otro las orejas, otro los ojos…";
+      const face=hi=>el("div",{class:"rc-t",html:faceSVG(APP,hi)});
+      trozos([
+        {x:300,seq:"ATGC",color:T.blue,card:face("pelo"),label:"el color<small>del pelo</small>"},
+        {x:740,seq:"GGTA",color:T.orange,card:face("orejas"),label:"la forma<small>de las orejas</small>"},
+        {x:1180,seq:"CATG",color:T.green,card:face("ojos"),label:"el color<small>de los ojos</small>"},
+        {x:1620,seq:"TACG",color:"#BDB29C",more:true,card:el("div",{class:"rc-t"},el("span",{class:"dots",text:"…"})),label:"¡y muchas<small>cosas más!</small>"}
+      ]);
     } else if(step===2){
+      title.innerHTML="La receta de un <span>perro</span>"; sub.textContent="3 trozos de ADN = 3 gomets";
+      /* perro gris con UNA parte en color (como las caras del paso anterior) */
+      const EXK={ears:"rojo",coat:"azul",tail:"amarillo"}, Pp=APP.dog.parts;
+      const sh=(q)=>q==="coat"?Pp.coat(EXK.coat):Pp[q][EXK[q]];
+      const dp=(p,k)=>el("div",{class:"rc-t dogp"},el("div",{html:APP.paperSVG([...["coat","ears","tail"].flatMap(q=>q===p?sh(q):gray(sh(q)))],{vb:Pp.vb,eyes:Pp.eyes,label:LABEL[p]})}),gomet(APP,k,96));
+      trozos([
+        {x:420,seq:"ATGC",color:T.blue,card:dp("ears","rojo"),label:"orejas"},
+        {x:960,seq:"GGTA",color:T.orange,card:dp("coat","azul"),label:"cuerpo<small>(el pelo)</small>"},
+        {x:1500,seq:"CATG",color:T.green,card:dp("tail","amarillo"),label:"cola"}
+      ]);
+    } else if(step===3){
       title.innerHTML="Cada color, <span>una pieza</span>"; sub.textContent="Rojo, azul o amarillo";
       const g=el("div",{class:"rc-grid",style:{position:"absolute",left:"250px",top:"0"}});
       g.append(el("span"),...KEYS.map(k=>el("span",{class:"hd"},gomet(APP,k,80))));
@@ -128,22 +182,10 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
           later(()=>{cell.style.opacity=1;cell.classList.add("pz-in");},250+(r*3+cI)*160);});
       });
       stage.append(g);
-    } else if(step===3){
-      title.innerHTML="¿Cuántos perros <span>distintos</span>?"; sub.textContent="";
-      const m=el("div",{class:"rc-math pz-fade",style:{position:"absolute",left:"300px",top:"40px"}},
-        el("span",{text:"3"}),el("span",{text:"×"}),el("span",{text:"3"}),el("span",{text:"×"}),el("span",{text:"3"}),el("span",{text:"="}),el("span",{class:"n",text:"?",style:{color:T.orange}}));
-      stage.append(m);
-    } else if(step===4){
-      title.innerHTML="¡<span>27</span> perros distintos!"; sub.textContent="Y vosotros sois muchos más… ¡habrá gemelos!";
-      const g=el("div",{class:"rc-27",style:{position:"absolute",left:"110px",top:"-20px"}});
-      let n=0; KEYS.forEach(e=>KEYS.forEach(c=>KEYS.forEach(t=>{const d=el("div",{html:dog.svg(e,c,t)});g.append(d);
-        const i=n++; if(APP.reduced()) return; d.style.opacity=0; later(()=>{d.style.opacity=1;d.classList.add("pz-in");},i*70);})));
-      stage.append(g);
-      if(fwd) later(()=>audio.win(),APP.reduced()?0:27*70+200);   // única revelación con sonido
     }
   }
   render();
-  return {next(){ if(step<4){step++;render(true);return true;} return false; },prev(){ if(step>0){step--;render(false);return true;} return false; },destroy(){timers.forEach(clearTimeout);}};
+  return {next(){ if(step<3){step++;render();return true;} return false; },prev(){ if(step>0){step--;render();return true;} return false; },destroy(){timers.forEach(clearTimeout);}};
 }});
 
 /* ---------------- 52 · familia de perros ---------------- */
@@ -325,11 +367,20 @@ S.push({id:"como-buscar",title:"Cómo hacer tu perro",order:55,mount(box,APP){
     .cb-build .bg{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:var(--display);font-weight:600;font-size:34px;color:#B9AF9A}
     .cb-build>div{position:absolute;left:10px;top:10px;width:332px;height:274px;transition:transform .5s cubic-bezier(.2,1.4,.4,1),opacity .4s}
     .cb-build svg{width:100%;height:100%}
-    .cb-name{font-family:var(--display);font-weight:600;font-size:44px;color:var(--ink);text-align:center;margin:0}
-    .cb-name span{display:block;color:var(--orange);font-size:52px}
+    .cb-phone{position:relative;width:230px;height:300px;flex:none;background:var(--ink);border-radius:40px;padding:14px 10px 18px;box-sizing:border-box;box-shadow:0 14px 30px rgba(31,42,68,.25);transform:rotate(3deg)}
+    .cb-phone:before{content:"";position:absolute;left:50%;top:6px;width:54px;height:6px;margin-left:-27px;border-radius:3px;background:#3A4560}
+    .cb-scr{width:100%;height:100%;background:linear-gradient(180deg,#FFFFFF,#F6F1E6);border-radius:26px;display:flex;flex-direction:column;align-items:center;padding:12px 8px;box-sizing:border-box;gap:4px;overflow:hidden}
+    .cb-scr .t{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);white-space:nowrap}
+    .cb-scr .t span{color:var(--orange)}
+    .cb-scr .dg svg{width:160px;height:auto;display:block}
+    .cb-scr .q{font-family:var(--display);font-weight:600;font-size:22px;color:var(--inkSoft);margin-top:2px}
+    .cb-scr .nm{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.05;color:var(--orange);text-align:center}
+    .cb-scr .gs{display:none}
+    .cb-scr .gs .pz-gomet{width:30px;height:30px}
+    .cb-home{margin:-4px 0 0;font-family:var(--display);font-weight:600;font-size:40px;line-height:1.1;color:var(--orange);text-align:center}
   `));
   const root=el("div",{class:"cb"});
-  root.append(el("h2",{class:"pz-title",html:"Cómo hacer <span>tu perro</span>"}),el("p",{class:"pz-sub",text:"Cuatro pasos. ¡Fácil!"}));
+  root.append(el("h2",{class:"pz-title",html:"Cómo hacer <span>tu perro</span>"}),el("p",{class:"pz-sub",text:"Tres pasos… ¡y una sorpresa en casa!"}));
   const row=el("div",{class:"cb-row"}); root.append(row); box.append(root);
   // Panel 1: la hoja (tarjeta arriba + zona para pegar abajo)
   const sheet=el("div",{class:"cb-sheet"},
@@ -346,8 +397,12 @@ S.push({id:"como-buscar",title:"Cómo hacer tu perro",order:55,mount(box,APP){
   const lay={coat:el("div",{html:dog.svg(EX[0],EX[1],EX[2],{only:"coat"})}),ears:el("div",{html:dog.svg(EX[0],EX[1],EX[2],{only:"ears"})}),tail:el("div",{html:dog.svg(EX[0],EX[1],EX[2],{only:"tail"})})};
   Object.values(lay).forEach(d=>{d.style.opacity=0;d.style.transform="translateY(-120px)";build.append(d);});
   const p3=el("div",{class:"cb-p"},el("span",{class:"cb-n",text:"3"}),el("h3",{text:"Pégalo abajo: cuerpo, orejas y cola"}),build);
-  // Panel 4: nombre
-  const p4=el("div",{class:"cb-p"},el("span",{class:"cb-n",text:"4"}),el("h3",{text:"¡Ponle nombre!"}),el("div",{style:{width:"300px"},html:dog.svg(...EX)}),el("p",{class:"cb-name",html:`Mi perro se llama<span>${dog.name(...EX)}</span>`}));
+  // Panel 4: el nombre secreto se descubre en casa, en el Laboratorio de perros (móvil)
+  const phone=el("div",{class:"cb-phone","aria-label":"El Laboratorio de perros en un móvil"},
+    el("div",{class:"cb-scr"},el("span",{class:"t",html:"Laboratorio de <span>perros</span>"}),el("div",{class:"dg",html:dog.svg(...EX)}),
+      el("span",{class:"q",text:"Se llama:"}),el("span",{class:"nm",text:dog.name(...EX)}),
+      el("div",{class:"gs"},...EX.map(k=>gomet(APP,k,30)))));
+  const p4=el("div",{class:"cb-p"},el("span",{class:"cb-n",text:"4"}),el("h3",{text:"Cada perro tiene un nombre secreto…"}),phone,el("p",{class:"cb-home",text:"¡Descúbrelo en casa en el Laboratorio de perros!"}));
   const panels=[p1,p2,p3,p4]; row.append(...panels);
   let step=-1, timers=[]; const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
   function go(s,fwd){
@@ -381,13 +436,15 @@ S.push({id:"laboratorio",title:"Laboratorio de perros",order:60,mount(box,APP){
     .lb-g:focus-visible{outline:8px solid var(--blue);outline-offset:6px}
     .lb-strip{position:absolute;left:1000px;top:60px;display:flex;gap:16px;background:#fff;border-radius:999px;padding:14px 24px;box-shadow:0 5px 0 rgba(90,74,48,.08)}
     .lb-strip i{width:64px;height:64px;border-radius:50%;background:#E7E0D0;box-shadow:inset 0 -5px 0 rgba(0,0,0,.12)}
-    .lb-dog{position:absolute;left:760px;top:180px;width:800px;height:560px}
+    .lb-dog{position:absolute;left:760px;top:170px;width:800px;height:500px}
     .lb-dog>div{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,1.5,.4,1),opacity .3s}
     .lb-dog svg{width:100%;height:100%}
     .lb-dog.wig{animation:lbWig .5s ease 2}
     @keyframes lbWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
-    .lb-name{position:absolute;left:740px;top:740px;width:840px;text-align:center;margin:0;font-family:var(--display);font-weight:700;font-size:76px;color:var(--ink);min-height:90px}
-    .lb-desc{position:absolute;left:740px;top:836px;width:840px;text-align:center;margin:0;font-size:40px;color:var(--inkSoft)}
+    .lb-name{position:absolute;left:760px;top:680px;width:800px;box-sizing:border-box;text-align:center;margin:0;font-family:var(--display);font-weight:700;font-size:84px;line-height:1;color:var(--orange);background:#fff;border-radius:36px;padding:14px 20px 18px;box-shadow:0 6px 0 rgba(90,74,48,.10),0 16px 34px rgba(90,74,48,.12)}
+    .lb-name small{display:block;font-size:44px;font-weight:600;color:var(--ink);margin-bottom:4px}
+    .lb-name:empty{display:none}
+    .lb-desc{position:absolute;left:740px;top:850px;width:840px;text-align:center;margin:0;font-size:40px;color:var(--inkSoft)}
     .lb-act{position:absolute;right:50px;top:170px;display:flex;flex-direction:column;gap:18px;width:270px}
     .lb-act button{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.05;border:none;border-radius:26px;padding:20px 14px;color:#fff;cursor:pointer;box-shadow:inset 0 -6px 0 rgba(0,0,0,.15)}
     .lb-act .add{font-size:44px;padding:26px 14px}
@@ -461,8 +518,8 @@ S.push({id:"laboratorio",title:"Laboratorio de perros",order:60,mount(box,APP){
       KEYS.forEach(c=>btns[p][c].classList.toggle("sel",c===k));
     });
     if(changed&&!APP.reduced()){ const L=layer[changed]; L.style.transform="translateY(-90px) scale(1.05)"; requestAnimationFrame(()=>requestAnimationFrame(()=>{L.style.transform="none";})); }
-    if(complete()){ name.textContent=dog.name(st.ears,st.coat,st.tail); desc.textContent=added?"¡Añadido! Saldrá en el desfile final":`Orejas ${P.names.ears[st.ears]} · pelaje ${P.names.coat[st.coat]} · cola ${P.names.tail[st.tail]}`; }
-    else { name.textContent=""; desc.textContent="Elige un color para cada parte"; }
+    if(complete()){ name.replaceChildren(el("small",{text:"Se llama:"}),dog.name(st.ears,st.coat,st.tail)); desc.textContent=added?"¡Añadido! Saldrá en el desfile final":`Orejas ${P.names.ears[st.ears]} · pelaje ${P.names.coat[st.coat]} · cola ${P.names.tail[st.tail]}`; }
+    else { name.replaceChildren(); desc.textContent="Elige un color para cada parte"; }
     bSave.disabled=!complete()||added;
     bSave.textContent=added?"¡Añadido!":"Añadir a la clase";
   }

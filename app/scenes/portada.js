@@ -1,10 +1,10 @@
-/* Escena 35 · portada: va DESPUÉS de «¿Qué hace la ciencia?». Paso 0: «¿Y yo?» · paso 1: «Soy Uciel y soy científico» + perro (un ladrido). */
+/* Escena 35 · portada: va DESPUÉS de «¿Qué hace la ciencia?». Paso 0: «¿Y yo?» · paso 1: «Soy Uciel y soy científico» + foto (img/equipo/uciel.jpg) enmarcada en cartulina. */
 (window.SCENES=window.SCENES||[]).push({
   id:"portada", title:"¿Y yo? Soy Uciel", order:35,
   mount(box,APP){
-    const {el,T,GOMET,dog,audio}=APP;
+    const {el,T,GOMET}=APP;
     box.append(el("style",{text:`
-      .po{position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,#FFF6E4 0,#F6F1E6 55%,#EFE5D2 100%);overflow:hidden}
+      .po{position:absolute;inset:0;background:radial-gradient(circle at 70% 45%,#FFF6E4 0,#F6F1E6 55%,#EFE5D2 100%);overflow:hidden;cursor:pointer}
       .po-logo{position:absolute;left:90px;top:70px;width:420px;height:auto;background:#fff;padding:22px 28px;border-radius:28px;box-shadow:0 6px 0 rgba(90,74,48,.12),0 14px 30px rgba(90,74,48,.12)}
       .po-dot{position:absolute;border-radius:50%;box-shadow:0 4px 0 rgba(0,0,0,.08),0 8px 16px rgba(90,74,48,.18);animation:poFloat 6s ease-in-out infinite}
       @keyframes poFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
@@ -12,116 +12,124 @@
       .po.on .po-q{top:322px;font-size:96px;color:var(--grey)}
       .po-r{opacity:0;transform:translateY(30px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1)}
       .po.on .po-r{opacity:1;transform:none}
-      .po.on .po-hi{transition-delay:.25s}.po.on .po-sub{transition-delay:.55s}.po.on .po-tag{transition-delay:.8s}.po.on .po-dog{transition-delay:.4s}
+      .po.on .po-hi{transition-delay:.25s}.po.on .po-sub{transition-delay:.55s}.po.on .po-tag{transition-delay:.8s}
       .po-hi{position:absolute;left:90px;top:440px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:var(--ink);margin:0}
       .po-hi span{color:var(--orange)}
       .po-sub{position:absolute;left:96px;top:605px;font-family:var(--display);font-weight:500;font-size:84px;line-height:1.05;color:var(--ink);margin:0}
       .po-sub b{color:var(--blue);font-weight:700}
       .po-tag{position:absolute;left:96px;top:760px;display:flex;gap:18px}
       .po-tag p{margin:0;font-family:var(--display);font-weight:600;font-size:40px;padding:12px 30px;border-radius:999px;color:#fff}
-      .po-dog{position:absolute;right:120px;bottom:90px;width:720px;cursor:pointer;transform-origin:50% 90%;animation:poWag 2.6s ease-in-out infinite}
-      .po-dog svg{width:100%;height:auto;display:block}
-      @keyframes poWag{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
-      .po-bubble{position:absolute;right:560px;bottom:610px;background:#fff;border-radius:40px;padding:22px 34px;font-family:var(--display);font-weight:600;font-size:54px;color:var(--ink);box-shadow:0 6px 0 rgba(90,74,48,.12);opacity:0;transform:scale(.6);transition:all .25s}
-      .po-bubble.on{opacity:1;transform:scale(1)}
-      .po-bubble::after{content:"";position:absolute;right:60px;bottom:-26px;border:18px solid transparent;border-top:26px solid #fff}
+      /* Foto en capas de cartulina: mancha naranja, tarjeta azul, marco de papel, cinta adhesiva */
+      .po-ph{position:absolute;left:1130px;top:170px;width:660px;height:760px;opacity:0;transform:translateY(60px) rotate(6deg) scale(.85);transition:opacity .5s .35s,transform .8s .35s cubic-bezier(.3,1.5,.5,1)}
+      .po.on .po-ph{opacity:1;transform:none}
+      .po-blob{position:absolute;left:-40px;top:40px;width:640px;height:640px;border-radius:46% 54% 50% 50%/52% 46% 54% 48%;background:var(--orange);opacity:.9;box-shadow:0 8px 0 rgba(90,74,48,.14)}
+      .po-card{position:absolute;left:70px;top:-6px;width:560px;height:640px;border-radius:30px;background:var(--blue);transform:rotate(-6deg);box-shadow:0 8px 0 rgba(90,74,48,.16),0 18px 34px rgba(90,74,48,.2)}
+      .po-mat{position:absolute;left:40px;top:30px;width:580px;height:680px;box-sizing:border-box;padding:28px 28px 0;background:#FFFDF7;border-radius:16px;transform:rotate(2.5deg);box-shadow:0 10px 0 rgba(90,74,48,.14),0 22px 44px rgba(90,74,48,.28)}
+      .po-mat img{display:block;width:524px;height:524px;object-fit:cover;border-radius:8px;background:#E8E2D6}
+      .po-mat p{margin:0;height:128px;display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--display);font-weight:700;font-size:64px;color:var(--ink)}
+      .po-mat p i{display:inline-block;width:30px;height:30px;border-radius:50%;background:var(--green)}
+      .po-tape{position:absolute;width:190px;height:54px;background:rgba(242,194,48,.78);border-radius:4px;box-shadow:0 2px 4px rgba(90,74,48,.15)}
       .po-hint{position:absolute;right:120px;bottom:36px;font-size:30px;color:var(--grey);font-family:var(--body)}
-      @media (prefers-reduced-motion:reduce){.po-dot,.po-dog{animation:none}.po *{transition:none!important}}
+      @media (prefers-reduced-motion:reduce){.po-dot{animation:none}.po *{transition:none!important}}
     `}));
     const root=el("div",{class:"po"});
-    const dots=[[1520,120,90,GOMET.rojo],[1700,300,60,GOMET.azul],[1340,250,46,GOMET.amarillo],[880,120,70,T.green],[1080,330,40,T.blue],[760,880,56,GOMET.amarillo],[640,980,34,T.orange],[1820,700,40,T.green]];
+    const dots=[[1560,70,70,GOMET.rojo],[1850,250,50,GOMET.azul],[1060,120,46,GOMET.amarillo],[820,140,70,T.green],[960,330,40,T.blue],[760,900,56,GOMET.amarillo],[620,990,34,T.orange],[1840,960,44,T.green],[1080,960,36,GOMET.rojo]];
     dots.forEach(([x,y,s,c],i)=>root.append(el("i",{class:"po-dot",style:{left:x+"px",top:y+"px",width:s+"px",height:s+"px",background:c,animationDelay:(i*0.6)+"s"}})));
-    const bubble=el("div",{class:"po-bubble",text:"¡Guau! ¡Hola!"});
-    const d=el("div",{class:"po-r",style:{position:"absolute",inset:0,pointerEvents:"none"}},el("div",{class:"po-dog",html:dog.svg("azul","amarillo","azul"),style:{pointerEvents:"auto"}}));
-    let hideT=0, barked=false, on=false;
-    const say=()=>{ bubble.classList.add("on"); clearTimeout(hideT); hideT=setTimeout(()=>bubble.classList.remove("on"),1600); };
-    d.firstChild.onclick=ev=>{ ev.stopPropagation(); say(); };
+    const img=el("img",{src:"img/equipo/uciel.jpg",alt:"Foto de Uciel",draggable:"false"});
+    img.onerror=()=>{ img.style.visibility="hidden"; };
+    const photo=el("div",{class:"po-ph"},
+      el("div",{class:"po-blob"}),el("div",{class:"po-card"}),
+      el("div",{class:"po-mat"},img,el("p",{},el("i"),"Uciel")),
+      el("i",{class:"po-tape",style:{left:"250px",top:"6px",transform:"rotate(-4deg)"}}),
+      el("i",{class:"po-tape",style:{left:"520px",top:"620px",width:"150px",transform:"rotate(-38deg)"}}));
     root.append(
       el("img",{class:"po-logo",src:"img/elm.png",alt:"Institut-Escola Lluís Millet, El Masnou"}),
       el("h1",{class:"po-q",text:"¿Y yo?"}),
       el("p",{class:"po-hi po-r",html:"Soy <span>Uciel</span>"}),
       el("p",{class:"po-sub po-r",html:"y soy <b>científico</b>"}),
       el("div",{class:"po-tag po-r"},el("p",{text:"Día de la Ciencia",style:{background:T.green}}),el("p",{text:"1º y 2º",style:{background:T.orange}})),
-      d,bubble
+      photo
     );
     box.append(root);
     root.addEventListener("click",()=>APP.next());
-    const show=v=>{ on=v; root.classList.toggle("on",v); if(v&&!barked){ barked=true; hideT=setTimeout(()=>{ audio.bark(1); say(); },700); } };
+    let on=false;
+    const show=v=>{ on=v; root.classList.toggle("on",v); };
     return {
       next(){ if(!on){ show(true); return true; } return false; },
-      prev(){ if(on){ show(false); bubble.classList.remove("on"); return true; } return false; },
-      destroy(){ clearTimeout(hideT); }
+      prev(){ if(on){ show(false); return true; } return false; },
+      destroy(){}
     };
   }
 });
 
-/* Escena 37 · equipo: «Tengo un equipo en la UIC». Fotos reales (archivos locales img/equipo/*.jpg) en marcos redondos de cartulina.
-   Al entrar: Uciel solo, en grande. Paso 1: aparece el resto del equipo, uno a uno. Paso 2: foto del grupo presentando pósteres + «¡La ciencia se hace en equipo!». */
+/* Escena 37 · equipo: «Mi equipo en la UIC» · Grupo de Biología Computacional del ARN. Retratos en B/N (img/equipo/*.jpg) en marcos redondos de cartulina.
+   Al entrar: Uciel solo, en grande. Paso 1: aparece todo el equipo (2 filas de 4), uno a uno. Paso 2: foto del grupo en un congreso (congreso.jpg) + «¡La ciencia se hace en equipo!». */
 (window.SCENES=window.SCENES||[]).push({
   id:"equipo", title:"Mi equipo", order:37,
   mount(box,APP){
     const {el,T,GOMET,audio}=APP, red=APP.reduced();
     const PEOPLE=[ // nombre, archivo, color del marco de cartulina
-      ["Nicolás","nicolas",T.blue],["Jorge","jorge",T.green],["Clara","clara",GOMET.amarillo],
-      ["Uciel","uciel",T.orange],
-      ["Santiago","santiago",GOMET.rojo],["Fernando","fernando",GOMET.azul],["Júlia","julia",T.pink]
+      ["Uciel","uciel",T.orange],["Nicolás","nicolas",T.blue],["Jorge","jorge",T.green],["Santiago","santiago",GOMET.amarillo],
+      ["Fernando","fernando",GOMET.rojo],["Meki","meki",GOMET.azul],["Clara","clara",T.pink],["Júlia","julia","#8E6CC4"]
     ];
-    const UI=3; // índice de Uciel (en el centro)
+    const UI=0; // índice de Uciel
     box.append(el("style",{text:`
       .eq{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#FFF6E4 0,#F6F1E6 60%,#EFE5D2 100%);overflow:hidden;cursor:pointer}
       .eq-dot{position:absolute;border-radius:50%;opacity:.55;box-shadow:0 4px 0 rgba(0,0,0,.06)}
-      .eq-title{position:absolute;left:0;right:0;top:46px;margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:104px;line-height:1;color:var(--ink)}
+      .eq-title{position:absolute;left:0;right:0;top:40px;margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:100px;line-height:1;color:var(--ink)}
       .eq-title b{color:var(--orange);font-weight:700}
+      .eq-sub{position:absolute;left:50%;top:160px;transform:translateX(-50%);margin:0;white-space:nowrap;font-family:var(--display);font-weight:500;font-size:46px;line-height:1;color:#fff;background:var(--blue);padding:12px 34px 14px;border-radius:999px;box-shadow:0 5px 0 rgba(90,74,48,.14)}
       .eq-p{position:absolute;left:0;top:0;transform:translate(-50%,-50%) rotate(var(--rot)) scale(var(--sc,1));transition:left .8s cubic-bezier(.5,0,.2,1),top .8s cubic-bezier(.5,0,.2,1),width .8s cubic-bezier(.5,0,.2,1),height .8s cubic-bezier(.5,0,.2,1),transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}
       .eq-p.hid{--sc:0;opacity:0}
       .eq-ring{position:absolute;inset:0;border-radius:50%;background:var(--c);box-shadow:0 7px 0 rgba(90,74,48,.16),0 16px 30px rgba(90,74,48,.22)}
-      .eq-ph{position:absolute;inset:7%;border-radius:50%;background:#FFFDF7;padding:4.5%;box-sizing:border-box}
-      .eq-ph i{position:absolute;inset:4.5%;border-radius:50%;background:var(--c);opacity:.35}
-      .eq-ph img{position:relative;display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
-      .eq-name{position:absolute;left:50%;top:100%;transform:translate(-50%,10px) rotate(calc(var(--rot) * -1));white-space:nowrap;background:#FFFDF7;color:var(--ink);font-family:var(--display);font-weight:600;font-size:46px;line-height:1;padding:10px 26px 12px;border-radius:999px;box-shadow:0 4px 0 rgba(90,74,48,.14);transition:font-size .8s,padding .8s}
+      .eq-ph{position:absolute;inset:6%;border-radius:50%;background:#FFFDF7;padding:3.5%;box-sizing:border-box}
+      .eq-ph img{position:relative;display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:#E8E2D6}
+      .eq-name{position:absolute;left:50%;top:100%;transform:translate(-50%,6px) rotate(calc(var(--rot) * -1));white-space:nowrap;background:#FFFDF7;color:var(--ink);font-family:var(--display);font-weight:600;font-size:46px;line-height:1;padding:10px 26px 12px;border-radius:999px;box-shadow:0 4px 0 rgba(90,74,48,.14);transition:font-size .8s,padding .8s}
       .eq-name::before{content:"";display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--c);margin-right:12px;vertical-align:2px}
-      .eq.s2 .eq-name{font-size:40px;padding:6px 18px 8px}
-      .eq-uic{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-family:var(--display);font-weight:500;font-size:42px;color:var(--inkSoft);transition:opacity .4s}
-      .eq.s2 .eq-uic{opacity:0}
-      .eq-group{position:absolute;left:120px;top:478px;width:800px;background:#FFFDF7;padding:22px 22px 26px;border-radius:18px;box-shadow:0 8px 0 rgba(90,74,48,.14),0 18px 40px rgba(90,74,48,.25);transform:rotate(-2.5deg) translateY(60px) scale(.8);opacity:0;transition:transform .7s cubic-bezier(.3,1.4,.5,1),opacity .4s}
-      .eq-group img{display:block;width:100%;height:auto;border-radius:10px}
-      .eq-group::before{content:"";position:absolute;left:50%;top:-22px;width:190px;height:48px;transform:translateX(-50%) rotate(3deg);background:rgba(242,194,48,.75);border-radius:4px}
-      .eq-msg{position:absolute;left:1020px;top:540px;width:820px;margin:0;font-family:var(--display);font-weight:700;font-size:118px;line-height:1.05;color:var(--ink);opacity:0;transform:translateY(40px) scale(.85);transition:opacity .4s .35s,transform .7s .35s cubic-bezier(.3,1.6,.5,1)}
+      .eq.s0 .eq-name{font-size:60px}
+      .eq.s2 .eq-name{font-size:40px;padding:6px 16px 8px}
+      .eq.s2 .eq-name::before{display:none}
+      .eq-group{position:absolute;left:70px;top:478px;width:960px;margin:0;background:#FFFDF7;padding:22px 22px 26px;box-sizing:border-box;border-radius:18px;box-shadow:0 8px 0 rgba(90,74,48,.14),0 18px 40px rgba(90,74,48,.25);transform:rotate(-2deg) translateY(60px) scale(.8);opacity:0;transition:transform .7s cubic-bezier(.3,1.4,.5,1),opacity .4s}
+      .eq-group img{display:block;width:916px;height:515px;object-fit:cover;border-radius:10px;background:#E8E2D6}
+      .eq-group::before,.eq-group::after{content:"";position:absolute;top:-22px;width:170px;height:48px;background:rgba(242,194,48,.75);border-radius:4px}
+      .eq-group::before{left:40px;transform:rotate(-8deg)}.eq-group::after{right:40px;transform:rotate(7deg)}
+      .eq-msg{position:absolute;left:1100px;top:540px;width:760px;margin:0;font-family:var(--display);font-weight:700;font-size:112px;line-height:1.05;color:var(--ink);opacity:0;transform:translateY(40px) scale(.85);transition:opacity .4s .35s,transform .7s .35s cubic-bezier(.3,1.6,.5,1)}
       .eq-msg b{color:var(--green);font-weight:700}
-      .eq.s2 .eq-group{opacity:1;transform:rotate(-2.5deg)}
+      .eq.s2 .eq-group{opacity:1;transform:rotate(-2deg)}
       .eq.s2 .eq-msg{opacity:1;transform:none}
       @media (prefers-reduced-motion:reduce){.eq *{transition:none!important;animation:none!important}}
     `}));
-    const root=el("div",{class:"eq"});
-    [[40,410,54,GOMET.rojo],[1820,450,48,T.green],[1700,960,64,GOMET.amarillo],[160,960,44,T.blue],[330,1010,30,T.orange],[1860,880,34,GOMET.azul],[50,880,30,T.green]]
+    const root=el("div",{class:"eq s0"});
+    [[40,410,54,GOMET.rojo],[1840,470,48,T.green],[1760,980,64,GOMET.amarillo],[120,990,44,T.blue],[330,1030,30,T.orange],[1880,860,34,GOMET.azul],[50,860,30,T.green]]
       .forEach(([x,y,s,c])=>root.append(el("i",{class:"eq-dot",style:{left:x+"px",top:y+"px",width:s+"px",height:s+"px",background:c}})));
-    root.append(el("h1",{class:"eq-title",html:"Mi <b>equipo</b> en la UIC"}));
-    const rots=[-4,3,-3,0,4,-3,3];
+    root.append(el("h1",{class:"eq-title",html:"Mi <b>equipo</b> en la UIC"}),
+      el("p",{class:"eq-sub",text:"Grupo de Biología Computacional del ARN (UIC)"}));
+    const rots=[0,3,-3,4,-4,3,-3,4];
     const cards=PEOPLE.map(([name,file,c],i)=>{
       const img=el("img",{src:`img/equipo/${file}.jpg`,alt:name,draggable:"false"});
       img.onerror=()=>{ img.style.visibility="hidden"; };
       const p=el("div",{class:"eq-p"+(i===UI?"":" hid")},
-        el("div",{class:"eq-ring"}),el("div",{class:"eq-ph"},el("i"),img),el("div",{class:"eq-name",text:name}));
+        el("div",{class:"eq-ring"}),el("div",{class:"eq-ph"},img),el("div",{class:"eq-name",text:name}));
       p.style.setProperty("--c",c); p.style.setProperty("--rot",rots[i]+"deg");
       root.append(p); return p;
     });
-    const group=el("figure",{class:"eq-group",style:{margin:0}},el("img",{src:"img/equipo/phday.jpg",alt:"El equipo presentando sus pósteres en la UIC"}));
-    root.append(group,
-      el("p",{class:"eq-msg",html:"¡La ciencia se hace en <b>equipo</b>!"}),
-      el("div",{class:"eq-uic",text:"Biología Computacional del ARN · UIC Barcelona"}));
+    const gimg=el("img",{src:"img/equipo/congreso.jpg",alt:"El equipo en un congreso de ciencia"});
+    gimg.onerror=()=>{ gimg.style.visibility="hidden"; };
+    root.append(el("figure",{class:"eq-group"},gimg),
+      el("p",{class:"eq-msg",html:"¡La ciencia se hace en <b>equipo</b>!"}));
     box.append(root);
     // Posiciones (centro x, centro y, diámetro) de cada estado
     const LAYOUT={
-      0:i=>[960,560,440],
-      1:i=>{ const k=i-UI; return [960+k*262, 520+Math.abs(k)*Math.abs(k)*14+(i===UI?-30:0), i===UI?300:232]; },
-      2:i=>{ const k=i-UI; return [960+k*250, 285, 160]; }
+      0:i=>[960,590,460],
+      1:i=>{ const r=i<4?0:1, c=i%4; return [960+(c-1.5)*400+(r?40:-40), r?775:405, 250]; },
+      2:i=>[960+(i-3.5)*226, 315, 140]
     };
     let step=0;
     const place=s=>cards.forEach((p,i)=>{ const [x,y,d]=LAYOUT[s](i); Object.assign(p.style,{left:x+"px",top:y+"px",width:d+"px",height:d+"px"}); });
     const set=s=>{
       step=s; place(s);
-      cards.forEach((p,i)=>{ if(i===UI) return; p.classList.toggle("hid",s<1); p.style.transitionDelay=(s===1&&!red)?`0s,0s,0s,0s,${0.2+[0,1,2,0,3,4,5][i]*0.32}s,${0.2+[0,1,2,0,3,4,5][i]*0.32}s`:""; });
-      root.classList.toggle("s2",s===2);
+      cards.forEach((p,i)=>{ if(i===UI) return; p.classList.toggle("hid",s<1); const d=0.2+(i-1)*0.3; p.style.transitionDelay=(s===1&&!red)?`0s,0s,0s,0s,${d}s,${d}s`:""; });
+      root.classList.toggle("s0",s===0); root.classList.toggle("s2",s===2);
       if(s===2) audio.ok();
     };
     place(0);

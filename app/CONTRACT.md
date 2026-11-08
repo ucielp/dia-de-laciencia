@@ -44,6 +44,7 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 |---|---|---|---|
 | 5 | misterio | Pantalla casi vacía: un «?» gigante y sonido de suspense mientras el presentador hace el experimento de la espuma EN SILENCIO. Al pulsar: «¿Qué ha pasado?» | ciencia.js |
 | 8 | experimento | Explicación animada del experimento de la espuma (dos ingredientes → gas → el jabón atrapa el gas en burbujas → espuma). Sustituye a la pimienta | ciencia.js |
+| 9 | metodo | Método científico (ciclo de 5 pasos) | ciencia.js |
 | 25 | no-solo | «La ciencia es mucho más que experimentos» (transición) | ciencia.js |
 | 30 | ambitos | ¿Qué hace la ciencia? tarjetas; las DOS ÚLTIMAS son medicina y ordenadores/IA; hay una de historia | ciencia.js |
 | 35 | portada | Logo del cole, «Hola, soy Uciel y soy científico» (ahora va DESPUÉS de ámbitos) | portada.js |

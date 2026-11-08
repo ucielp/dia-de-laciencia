@@ -5,7 +5,8 @@ md=open(B+"guion_clase.md").read()
 md=re.sub(r"\n### Souvenir.*?(?=\n---|\n## )","\n",md,flags=re.S)          # material solo para una clase concreta
 md=re.sub(r"\nOjo: la Clara del equipo[^\n]*\n","\n",md)                      # nombre privado
 md=md.split("\n",1)[1]                                                       # quitar el título (la página ya lo tiene)
-for bad in ["Souvenir","souvenir","Clara del cole","clase de Clara","@"]:
+BAD=["Souvenir","souvenir","Clara del cole","clase de Clara","otra Clara","Pareja de Uciel","pareja de Uciel","hija","@"]
+for bad in BAD:
     assert bad not in md, bad
 # python-markdown necesita una línea en blanco antes de una lista
 md=re.sub(r"(?m)^((?![-*] |\d+\. |>|\||#)[^\n]*\S)\n(?=(?:[-*] |\d+\. ))",r"\1\n\n",md)
@@ -17,4 +18,5 @@ p=B+"app/profes.html"; s=open(p).read()
 a,b="<!-- GUION:START -->","<!-- GUION:END -->"
 i,j=s.index(a)+len(a),s.index(b)
 s=s[:i]+"\n"+html+"\n"+s[j:]
+for bad in BAD: assert bad not in html, bad
 open(p,"w").write(s); print("ok",len(html))
