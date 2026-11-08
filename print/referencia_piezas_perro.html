@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Referencia de piezas del perro</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* 1 hoja A4: qué pieza va con cada color de gomet. Sin fondos (ahorro de tinta). Generado desde artifact/piezas_recortar.html */
+@page{size:A4;margin:12mm}
+*{box-sizing:border-box}
+html,body{margin:0;background:transparent}
+body{font-family:"Nunito Sans",sans-serif;color:#1F2A44}
+h1{font-family:Fredoka;font-weight:700;font-size:24pt;margin:0}
+.sub{margin:1mm 0 6mm;color:#4A5265;font-size:11pt}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{border:.4mm solid #C9CDD6;text-align:center;vertical-align:middle;padding:3mm 2mm}
+thead th{font-family:Fredoka;font-weight:600;font-size:15pt;padding:3mm 1mm}
+.dot{display:inline-block;width:11mm;height:11mm;border-radius:50%;border:1.6mm solid;vertical-align:middle;margin-right:2mm}
+tbody th{font-family:Fredoka;font-weight:700;font-size:17pt;width:30mm}
+td{height:62mm}
+td svg{display:block;margin:0 auto 2mm}
+td b{font-family:Fredoka;font-weight:600;font-size:15pt;display:block}
+td small{color:#6D6E71;font-size:9.5pt}
+.foot{margin-top:5mm;font-size:10pt;color:#4A5265}
+</style></head><body>
+<h1>¿Qué pieza va con cada gomet?</h1>
+<p class="sub">Referencia para preparar y recortar las piezas. El color del gomet no es el color de la pieza.</p>
+<table id="t"></table>
+<p class="foot" id="f"></p>
+<script>
+const S=0.48, O=5; // mm por unidad y margen de corte
+const E=(cx,cy,rx,ry,c,rot)=>({t:"e",cx,cy,rx,ry,c,rot});
+const C=(cx,cy,r,c)=>({t:"c",cx,cy,r,c});
+const R=(x,y,w,h,rx,c)=>({t:"r",x,y,w,h,rx,c});
+const P=(d,c)=>({t:"p",d,c});
+const L=(d,c,w)=>({t:"l",d,c,w});
+const LN=(d,c,w)=>({t:"ln",d,c,w});
+const GHEX={rojo:"#E04B3A",azul:"#2453C7",amarillo:"#F2C230"};
+const KEYS=["rojo","azul","amarillo"];
+const COAT={rojo:{m:"#B98A62",b:"#EAD9C2",name:"marrón"},azul:{m:"#F4F1EA",b:"#E3DED3",name:"dálmata"},amarillo:{m:"#E2B65C",b:"#F3DFB0",name:"dorado"}};
+const DARK="#5A3E2B", NOSE="#3B2A20", SPOT="#3A3A40";
+const EARC={rojo:"#7A5236",azul:"#4A4E5C",amarillo:"#BF7A34"};
+const TAILC={rojo:"#D9C3A0",azul:"#E59AAE",amarillo:"#8C6A4A"};
+
+const coat=k=>[R(80,138,14,38,5,COAT[k].m),R(100,138,14,38,5,COAT[k].m),R(134,138,14,38,5,COAT[k].m),R(152,138,14,38,5,COAT[k].m),
+  R(72,94,96,50,12,COAT[k].m),R(86,130,66,9,4,COAT[k].b),R(36,58,54,50,12,COAT[k].m),R(16,84,32,24,8,COAT[k].b),C(20,88,6,NOSE),
+  ...(k==="azul"?[R(110,104,12,10,3,SPOT),R(140,116,10,9,3,SPOT),R(60,64,9,8,3,SPOT)]:[]),
+  LN("M26 100 L40 100",DARK,3)];
+const EYES=[[60,76]];
+const EARC_FOLD="#8F5A24";
+// iguales que app/core.js: caída · redonda · doblada (punta caída hacia delante)
+const EARS={rojo:{n:"caídas",s:[R(70,58,16,40,7,EARC.rojo)]},
+            azul:{n:"redondas",s:[P("M72 54 H96 L98 60 A16 16 0 1 1 72 76 Z",EARC.azul)]},
+            amarillo:{n:"dobladas",s:[P("M70 66 L72 40 L62 50 Q60 44 66 36 Q74 26 86 26 Q92 28 92 38 L96 66 Z",EARC.amarillo),P("M72 40 L62 50 Q60 44 66 36 Q74 26 86 26 L88 38 Z",EARC_FOLD)]}};
+const TAILS={rojo:{n:"pompón",s:[L("M164 104 L180 80",TAILC.rojo,7),C(183,72,11,TAILC.rojo)]},
+             azul:{n:"rizada",s:[C(176,96,15,TAILC.azul),LN("M176 96 q5 -1 4 5 q-2 6 -9 4 q-8 -3 -6 -11 q3 -10 14 -8",  "#B4566F",3)]},
+             amarillo:{n:"larga",s:[L("M164 104 L196 70",TAILC.amarillo,8)]}};
+const PIECE={coat:k=>coat(k),ears:k=>EARS[k].s,tail:k=>TAILS[k].s};
+const NAME={coat:k=>COAT[k].name,ears:k=>EARS[k].n,tail:k=>TAILS[k].n};
+const VB={coat:[8,50,166,134],ears:[50,19,60,89],tail:[154,54,50,64]};
+const assembled=(e,c,t)=>[...coat(c),...EARS[e].s,...TAILS[t].s];
+
+let uid=0;
+function el(s,k,mode){ // mode: "fill" | "cutOuter" | "cutInner" | "mono"
+  const f="";
+  let fill=s.c, stroke="none", sw=0;
+  if(mode==="mono"){fill="#d5d8df";}
+  if(mode==="cutOuter"){fill="#8f95a3";stroke="#8f95a3";sw=2*O+1.4;}
+  if(mode==="cutInner"){fill="#ffffff";stroke="#ffffff";sw=2*O;}
+  if(s.t==="ln"){ return mode==="fill"? `<path d="${s.d}" fill="none" stroke="${s.c}" stroke-width="${s.w}" stroke-linecap="round" stroke-linejoin="round"/>` : ""; }
+  if(s.t==="l"){ const col=mode==="fill"?s.c:fill; const w=s.w+(mode==="cutOuter"?2*O+1.4:mode==="cutInner"?2*O:0);
+    return `<path d="${s.d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round"${f}/>`; }
+  const st=`fill="${fill}" stroke="${mode==="fill"&&s.t==="p"?s.c:stroke}" stroke-width="${mode==="fill"&&s.t==="p"?2:sw}" stroke-linejoin="round"${f}`;
+  if(s.t==="e") return `<ellipse cx="${s.cx}" cy="${s.cy}" rx="${s.rx}" ry="${s.ry}" ${st}${s.rot?` transform="rotate(${s.rot} ${s.cx} ${s.cy})"`:""}/>`;
+  if(s.t==="c") return `<circle cx="${s.cx}" cy="${s.cy}" r="${s.r}" ${st}/>`;
+  if(s.t==="r") return `<rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="${s.rx}" ${st}/>`;
+  return `<path d="${s.d}" ${st}/>`;
+}
+function draw(shapes,o){
+  const k=++uid,[vx,vy,vw,vh]=o.vb,sc=o.mm||S;
+  let g="";
+  if(o.contour) g+=shapes.map(s=>el(s,k,"cutOuter")).join("")+shapes.map(s=>el(s,k,"cutInner")).join("");
+  g+=shapes.map(s=>el(s,k,o.mono?"mono":"fill")).join("");
+  if(o.eyes&&!o.mono) g+=EYES.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8.5" fill="#FFFDF6"/><circle cx="${x-1.5}" cy="${y+1}" r="4.6" fill="#2A2A30"/>`).join("");
+  return `<svg viewBox="${vx} ${vy} ${vw} ${vh}" style="width:${(vw*sc).toFixed(2)}mm;height:${(vh*sc).toFixed(2)}mm" role="img" aria-label="${o.label||"pieza"}" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sh${k}" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="1.5" dy="2.5" stdDeviation="1.2" flood-color="#5a4a30" flood-opacity="0.45"/></filter></defs>${g}</svg>`;
+}
+
+
+const USED={ears:{rojo:17,azul:17,amarillo:18},coat:{rojo:17,azul:17,amarillo:18},tail:{rojo:17,azul:18,amarillo:17}}, SPARE=2;
+const ROWS=[["ears","Orejas",0.42],["coat","Cuerpo",0.2],["tail","Cola",0.46]];
+const LBL={rojo:"Gomet rojo",azul:"Gomet azul",amarillo:"Gomet amarillo"};
+document.getElementById("t").innerHTML=
+ `<thead><tr><th></th>${KEYS.map(k=>`<th><span class="dot" style="border-color:${GHEX[k]}"></span>${LBL[k].replace("Gomet ","")}</th>`).join("")}</tr></thead><tbody>`+
+ ROWS.map(([p,l,mm])=>`<tr><th>${l}</th>${KEYS.map(k=>`<td>${draw(PIECE[p](k),{vb:VB[p],eyes:p==="coat",mm,label:l+" "+NAME[p](k)})}<b>${NAME[p](k)}</b><small>recortar ${USED[p][k]+SPARE}</small></td>`).join("")}</tr>`).join("")+"</tbody>";
+document.getElementById("f").textContent="Cantidades: 52 niños + 2 de repuesto por color (igual que piezas_perro_geometrico.pdf). Cada mesa: 3 bandejas (orejas, cuerpos, colas), cada una con 3 compartimentos marcados con un gomet.";
+</script>
+</body></html>
