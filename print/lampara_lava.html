@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Lámpara de lava</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:11mm 13mm 10mm}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Nunito Sans",sans-serif;font-size:10pt;line-height:1.32;color:#1F2A44;background:#fff}
+h1{font-family:Fredoka;font-weight:700;font-size:24pt;margin:0 0 1mm}
+h1 span{color:#F7931E}
+.sub{color:#4A5265;margin:0 0 4mm}
+h2{font-family:Fredoka;font-weight:600;font-size:13pt;margin:3.5mm 0 1.5mm;color:#29ABE2}
+.page{page-break-after:always}
+.page:last-child{page-break-after:auto}
+.top{display:grid;grid-template-columns:1fr 38mm;gap:6mm;align-items:start}
+table{width:100%;border-collapse:collapse;font-size:10.5pt}
+th,td{border:1pt solid #D9D2C2;padding:1.4mm 2.2mm;text-align:left;vertical-align:top}
+th{background:#F6F1E6;font-family:Fredoka;font-weight:600}
+td.n{white-space:nowrap;font-weight:700}
+ol{margin:1mm 0;padding-left:5mm} li{margin:.8mm 0}
+ul{margin:1mm 0;padding-left:5mm} ul li{margin:.8mm 0}
+.chk{list-style:none;padding-left:0}
+.box{width:3.6mm;height:3.6mm;border:1.2pt solid #6D6E71;border-radius:1mm;display:inline-block;vertical-align:-.6mm;margin-right:2mm}
+.tip{background:#FFF4DF;border-left:3pt solid #F7931E;padding:2mm 4mm;border-radius:2mm;margin:2mm 0}
+.warn{background:#FDECEA;border-left:3pt solid #E04B3A;padding:2mm 3.5mm;border-radius:2mm;margin:2mm 0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+/* cartel */
+.sign{height:269mm;border:1.5pt dashed #C9BFA9;border-radius:8mm;padding:14mm 14mm;display:flex;flex-direction:column;align-items:center;text-align:center}
+.sign h1{font-size:44pt;line-height:1.05;margin:0 0 4mm}
+.sign .q{font-family:Fredoka;font-weight:600;font-size:22pt;color:#4A5265;margin:0 0 6mm}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;width:100%;margin-top:4mm}
+.st{background:#FFFDF7;border:1.2pt solid #EFE5D2;border-radius:6mm;padding:5mm 4mm}
+.st b{display:block;font-family:Fredoka;font-weight:700;font-size:17pt;margin-top:2mm}
+.st p{margin:1mm 0 0;font-size:13pt;line-height:1.3}
+.num{display:inline-flex;width:11mm;height:11mm;border-radius:50%;color:#fff;font-family:Fredoka;font-weight:700;font-size:15pt;align-items:center;justify-content:center}
+.foot{margin-top:auto;font-family:Fredoka;font-weight:600;font-size:16pt;color:#7AC143}
+.small{font-size:9pt;color:#4A5265}
+</style></head><body>
+
+<section class="page">
+<div class="top">
+<div>
+<h1>Lámpara de <span>lava</span></h1>
+<p class="sub">Dos lámparas para dejar a un costado durante la clase. Agua + aceite + colorante + pastilla efervescente.</p>
+
+<h2>Proporciones (para cada lámpara)</h2>
+<table>
+<tr><th>Ingrediente</th><th>Cantidad</th><th>Para qué</th></tr>
+<tr><td>Botella o frasco transparente</td><td class="n">≈ 1 L</td><td>Mejor alto y estrecho: las burbujas suben más</td></tr>
+<tr><td>Agua</td><td class="n">¼ (≈ 250 ml)</td><td>Va abajo: pesa más que el aceite</td></tr>
+<tr><td>Aceite de girasol (o de bebé)</td><td class="n">¾ (≈ 700 ml)</td><td>Hasta 3–4 cm del borde</td></tr>
+<tr><td>Colorante alimentario líquido</td><td class="n">10–15 gotas</td><td>Tiñe solo el agua (no se mezcla con el aceite)</td></tr>
+<tr><td>Pastilla efervescente</td><td class="n">¼ de pastilla cada vez</td><td>Hace el gas que sube las burbujas de colores</td></tr>
+</table>
+<p class="small">Regla fácil: <b>1 parte de agua y 3 de aceite</b>. Si la botella es de 1,5 L: unos 375 ml de agua y 1 L de aceite.<br>
+Pastillas que sirven: Redoxon / vitamina C efervescente, Alka-Seltzer o pastillas de limpiar dentaduras. Cada ¼ dura 1–2 minutos.</p>
+</div>
+<svg viewBox="0 0 120 260" xmlns="http://www.w3.org/2000/svg" style="width:38mm;margin-top:10mm">
+  <defs><filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".18"/></filter></defs>
+  <rect x="45" y="8" width="30" height="16" rx="3" fill="#F7931E" filter="url(#sh)"/>
+  <path d="M42 24 H78 V44 Q100 54 100 80 V236 Q100 250 86 250 H34 Q20 250 20 236 V80 Q20 54 42 44 Z" fill="#EAF6FC" stroke="#9CCDE6" stroke-width="2"/>
+  <path d="M22 84 H98 V186 H22 Z" fill="#F6D26B" opacity=".75"/>
+  <path d="M22 186 H98 V236 Q98 248 86 248 H34 Q22 248 22 236 Z" fill="#E0245E" opacity=".85"/>
+  <g fill="#E0245E"><ellipse cx="48" cy="160" rx="9" ry="11"/><ellipse cx="72" cy="128" rx="7" ry="9"/><ellipse cx="56" cy="104" rx="6" ry="7"/><ellipse cx="80" cy="170" rx="6" ry="7"/></g>
+  <g fill="#fff" opacity=".8"><circle cx="46" cy="156" r="2.5"/><circle cx="70" cy="125" r="2"/><circle cx="54" cy="101" r="1.6"/></g>
+  <text x="60" y="80" text-anchor="middle" font-family="Nunito Sans" font-weight="700" font-size="10" fill="#8A6A1E">aceite</text>
+  <text x="60" y="228" text-anchor="middle" font-family="Nunito Sans" font-weight="700" font-size="11" fill="#fff">agua</text>
+</svg>
+</div>
+
+<h2>Cómo se hace</h2>
+<ol>
+<li>Pon la botella sobre una <b>bandeja</b>. Echa el <b>agua</b> (¼ de la botella).</li>
+<li>Añade el <b>colorante</b> y remueve un poco. Un color por lámpara queda muy bonito: por ejemplo, rojo y azul.</li>
+<li>Echa el <b>aceite</b> despacio, con un embudo, hasta 3–4 cm del borde. Espera 1–2 minutos a que se separen: el agua de color se queda abajo.</li>
+<li>Parte la pastilla en 4 trozos y echa <b>uno</b>. ¡Empiezan a subir y bajar burbujas de colores!</li>
+<li>Cuando pare, echa otro trozo. Para que dure toda la clase, deja los trozos al lado y repón cada pocos minutos.</li>
+</ol>
+<div class="tip"><b>Truco:</b> pon la linterna del móvil (o una luz pequeña) <b>debajo</b> de la botella. Brilla como una lámpara de verdad.</div>
+
+<h2>¿Por qué funciona? (para contarlo si preguntan)</h2>
+<ul>
+<li><b>El agua y el aceite no se mezclan.</b> El agua pesa más y se queda abajo; el colorante solo tiñe el agua.</li>
+<li>La pastilla hace <b>gas</b>, ¡como la espuma del principio! Las burbujas de gas se llevan gotas de agua de color hacia arriba.</li>
+<li>Arriba la burbuja se rompe, el gas se escapa y la gota de agua, que pesa más, <b>vuelve a bajar</b>.</li>
+</ul>
+
+<div class="cols">
+<div>
+<h2>Material (para 2 lámparas)</h2>
+<ul class="chk">
+<li><span class="box"></span>2 botellas transparentes de ≈1 L (sin etiqueta)</li>
+<li><span class="box"></span>≈ 1,5 L de aceite de girasol</li>
+<li><span class="box"></span>Agua y 2 colorantes</li>
+<li><span class="box"></span>Un tubo de pastillas efervescentes (≈ 10)</li>
+<li><span class="box"></span>Embudo, 2 bandejas, papel de cocina</li>
+<li><span class="box"></span>Linterna o luz pequeña (opcional)</li>
+</ul>
+</div>
+<div>
+<div class="warn"><b>Seguridad:</b>
+<ul>
+<li><b>No taparla</b> mientras burbujea: hace presión.</li>
+<li>No se bebe. Las pastillas, fuera del alcance de los niños.</li>
+<li>El aceite en el suelo del gimnasio <b>resbala</b>: siempre sobre bandeja y lejos del paso.</li>
+<li>Al terminar se puede tapar y reutilizar otro día: solo hace falta otra pastilla.</li>
+</ul></div>
+</div>
+</div>
+</section>
+
+<section class="page">
+<div class="sign">
+<h1>Lámpara de <span style="color:#F7931E">lava</span></h1>
+<p class="q">¿Por qué suben y bajan las burbujas?</p>
+<svg viewBox="0 0 120 260" xmlns="http://www.w3.org/2000/svg" style="height:95mm">
+  <defs><filter id="sh2"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".18"/></filter></defs>
+  <rect x="45" y="8" width="30" height="16" rx="3" fill="#29ABE2" filter="url(#sh2)"/>
+  <path d="M42 24 H78 V44 Q100 54 100 80 V236 Q100 250 86 250 H34 Q20 250 20 236 V80 Q20 54 42 44 Z" fill="#EAF6FC" stroke="#9CCDE6" stroke-width="2"/>
+  <path d="M22 84 H98 V186 H22 Z" fill="#F6D26B" opacity=".75"/>
+  <path d="M22 186 H98 V236 Q98 248 86 248 H34 Q22 248 22 236 Z" fill="#2F6BD8" opacity=".85"/>
+  <g fill="#2F6BD8"><ellipse cx="48" cy="160" rx="9" ry="11"/><ellipse cx="72" cy="128" rx="7" ry="9"/><ellipse cx="56" cy="104" rx="6" ry="7"/><ellipse cx="80" cy="170" rx="6" ry="7"/></g>
+  <g fill="#fff" opacity=".8"><circle cx="46" cy="156" r="2.5"/><circle cx="70" cy="125" r="2"/><circle cx="54" cy="101" r="1.6"/></g>
+</svg>
+<div class="steps">
+<div class="st"><span class="num" style="background:#29ABE2">1</span><b>No se mezclan</b><p>El agua y el aceite no son amigos. El agua pesa más y se queda abajo.</p></div>
+<div class="st"><span class="num" style="background:#F7931E">2</span><b>¡Gas!</b><p>La pastilla hace burbujas de gas que suben gotas de agua de color.</p></div>
+<div class="st"><span class="num" style="background:#7AC143">3</span><b>Y vuelve a bajar</b><p>Arriba la burbuja explota y la gota de agua cae otra vez.</p></div>
+</div>
+<p class="foot">Mira, pero no toques. ¡Los científicos observan!</p>
+</div>
+</section>
+</body></html>
