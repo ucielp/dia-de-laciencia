@@ -162,8 +162,30 @@ function next(){ if(inst&&inst.next&&inst.next()) return; show(current+1); }
 function prev(){ if(inst&&inst.prev&&inst.prev()) return; show(current-1); }
 api.next=next; api.prev=prev;
 
-function boot(){
-  SCENES.sort((a,b)=>(a.order||0)-(b.order||0));
+/* Escenas opcionales: si una escena define available() (devuelve boolean o Promise<boolean>), se comprueba al arrancar.
+   Mientras no responda «true» queda fuera de la navegación y de los puntos (p. ej. el vídeo, si falta el archivo).
+   Se espera como mucho 4 s antes de mostrar la primera pantalla; si responde «true» más tarde, se añade igualmente. */
+const byOrder=(a,b)=>(a.order||0)-(b.order||0);
+function admit(s){
+  if(SCENES.includes(s)) return;
+  const cur=SCENES[current]; SCENES.push(s); SCENES.sort(byOrder);
+  if(cur) current=SCENES.indexOf(cur);
+  if(stage&&current>=0) renderDots();
+}
+function probeOptional(){
+  const gated=SCENES.filter(s=>typeof s.available==="function");
+  if(!gated.length) return Promise.resolve();
+  gated.forEach(s=>SCENES.splice(SCENES.indexOf(s),1));
+  const checks=gated.map(s=>{
+    let r; try{ r=s.available(api); }catch(e){ console.error(e); r=false; }
+    return Promise.resolve(r).then(v=>{ if(v) admit(s); },e=>{ console.error(e); });
+  });
+  return Promise.race([Promise.all(checks),sleep(4000)]);
+}
+
+async function boot(){
+  SCENES.sort(byOrder);
+  await probeOptional();
   stage=document.getElementById("stage");
   fit(); window.addEventListener("resize",fit);
   document.addEventListener("keydown",e=>{

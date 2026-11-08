@@ -66,7 +66,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16p
 
 <div class="toolbar">
   <h1>Piezas del perro geométrico para recortar</h1>
-  <p>Hojas A4 a tamaño real, en estilo papel recortado. Primero, una hoja que explica a los niños cómo buscar sus piezas. Después, las piezas justas para las 52 hojas «Mi ADN secreto» (print/hojas_adn_secreto.html) más 2 de repuesto de cada color. Recortad cada pieza por la línea gris de fuera. Las piezas no llevan marca: cada color va a su compartimento, marcado con un gomet.</p>
+  <p>Hojas A4 a tamaño real, en estilo papel recortado. Primero, una hoja que explica a los niños cómo buscar sus piezas. Después, las piezas justas para las 52 hojas «Mi ADN secreto» (print/hojas_adn_secreto.html) más 2 de repuesto de cada color. Recorten cada pieza por la línea gris de fuera. Las piezas no llevan marca: cada color va a su compartimento, marcado con un gomet.</p>
   <p id="need"></p>
 </div>
 <div class="pages" id="pages"></div>
@@ -148,8 +148,8 @@ function examplePage(){
     <div class="step"><h3><span class="n">1</span>Mira tu ADN secreto</h3>
       <p class="say">Tu hoja tiene 3 gomets: uno para las orejas, otro para el cuerpo y otro para la cola.</p>
       <div class="card">${slot("ears",ex[0])}${slot("coat",ex[1])}${slot("tail",ex[2])}</div></div>
-    <div class="step"><h3><span class="n">2</span>Coge las piezas del vaso de tu color</h3>
-      <p class="say">En tu mesa hay un vaso de orejas, uno de cuerpos y uno de colas. Cada vaso tiene 3 compartimentos con un gomet. Coge la pieza del compartimento de tu color.</p>
+    <div class="step"><h3><span class="n">2</span>Toma de cada bandeja la pieza de tu color</h3>
+      <p class="say">En tu mesa hay una bandeja de orejas, una de cuerpos y una de colas. Cada bandeja tiene 3 compartimentos con un gomet. Toma la pieza del compartimento de tu color.</p>
       <div class="cols">${col("ears",ex[0])}${col("coat",ex[1])}${col("tail",ex[2])}</div></div>
     <div class="step"><h3><span class="n">3</span>Pega el cuerpo y, encima, las orejas y la cola</h3>
       <div class="final">${draw(assembled(...ex),{vb:[8,22,196,160],eyes:true,mm:0.27,label:"Perro montado"})}<span class="name">¡Listo!<br>Pégalo en «Pega aquí tu perro».</span></div></div>

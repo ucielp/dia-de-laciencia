@@ -1,4 +1,4 @@
-/* Escenas 70, 75 y 80 · Actividad 2 «Busca a tu familia por el ADN» (v2)
+/* Escenas 70, 75, 77 y 80 · Actividad 2 «Busca a tu familia por el ADN» (v2)
    parientes: el ADN tiene muchas partes; la parte «soy un perro» es igual en todos los perros; perro-lobo 1, perro-gallina muchas
    busca-familia: instrucciones (buscar el grupo con SOLO 1 diferencia → pareja) + mini demostración
    arbol: se juntan las parejas y luego el adulto saca murciélago, T-rex, cocodrilo, rana y tiburón
@@ -120,6 +120,11 @@ SC.push({
       .par-end{position:absolute;top:760px;font:700 54px var(--display)}
       .par-card{position:absolute;top:300px;width:240px;height:300px;margin-left:-120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
       .par-card:after{content:"";position:absolute;bottom:-40px;left:50%;margin-left:-14px;border:14px solid transparent;border-top:26px solid #FFFDF7}
+      .par-hint{position:absolute;left:1000px;top:58px;display:flex;align-items:center;gap:14px;background:var(--orange);color:#fff;font:700 52px/1 var(--display);padding:20px 34px;border-radius:999px;box-shadow:0 6px 0 rgba(150,80,0,.25)}
+      .par-hint svg{width:44px;height:44px;flex:none}
+      .par-pulse{animation:parPulse 1.2s ease-in-out infinite}
+      @keyframes parPulse{50%{box-shadow:0 0 0 14px rgba(247,147,30,.45);border-color:var(--orange)}}
+      @media (prefers-reduced-motion:reduce){.par-pulse{animation:none}}
     `));
     const bg=el("div",{class:"par-bg"});
     const title=el("h1",{class:"fam-h1"});
@@ -145,7 +150,9 @@ SC.push({
     const count=el("div",{class:"par-count fam-paper"},el("small",{text:"diferencias"}),num);
     const msg=el("div",{class:"fam-msg",style:{top:"880px"}});
     const sum=el("div",{class:"par-sum"});
-    box.append(bg,title,two,cmp.el,count,msg,sum);
+    const hint=el("div",{class:"par-hint",html:'<svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="18" cy="18" r="12" fill="none" stroke="#fff" stroke-width="6"/><path d="M27 27 L39 39" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>'},el("span",{text:"Comparen casilla por casilla"}));
+    const scanBox=cmp.el.querySelector(".fam-scan");
+    box.append(bg,title,two,cmp.el,count,msg,sum,hint);
 
     let step=0, token=0;
     const say=h=>{ msg.innerHTML=h; fadeIn(APP,msg,0,16); };
@@ -167,9 +174,14 @@ SC.push({
       const n=await cmp.run(()=>t===token,(k,a)=>{ num.textContent=k; if(a) bump(APP,num); },!anim);
       if(t===token) after(n);
     }
+    /* pasos: 0 muchas partes · 1 «soy un perro» · 2 perro-lobo (presentación) · 3 se buscan las diferencias
+       4 perro-gallina (presentación) · 5 se buscan las diferencias · 6 resumen */
+    let curB="lobo";
     function show(s,anim){
       token++; step=s; const t=token;
-      two.hidden=s>1; cmp.el.hidden=count.hidden=!(s===2||s===3); sum.hidden=s!==4;
+      const cmpStep=s>=2&&s<=5, intro=s===2||s===4;
+      two.hidden=s>1; cmp.el.hidden=count.hidden=!cmpStep; sum.hidden=s!==6; hint.hidden=!intro;
+      scanBox.classList.remove("par-pulse");
       msg.style.top=s<=1?"905px":"880px";
       if(s<=1){
         title.innerHTML=s===0?"Nuestro ADN tiene <span>muchas partes</span>":"Una parte dice: <span>«soy un perro»</span>";
@@ -179,16 +191,24 @@ SC.push({
         else { say("Esa parte es <b>igual</b> en todos los perros."); if(anim){ segDog.forEach((x,i)=>pop(APP,x,i*200)); pop(APP,eq,600); } }
         return;
       }
-      if(s===2||s===3){
-        const b=s===2?"lobo":"gallina";
-        title.innerHTML=s===2?"Perro y <span>lobo</span>":"Perro y <span>gallina</span>";
-        cmp.setB(b,anim&&s===3); num.textContent="?";
-        say(s===2?"¿Cuántas casillas son distintas?":"¿Y ahora?");
-        (async()=>{ if(anim&&!APP.reduced()) await APP.sleep(900); if(t!==token) return;
-          compare(anim,n=>{
-            if(s===2){ say(`¡Solo <b>1 diferencia</b>! Parientes muy cercanos… pero <b>especies distintas</b>.`); if(anim) APP.audio.ok(); }
-            else say(`¡<b>${n} diferencias</b>! Familia lejana.`);
-          }); })();
+      if(cmpStep){
+        const b=s<=3?"lobo":"gallina";
+        title.innerHTML=b==="lobo"?"Perro y <span>lobo</span>":"Perro y <span>gallina</span>";
+        if(curB!==b){ cmp.setB(b,anim); curB=b; }
+        cmp.clear(); num.textContent="?";
+        if(intro){
+          // presentación: las dos tiras, una encima de la otra; el marco espera en la primera casilla
+          say(b==="lobo"?"Vamos a buscar las <b>diferencias</b> entre el ADN del perro y el del lobo.":"Ahora, perro y gallina: ¿cuántas <b>diferencias</b> hay?");
+          scanBox.style.transition="none"; scanBox.style.transform="translateX(0px)"; scanBox.style.opacity=1; void scanBox.offsetWidth; scanBox.style.transition="";
+          scanBox.classList.add("par-pulse");
+          if(anim) pop(APP,hint,b==="gallina"?500:150);
+          return;
+        }
+        say("Casilla por casilla…");
+        compare(anim,n=>{
+          if(b==="lobo"){ say(`¡Solo <b>1 diferencia</b>! Parientes muy cercanos… pero <b>especies distintas</b>.`); if(anim) APP.audio.ok(); }
+          else say(`¡<b>${n} diferencias</b>! Familia lejana.`);
+        });
         return;
       }
       title.innerHTML="ADN parecido = <span>familia cercana</span>";
@@ -197,7 +217,7 @@ SC.push({
     }
     show(0,true);
     return {
-      next(){ if(step>=4) return false; show(step+1,true); return true; },
+      next(){ if(step>=6) return false; show(step+1,true); return true; },
       prev(){ if(step<=0) return false; show(step-1,false); return true; },
       destroy(){ token++; }
     };
@@ -227,7 +247,7 @@ function sign(APP,id,sq,picH){
   return APP.el("div",{class:"bf-sign fam-paper"},pic(APP,id,picH*1.2,picH),strip(APP,T.dna[id],sq,Math.round(sq*0.18)));
 }
 SC.push({
-  id:"busca-familia", title:"¡Busca a tu pareja!", order:75,
+  id:"busca-familia", title:"¡Busquen a su pareja!", order:75,
   mount(box,APP){
     if(!need(box,APP)) return {};
     const T=window.TREE, el=APP.el;
@@ -258,11 +278,11 @@ SC.push({
       el("div",{class:"bf-txt"},el("span",{html:"Cada grupo tiene <b>un cartel</b>: un animal y su ADN"})));
     const c2=el("div",{class:"bf-card fam-paper"},el("div",{class:"bf-n",text:"2"}),
       el("div",{class:"bf-art"},sign(APP,"gato",40,130),el("div",{class:"bf-vs",text:"?"}),sign(APP,"perro",40,130)),
-      el("div",{class:"bf-txt"},el("span",{html:"Comparad vuestra tira con la de <b>otros grupos</b>"})));
+      el("div",{class:"bf-txt"},el("span",{html:"Comparen su tira con la de <b>otros grupos</b>"})));
     const c3=el("div",{class:"bf-card fam-paper"},el("div",{class:"bf-n",text:"3"}),
       el("div",{class:"bf-art"},el("div",{style:{display:"flex",gap:"16px"}},sign(APP,"gato",30,110),sign(APP,"leon",30,110)),
         el("div",{class:"fam-pic",style:{width:"400px",height:"180px"},html:kidsSVG(APP,4,true)})),
-      el("div",{class:"bf-txt"},el("span",{html:"¿Solo <b>1 diferencia</b>? ¡Sois pareja! Juntaos"})));
+      el("div",{class:"bf-txt"},el("span",{html:"¿Solo <b>1 diferencia</b>? ¡Son pareja! Júntense"})));
     const cards=el("div",{class:"bf-cards"},c1,c2,c3);
     // demo
     const demo=el("div",{class:"bf-demo",hidden:true});
@@ -288,7 +308,7 @@ SC.push({
       token++; step=s; const t=token;
       const demoMode=s>=3;
       cards.hidden=demoMode; demo.hidden=!demoMode;
-      title.innerHTML=demoMode?"¿Quién tiene <span>solo 1 diferencia</span>?":"¡Busca a tu <span>pareja</span>!";
+      title.innerHTML=demoMode?"¿Quién tiene <span>solo 1 diferencia</span>?":"¡Busquen a su <span>pareja</span>!";
       if(!demoMode){
         [c1,c2,c3].forEach((c,i)=>{ c.style.visibility=i<=s?"visible":"hidden"; });
         if(anim) pop(APP,[c1,c2,c3][s]);
@@ -311,6 +331,50 @@ SC.push({
       prev(){ if(step<=0) return false; show(step-1,false); return true; },
       destroy(){ token++; }
     };
+  }
+});
+
+// =====================================================================
+// 77 · separador: ¡A jugar! Actividad 2 (sin pasos internos)
+// =====================================================================
+SC.push({
+  id:"actividad-2", title:"¡A jugar! Actividad 2", order:77,
+  mount(box,APP){
+    if(!need(box,APP)) return {};
+    const T=window.TREE, el=APP.el;
+    box.append(css(APP,`
+      .a2{position:absolute;inset:0;background:linear-gradient(150deg,#5FA040,#7AC143 55%,#9BD267);overflow:hidden}
+      .a2-float{position:absolute;color:#fff;text-align:center;font-family:var(--display);font-weight:700;opacity:.2;animation:a2Float linear infinite}
+      @keyframes a2Float{from{transform:translateY(0) rotate(0)}to{transform:translateY(-1300px) rotate(-200deg)}}
+      .a2-pill{position:absolute;left:120px;top:110px;background:#fff;color:#4E8F2A;font:700 64px/1 var(--display);padding:22px 46px;border-radius:999px;box-shadow:0 8px 0 rgba(40,80,10,.2)}
+      .a2-h{position:absolute;left:110px;top:230px;margin:0;font:700 190px/1 var(--display);color:#fff;text-shadow:0 8px 0 rgba(40,80,10,.2)}
+      .a2-s{position:absolute;left:120px;top:460px;margin:0;font:700 100px/1.05 var(--display);color:var(--ink)}
+      .a2-art{position:absolute;left:80px;right:80px;top:600px;height:440px;display:flex;align-items:flex-end;justify-content:center;gap:30px}
+      .a2-art .bf-sign{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 22px;border-radius:22px;border:6px solid #E2D6BE}
+      .a2-kids{display:flex;flex-direction:column;align-items:center;gap:10px}
+      .a2-one{background:var(--ink);color:#fff;font:700 52px/1 var(--display);padding:16px 30px;border-radius:999px}
+      .a2-bob{animation:a2Bob 3.4s ease-in-out infinite}
+      @keyframes a2Bob{50%{translate:0 -14px}}
+      @media (prefers-reduced-motion:reduce){.a2-float,.a2-bob{animation:none}}
+    `));
+    const root=el("div",{class:"a2"});
+    const L="ATGC";
+    for(let i=0;i<20;i++){
+      const s=56+((i*29)%60), d=20+((i*5)%14), ch=L[i%4];
+      const f=el("i",{class:"a2-float",text:ch,style:{left:((i*197)%1880)+"px",top:(1100+((i*83)%300))+"px",width:s+"px",height:s+"px",lineHeight:s+"px",fontSize:Math.round(s*.6)+"px",borderRadius:Math.round(s*.2)+"px",background:T.colors[ch],animationDuration:d+"s",animationDelay:(-(i*1.9)%d)+"s"}});
+      if(APP.reduced()) f.style.top=((i*127)%1000)+"px";
+      root.append(f);
+    }
+    root.append(el("div",{class:"a2-pill",text:"Actividad 2"}),
+      el("h2",{class:"a2-h",text:"¡A jugar!"}),
+      el("p",{class:"a2-s",text:"Busquen a su pareja"}));
+    const sA=sign(APP,"gato",54,190), sB=sign(APP,"leon",54,190);
+    sA.classList.add("a2-bob"); sB.classList.add("a2-bob"); sB.style.animationDelay="-1.7s";
+    const kids=el("div",{class:"a2-kids"},el("div",{class:"a2-one",text:"¡Solo 1 diferencia!"}),
+      el("div",{class:"fam-pic",style:{width:"620px",height:"279px"},html:kidsSVG(APP,4,true)}));
+    root.append(el("div",{class:"a2-art"},sA,kids,sB));
+    box.append(root);
+    return {next:()=>false,prev:()=>false,destroy(){}};
   }
 });
 
@@ -435,7 +499,7 @@ SC.push({
       else if(s===1){ title.innerHTML="¡Las <b>parejas</b>! Solo 1 diferencia"; msg.innerHTML="Ahora llegan <b>otros animales</b>…"; }
       else if(s>=LAST){ title.innerHTML="¡El <span>árbol de la vida</span>!"; msg.innerHTML="<b>Menos diferencias</b> = familia más cercana."; }
       else { const r=T.reveals[revOf(s)];
-        if(isQ(s)){ title.innerHTML=r.q; msg.innerHTML="Mirad vuestra tira y contad las diferencias."; }
+        if(isQ(s)){ title.innerHTML=r.q; msg.innerHTML="Miren su tira y cuenten las diferencias."; }
         else { title.innerHTML=r.a; msg.innerHTML=r.msg; } }
     }
     function applyState(s){

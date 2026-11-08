@@ -3,11 +3,6 @@
 (function(){
 "use strict";
 const SC=window.SCENES=window.SCENES||[];
-/* VÍDEO de las familias preparando el experimento en casa: paso OPCIONAL al final de la escena «experimento».
-   Cómo añadirlo: guarda el vídeo como  app/video/experimento.mp4  (MP4 H.264 + AAC; mejor < 50 MB para Vercel).
-   Si el archivo no existe o no se puede cargar, ese paso se SALTA solo (no aparece nada en pantalla).
-   Para usar otro nombre, cambia solo esta ruta (relativa a index.html). */
-const EXPERIMENT_VIDEO="video/experimento.mp4";
 let UID=0;
 /* Colores del modelo físico de ADN (letra siempre en blanco) */
 const BASE={A:"#2F6BD8",T:"#E0245E",G:"#1E9A57",C:"#F28A1E"};
@@ -41,19 +36,26 @@ const ICON={
 };
 
 /* =====================================================================================
-   5 · MISTERIO: «?» gigante + sonido de suspense (el presentador hace la espuma en silencio)
-   Paso 1: empieza el suspense (latido + trémolo que sube). Paso 2: «¿Qué ha pasado?» + ta-da.
+   5 · MISTERIO: «?» gigante + música de misterio (el presentador hace la espuma en silencio)
+   Paso 1: empieza la música de misterio (en bucle). Paso 2: «¿Qué ha pasado?» + ta-da.
    ===================================================================================== */
 SC.push({id:"misterio",title:"¿Qué pasará?",order:5,mount(box,APP){
   const {el}=APP, red=APP.reduced(), tm=timers();
   box.append(styleEl(APP,`
-  .mi{position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,#2E3757 0,#1C2238 58%,#121628 100%);overflow:hidden;cursor:pointer}
+  .mi{position:absolute;inset:0;background:#121628;overflow:hidden;cursor:pointer}
+  .mi-bg{position:absolute;inset:0;background:url(img/portada.jpg) center/cover no-repeat;transform-origin:42% 55%;animation:miKen 40s ease-in-out infinite alternate;transition:filter 1s}
+  @keyframes miKen{from{transform:scale(1)}to{transform:scale(1.09) translate(-1.2%,0.6%)}}
+  .mi-vig{position:absolute;inset:0;background:radial-gradient(ellipse at 42% 55%,rgba(18,22,40,0) 45%,rgba(18,22,40,.55) 100%),linear-gradient(90deg,rgba(18,22,40,0) 70%,rgba(18,22,40,.6) 100%);transition:background .8s}
+  .mi.sus .mi-bg{filter:saturate(1.1) contrast(1.05)}
+  .mi.rev .mi-bg{filter:brightness(.42) blur(2px)}
+  .mi-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:#FFE9B8;box-shadow:0 0 18px 6px rgba(247,147,30,.55);opacity:0;animation:miSpark 4s ease-in-out infinite}
+  @keyframes miSpark{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translateY(-140px) scale(1.2)}}
   .mi-dot{position:absolute;border-radius:50%;opacity:.16;animation:miFloat 9s ease-in-out infinite}
   .mi.sus .mi-dot{opacity:.28}
   @keyframes miFloat{50%{transform:translateY(-46px)}}
-  .mi-qw{position:absolute;left:960px;top:540px;width:0;height:0;transition:transform 1s cubic-bezier(.5,0,.2,1)}
-  .mi.rev .mi-qw{transform:translate(0,-300px) scale(.36)}
-  .mi-q{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font-family:var(--display);font-weight:700;font-size:840px;line-height:1;color:#F7931E;text-shadow:0 0 90px rgba(247,147,30,.35),0 22px 0 rgba(0,0,0,.3);animation:miSway 3.6s ease-in-out infinite;user-select:none;transition:text-shadow .6s}
+  .mi-qw{position:absolute;left:1745px;top:420px;width:0;height:0;transition:transform 1s cubic-bezier(.5,0,.2,1)}
+  .mi.rev .mi-qw{transform:translate(-785px,-200px) scale(.45)}
+  .mi-q{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font-family:var(--display);font-weight:700;font-size:740px;line-height:1;color:#F7931E;-webkit-text-stroke:10px #FFFDF7;paint-order:stroke fill;text-shadow:0 0 90px rgba(247,147,30,.45),0 22px 0 rgba(0,0,0,.35);animation:miSway 3.6s ease-in-out infinite;user-select:none;transition:text-shadow .6s}
   .mi.sus .mi-q{text-shadow:0 0 140px rgba(247,147,30,.6),0 22px 0 rgba(0,0,0,.3)}
   @keyframes miSway{0%,100%{rotate:-6deg}50%{rotate:6deg}}
   .mi-t{position:absolute;left:0;right:0;top:560px;text-align:center;font-family:var(--display);font-weight:700;font-size:190px;line-height:1;color:#FFFDF7;margin:0;opacity:0;transform:scale(.4);transition:opacity .4s,transform .7s cubic-bezier(.3,1.6,.5,1);text-shadow:0 10px 0 rgba(0,0,0,.25)}
@@ -61,46 +63,104 @@ SC.push({id:"misterio",title:"¿Qué pasará?",order:5,mount(box,APP){
   @media (prefers-reduced-motion:reduce){.mi *{animation:none!important;transition:none!important}}
   `));
   const root=el("div",{class:"mi"}); box.append(root);
-  [[180,170,70,"#29ABE2"],[1690,210,90,"#7AC143"],[1540,860,60,"#F7931E"],[300,840,110,"#E59AAE"],[820,120,40,"#F2C230"],[1240,960,46,"#29ABE2"],[1800,560,36,"#F2C230"],[120,520,44,"#7AC143"]]
-    .forEach(([x,y,s,c],i)=>root.append(el("i",{class:"mi-dot",style:{left:x+"px",top:y+"px",width:s+"px",height:s+"px",background:c,animationDelay:(-i*1.3)+"s"}})));
+  root.append(el("div",{class:"mi-bg"}),el("div",{class:"mi-vig"}));   // foto a pantalla completa (img/portada.jpg) con zoom lento
+  [[1560,640],[1640,700],[1760,620],[1820,760],[1600,820],[1700,560]].forEach(([x,y],i)=>root.append(el("i",{class:"mi-spark",style:{left:x+"px",top:y+"px",animationDelay:(i*0.7)+"s"}})));
   const pulseEl=el("div");
   const qw=el("div",{class:"mi-qw"},pulseEl);
   pulseEl.append(el("div",{class:"mi-q",text:"?"}));
   root.append(qw,el("h1",{class:"mi-t",text:"¿Qué ha pasado?"}));
 
-  /* ---- Sonido de suspense (Web Audio propio, se para en destroy) ---- */
-  let S=null, sid=0;
-  function thump(c,out,when,v){
-    const o=c.createOscillator(), g=c.createGain();
-    o.type="triangle"; o.frequency.setValueAtTime(95,when); o.frequency.exponentialRampToValueAtTime(42,when+0.2);
-    g.gain.setValueAtTime(0.0001,when); g.gain.exponentialRampToValueAtTime(v,when+0.015); g.gain.exponentialRampToValueAtTime(0.0001,when+0.24);
-    o.connect(g).connect(out); o.start(when); o.stop(when+0.27);
+  /* ---- Música de misterio (Web Audio, sin archivos; se para en destroy) ----
+     La menor, 96 ppm, bucle de 16 compases: frase A + frase B sobre la misma armonía (Am · F · Dm · E · Am · F · Dm-E · Am).
+     Melodía en pizzicato (con un eco suave), bajo punteado, colchón de acordes y «tic-tac» de reloj; en la frase B entra una maraca.
+     Programador con margen (lookahead): cada 25 ms se agendan con el reloj del AudioContext las corcheas de los próximos 0,15 s.
+     Respeta APP.audio.muted en todo momento (tecla M) mediante una ganancia de silencio. */
+  const BPM=96, EIGHTH=60/BPM/2, LOOK=0.15, TICK_MS=25, SWING=0.028, VOL=0.8;
+  const mf=m=>440*Math.pow(2,(m-69)/12);
+  const _=null;
+  const MEL=[ // 16 compases × 8 corcheas (números MIDI; 69 = La4)
+    [76,_,69,_,72,_,76,74],[72,_,69,_,65,_,69,_],[74,_,77,_,81,_,77,74],[68,_,71,_,76,_,74,71],
+    [69,72,76,81,_,80,_,76],[77,_,72,_,69,_,72,_],[74,_,77,_,76,_,68,71],[69,_,_,_,64,_,69,_],
+    [69,_,71,72,_,_,76,_],[77,_,_,76,77,_,72,_],[74,76,77,_,81,_,77,_],[76,_,_,68,71,_,76,_],
+    [72,71,69,_,76,_,81,_],[81,_,79,77,72,_,69,_],[74,_,77,_,76,74,71,68],[69,_,_,_,_,_,_,_]
+  ];
+  const CH={Am:{b:[45,52],p:[57,60,64]},F:{b:[41,48],p:[57,60,65]},Dm:{b:[38,45],p:[57,62,65]},E:{b:[40,47],p:[56,59,64]}};
+  const PROG=[["Am"],["F"],["Dm"],["E"],["Am"],["F"],["Dm","E"],["Am"]];
+  let M=null;
+  function pulse(){ if(!red) pulseEl.animate([{transform:"scale(1)"},{transform:"scale(1.06)",offset:.2},{transform:"scale(1)"}],{duration:520,easing:"ease-out"}); }
+  function voice(type,f){ const o=M.c.createOscillator(); o.type=type; o.frequency.value=f; M.count++; return o; }
+  function env(g,t,v,att,tau,end){ g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(v,t+att); g.gain.setTargetAtTime(0,t+att,tau); return end; }
+  function pluck(f,t,v,dest){ // pizzicato: triángulo + un poco de sierra, filtro que se cierra rápido
+    const c=M.c, g=c.createGain(), lp=c.createBiquadFilter(), s=c.createGain(), o=voice("triangle",f), o2=voice("sawtooth",f);
+    lp.type="lowpass"; lp.Q.value=0.8; lp.frequency.setValueAtTime(Math.min(9000,f*7),t); lp.frequency.exponentialRampToValueAtTime(Math.max(300,f*1.5),t+0.22);
+    s.gain.value=0.22; o2.connect(s).connect(lp); o.connect(lp); lp.connect(g).connect(dest);
+    const end=env(g,t,v,0.005,0.07,t+0.55); o.start(t); o2.start(t); o.stop(end); o2.stop(end);
   }
-  function pulse(){ if(!red) pulseEl.animate([{transform:"scale(1)"},{transform:"scale(1.07)",offset:.18},{transform:"scale(1)",offset:.4},{transform:"scale(1.04)",offset:.55},{transform:"scale(1)"}],{duration:620,easing:"ease-out"}); }
-  function startSuspense(){
-    if(S) return; const c=APP.audio.ensure(); if(!c) return;
-    const t=c.currentTime, out=c.createGain();
-    out.gain.setValueAtTime(0,t); out.gain.linearRampToValueAtTime(APP.audio.muted?0:1,t+1.5); out.connect(c.destination);
-    const dg=c.createGain(); dg.gain.value=0.03; dg.connect(out);
-    const oscs=[];
-    [[98,147,"triangle"],[147,220,"sine"]].forEach(([f0,f1,ty])=>{ const o=c.createOscillator(); o.type=ty; o.frequency.setValueAtTime(f0,t); o.frequency.linearRampToValueAtTime(f1,t+50); o.connect(dg); o.start(t); oscs.push(o); });
-    const lfo=c.createOscillator(), lg=c.createGain(); lfo.frequency.setValueAtTime(3,t); lfo.frequency.linearRampToValueAtTime(8,t+50); lg.gain.value=0.022; lfo.connect(lg).connect(dg.gain); lfo.start(t); oscs.push(lfo);
-    const id=++sid; S={c,out,oscs,id,period:1150};
-    const beat=()=>{
-      if(!S||S.id!==id) return;
-      const now=c.currentTime;
-      S.out.gain.setTargetAtTime(APP.audio.muted?0:1,now,0.05);
-      thump(c,out,now+0.02,0.5); thump(c,out,now+0.26,0.32); pulse();
-      S.period=Math.max(640,S.period*0.975); tm.set(beat,S.period);
-    };
-    tm.set(beat,400);
+  function bass(f,t,v){
+    const c=M.c, g=c.createGain(), lp=c.createBiquadFilter(), o=voice("triangle",f);
+    lp.type="lowpass"; lp.frequency.setValueAtTime(f*8,t); lp.frequency.exponentialRampToValueAtTime(f*2,t+0.25);
+    o.connect(lp).connect(g).connect(M.bus); const end=env(g,t,v,0.008,0.11,t+0.8); o.start(t); o.stop(end);
   }
-  function stopSuspense(fade){
-    if(!S) return; const {c,out,oscs}=S; S=null;
-    const t=c.currentTime;
-    try{ out.gain.cancelScheduledValues(t); out.gain.setValueAtTime(out.gain.value,t); out.gain.linearRampToValueAtTime(0,t+fade); }catch(e){}
-    oscs.forEach(o=>{ try{o.stop(t+fade+0.05);}catch(e){} });
-    if(fade<0.1) try{out.disconnect();}catch(e){}
+  function pad(notes,t,dur){
+    const c=M.c, lp=c.createBiquadFilter(), g=c.createGain(); lp.type="lowpass"; lp.frequency.value=1000; lp.connect(g).connect(M.bus);
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(1,t+0.3); g.gain.setValueAtTime(1,t+dur-0.06); g.gain.setTargetAtTime(0,t+dur-0.06,0.14);
+    const end=t+dur+1;
+    notes.forEach(m=>[-5,5].forEach(cents=>{ const o=voice("triangle",mf(m)), og=c.createGain(); o.detune.value=cents; og.gain.value=0.011; o.connect(og).connect(lp); o.start(t); o.stop(end); }));
+  }
+  function wood(f,t,v,tau){ // tic / tac de reloj
+    const c=M.c, g=c.createGain(), o=voice("sine",f);
+    o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*0.82,t+0.04);
+    o.connect(g).connect(M.bus); const end=env(g,t,v,0.002,tau,t+0.15); o.start(t); o.stop(end);
+  }
+  function shaker(t,v){
+    const c=M.c, src=c.createBufferSource(), hp=c.createBiquadFilter(), g=c.createGain(); M.count++;
+    src.buffer=M.noise; hp.type="highpass"; hp.frequency.value=5500; src.connect(hp).connect(g).connect(M.bus);
+    const end=env(g,t,v,0.006,0.018,t+0.1); src.start(t); src.stop(end);
+  }
+  function bell(f,t,v){
+    const c=M.c, g=c.createGain(), o=voice("sine",f), o2=voice("sine",f*2), g2=c.createGain(); g2.gain.value=0.25;
+    o.connect(g); o2.connect(g2).connect(g); g.connect(M.mel); const end=env(g,t,v,0.003,0.3,t+1.8); o.start(t); o2.start(t); o.stop(end); o2.stop(end);
+  }
+  function playSlot(i,t){
+    const bar=i>>3, s=i&7, secB=bar>=8, pb=PROG[bar&7], ts=t+((s&1)?SWING:0);
+    const m=MEL[bar][s]; if(m!=null) pluck(mf(m),ts,s===0?0.11:0.085,M.mel);
+    if(pb.length===1){ if(s===0) pad(CH[pb[0]].p,t,8*EIGHTH); }
+    else{ if(s===0) pad(CH[pb[0]].p,t,4*EIGHTH); if(s===4) pad(CH[pb[1]].p,t,4*EIGHTH); }
+    if(s===0) bass(mf(CH[pb[0]].b[0]),t,0.15);
+    if(s===4) bass(mf(pb.length>1?CH[pb[1]].b[0]:CH[pb[0]].b[1]),t,0.12);
+    if(secB&&s===7&&bar!==15) bass(mf(CH[pb[pb.length-1]].b[0]+12),ts,0.06);
+    if(s===0||s===4) wood(620,t,0.05,0.018); else if(s===2||s===6) wood(1250,t,0.035,0.011);
+    if(secB&&(s&1)) shaker(ts,0.025);
+    if(bar===15&&s===4) bell(mf(88),t,0.045); if(bar===15&&s===6) bell(mf(93),t,0.04);
+    if(s===0) tm.set(pulse,Math.max(0,(t-M.c.currentTime)*1000));
+  }
+  function tick(){
+    if(!M) return; const c=M.c, now=c.currentTime;
+    const want=APP.audio.muted?0:1; if(want!==M.mute){ M.mute=want; M.mg.gain.setTargetAtTime(want,now,0.05); }
+    if(M.next<now-0.2){ const n=Math.ceil((now-M.next)/EIGHTH); M.slot+=n; M.next+=n*EIGHTH; } // si la pestaña se durmió, no recuperar notas atrasadas
+    while(M.next<now+LOOK){ playSlot(M.slot%128,M.next); M.slot++; M.next+=EIGHTH; }
+    APP.store.misterioMusic={playing:true,nodes:M.count,slot:M.slot};
+  }
+  function startMusic(){
+    if(M) return; const c=APP.audio.ensure(); if(!c) return;
+    const now=c.currentTime, out=c.createGain(), mg=c.createGain(), bus=c.createGain(), mel=c.createGain();
+    out.gain.setValueAtTime(0,now); out.gain.linearRampToValueAtTime(VOL,now+2.5);
+    mg.gain.value=APP.audio.muted?0:1;
+    const dl=c.createDelay(1), fb=c.createGain(), wlp=c.createBiquadFilter(), wet=c.createGain();
+    dl.delayTime.value=EIGHTH*1.5; fb.gain.value=0.28; wlp.type="lowpass"; wlp.frequency.value=2600; wet.gain.value=0.22;
+    mel.connect(bus); mel.connect(dl); dl.connect(fb).connect(dl); dl.connect(wlp).connect(wet).connect(bus);
+    bus.connect(mg).connect(out).connect(c.destination);
+    const len=Math.floor(c.sampleRate*0.1), noise=c.createBuffer(1,len,c.sampleRate), d=noise.getChannelData(0);
+    for(let k=0;k<len;k++) d[k]=Math.random()*2-1;
+    M={c,out,mg,bus,mel,noise,mute:APP.audio.muted?0:1,slot:0,next:now+0.1,count:0,all:[out,mg,bus,mel,dl,fb,wlp,wet]};
+    M.iv=setInterval(tick,TICK_MS); tick();
+  }
+  function stopMusic(fade){
+    if(!M) return; const m=M; M=null; clearInterval(m.iv);
+    const t=m.c.currentTime;
+    try{ m.out.gain.cancelScheduledValues(t); m.out.gain.setValueAtTime(m.out.gain.value,t); m.out.gain.linearRampToValueAtTime(0,t+fade); }catch(e){}
+    setTimeout(()=>m.all.forEach(n=>{ try{n.disconnect();}catch(e){} }),(fade+0.25)*1000); // notas ya agendadas terminan solas (≤2 s)
+    APP.store.misterioMusic={playing:false,nodes:m.count,slot:m.slot};
   }
   function taDa(){ const a=APP.audio; a.tone(523,0.14,"triangle",0.12); a.tone(659,0.14,"triangle",0.12,0.13); a.tone(784,0.6,"triangle",0.13,0.26); a.tone(1047,0.7,"sine",0.05,0.26); }
 
@@ -111,16 +171,16 @@ SC.push({id:"misterio",title:"¿Qué pasará?",order:5,mount(box,APP){
   root.addEventListener("click",()=>APP.next());
   return {
     next(){
-      if(st===0){ set(1); startSuspense(); return true; }
-      if(st===1){ set(2); stopSuspense(0.5); taDa(); return true; }
+      if(st===0){ set(1); startMusic(); return true; }
+      if(st===1){ set(2); stopMusic(0.6); taDa(); return true; }
       return false;
     },
     prev(){
-      if(st===2){ set(1); startSuspense(); return true; }
-      if(st===1){ set(0); stopSuspense(0.4); return true; }
+      if(st===2){ set(1); startMusic(); return true; }
+      if(st===1){ set(0); stopMusic(0.5); return true; }
       return false;
     },
-    destroy(){ stopSuspense(0.05); tm.clear(); }
+    destroy(){ stopMusic(0.08); tm.clear(); }
   };
 }});
 
@@ -157,15 +217,6 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   .fx-swap{position:absolute;left:22px;bottom:20px;width:62px;height:62px;border-radius:50%;border:none;background:rgba(31,42,68,.07);cursor:pointer;opacity:.45;padding:9px}
   .fx-swap:hover,.fx-swap:focus-visible{opacity:1}
   .fx-swap svg{width:100%;height:100%;display:block}
-  .fx-vid{position:absolute;inset:0;z-index:30;background:radial-gradient(circle at 50% 55%,#FFF8EA 0,#F4E6CC 70%,#E9D4AE 100%);display:none}
-  .fx-vid.on{display:block;animation:fxVidIn .5s cubic-bezier(.3,1.3,.5,1) both}
-  @keyframes fxVidIn{from{opacity:0;transform:scale(.94)}}
-  .fx-vid h1{position:absolute;left:0;right:0;top:44px;margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:96px;line-height:1;color:var(--ink)}
-  .fx-vid h1 b{color:var(--orange);font-weight:700}
-  .fx-vframe{position:absolute;left:50%;top:180px;width:1440px;height:852px;margin-left:-720px;box-sizing:border-box;padding:24px;background:#FFFDF7;border-radius:22px;transform:rotate(-1deg);box-shadow:0 10px 0 rgba(90,74,48,.14),0 24px 50px rgba(90,74,48,.28)}
-  .fx-vframe::before,.fx-vframe::after{content:"";position:absolute;top:-24px;width:200px;height:52px;background:rgba(242,194,48,.78);border-radius:4px;z-index:2}
-  .fx-vframe::before{left:80px;transform:rotate(-6deg)}.fx-vframe::after{right:80px;transform:rotate(5deg)}
-  .fx-vframe video{display:block;width:1392px;height:804px;object-fit:contain;background:#1F2A44;border-radius:12px;cursor:pointer}
   @media (prefers-reduced-motion:reduce){.fx *{animation:none!important}}
   `));
   const root=el("div",{class:"fx"}); box.append(root);
@@ -194,18 +245,6 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   const swap=el("button",{class:"fx-swap",title:"Cambiar nombres de ingredientes (tecla I)","aria-label":"Cambiar nombres de ingredientes",
     html:`<svg viewBox="0 0 48 48"><path d="M10 18 A15 15 0 0 1 38 14" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M38 6 V15 H29" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 30 A15 15 0 0 1 10 34" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M10 42 V33 H19" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`});
   root.append(cv,left,cup1,cup2,soapB,swap);
-  /* Paso opcional: vídeo de las familias (EXPERIMENT_VIDEO). Solo existe si el archivo carga; si no, se salta. */
-  let vidOK=false;
-  const video=el("video",{preload:"auto",playsinline:true,"aria-label":"Vídeo: así preparasteis el experimento en casa"});
-  video.addEventListener("loadeddata",()=>{ vidOK=true; });
-  video.addEventListener("error",()=>{ vidOK=false; });
-  video.addEventListener("click",ev=>{ ev.stopPropagation(); if(video.paused){ const p=video.play(); if(p&&p.catch) p.catch(()=>{}); } else video.pause(); });
-  const vidBox=el("div",{class:"fx-vid"},el("h1",{html:"¡Así lo hicisteis <b>en casa</b>!"}),el("div",{class:"fx-vframe"},video));
-  root.append(vidBox);
-  try{ video.src=EXPERIMENT_VIDEO; }catch(e){ vidOK=false; }
-  function showVid(){ vidBox.classList.add("on"); fizz(0); try{ video.currentTime=0; }catch(e){} const p=video.play(); if(p&&p.catch) p.catch(()=>{}); }
-  function hideVid(){ vidBox.classList.remove("on"); try{ video.pause(); }catch(e){} fizz(0.045); }
-
   /* ---- Mundo: bote, líquido, burbujas, espuma ---- */
   const JX0=1170,JX1=1610,JXC=1390,JTOP=390,JBOT=910,WALL=14,LIQ=170,TLMAX=JBOT+16-JTOP;
   const COLS=["#29ABE2","#F7931E","#7AC143","#E59AAE"];
@@ -427,12 +466,9 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
   root.addEventListener("click",()=>APP.next());
   enter(1);
   return {
-    next(){ if(step<3){ pourTm.clear(); step++; enter(1); return true; }
-      if(step===3&&vidOK){ step=4; showVid(); return true; } return false; },
-    prev(){ if(step===4){ step=3; hideVid(); return true; }
-      if(step>0){ pourTm.clear(); step--; enter(-1); return true; } return false; },
-    destroy(){ cancelAnimationFrame(raf); tm.clear(); pourTm.clear(); fizzStop(); window.removeEventListener("keydown",onKey);
-      try{ video.pause(); video.removeAttribute("src"); video.load(); }catch(e){} }
+    next(){ if(step<3){ pourTm.clear(); step++; enter(1); return true; } return false; },
+    prev(){ if(step>0){ pourTm.clear(); step--; enter(-1); return true; } return false; },
+    destroy(){ cancelAnimationFrame(raf); tm.clear(); pourTm.clear(); fizzStop(); window.removeEventListener("keydown",onKey); }
   };
 }});
 
@@ -656,7 +692,7 @@ const AMB=[
         <circle cx="222" cy="78" r="40" fill="#F7931E" %F%/><circle cx="208" cy="66" r="8" fill="#E07E10"/><circle cx="234" cy="94" r="6" fill="#E07E10"/>
         <ellipse cx="222" cy="78" rx="66" ry="14" fill="none" stroke="#F2C230" stroke-width="8" transform="rotate(-18 222 78)"/>
         <g class="am-fly"><g transform="translate(92 120) rotate(40)"><path class="am-flame" d="M-13 40 Q0 84 13 40 Z" fill="#F7931E"/><path d="M-20 40 L-20 -8 Q0 -60 20 -8 L20 40 Z" fill="#FFFDF7" %F%/><circle cx="0" cy="-4" r="9" fill="#29ABE2"/><path d="M-20 14 L-36 46 L-20 40Z" fill="#E04B3A"/><path d="M20 14 L36 46 L20 40Z" fill="#E04B3A"/></g></g>`},
-  {k:"chem",short:"Química",name:"La química",phr:"Mezclas y colores",ex:"Inventaron los colores de tus rotuladores",col:"#9B6BD3",bg:"#F3E8FB",
+  {k:"chem",short:"Química",name:"La química",phr:"Mezclas y colores",ex:"Inventaron los colores de sus rotuladores",col:"#9B6BD3",bg:"#F3E8FB",
    ill:`<path d="M110 26 H152 V74 L194 160 Q200 178 182 178 H80 Q62 178 68 160 L110 74 Z" fill="#E3F4FB" %F%/>
         <path class="am-hue" d="M90 118 H172 L190 160 Q194 172 182 172 H80 Q68 172 72 160 Z" fill="#9B6BD3"/>
         ${[[118,150,6,0],[136,160,8,.7],[154,148,5,1.3],[130,140,4,1.9]].map(([x,y,r,d])=>`<circle class="am-rise" style="animation-delay:${d}s" cx="${x}" cy="${y}" r="${r}" fill="#fff"/>`).join("")}
@@ -1073,12 +1109,12 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
   /* ---------- niveles ---------- */
   const mk=(...kids)=>{ const d=el("div",{class:"mt-L"}); kids.forEach(k=>d.append(typeof k==="string"?APP.svg(k):k)); root.append(d); return d; };
   const LV=[
-    {el:mk(L0),focal:[770,700],ban:"Tú estás hecho de…",zoom:"×1"},
+    {el:mk(L0),focal:[770,700],ban:"Ustedes están hechos de…",zoom:"×1"},
     {el:mk(L1),focal:L1focal,ban:"¡Millones de <b>células</b>!",zoom:"×100",trans:"zoom"},
     {el:mk(L2),focal:[1000,600],ban:"Una célula… ¡y su <b>núcleo</b>!",zoom:"×1.000",trans:"zoom"},
     {el:mk(L3bg,helixCv),focal:[960,630],ban:()=>{ const f=document.createDocumentFragment(); f.append(APP.svg(book),el("span",{html:"El ADN: un <b>libro de instrucciones</b>"})); return f; },zoom:"×100.000",trans:"zoom"},
     {el:mk(L4bg,...bonds,...topT,...botT,legend),focal:[960,600],ban:"Escrito con <b>solo 4 letras</b>",zoom:"×1.000.000",trans:"zoom",letters:true},
-    {el:mk(LIBbg,libCount,...cases,libPill),ban:"Tu ADN tiene <b>muchísimas</b> letras…",trans:"slide",lib:true},
+    {el:mk(LIBbg,libCount,...cases,libPill),ban:"Su ADN tiene <b>muchísimas</b> letras…",trans:"slide",lib:true},
     {el:mk(L5bg,strip,handle,mag),ban:"Yo estudio <b>estas letras</b>",trans:"slide"},
     {el:mk(L7bg,rainCv,nn),ban:"…y lo combino con la <b>inteligencia artificial</b>",two:true,trans:"slide"}
   ];

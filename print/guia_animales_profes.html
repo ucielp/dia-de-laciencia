@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Guía de los 5 animales</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:9mm 12mm}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Nunito Sans",sans-serif;font-size:10pt;color:#1F2A44;background:#fff}
+h1{font-family:Fredoka;font-weight:700;font-size:21pt;margin:0}
+h1 span{color:#8E6CC4}
+.sub{margin:1mm 0 3mm;color:#4A5265}
+.rule{background:#F3EEFA;border:1.2pt dashed #8E6CC4;border-radius:3mm;padding:2mm 4mm;margin-bottom:3mm;font-size:10pt}
+.row{display:grid;grid-template-columns:36mm 1fr;gap:4mm;border:1.2pt solid #E7E0D0;border-radius:4mm;padding:1.8mm 3.5mm;margin-bottom:2mm;break-inside:avoid;background:#FFFDF7}
+.who{display:flex;flex-direction:column;align-items:center;text-align:center}
+.who .ic svg{width:21mm;height:auto;display:block}
+.who b{font-family:Fredoka;font-weight:700;font-size:12.5pt;margin-top:-1mm}
+.n{display:inline-block;font-family:Fredoka;font-weight:700;font-size:10pt;color:#fff;background:#8E6CC4;border-radius:99px;padding:.3mm 3mm;margin-bottom:1mm}
+.q{font-family:Fredoka;font-weight:600;font-size:12.5pt;margin:0 0 1mm}
+.q em{font-style:normal;color:#F7931E}
+.mates{display:flex;flex-wrap:wrap;gap:1.6mm 3mm;margin:1mm 0 1.4mm}
+.m{display:flex;align-items:center;gap:1.2mm;background:#fff;border:1pt solid #E7E0D0;border-radius:2.5mm;padding:.6mm 2mm .6mm .8mm;font-weight:700;font-size:9.5pt}
+.m svg{width:9mm;height:auto}
+.m i{font-style:normal;font-family:Fredoka;color:#fff;background:#F7931E;border-radius:99px;padding:0 1.6mm;font-size:9pt}
+.strip{display:flex;gap:.8mm;margin-top:1mm}
+.strip span{width:5.6mm;height:5.6mm;border-radius:1.2mm;color:#fff;font-family:Fredoka;font-weight:700;font-size:9pt;display:flex;align-items:center;justify-content:center}
+.say{margin:.6mm 0 0;font-size:10pt}
+.say b{color:#1F2A44}
+.say:before{content:"Decir: ";font-weight:700;color:#7AC143}
+.foot{font-size:8.5pt;color:#6D6E71;margin-top:2mm}
+</style></head><body>
+<script>document.addEventListener("DOMContentLoaded",function(e){e.stopPropagation();});</script>
+<script src="../app/core.js"></script>
+<script src="../app/art/species.js"></script>
+<script src="../app/data/tree.js"></script>
+
+<h1>Los 5 animales que guarda <span>el adulto</span></h1>
+<p class="sub">Actividad 2 · Guía para las profes. Primero los niños se juntan en parejas (1 diferencia). Después se sacan estos carteles, <b>uno a uno y en este orden</b>.</p>
+<div class="rule"><b>Cómo se hace:</b> 1) levantar el cartel bien alto · 2) preguntar «¿Quién tiene <b>N</b> diferencias con…?» · 3) los grupos que lo tienen levantan la mano · 4) el animal se va con ellos. La pantalla muestra lo mismo.</div>
+<div id="list"></div>
+<p class="foot">Las 5 parejas de los niños: humano + chimpancé · perro + lobo · gato + león · ballena + hipopótamo · gallina + pingüino. Colores: A azul · T rojo · G verde · C naranja.</p>
+
+<script>
+(function(){
+const T=window.TREE, SP=window.SPECIES, COL={A:"#2F6BD8",T:"#E0245E",G:"#1E9A57",C:"#F28A1E"};
+const name=id=>T.names[id], icon=id=>SP.find(s=>s.id===id).svg({label:name(id)});
+const d=(a,b)=>[...T.dna[a]].filter((c,i)=>c!==T.dna[b][i]).length;
+const strip=id=>`<div class="strip">${[...T.dna[id]].map(c=>`<span style="background:${COL[c]}">${c}</span>`).join("")}</div>`;
+const mates=(id,list)=>`<div class="mates">${list.map(o=>`<div class="m">${icon(o)}${name(o)} <i>${d(id,o)}</i></div>`).join("")}</div>`;
+const mam=["humano","chimpance","perro","lobo","gato","leon","ballena","hipopotamo"];
+const all=["humano","chimpance","perro","lobo","gato","leon","ballena","hipopotamo","murcielago","gallina","pinguino","trex","cocodrilo"];
+const R=[
+ {id:"murcielago",q:"¿Quién tiene <em>2 diferencias</em> con el murciélago?",with:mam,
+  say:"<b>Todos los mamíferos.</b> El murciélago es un mamífero: se parece a todos, pero no tanto como perro y lobo (que tienen solo 1)."},
+ {id:"trex",q:"¿Quién tiene <em>2 diferencias</em> con el T-rex?",with:["gallina","pinguino"],
+  say:"<b>La gallina y el pingüino.</b> ¡Las aves son dinosaurios!"},
+ {id:"cocodrilo",q:"¿Quién tiene <em>3 diferencias</em> con el cocodrilo?",with:["gallina","pinguino","trex"],
+  say:"<b>Gallina, pingüino y T-rex.</b> El cocodrilo es primo de las aves y de los dinosaurios."},
+ {id:"rana",q:"La rana: tiene <em>4 o más</em> con todos",with:null,
+  say:"<b>Con nadie de cerca.</b> Está más lejos de todos: es un anfibio. Se pone al lado de todo el grupo."},
+ {id:"tiburon",q:"El tiburón: tiene <em>5 o más</em> con todos",with:null,
+  say:"<b>El más lejano de todos.</b> Es un pez. ¡Y así queda el árbol completo!"}
+];
+document.getElementById("list").innerHTML=R.map((r,i)=>`<div class="row">
+  <div class="who"><span class="n">${i+1}º</span><div class="ic">${icon(r.id)}</div><b>${name(r.id)}</b>${strip(r.id)}</div>
+  <div><p class="q">${r.q}</p>${r.with?mates(r.id,r.with):`<p style="margin:0 0 1mm">Distancia mínima: ${Math.min(...all.filter(x=>x!==r.id).map(x=>d(r.id,x)))} diferencias.</p>`}<p class="say">${r.say}</p></div></div>`).join("");
+})();
+</script>
+</body></html>

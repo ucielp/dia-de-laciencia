@@ -1,6 +1,6 @@
 /* Escena 90 · cierre */
 (window.SCENES=window.SCENES||[]).push({
-  id:"cierre", title:"¡Hoy habéis sido científicos!", order:90,
+  id:"cierre", title:"¡Hoy han sido científicos!", order:90,
   mount(box,APP){
     const {el,T,GOMET,dog,audio}=APP;
     box.append(el("style",{text:`
@@ -28,7 +28,7 @@
       @media (prefers-reduced-motion:reduce){.ci-track,.ci-conf,.ci-i{animation:none}}
     `}));
     const root=el("div",{class:"ci"});
-    root.append(el("h1",{class:"ci-h",html:"¡Hoy habéis sido <span>científicos</span>!"}));
+    root.append(el("h1",{class:"ci-h",html:"¡Hoy han sido <span>científicos</span>!"}));
     const icon1=APP.paperSVG([APP.C(100,96,58,T.blue),APP.R(84,150,32,30,8,"#B7BCC9"),APP.P("M100 62 Q122 62 122 84 Q122 100 104 106 L104 120 L96 120 L96 100 Q112 96 112 84 Q112 72 100 72 Q88 72 88 84 L78 84 Q78 62 100 62 Z","#FFFFFF"),APP.C(100,134,7,"#FFFFFF")],{vb:"20 20 160 170"});
     const icon2=APP.paperSVG([APP.R(36,40,128,124,22,"#FFFFFF"),APP.R(56,64,88,14,7,T.orange),APP.C(64,110,14,GOMET.rojo),APP.C(100,110,14,GOMET.azul),APP.C(136,110,14,GOMET.amarillo),APP.R(56,138,60,10,5,"#E7E0D0")],{vb:"20 20 160 160"});
     const icon3=APP.paperSVG([APP.L("M100 170 L100 110 M100 110 L56 64 M100 110 L144 64 M56 64 L36 36 M56 64 L76 36 M144 64 L124 36 M144 64 L164 36","#8C6A4A",10),APP.C(36,36,13,T.green),APP.C(76,36,13,T.green),APP.C(124,36,13,T.orange),APP.C(164,36,13,T.orange)],{vb:"10 10 180 175"});

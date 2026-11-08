@@ -68,7 +68,7 @@ const reveals=[
    a:"¡Gallina, pingüino y T-rex tienen 3!",
    msg:"El cocodrilo es primo de las aves y los dinosaurios."},
   {id:"rana",ask:4,min:true,nodes:["amn","tetra"],
-   q:"¿Y la <b>rana</b>? ¿Cuántas diferencias tiene con vosotros?",
+   q:"¿Y la <b>rana</b>? ¿Cuántas diferencias tiene con ustedes?",
    a:"¡<b>4 o más</b> con todos!",
    msg:"La rana está más lejos: es un <b>anfibio</b>."},
   {id:"tiburon",ask:5,min:true,nodes:["vert"],

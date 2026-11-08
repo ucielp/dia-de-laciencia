@@ -7,7 +7,7 @@ App de una sola página para el proyector, clase de ciencia para 52 niños de 6�
 |---|---|
 | `index.html`, `core.js` | coordinador (ya existen: LEERLOS antes de empezar) |
 | `scenes/portada.js`, `scenes/perro.js`, `scenes/cierre.js` | coordinador |
-| `scenes/ciencia.js` | agente «ciencia» |
+| `scenes/ciencia.js`, `scenes/video.js` | agente «ciencia» |
 | `art/species.js`, `data/tree.js`, `scenes/familia.js` | agente «familia» |
 | `data/notes.js`, `../guion_clase.md` | agente «guion» |
 
@@ -37,13 +37,14 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 ```
 - Navegación: flechas ←/→, espacio, PageUp/PageDown (mando de presentaciones). Cada pulsación llama a `next()` de la escena; si devuelve `false`, pasa a la siguiente escena. Usa pasos internos para ir revelando cosas (máx. ~6 pasos por escena).
 - Clicks en elementos de la escena también deben funcionar (el presentador puede usar ratón).
+- Escena opcional: `available(APP)` (opcional) devuelve `true/false` o una `Promise<boolean>`; `core.js` la comprueba al arrancar y, si no es `true`, la escena queda fuera de la navegación y de los puntos.
 - `destroy()` debe limpiar `setInterval`, `requestAnimationFrame` y listeners en `window/document`.
 
 ## Orden global de escenas (v2, tras la revisión del presentador)
 | order | id | Contenido | Archivo |
 |---|---|---|---|
-| 5 | misterio | Pantalla casi vacía: un «?» gigante y sonido de suspense mientras el presentador hace el experimento de la espuma EN SILENCIO. Al pulsar: «¿Qué ha pasado?» | ciencia.js |
-| 8 | experimento | Explicación animada del experimento de la espuma (dos ingredientes → gas → el jabón atrapa el gas en burbujas → espuma). Sustituye a la pimienta | ciencia.js |
+| 5 | misterio | Pantalla casi vacía: un «?» gigante y música de misterio en bucle (sintetizada; empieza con la 1.ª pulsación) mientras el presentador hace el experimento de la espuma EN SILENCIO. Al pulsar: «¿Qué ha pasado?» | ciencia.js |
+| 8 | experimento | Explicación animada del experimento de la espuma (dos ingredientes → gas → el jabón atrapa el gas en burbujas → espuma). Sustituye a la pimienta. Ya NO lleva el paso del vídeo | ciencia.js |
 | 9 | metodo | Método científico (ciclo de 5 pasos) | ciencia.js |
 | 25 | no-solo | «La ciencia es mucho más que experimentos» (transición) | ciencia.js |
 | 30 | ambitos | ¿Qué hace la ciencia? tarjetas; las DOS ÚLTIMAS son medicina y ordenadores/IA; hay una de historia | ciencia.js |
@@ -53,17 +54,20 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 | 50 | receta | El ADN es una receta (ejemplo: panellets) → la receta del perro (3 gomets) | perro.js |
 | 52 | familia-perro | Historia: mamá perra y papá perro → los cachorros reciben cada parte de mamá o de papá. Nos parecemos a nuestros padres | perro.js |
 | 55 | como-buscar | Cómo se hace la actividad 1 (aquí se para y se hace la actividad) | perro.js |
+| 57 | actividad-1 | Separador «¡A trabajar! Actividad 1: descubran su perro» (aquí se para y se hace la actividad; sin pasos) | perro.js |
 | 60 | laboratorio | Laboratorio de perros: clic en 3 colores → perro | perro.js |
 | 70 | parientes | ¿Quién es pariente de quién? | familia.js |
 | 75 | busca-familia | Instrucciones actividad 2 (10 grupos, parejas) | familia.js |
+| 77 | actividad-2 | Separador «¡A jugar! Actividad 2: busquen a su pareja» (aquí se hace la actividad; sin pasos) | familia.js |
 | 80 | arbol | Árbol: parejas + el adulto saca murciélago, T-rex, cocodrilo, rana, tiburón | familia.js |
-| 90 | cierre | Hoy habéis sido científicos | cierre.js |
+| 90 | cierre | ¡Hoy han sido científicos! | cierre.js |
+| 95 | video | OPCIONAL: «¡Así lo preparamos en casa!», vídeo `video/experimento.mp4` en bucle (clic = pausa). Si el archivo no existe, la escena no aparece y todo termina en cierre | video.js |
 
 ## Colores de las bases del ADN (modelo físico que estará a la vista)
 A = azul `#2F6BD8` · T = rojo frambuesa `#E0245E` · G = verde `#1E9A57` · C = naranja `#F28A1E`. Cada casilla de ADN se dibuja con su color **y su letra en blanco** (así no se confunde con los gomets redondos de los perros: rojo/azul/amarillo).
 
 ## Sonido
-Menos sonidos: solo en momentos clave (ladrido al aparecer un perro, revelaciones grandes, suspense del experimento, final). Nada de pop/click en cada paso.
+Menos sonidos: solo en momentos clave (ladrido al aparecer un perro, revelaciones grandes, música de misterio del experimento, final). Nada de pop/click en cada paso.
 
 ## API disponible: `window.APP` (ver core.js)
 - `APP.el(tag, attrs, ...hijos)` — crea elementos (`style` objeto, `class`, `html`, `onclick`...).
