@@ -31,7 +31,7 @@ window.NOTES = {
 
   portada:
     "«¿Y yo?» (pausa) «Soy Uciel… ¡y soy científico!» (Señala la foto.)\n\n" +
-    "«Mi ciencia mezcla un poco de medicina y un poco de ordenadores.»\n\n" +
+    "(→) «Mi ciencia mezcla dos cosas: la biomedicina… y la inteligencia artificial.» (salen las dos tarjetas)\n\n" +
     "Ensayar la señal de silencio: «¡Científicos!» → «¡A observar!» + mano arriba. Luego → mi equipo.",
 
   equipo:
@@ -47,8 +47,8 @@ window.NOTES = {
 
   receta:
     "«Una receta dice cómo hacer algo: los panellets llevan almendra, azúcar, huevo y piñones. Vuestro ADN es la receta de vosotros.»\n\n" +
-    "(→) «El ADN es muy largo y tiene trozos. Un trozo decide el color del pelo, otro la forma de las orejas, otro el color de los ojos… ¡y muchas cosas más!»\n\n" +
-    "(→) «Nuestros perros son más sencillos: su ADN solo tiene 3 trozos = 3 gomets: orejas, cuerpo (el pelo) y cola.»\n\n" +
+    "(→ sale la receta de una persona.) (→ cada clic, un trozo) «El ADN es muy largo y tiene trozos. Un trozo decide el color del pelo, otro la forma de las orejas, otro el color de los ojos… ¡y muchas cosas más!»\n\n" +
+    "(→ y un clic por trozo) «Nuestros perros son más sencillos: su ADN solo tiene 3 trozos = 3 gomets: orejas, cuerpo (el pelo) y cola.»\n\n" +
     "(→) «Cada color es una pieza distinta: rojo, azul o amarillo.»",
 
   "familia-perro":

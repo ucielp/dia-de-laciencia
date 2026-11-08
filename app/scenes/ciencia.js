@@ -679,6 +679,8 @@ const AMB=[
    ill:`<rect x="52" y="24" width="196" height="134" rx="16" fill="#2A3550" %F%/><rect x="66" y="38" width="168" height="106" rx="8" fill="#16203A"/>${iaNet()}
         <rect x="135" y="158" width="30" height="16" fill="#6D6E71"/><rect x="98" y="172" width="104" height="14" rx="7" fill="#6D6E71" %F%/>`}
 ];
+window.CIENCIA_ART={paper,AMB}; // lo usa portada.js («Mi ciencia mezcla…»)
+
 SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   const {el}=APP, red=APP.reduced(), tm=timers();
   box.append(styleEl(APP,`

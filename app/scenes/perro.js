@@ -133,13 +133,13 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
       col.style.setProperty("--c",c.color);
       col.querySelector(".rc-t").style.setProperty("--c",c.color);
       stage.append(col);
-      if(APP.reduced()) return;
-      col.style.opacity=0;
-      later(()=>{col.style.opacity=1;col.classList.add("pz-in");},300+i*700);
+      col.style.visibility="hidden"; items.push(col);   // se revelan con cada clic
     });
   }
-  function render(){
-    timers.forEach(clearTimeout); timers=[]; stage.replaceChildren();
+  let items=[], rsub=0;   // elementos que se revelan uno a uno con cada clic
+  function reveal(n){ rsub=n; items.forEach((it,i)=>{ const on=i<n; it.style.visibility=on?"visible":"hidden"; it.classList.toggle("pz-in",on&&!APP.reduced()); }); }
+  function render(full){
+    timers.forEach(clearTimeout); timers=[]; stage.replaceChildren(); items=[];
     if(step===0){
       title.innerHTML="Tu ADN es una <span>receta</span>"; sub.textContent="Una receta dice cómo hacer algo. Tu ADN dice cómo eres tú.";
       const card=el("div",{class:"rc-card rc-pan pz-in",style:{left:"110px",top:"0px",width:"740px",padding:"40px 50px"}},
@@ -150,7 +150,9 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
       const card2=el("div",{class:"rc-card pz-in",style:{left:"1030px",top:"0px",width:"780px",padding:"40px 60px",animationDelay:APP.reduced()?"0s":".35s"}},
         el("p",{class:"rc-big",text:"Receta de una persona"}),
         el("div",{class:"rc-dna"},...seq.map(b=>el("i",{text:b,style:{background:BASES[b]}}))));
-      stage.append(card,el("div",{class:"rc-arrow",text:"→"}),card2);
+      card2.style.animationDelay="0s";
+      const arr=el("div",{class:"rc-arrow",text:"→"});
+      stage.append(card,arr,card2); items.push(arr,card2);
     } else if(step===1){
       title.innerHTML="Cada <span>trozo</span> del ADN decide una cosa"; sub.textContent="Un trozo decide el pelo, otro las orejas, otro los ojos…";
       const face=hi=>el("div",{class:"rc-t",html:faceSVG(APP,hi)});
@@ -183,9 +185,16 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
       });
       stage.append(g);
     }
+    // paso 0: el panellet sale solo y la persona (flecha + tarjeta) con el siguiente clic, a la vez
+    if(step===0){ items=[[items[0],items[1]]].map(([x,y])=>({style:{set visibility(v){x.style.visibility=v;y.style.visibility=v;}},classList:{toggle(c,on){x.classList.toggle(c,on);y.classList.toggle(c,on);}}})); }
+    reveal(full?items.length:0);
   }
-  render();
-  return {next(){ if(step<3){step++;render();return true;} return false; },prev(){ if(step>0){step--;render();return true;} return false; },destroy(){timers.forEach(clearTimeout);}};
+  render(false);
+  return {
+    next(){ if(rsub<items.length){ reveal(rsub+1); return true; } if(step<3){ step++; render(false); return true; } return false; },
+    prev(){ if(rsub>0){ reveal(rsub-1); return true; } if(step>0){ step--; render(true); return true; } return false; },
+    destroy(){timers.forEach(clearTimeout);}
+  };
 }});
 
 /* ---------------- 52 · familia de perros ---------------- */

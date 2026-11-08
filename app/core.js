@@ -172,14 +172,18 @@ function boot(){
     else if(["ArrowLeft","PageUp"].includes(e.key)){ e.preventDefault(); prev(); }
     else if(e.key==="n"||e.key==="N"){ notesOpen=!notesOpen; renderNotes(); }
     else if(e.key==="f"||e.key==="F"){ toggleFull(); }
-    else if(e.key==="m"||e.key==="M"){ audio.muted=!audio.muted; document.getElementById("mute").setAttribute("aria-pressed",String(audio.muted)); }
+    else if(e.key==="m"||e.key==="M"){ setMute(!audio.muted); }
   });
-  document.addEventListener("pointerdown",()=>audio.ensure(),{once:true});
+  // El sonido está ACTIVADO por defecto. Los navegadores solo dejan sonar tras el primer gesto: lo desbloqueamos con el primer clic o tecla.
+  const unlock=()=>audio.ensure();
+  document.addEventListener("pointerdown",unlock,{once:true}); document.addEventListener("keydown",unlock,{once:true,capture:true});
+  function setMute(m){ audio.muted=m; const b=document.getElementById("mute"); b.setAttribute("aria-pressed",String(m)); b.textContent=m?"Sonido: NO (M)":"Sonido: SÍ (M)"; }
+  setMute(false);
   document.getElementById("prev").onclick=()=>{audio.click();prev();};
   document.getElementById("next").onclick=()=>{audio.click();next();};
   document.getElementById("notesBtn").onclick=()=>{notesOpen=!notesOpen;renderNotes();};
   document.getElementById("fullBtn").onclick=toggleFull;
-  document.getElementById("mute").onclick=e=>{audio.muted=!audio.muted;e.currentTarget.setAttribute("aria-pressed",String(audio.muted));};
+  document.getElementById("mute").onclick=()=>setMute(!audio.muted);
   const start=Math.max(0,SCENES.findIndex(s=>"#"+s.id===location.hash));
   show(start);
   window.addEventListener("hashchange",()=>{ const i=SCENES.findIndex(s=>"#"+s.id===location.hash); if(i>=0&&i!==current) show(i); });

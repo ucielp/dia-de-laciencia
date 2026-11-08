@@ -29,6 +29,17 @@
       .po-mat p{margin:0;height:128px;display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--display);font-weight:700;font-size:64px;color:var(--ink)}
       .po-mat p i{display:inline-block;width:30px;height:30px;border-radius:50%;background:var(--green)}
       .po-tape{position:absolute;width:190px;height:54px;background:rgba(242,194,48,.78);border-radius:4px;box-shadow:0 2px 4px rgba(90,74,48,.15)}
+      .po-mix{position:absolute;left:90px;top:722px;width:1000px;opacity:0;transform:translateY(40px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1);pointer-events:none}
+      .po.mix .po-mix{opacity:1;transform:none}
+      .po.mix .po-tag{opacity:0}
+      .po-mix h3{margin:0 0 10px;font-family:var(--display);font-weight:600;font-size:54px;color:var(--ink)}
+      .po-mix h3 b{color:var(--orange)}
+      .po-mix .row{display:flex;align-items:center;gap:26px}
+      .po-mc{width:430px;background:#FFFDF7;border-radius:30px;padding:14px 16px 10px;box-shadow:0 7px 0 rgba(90,74,48,.14),0 16px 30px rgba(90,74,48,.18);text-align:center}
+      .po-mc .ill{height:160px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+      .po-mc .ill svg{height:150px;width:auto}
+      .po-mc p{margin:6px 0 0;font-family:var(--display);font-weight:700;font-size:40px;white-space:nowrap;line-height:1.05}
+      .po-plus{font-family:var(--display);font-weight:700;font-size:110px;color:var(--orange);line-height:1}
       .po-hint{position:absolute;right:120px;bottom:36px;font-size:30px;color:var(--grey);font-family:var(--body)}
       @media (prefers-reduced-motion:reduce){.po-dot{animation:none}.po *{transition:none!important}}
     `}));
@@ -50,13 +61,19 @@
       el("div",{class:"po-tag po-r"},el("p",{text:"Día de la Ciencia",style:{background:T.green}}),el("p",{text:"1º y 2º",style:{background:T.orange}})),
       photo
     );
+    // Paso 2: «Mi ciencia mezcla…» medicina + IA (dibujos de la escena «ámbitos»)
+    const ART=window.CIENCIA_ART;
+    if(ART){
+      const card=k=>{ const a=ART.AMB.find(x=>x.k===k); return el("div",{class:"po-mc"},el("div",{class:"ill",style:{background:a.bg},html:ART.paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),el("p",{text:k==="med"?"Biomedicina":"Inteligencia artificial",style:{color:a.col}})); };
+      root.append(el("div",{class:"po-mix"},el("h3",{html:"Mi ciencia <b>mezcla</b>…"}),el("div",{class:"row"},card("med"),el("span",{class:"po-plus",text:"+"}),card("ia"))));
+    }
     box.append(root);
     root.addEventListener("click",()=>APP.next());
-    let on=false;
-    const show=v=>{ on=v; root.classList.toggle("on",v); };
+    let step=0; const MAX=window.CIENCIA_ART?2:1;
+    const show=n=>{ step=n; root.classList.toggle("on",n>=1); root.classList.toggle("mix",n>=2); };
     return {
-      next(){ if(!on){ show(true); return true; } return false; },
-      prev(){ if(on){ show(false); return true; } return false; },
+      next(){ if(step<MAX){ show(step+1); return true; } return false; },
+      prev(){ if(step>0){ show(step-1); return true; } return false; },
       destroy(){}
     };
   }
