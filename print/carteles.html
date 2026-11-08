@@ -12,18 +12,18 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#fff}
 body{font-family:"Fredoka",ui-rounded,system-ui,sans-serif;color:#1F2A44;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.page{width:297mm;height:210mm;padding:9mm 12mm 10mm;display:flex;flex-direction:column;align-items:center;page-break-after:always;break-after:page;overflow:hidden;position:relative;background:#FFFDF7}
+.page{width:297mm;height:210mm;padding:9mm 12mm 10mm;display:flex;flex-direction:column;align-items:center;page-break-after:always;break-after:page;overflow:hidden;position:relative;background:#fff}
 .page:last-child{page-break-after:auto;break-after:auto}
 .frame{position:absolute;inset:5mm;border:1.2mm solid #EFE5D2;border-radius:8mm;pointer-events:none}
 .adult .frame{border:3mm dashed #7B5EA7}
-.adult{background:#F7F3FB}
-.tag{position:absolute;left:50%;top:7mm;transform:translateX(-50%);background:#7B5EA7;color:#fff;font-weight:700;font-size:9mm;padding:2mm 8mm;border-radius:20mm;white-space:nowrap}
+.adult{background:#fff}
+.tag{position:absolute;left:50%;top:7mm;transform:translateX(-50%);background:#fff;color:#7B5EA7;border:.8mm solid #7B5EA7;font-weight:700;font-size:9mm;padding:2mm 8mm;border-radius:20mm;white-space:nowrap}
 .adult .name{margin-top:15mm}
 .name{font-weight:700;font-size:25mm;line-height:1;margin-top:1mm;letter-spacing:.3mm}
 .art{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;padding:2mm 0}
 .art svg{height:100%;max-width:190mm;display:block}
 .strip{display:flex;gap:5mm;padding:3.5mm;border-radius:7mm;background:#fff;border:.6mm solid #E2D6BE}
-.sq{width:35mm;height:35mm;border-radius:5mm;box-shadow:.5mm .8mm 0 rgba(90,74,48,.35);color:#fff;font-weight:700;font-size:24mm;line-height:35mm;text-align:center}
+.sq{width:35mm;height:35mm;border-radius:5mm;border:2.6mm solid;background:#fff;font-weight:700;font-size:24mm;line-height:29.8mm;text-align:center}
 .foot{position:absolute;right:12mm;bottom:6.5mm;font-size:3.6mm;color:#A39B8B}
 .foot.l{left:12mm;right:auto}
 @media screen{body{background:#555}.page{margin:8mm auto;box-shadow:0 2mm 8mm rgba(0,0,0,.4)}}
@@ -43,7 +43,7 @@ body{font-family:"Fredoka",ui-rounded,system-ui,sans-serif;color:#1F2A44;-webkit
   order.forEach(function(id,i){
     var adult=T.adults.indexOf(id)>=0;
     var p=document.createElement("section"); p.className="page"+(adult?" adult":"");
-    var sq=T.dna[id].split("").map(function(c){return '<div class="sq" style="background:'+T.colors[c]+'">'+c+'</div>';}).join("");
+    var sq=T.dna[id].split("").map(function(c){return '<div class="sq" style="color:'+T.colors[c]+';border-color:'+T.colors[c]+'">'+c+'</div>';}).join("");
     p.innerHTML='<div class="frame"></div>'+(adult?'<div class="tag">LO GUARDA UN ADULTO · no se reparte</div>':'')+
       '<div class="name">'+T.names[id].toUpperCase()+'</div>'+
       '<div class="art">'+S.byId[id].svg()+'</div>'+
