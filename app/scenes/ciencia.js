@@ -716,7 +716,7 @@ const AMB=[
 ];
 window.CIENCIA_ART={paper,AMB}; // lo usa portada.js («Mi ciencia mezcla…»)
 
-SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
+SC.push({id:"ambitos",title:"¿Qué hace un científico?",order:30,mount(box,APP){
   const {el}=APP, red=APP.reduced(), tm=timers();
   box.append(styleEl(APP,`
   .am{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#FFF8EA 0,#F6EAD3 65%,#EEDDBF 100%);overflow:hidden}
@@ -739,6 +739,8 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   .am-card.rev .am-front{display:flex}
   .am-ill{width:100%;height:240px;border-radius:24px;flex:none;display:flex;align-items:center;justify-content:center}
   .am-ill svg{height:100%;width:auto;max-width:100%;overflow:visible}
+  .am-ill.photo{overflow:hidden;background:#ddd}
+  .am-ill.photo img{width:100%;height:100%;object-fit:cover;display:block}
   .am-name{font-family:var(--display);font-weight:700;font-size:54px;line-height:1.08;margin:14px 0 2px;text-align:center}
   .am-name .l{display:none}
   .am-phr{font-family:var(--body);font-weight:800;font-size:40px;color:var(--inkSoft);text-align:center;line-height:1.15}
@@ -778,6 +780,8 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   @keyframes amBrush{from{transform:translateX(-6px) rotate(-6deg)}to{transform:translateX(8px) rotate(8deg)}}
   @media (prefers-reduced-motion:reduce){.am *{animation:none!important;transition:none!important}}
   `));
+  // Fotos reales (img/ambitos/CREDITS.md). Solo en esta escena; los dibujos se siguen usando en «¿Y yo?».
+  const AM_PHOTO={nature:"naturaleza",space:"espacio",chem:"quimica",hist:"historia",med:"medicina",ia:"ia"};
   const root=el("div",{class:"am"}); box.append(root);
   const title=el("h1",{class:"am-title",html:"¿Qué hace un <b>científico</b>?"});
   const dim=el("div",{class:"am-dim"});
@@ -787,7 +791,8 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   const FOC={left:150,top:150,width:1620,height:860};
   const cards=AMB.map((a,i)=>{
     const front=el("div",{class:"am-front"},
-      el("div",{class:"am-ill",style:{background:a.bg},html:paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),
+      AM_PHOTO[a.k]?el("div",{class:"am-ill photo"},el("img",{src:"img/ambitos/"+AM_PHOTO[a.k]+".jpg",alt:a.name,draggable:"false"}))
+        :el("div",{class:"am-ill",style:{background:a.bg},html:paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),
       el("div",{class:"am-txt"},
         el("div",{class:"am-name",style:{color:a.col}},el("span",{class:"s",text:a.short}),el("span",{class:"l",text:a.name})),
         el("div",{class:"am-phr",text:a.phr}),
