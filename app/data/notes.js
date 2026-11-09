@@ -97,7 +97,7 @@ window.NOTES = {
     "(4 pulsaciones.) Mientras, los adultos abren los sobres: un cartel y una tira por estación.\n\n" +
     "Al entrar) «Cada grupo tiene un cartel: un animal y su ADN.» «¿Quién es el perro? ¡Guau!» (cada grupo hace su sonido, 1 segundo)\n\n" +
     "1) «Comparen su tira con la de otros grupos, casilla a casilla.» 2) «¿Solo 1 diferencia? ¡Son pareja! Júntense y dense la mano.»\n\n" +
-    "3) Demo con animales inventados (así no se resuelve ninguna pareja del juego): «Somos Blup.» Blup y Plim: 3 diferencias… ¡no! 4) Blup y Ñam: ¡1! ¡Pareja!\n\n" +
+    "3) Demo con animales que NO están en el juego (así no se resuelve ninguna pareja): «Somos el conejo.» Conejo y tortuga: 3 diferencias… ¡no! 4) Conejo y liebre: ¡1! ¡Pareja! (son primos de verdad)\n\n" +
     "RECORDATORIO: los 5 carteles de borde morado (murciélago, T-rex, cocodrilo, rana, tiburón) NO se reparten. Los guarda la profe (guía: imprimir/guia_animales_profes.pdf).",
 
   "actividad-2":

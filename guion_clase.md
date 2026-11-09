@@ -216,7 +216,7 @@ Los adultos abren los sobres y dan **un cartel y una tira por estación** mientr
 
 > «Ahora cada grupo es un **animal**. ¿Quién es el perro? ¡Guau! ¿Quién es la gallina?» *(cada grupo hace su sonido, 1 segundo: va rapidísimo y les encanta)*
 > → «Un niño lleva el cartel y otro la tira. Comparen su tira con la de otros grupos, **casilla a casilla**.» → «Si encuentran un grupo con **solo 1 diferencia**: ¡son pareja! Júntense y dense la mano.»
-> → Demo con la pantalla: con animales **inventados**, para no resolver ninguna pareja del juego: «Somos Blup. Blup y Plim: 3 diferencias… no.» → «Blup y Ñam: ¡1! ¡Pareja!»
+> → Demo con la pantalla: con animales que **no están en el juego**, para no resolver ninguna pareja: «Somos el conejo. Conejo y tortuga: 3 diferencias… no.» → «Conejo y liebre: ¡1! ¡Pareja!» (son primos de verdad)
 
 ### 3.16 actividad-2 (min 44–47) · ACTIVIDAD 2 · separador
 
