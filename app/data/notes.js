@@ -15,18 +15,18 @@ window.NOTES = {
 
   metodo:
     "(6 pulsaciones: un paso del ciclo por clic y el último cierra el círculo.)\n\n" +
-    "«¿Cómo trabaja un científico? Sigue unos pasos… ¡como con la espuma!»\n\n" +
+    "«¿Cómo trabaja un científico? Vamos a verlo con nuestro experimento.»\n\n" +
     "1) Observar: un bote, dos ingredientes… 2) Preguntar: ¿qué pasará si los mezclamos?\n\n" +
     "3) Imaginar: «Yo creo que… ¡saldrán burbujas!». Se llama hipótesis. «¿Qué creían ustedes?»\n\n" +
     "4) Probar: lo mezclamos y miramos. Es el experimento. 5) ¿Qué ha pasado? ¡Espuma! Es la conclusión.\n\n" +
     "Cierre: «¡Es el método científico! Y con lo que aprendemos… ¡nos hacemos una pregunta nueva!» (¿Y si no ponemos jabón?)",
 
   "no-solo":
-    "«Esto ha sido un experimento…» (1 pulsación) «…¡pero la ciencia es mucho más!» Salen volando los dibujos.\n\n" +
+    "«Esto que hicimos recién es un experimento…» (1 pulsación) «…¡pero la ciencia es mucho más!» Salen volando los dibujos.\n\n" +
     "«¿Dónde creen que trabajan los científicos?» Una o dos respuestas y avanzar: es una transición de un minuto.",
 
   ambitos:
-    "Una tarjeta por pulsación (con una pregunta de manos arriba): naturaleza («¿Quién tiene una mascota?»), espacio, química («¡como la espuma!»), historia (los arqueólogos excavan y descubren cómo vivía la gente hace mucho tiempo)…\n\n" +
+    "«¿Qué hace un científico?» Una tarjeta por pulsación (con una pregunta de manos arriba): naturaleza («¿Quién tiene una mascota?»), espacio, química («¡como la espuma!»), historia (los arqueólogos excavan y descubren cómo vivía la gente hace mucho tiempo)…\n\n" +
     "…medicina y ordenadores e inteligencia artificial: las dos últimas, juntas. «Hoy los médicos y los ordenadores trabajan en equipo.»\n\n" +
     "Última pulsación: todas juntas → «¡La ciencia está en todas partes!»",
 
@@ -43,23 +43,23 @@ window.NOTES = {
 
   "mi-trabajo":
     "(7 pulsaciones; en cada zoom, gesto de lupa con las manos y «¡zooooom!».)\n\n" +
-    "«Ustedes están hechos de…» → ¡millones de células! → una célula y su núcleo → dentro está el ADN: un libro de instrucciones.\n\n" +
+    "Puente: «Yo estudio lo que llevamos por dentro: es la genética. ¿De qué están hechos ustedes?» → ¡millones de células! → una célula y su núcleo → dentro está el ADN: un libro de instrucciones.\n\n" +
     "Escrito con solo 4 letras: SEÑALAR EL MODELO FÍSICO DE ADN (A azul, T roja, G verde, C naranja; A con T, G con C). «¡Díganlas conmigo!»\n\n" +
     "Biblioteca: «¿Cuántas letras creen que tiene su ADN?» (esperar) «¡3.000 millones! Si las escribiéramos en libros… ¡una biblioteca entera, unos mil libros gordos!»\n\n" +
     "«Yo estudio estas letras… y como son tantísimas, lo combino con la inteligencia artificial: el ordenador me ayuda a encontrar pistas.»",
 
   receta:
     "Al entrar: la receta de los panellets. «Una receta dice cómo hacer algo: los panellets llevan almendra, azúcar, huevo y piñones.»\n\n" +
-    "(→) Sale la receta de una persona: «Su ADN es la receta… ¡de ustedes!»\n\n" +
+    "(→) Sale la receta de una persona: «Su ADN es como una receta… ¡la receta de ustedes!»\n\n" +
     "(→ y un clic por trozo) «El ADN es muy largo y tiene trozos. Un trozo decide el color del pelo, otro la forma de las orejas, otro el color de los ojos… ¡y muchas cosas más!»\n\n" +
-    "(→ y un clic por trozo) «Nuestros perros son más sencillos: su ADN solo tiene 3 trozos = 3 gomets: orejas, cuerpo (el pelo) y cola.»\n\n" +
+    "(→ y un clic por trozo) «Nuestros perros son más sencillos: su ADN solo tiene 3 trozos: orejas, cuerpo (el pelo) y cola.»\n\n" +
     "(→) Todas las piezas: «Cada color es una pieza distinta: rojo, azul o amarillo.»",
 
   "familia-perro":
-    "Al entrar: «Esta es mamá Canela y este es papá Bruno. Cada uno tiene su receta: 3 gomets. ¡Tienen cachorros!»\n\n" +
+    "Al entrar: «Esta es mamá Canela y este es papá Bruno. Cada uno tiene su receta: 3 trozos de ADN. ¡Tienen cachorros!»\n\n" +
     "(→) Chispa, en gris: «¿De quién saca cada parte?» Un clic por parte, que lo digan ellos mirando los colores: orejas… ¡de papá! cuerpo… ¡de mamá! cola… ¡de papá! (ladra).\n\n" +
     "(→) Pipa, su hermana: «¿Será igual?» Un clic por parte: orejas de mamá, cuerpo de papá, cola de mamá. «Son hermanas, pero no son iguales.»\n\n" +
-    "(→) «Ustedes también: su receta es mitad de mamá y mitad de papá. Por eso se parecen a ellos… ¡y no a un perro!»\n\n" +
+    "(→) «Ustedes también: su receta es mitad de mamá y mitad de papá. Por eso se parecen a ellos.»\n\n" +
     "(→) La misión: «Cada uno tiene una muestra de ADN secreta: ¡tienen que descubrir qué perro es! Al final, en el Laboratorio, sabrán cómo se llama.»",
 
   "como-buscar":
@@ -92,7 +92,7 @@ window.NOTES = {
     "(4 pulsaciones.) Mientras, los adultos abren los sobres: un cartel y una tira por estación.\n\n" +
     "Al entrar) «Cada grupo tiene un cartel: un animal y su ADN.» «¿Quién es el perro? ¡Guau!» (cada grupo hace su sonido, 1 segundo)\n\n" +
     "1) «Comparen su tira con la de otros grupos, casilla a casilla.» 2) «¿Solo 1 diferencia? ¡Son pareja! Júntense y dense la mano.»\n\n" +
-    "3) Demo: «Somos el gato.» Gato y perro: 4 diferencias… ¡no! 4) Gato y león: ¡1! ¡Pareja!\n\n" +
+    "3) Demo con animales inventados (así no se resuelve ninguna pareja del juego): «Somos Blup.» Blup y Plim: 3 diferencias… ¡no! 4) Blup y Ñam: ¡1! ¡Pareja!\n\n" +
     "RECORDATORIO: los 5 carteles de borde morado (murciélago, T-rex, cocodrilo, rana, tiburón) NO se reparten. Los guarda la profe (guía: imprimir/guia_animales_profes.pdf).",
 
   "actividad-2":

@@ -141,13 +141,13 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
   function render(full){
     timers.forEach(clearTimeout); timers=[]; stage.replaceChildren(); items=[];
     if(step===0){
-      title.innerHTML="Su ADN es una <span>receta</span>"; sub.textContent="Una receta dice cómo hacer algo. Su ADN dice cómo son ustedes.";
+      title.innerHTML="Su ADN es <i>como</i> una <span>receta</span>"; sub.textContent="Una receta dice cómo hacer algo. Su ADN dice cómo son ustedes.";
       const card=el("div",{class:"rc-card rc-pan pz-in",style:{left:"110px",top:"0px",width:"740px",padding:"40px 50px"}},
         el("p",{class:"rc-big",text:"Receta de panellets"}),
         el("div",{html:panelletsSVG(APP)}),
         el("div",{class:"rc-ing"},...[["almendra","Almendra"],["azucar","Azúcar"],["huevo","Huevo"],["pinones","Piñones"]].map(([k,t])=>el("div",{},el("div",{html:ingredientSVG(APP,k)}),el("span",{text:t})))));
       const seq="ATGCCATAGGCTTACGATCAGTCA".split("");
-      const card2=el("div",{class:"rc-card pz-in",style:{left:"1030px",top:"0px",width:"780px",padding:"40px 60px",animationDelay:APP.reduced()?"0s":".35s"}},
+      const card2=el("div",{class:"rc-card pz-in",style:{left:"990px",top:"0px",width:"700px",padding:"40px 50px",animationDelay:APP.reduced()?"0s":".35s"}},
         el("p",{class:"rc-big",text:"Receta de una persona"}),
         el("div",{class:"rc-dna"},...seq.map(b=>el("i",{text:b,style:{background:BASES[b]}}))));
       card2.style.animationDelay="0s";
@@ -163,7 +163,7 @@ S.push({id:"receta",title:"El ADN es una receta",order:50,mount(box,APP){
         {x:1620,seq:"TACG",color:"#BDB29C",more:true,card:el("div",{class:"rc-t"},el("span",{class:"dots",text:"…"})),label:"¡y muchas<small>cosas más!</small>"}
       ]);
     } else if(step===2){
-      title.innerHTML="La receta de un <span>perro</span>"; sub.textContent="3 trozos de ADN = 3 gomets";
+      title.innerHTML="La receta de un <span>perro</span>"; sub.textContent="El ADN de nuestros perros tiene solo 3 trozos";
       /* perro gris con UNA parte en color (como las caras del paso anterior) */
       const EXK={ears:"rojo",coat:"azul",tail:"amarillo"}, Pp=APP.dog.parts;
       const sh=(q)=>q==="coat"?Pp.coat(EXK.coat):Pp[q][EXK[q]];
@@ -290,7 +290,7 @@ S.push({id:"familia-perro",title:"Mamá, papá y los cachorros",order:52,mount(b
     root.append(card);
     return {pp,card,layers,slots,froms};
   });
-  const ban=el("div",{class:"fp-ban",html:"Ustedes también: su receta es <b>mitad de mamá</b> y <b>mitad de papá</b>.<br>Por eso se parecen a ellos… ¡y no a un perro!"});
+  const ban=el("div",{class:"fp-ban",html:"Ustedes también: su receta es <b>mitad de mamá</b> y <b>mitad de papá</b>.<br>Por eso se parecen a ellos."});
   root.append(ban);
   // final: la muestra de ADN secreta y la misión
   const end=el("div",{class:"fp-end"},
@@ -340,7 +340,7 @@ S.push({id:"familia-perro",title:"Mamá, papá y los cachorros",order:52,mount(b
     an.onfinish=()=>{ n.remove(); flyers=flyers.filter(x=>x!==f); if(my===gen) done(); };
   }
   function texts(s){
-    if(s===0) return ["Mamá <span>Canela</span> y papá <span class=\"pb\">Bruno</span>","Cada uno tiene su receta: 3 gomets"];
+    if(s===0) return ["Mamá <span>Canela</span> y papá <span class=\"pb\">Bruno</span>","Cada uno tiene su receta: 3 trozos de ADN"];
     if(s>=9) return ["Mitad de <span>mamá</span>, mitad de <span class=\"pb\">papá</span>","Por eso los cachorros se parecen a sus padres"];
     const i=s>=pupStart(1)?1:0, n=nParts(i,s), pp=PUPS[i];
     const t=i===0?`¡Un <span>cachorro</span>: ${pp.name}!`:`¡Otro <span>cachorro</span>: ${pp.name}!`;

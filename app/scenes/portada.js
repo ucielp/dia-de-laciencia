@@ -54,7 +54,6 @@
       el("i",{class:"po-tape",style:{left:"250px",top:"6px",transform:"rotate(-4deg)"}}),
       el("i",{class:"po-tape",style:{left:"520px",top:"620px",width:"150px",transform:"rotate(-38deg)"}}));
     root.append(
-      el("img",{class:"po-logo",src:"img/elm.png",alt:"Institut-Escola Lluís Millet, El Masnou"}),
       el("h1",{class:"po-q",text:"¿Y yo?"}),
       el("p",{class:"po-hi po-r",html:"Soy <span>Uciel</span>"}),
       el("p",{class:"po-sub po-r",html:"y soy <b>científico</b>"}),

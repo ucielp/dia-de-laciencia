@@ -27,7 +27,7 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 | 13–14 | **portada** | «¿Y yo? Soy Uciel y soy científico» (con mi foto). Se ensaya la señal de silencio. | suelo |
 | 14–15 | **equipo** | «Tengo un equipo en la UIC»: el Grupo de Biología Computacional del ARN, uno a uno, y la foto del congreso. «¡La ciencia se hace en equipo!» | suelo |
 | 15–18 | **mi-trabajo** | Zoom: niño → célula → núcleo → ADN. Señalar el **modelo físico de ADN**. 4 letras → biblioteca (3.000 millones de letras) → IA. | suelo |
-| 18–20 | **receta** | Receta de los panellets → el ADN es una receta con trozos → la receta del perro: 3 gomets. | suelo |
+| 18–20 | **receta** | Receta de los panellets → el ADN es una receta con trozos → la receta del perro: 3 trozos. | suelo |
 | 20–22 | **familia-perro** | Mamá Canela y papá Bruno: cada parte de los cachorros (Chispa y Pipa) viene de mamá o de papá, un clic por parte. La misión: descubrir qué perro es su muestra de ADN secreta. | suelo |
 | 22–24 | **como-buscar** | Cómo se hace el perro (Uciel lo hace en directo con una hoja y piezas). | suelo |
 | 24–26 | **actividad-1** (separador) | Van a sus **10 estaciones**. La hoja «ADN secreto» ya está allí, boca abajo. | ⏵ estaciones |
@@ -84,7 +84,7 @@ Si la opción B: un adulto puede pasar un poco de espuma para que la toquen al f
 
 El ciclo de 5 pasos aparece poco a poco. Cada paso se cuenta con la espuma que acaban de ver.
 
-> «¿Cómo trabaja un científico? Sigue unos pasos… ¡como con la espuma!»
+> «¿Cómo trabaja un científico? Vamos a verlo con nuestro experimento.»
 > «1) **Observar**: un bote, dos ingredientes… 2) **Preguntar**: ¿qué pasará si los mezclamos?»
 > «3) **Imaginar**: “Yo creo que… ¡saldrán burbujas!”. Eso se llama **hipótesis**. ¿Qué creían ustedes?»
 > «4) **Probar**: lo mezclamos y miramos. Es el **experimento**. 5) ¿Qué ha pasado? ¡Espuma! Es la **conclusión**.»
@@ -92,12 +92,12 @@ El ciclo de 5 pasos aparece poco a poco. Cada paso se cuenta con la espuma que a
 
 ### 3.4 no-solo (min 10–11)
 
-> «Esto ha sido un experimento. ¡Pero la ciencia es mucho más que experimentos!»
+> «Esto que hicimos recién es un experimento. ¡Pero la ciencia es mucho más que experimentos!»
 > «¿Dónde creen que trabajan los científicos?» *(1–2 respuestas y avanzar)*
 
 ### 3.5 ambitos (min 11–13)
 
-Una tarjeta cada vez, con una frase y una pregunta de manos arriba (los despierta).
+Título: **«¿Qué hace un científico?»**. Una tarjeta cada vez, con una frase y una pregunta de manos arriba (los despierta).
 
 | Tarjeta | Qué decir |
 |---|---|
@@ -131,7 +131,7 @@ Ojo: la Clara del equipo es una **doctoranda** del grupo, no la Clara del cole. 
 
 En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) y dicen «¡zooooom!».
 
-1. **Niño → piel → células.** «Vamos a hacer zoom dentro de ustedes. ¡Están hechos de células, como ladrillos pequeñísimos!»
+1. **Puente → niño → piel → células.** «Yo estudio lo que llevamos **por dentro**: es la **genética**. ¿De qué están hechos ustedes? Vamos a hacer zoom dentro de ustedes. ¡Están hechos de células, como ladrillos pequeñísimos!»
 2. **Núcleo.** «Dentro de cada célula hay una cajita. Se llama núcleo.»
 3. **ADN.** «Y dentro… ¡el ADN!» Aquí **señalar el modelo físico de ADN** (a la vista, junto a la pantalla): «Las dos cintas, la roja y la azul, son los lados. Los palitos de colores son las **letras**, que se dan la mano.»
 4. **4 letras.** «Solo hay 4 letras: **A azul, T roja, G verde, C naranja**. ¡Díganlas conmigo!» Señalar en el modelo una A con su T y una G con su C: «Siempre van juntas».
@@ -142,19 +142,19 @@ En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) 
 
 Un clic para cada cosa nueva: panellets → la receta de una persona → cada trozo del ADN → cada trozo del perro → las piezas.
 
-> «Una receta dice cómo hacer algo. ¿Conocen los **panellets**? Llevan almendra, azúcar, huevo y piñones.» → «Su **ADN** es la receta… ¡de ustedes!»
+> «Una receta dice cómo hacer algo. ¿Conocen los **panellets**? Llevan almendra, azúcar, huevo y piñones.» → «Su **ADN** es *como* una receta… ¡la receta de ustedes!»
 > → «El ADN es muy largo y tiene **trozos**. Un trozo decide el color del pelo, otro la forma de las orejas, otro el color de los ojos… ¡y muchas cosas más! **Cada trozo del ADN decide una cosa.**»
-> → «Nuestros perros son más sencillos: su ADN solo tiene **3 trozos = 3 gomets**: orejas, cuerpo (el pelo) y cola.»
+> → «Nuestros perros son más sencillos: su ADN solo tiene **3 trozos**: orejas, cuerpo (el pelo) y cola.»
 > → «Cada color es una pieza distinta: **rojo, azul o amarillo**.»
 
 ### 3.10 familia-perro (min 20–22)
 
 Paso a paso: **un clic por cada parte** (orejas, cuerpo, cola). El gomet vuela de mamá o de papá al cachorro.
 
-> «Esta es **mamá Canela** y este es **papá Bruno**. Cada uno tiene su receta: 3 gomets. ¡Tienen cachorros!»
+> «Esta es **mamá Canela** y este es **papá Bruno**. Cada uno tiene su receta: 3 trozos de ADN. ¡Tienen cachorros!»
 > → **Chispa**, en gris: «¿De quién saca cada parte?» → «Las orejas… ¡de papá!» → «El cuerpo… ¡de mamá!» → «Y la cola… ¡de papá!» *(que lo digan ellos mirando los colores; al final, ladra)*
 > → **Pipa**, su hermana: «¿Será igual?» → orejas de mamá → cuerpo de papá → cola de mamá. «Son **hermanas, pero no son iguales**.»
-> → «Ustedes también: su receta es mitad de mamá y mitad de papá. Por eso se parecen a ellos… ¡y no a un perro!»
+> → «Ustedes también: su receta es mitad de mamá y mitad de papá. Por eso se parecen a ellos.»
 > → **La misión:** «Cada uno tiene una **muestra de ADN secreta**: ¡tienen que descubrir qué perro es! Al final, en el **Laboratorio**, sabrán cómo se llama.»
 
 ### 3.11 como-buscar (min 22–24)
@@ -209,7 +209,7 @@ Los adultos abren los sobres y dan **un cartel y una tira por estación** mientr
 
 > «Ahora cada grupo es un **animal**. ¿Quién es el perro? ¡Guau! ¿Quién es la gallina?» *(cada grupo hace su sonido, 1 segundo: va rapidísimo y les encanta)*
 > → «Un niño lleva el cartel y otro la tira. Comparen su tira con la de otros grupos, **casilla a casilla**.» → «Si encuentran un grupo con **solo 1 diferencia**: ¡son pareja! Júntense y dense la mano.»
-> → Demo con la pantalla: «Somos el gato. Gato y perro: 4 diferencias… no.» → «Gato y león: ¡1! ¡Pareja!»
+> → Demo con la pantalla: con animales **inventados**, para no resolver ninguna pareja del juego: «Somos Blup. Blup y Plim: 3 diferencias… no.» → «Blup y Ñam: ¡1! ¡Pareja!»
 
 ### 3.16 actividad-2 (min 44–47) · ACTIVIDAD 2 · separador
 

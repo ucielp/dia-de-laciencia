@@ -55,13 +55,13 @@ function makeCompare(APP,o){
     const s=strip(APP,code,o.sq,o.gap); Object.assign(s.style,{position:"absolute",left:stripX+"px",top:(rowH-o.sq)/2+"px"});
     r.append(p,s); return {r,code,sqs:[...s.children]};
   }
-  const A=row(o.a,T.dna[o.a],0,o.svgA);
-  let B=row(o.b,T.dna[o.b],rowH+o.rowGap,o.svgB);
+  const A=row(o.a,o.codeA||T.dna[o.a],0,o.svgA);
+  let B=row(o.b,o.codeB||T.dna[o.b],rowH+o.rowGap,o.svgB);
   el.append(scan,A.r,B.r);
   function clear(){ el.querySelectorAll(".fam-ring,.fam-num").forEach(x=>x.remove()); scan.style.opacity=0; }
   return {el,W,H,
-    setB(id,anim,svgText){
-      const old=B.r; B=row(id,T.dna[id],rowH+o.rowGap,svgText); el.append(B.r); clear();
+    setB(id,anim,svgText,code){
+      const old=B.r; B=row(id,code||T.dna[id],rowH+o.rowGap,svgText); el.append(B.r); clear();
       if(anim&&!APP.reduced()){
         old.animate([{opacity:1},{opacity:0,transform:"translateX(120px)"}],{duration:300,fill:"forwards"}).finished.then(()=>old.remove(),()=>old.remove());
         B.r.animate([{opacity:0,transform:"translateX(-120px)"},{opacity:1,transform:"none"}],{duration:450,delay:200,easing:"ease-out",fill:"backwards"});
@@ -242,6 +242,27 @@ function kidsSVG(APP,n,joined){
   if(joined){ for(let i=0;i<n;i++){ const x=50+i*100; sh.push(APP.L(`M${x-24} 120 L${x-50} 150`,skins[i%5],11),APP.L(`M${x+24} 120 L${x+50} 150`,skins[i%5],11)); } }
   return APP.paperSVG(sh,{vb:`0 40 ${W} 180`,eyes,eyeR:4.5,label:joined?"Niños dados de la mano":"Niños sosteniendo un cartel"});
 }
+/* Animales INVENTADOS para el ejemplo de «solo 1 diferencia»: así el ejemplo no resuelve ninguna pareja real del juego. */
+const FAKE={
+  blup:{name:"Blup",dna:"GATTCA",col:"#29ABE2",belly:"#BFE6F7",horn:false},
+  plim:{name:"Plim",dna:"CAGGCA",col:"#E59AAE",belly:"#F9DCE4",horn:true},
+  nam:{name:"Ñam",dna:"GATTGA",col:"#3FA9D9",belly:"#C9EAF8",horn:false,ears:true}
+};
+function fakeSVG(id){
+  const f=FAKE[id];
+  const top=f.horn?`<path d="M70 52 L60 18 L84 46 Z M130 52 L140 18 L116 46 Z" fill="#F2C230"/>`
+    :f.ears?`<circle cx="62" cy="50" r="16" fill="${f.col}"/><circle cx="138" cy="50" r="16" fill="${f.col}"/>`
+    :`<path d="M100 40 Q96 18 108 10" stroke="${f.col}" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="109" cy="9" r="8" fill="#F2C230"/>`;
+  return `<svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">${top}
+    <rect x="58" y="140" width="22" height="22" rx="9" fill="${f.col}"/><rect x="120" y="140" width="22" height="22" rx="9" fill="${f.col}"/>
+    <ellipse cx="100" cy="100" rx="62" ry="56" fill="${f.col}"/><ellipse cx="100" cy="118" rx="36" ry="28" fill="${f.belly}"/>
+    <circle cx="80" cy="84" r="13" fill="#fff"/><circle cx="120" cy="84" r="13" fill="#fff"/><circle cx="82" cy="86" r="6" fill="#1F2A44"/><circle cx="122" cy="86" r="6" fill="#1F2A44"/>
+    <path d="M88 108 Q100 118 112 108" stroke="#1F2A44" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+}
+const fakeDiff=(a,b)=>[...FAKE[a].dna].filter((c,i)=>c!==FAKE[b].dna[i]).length;
+function fakeSign(APP,id,sq,picH){
+  return APP.el("div",{class:"bf-sign fam-paper"},pic(APP,id,picH*1.2,picH,fakeSVG(id)),strip(APP,FAKE[id].dna,sq,Math.round(sq*0.18)));
+}
 function sign(APP,id,sq,picH){
   const T=window.TREE;
   return APP.el("div",{class:"bf-sign fam-paper"},pic(APP,id,picH*1.2,picH),strip(APP,T.dna[id],sq,Math.round(sq*0.18)));
@@ -277,24 +298,24 @@ SC.push({
       el("div",{class:"bf-art"},sign(APP,"gato",48,170),el("div",{class:"fam-pic",style:{width:"400px",height:"180px"},html:kidsSVG(APP,4,false)})),
       el("div",{class:"bf-txt"},el("span",{html:"Cada grupo tiene <b>un cartel</b>: un animal y su ADN"})));
     const c2=el("div",{class:"bf-card fam-paper"},el("div",{class:"bf-n",text:"2"}),
-      el("div",{class:"bf-art"},sign(APP,"gato",40,130),el("div",{class:"bf-vs",text:"?"}),sign(APP,"perro",40,130)),
+      el("div",{class:"bf-art"},fakeSign(APP,"blup",40,130),el("div",{class:"bf-vs",text:"?"}),fakeSign(APP,"plim",40,130)),
       el("div",{class:"bf-txt"},el("span",{html:"Comparen su tira con la de <b>otros grupos</b>"})));
     const c3=el("div",{class:"bf-card fam-paper"},el("div",{class:"bf-n",text:"3"}),
-      el("div",{class:"bf-art"},el("div",{style:{display:"flex",gap:"16px"}},sign(APP,"gato",30,110),sign(APP,"leon",30,110)),
+      el("div",{class:"bf-art"},el("div",{style:{display:"flex",gap:"16px"}},fakeSign(APP,"blup",30,110),fakeSign(APP,"nam",30,110)),
         el("div",{class:"fam-pic",style:{width:"400px",height:"180px"},html:kidsSVG(APP,4,true)})),
       el("div",{class:"bf-txt"},el("span",{html:"¿Solo <b>1 diferencia</b>? ¡Son pareja! Júntense"})));
     const cards=el("div",{class:"bf-cards"},c1,c2,c3);
     // demo
     const demo=el("div",{class:"bf-demo",hidden:true});
-    const cmp=makeCompare(APP,{a:"gato",b:"perro",picW:230,picH:190,sq:92,gap:16,rowGap:60});
+    const cmp=makeCompare(APP,{a:"blup",b:"plim",codeA:FAKE.blup.dna,codeB:FAKE.plim.dna,svgA:fakeSVG("blup"),svgB:fakeSVG("plim"),picW:230,picH:190,sq:92,gap:16,rowGap:60});
     Object.assign(cmp.el.style,{left:"270px",top:"330px"});
     const labA=el("div",{class:"bf-lab",style:{top:"390px"},text:"Nosotros"});
     const labB=el("div",{class:"bf-lab",style:{top:"640px"},text:"¿Ellos?"});
-    const scoreEl=id=>{ const b=el("b",{text:"?"}), l=el("span",{text:"diferencias"}); const r=el("div",{class:"bf-score fam-paper"},pic(APP,id,190,157),b,l); r.num=b; r.lab=l; return r; };
-    const sPerro=scoreEl("perro"), sLeon=scoreEl("leon");
+    const scoreEl=id=>{ const b=el("b",{text:"?"}), l=el("span",{text:"diferencias"}); const r=el("div",{class:"bf-score fam-paper"},pic(APP,id,190,157,fakeSVG(id)),b,l); r.num=b; r.lab=l; return r; };
+    const sPerro=scoreEl("plim"), sLeon=scoreEl("nam");
     const board=el("div",{class:"bf-board"},sPerro,sLeon);
     const msg=el("div",{class:"fam-msg",style:{top:"905px",fontSize:"56px"}});
-    demo.append(el("div",{class:"bf-sub",text:"Ejemplo: somos el gato. ¿Quién es nuestra pareja?"}),labA,labB,cmp.el,board,msg);
+    demo.append(el("div",{class:"bf-sub",text:"Ejemplo inventado: somos Blup. ¿Quién es nuestra pareja?"}),labA,labB,cmp.el,board,msg);
     box.append(bg,title,cards,demo);
 
     let step=0, token=0;
@@ -316,13 +337,13 @@ SC.push({
       }
       if(anim&&s===3) fadeIn(APP,demo,0,30);
       sPerro.className=sLeon.className="bf-score fam-paper"; msg.textContent="";
-      if(s===3){ cmp.setB("perro",false); sPerro.num.textContent="?"; sLeon.num.textContent="?";
+      if(s===3){ cmp.setB("plim",false,fakeSVG("plim"),FAKE.plim.dna); sPerro.num.textContent="?"; sLeon.num.textContent="?";
         (async()=>{ if(anim&&!APP.reduced()) await APP.sleep(700); if(t!==token) return;
-          const n=await runAgainst(sPerro,anim); if(n>=0) { say(`Gato y perro: <b>${n} diferencias</b>. ¡No! Seguimos buscando…`); sPerro.classList.add("lose"); } })(); }
-      if(s===4){ sPerro.num.textContent=String(T.diff("gato","perro")); sPerro.classList.add("lose"); cmp.setB("leon",anim); sLeon.num.textContent="?";
+          const n=await runAgainst(sPerro,anim); if(n>=0) { say(`Blup y Plim: <b>${n} diferencias</b>. ¡No! Seguimos buscando…`); sPerro.classList.add("lose"); } })(); }
+      if(s===4){ sPerro.num.textContent=String(fakeDiff("blup","plim")); sPerro.lab.textContent="diferencias"; sPerro.classList.add("lose"); cmp.setB("nam",anim,fakeSVG("nam"),FAKE.nam.dna); sLeon.num.textContent="?";
         (async()=>{ if(anim&&!APP.reduced()) await APP.sleep(800); if(t!==token) return;
           const n=await runAgainst(sLeon,anim); if(n<0) return;
-          sLeon.classList.add("win"); say("Gato y león: ¡solo <b>1 diferencia</b>! ¡Somos pareja!");
+          sLeon.classList.add("win"); say("Blup y Ñam: ¡solo <b>1 diferencia</b>! ¡Somos pareja!");
           if(anim){ APP.audio.ok(); bump(APP,sLeon); } })(); }
     }
     show(0,true);
@@ -368,7 +389,7 @@ SC.push({
     root.append(el("div",{class:"a2-pill",text:"Actividad 2"}),
       el("h2",{class:"a2-h",text:"¡A jugar!"}),
       el("p",{class:"a2-s",text:"Busquen a su pareja"}));
-    const sA=sign(APP,"gato",54,190), sB=sign(APP,"leon",54,190);
+    const sA=fakeSign(APP,"blup",54,190), sB=fakeSign(APP,"nam",54,190);
     sA.classList.add("a2-bob"); sB.classList.add("a2-bob"); sB.style.animationDelay="-1.7s";
     const kids=el("div",{class:"a2-kids"},el("div",{class:"a2-one",text:"¡Solo 1 diferencia!"}),
       el("div",{class:"fam-pic",style:{width:"620px",height:"279px"},html:kidsSVG(APP,4,true)}));

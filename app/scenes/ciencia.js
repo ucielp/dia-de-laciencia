@@ -567,8 +567,7 @@ SC.push({id:"metodo",title:"El método científico",order:9,mount(box,APP){
     panel.replaceChildren(); panel.style.removeProperty("--c");
     const d=k=>({style:{animationDelay:(k*0.15)+"s"}});
     if(s===0){
-      panel.append(el("h2",Object.assign({class:"mc-in",html:"Sigue unos <b>pasos</b>…"},d(0))),
-        el("p",Object.assign({class:"mc-say mc-in",html:"¡como con la <b>espuma</b>!"},d(1))));
+      panel.append(el("h2",Object.assign({class:"mc-in",html:"Vamos a verlo con <b>nuestro experimento</b>"},d(0))));
     }else if(s<=5){
       const S=STEPS[s-1]; panel.style.setProperty("--c",S.c);
       panel.append(el("h2",Object.assign({class:"mc-in",text:S.name},d(0))));
@@ -644,7 +643,7 @@ SC.push({id:"no-solo",title:"La ciencia es mucho más",order:25,mount(box,APP){
     <rect x="166" y="46" width="128" height="24" rx="10" fill="#CDE9F5" %F%/>
     <g class="ns-cork"><path d="M172 4 L288 4 L280 56 L180 56 Z" fill="#B98A62" %F%/><circle cx="208" cy="24" r="5" fill="#8C6A4A"/><circle cx="250" cy="34" r="4" fill="#8C6A4A"/></g>`,"",2)});
   const fly=el("div",{class:"ns-flyc",html:paper("0 0 160 110",`<path d="M28 4 L132 4 L124 56 L36 56 Z" fill="#B98A62" %F%/>`)});
-  root.append(el("div",{class:"ns-rays"}),el("h1",{class:"ns-l1",text:"Esto es un experimento…"}),el("h2",{class:"ns-l2",text:"¡pero la ciencia es mucho más!"}),flask,fly);
+  root.append(el("div",{class:"ns-rays"}),el("h1",{class:"ns-l1",text:"Esto que hicimos recién es un experimento…"}),el("h2",{class:"ns-l2",text:"¡pero la ciencia es mucho más!"}),flask,fly);
   const items=[["nature","Naturaleza",300,740],["space","Espacio",480,470],["chem","Química",760,400],["hist","Historia",1160,400],["med","Medicina",1440,470],["ia","Ordenadores",1620,740]];
   const icons=items.map(([k,t,x,y])=>{ const n=el("div",{class:"ns-ic",style:{left:x+"px",top:y+"px"},html:paper("0 0 100 100",ICON[k],"",1.3)}); n.append(el("span",{text:t})); root.append(n); return n; });
   let open=false;
@@ -780,7 +779,7 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   @media (prefers-reduced-motion:reduce){.am *{animation:none!important;transition:none!important}}
   `));
   const root=el("div",{class:"am"}); box.append(root);
-  const title=el("h1",{class:"am-title",html:"¿Qué hace <b>la ciencia</b>?"});
+  const title=el("h1",{class:"am-title",html:"¿Qué hace un <b>científico</b>?"});
   const dim=el("div",{class:"am-dim"});
   root.append(title,dim);
   const W=580,H=420,GX=40,X0=50,Y0=192,GY=26;
@@ -824,7 +823,7 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
       place(i,s,!animate||red);
     });
     dim.classList.toggle("on",s.focus>=0);
-    title.innerHTML=s.fin?"¡La ciencia está <b>en todas partes</b>!":"¿Qué hace <b>la ciencia</b>?";
+    title.innerHTML=s.fin?"¡La ciencia está <b>en todas partes</b>!":"¿Qué hace un <b>científico</b>?";
     if(s.fin&&!old.fin&&animate){ APP.audio.win(); cards.forEach((c,i)=>tm.set(()=>{ c.classList.remove("wig"); void c.offsetWidth; c.classList.add("wig"); },i*120)); }
   }
   function change(s){ hist.push(st); apply(s,true); }
@@ -1111,7 +1110,7 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
   /* ---------- niveles ---------- */
   const mk=(...kids)=>{ const d=el("div",{class:"mt-L"}); kids.forEach(k=>d.append(typeof k==="string"?APP.svg(k):k)); root.append(d); return d; };
   const LV=[
-    {el:mk(L0),focal:[770,700],ban:"Ustedes están hechos de…",zoom:"×1"},
+    {el:mk(L0),focal:[770,700],ban:"Yo estudio lo que llevamos <b>por dentro</b>.<br>¿De qué están hechos ustedes?",two:true,zoom:"×1"},
     {el:mk(L1),focal:L1focal,ban:"¡Millones de <b>células</b>!",zoom:"×100",trans:"zoom"},
     {el:mk(L2),focal:[1000,600],ban:"Una célula… ¡y su <b>núcleo</b>!",zoom:"×1.000",trans:"zoom"},
     {el:mk(L3bg,helixCv),focal:[960,630],ban:()=>{ const f=document.createDocumentFragment(); f.append(APP.svg(book),el("span",{html:"El ADN: un <b>libro de instrucciones</b>"})); return f; },zoom:"×100.000",trans:"zoom"},
