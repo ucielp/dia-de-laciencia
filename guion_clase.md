@@ -24,8 +24,9 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 | 8–10 | **metodo** | El método científico en 5 pasos, con la espuma: observar, preguntar, imaginar (hipótesis), probar, conclusión. | suelo |
 | 10–11 | **no-solo** | Transición: la ciencia es mucho más. | suelo |
 | 11–13 | **ambitos** | Naturaleza, espacio, química, historia… y medicina + ordenadores/IA juntas. | suelo |
-| 13–14 | **portada** | «¿Y yo? Soy Uciel y soy científico» (con mi foto). Se ensaya la señal de silencio. | suelo |
-| 14–15 | **equipo** | «Tengo un equipo en la UIC»: el Grupo de Biología Computacional del ARN, uno a uno, y la foto del congreso. «¡La ciencia se hace en equipo!» | suelo |
+| 13–14 | **portada** | «Soy Uciel y soy científico»: mi grupo de investigación en la UIC mezcla biomedicina + IA para entender enfermedades (pantalla fija). Se ensaya la señal de silencio. | suelo |
+| 14–15 | **equipo** | «Este es mi equipo»: el Grupo de Biología Computacional del ARN, uno a uno, y la foto del congreso. «¡La ciencia se hace en equipo!» | suelo |
+| 15 | **kresko** | «¡Y tengo una empresa!»: moléculas de plantas buenas para la piel y el sueño (pantalla fija, 20–30 s). | suelo |
 | 15–18 | **mi-trabajo** | Zoom: niño → célula → núcleo → ADN. Señalar el **modelo físico de ADN**. 4 letras → biblioteca (3.000 millones de letras) → IA. | suelo |
 | 18–20 | **receta** | Receta de los panellets → el ADN es una receta con trozos → la receta del perro: 3 trozos. | suelo |
 | 20–22 | **familia-perro** | Mamá Canela y papá Bruno: cada parte de los cachorros (Chispa y Pipa) viene de mamá o de papá, un clic por parte. La misión: descubrir qué perro es su muestra de ADN secreta. | suelo |
@@ -109,39 +110,26 @@ Cierre: «¡La ciencia está en todas partes!»
 
 ### 3.6 portada (min 13–14)
 
-Dos pulsaciones.
+Una sola pantalla, sin pasos: todo aparece de entrada.
 
-> «¿Y yo?» *(pausa)* → «Soy Uciel… ¡y soy **científico**!» *(señalar mi foto en la pantalla)*
-> → *(salen las dos tarjetas)* «Mi ciencia mezcla **biomedicina + inteligencia artificial**.»
+> «Soy Uciel… ¡y soy **científico**!» *(señalar mi foto)* «Tengo un **grupo de investigación** en la UIC, una universidad de Barcelona. Mezclamos **biomedicina + inteligencia artificial** para entender **enfermedades**.»
 > «Los científicos necesitan silencio para pensar. Cuando yo diga “¡Científicos!”, ustedes dicen “¡A observar!” y levantan la mano. ¿Probamos?» *(ensayar dos veces: la segunda, más bajito)*
 
 ### 3.7 equipo (min 14–15)
 
 Un minuto, dos pulsaciones. Es el puente entre «soy científico» y «lo que hago».
 
-1. Al entrar: «Pero yo no trabajo solo. Tengo un **equipo** en la UIC, una universidad de Barcelona. Somos el **Grupo de Biología Computacional del ARN (UIC)**.»
+1. Al entrar: «Pero yo no trabajo solo. Este es mi **equipo**: el **Grupo de Biología Computacional del ARN (UIC)**.»
 2. → Aparecen **uno a uno** (somos 8 contándome a mí): Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia. Decir cada nombre mientras sale (solo el nombre). «Cada uno sabe cosas distintas, y nos ayudamos.»
 3. → **Foto del congreso**: «Y en los congresos nos juntamos con muchísimos científicos de otros sitios.» Que lo digan todos: **«¡La ciencia se hace en equipo!»** «Hoy ustedes también van a trabajar en equipo, en sus estaciones.»
 
 Ojo: la Clara del equipo es una **doctoranda** del grupo, no la Clara del cole. Si algún niño lo pregunta: «¡Es otra Clara!».
 
-### 3.7b grupo (1 minuto)
+### 3.7c kresko (20–30 segundos)
 
-Qué hace el grupo, en versión para niños. Tres pulsaciones, una idea por clic.
+Una sola pantalla, sin pasos. Corto.
 
-1. Al entrar, señalar el círculo: «Esto es una molécula por dentro: cada línea une dos partes. ¡Así se dobla, como un origami!»
-2. → «Leemos el **genoma**: millones y millones de letras.»
-3. → «Son tantas que nos ayuda el ordenador, con **inteligencia artificial**, a buscar pistas.»
-4. → «¿Para qué? Para entender **enfermedades** y ayudar a encontrar **medicinas**.»
-
-### 3.7c kresko (30–40 segundos)
-
-Mi empresa, **Kresko RNA Tech**, en versión para niños. Tres pulsaciones, una idea por clic.
-
-1. Al entrar, señalar el logo: «¡Y además tengo una **empresa**! Se llama **Kresko**.»
-2. → «Las **frutas y verduras frescas** también tienen **ARN**, ¡como nosotros!»
-3. → «Con la **inteligencia artificial** buscamos los trocitos de ARN que nos hacen bien.»
-4. → «Y con eso hacemos **alimentos** que ayudan a cuidar nuestro cuerpo.» Pregunta rápida: «¿Quién comió fruta hoy?» (manos arriba) y seguir.
+> «¡Y además tengo una **empresa**! Se llama **Kresko**. Encontramos **moléculas en las plantas** que son buenas para nuestro cuerpo: ayudan a tener **una piel más sana** y a **dormir mejor**.»
 
 ### 3.8 mi-trabajo (min 15–18)
 

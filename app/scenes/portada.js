@@ -1,6 +1,6 @@
 /* Escena 35 · portada: va DESPUÉS de «¿Qué hace la ciencia?». Paso 0: «¿Y yo?» · paso 1: «Soy Uciel y soy científico» + foto (img/equipo/uciel.jpg) enmarcada en cartulina. */
 (window.SCENES=window.SCENES||[]).push({
-  id:"portada", title:"¿Y yo? Soy Uciel", order:35,
+  id:"portada", title:"Soy Uciel, científico", order:35,
   mount(box,APP){
     const {el,T,GOMET}=APP;
     box.append(el("style",{text:`
@@ -13,9 +13,9 @@
       .po-r{opacity:0;transform:translateY(30px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1)}
       .po.on .po-r{opacity:1;transform:none}
       .po.on .po-hi{transition-delay:.25s}.po.on .po-sub{transition-delay:.55s}.po.on .po-tag{transition-delay:.8s}
-      .po-hi{position:absolute;left:90px;top:440px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:var(--ink);margin:0}
+      .po-hi{position:absolute;left:90px;top:110px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:var(--ink);margin:0}
       .po-hi span{color:var(--orange)}
-      .po-sub{position:absolute;left:96px;top:605px;font-family:var(--display);font-weight:500;font-size:84px;line-height:1.05;color:var(--ink);margin:0}
+      .po-sub{position:absolute;left:96px;top:270px;font-family:var(--display);font-weight:500;font-size:84px;line-height:1.05;color:var(--ink);margin:0}
       .po-sub b{color:var(--blue);font-weight:700}
       .po-tag{position:absolute;left:96px;top:760px;display:flex;gap:18px}
       .po-tag p{margin:0;font-family:var(--display);font-weight:600;font-size:40px;padding:12px 30px;border-radius:999px;color:#fff}
@@ -29,10 +29,13 @@
       .po-mat p{margin:0;height:128px;display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--display);font-weight:700;font-size:64px;color:var(--ink)}
       .po-mat p i{display:inline-block;width:30px;height:30px;border-radius:50%;background:var(--green)}
       .po-tape{position:absolute;width:190px;height:54px;background:rgba(242,194,48,.78);border-radius:4px;box-shadow:0 2px 4px rgba(90,74,48,.15)}
-      .po-mix{position:absolute;left:90px;top:722px;width:1000px;opacity:0;transform:translateY(40px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1);pointer-events:none}
+      .po-mix{position:absolute;left:90px;top:420px;width:1000px;opacity:0;transform:translateY(40px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1);pointer-events:none}
       .po.mix .po-mix{opacity:1;transform:none}
       .po.mix .po-tag{opacity:0}
-      .po-mix h3{margin:0 0 10px;font-family:var(--display);font-weight:600;font-size:54px;color:var(--ink)}
+      .po-mix h3{margin:0 0 22px;font-family:var(--display);font-weight:600;font-size:58px;line-height:1.12;color:var(--ink)}
+      .po-mix .end{margin:22px 0 0;font-family:var(--display);font-weight:600;font-size:58px;line-height:1.12;color:var(--ink)}
+      .po-mix .end b{color:var(--red,#E04B3A)}
+      .po.static *{transition:none!important}
       .po-mix h3 b{color:var(--orange)}
       .po-mix .row{display:flex;align-items:center;gap:26px}
       .po-mc{width:430px;background:#FFFDF7;border-radius:30px;padding:14px 16px 10px;box-shadow:0 7px 0 rgba(90,74,48,.14),0 16px 30px rgba(90,74,48,.18);text-align:center}
@@ -54,21 +57,21 @@
       el("i",{class:"po-tape",style:{left:"250px",top:"6px",transform:"rotate(-4deg)"}}),
       el("i",{class:"po-tape",style:{left:"520px",top:"620px",width:"150px",transform:"rotate(-38deg)"}}));
     root.append(
-      el("h1",{class:"po-q",text:"¿Y yo?"}),
       el("p",{class:"po-hi po-r",html:"Soy <span>Uciel</span>"}),
       el("p",{class:"po-sub po-r",html:"y soy <b>científico</b>"}),
-      el("div",{class:"po-tag po-r"},el("p",{text:"Día de la Ciencia",style:{background:T.green}}),el("p",{text:"1º y 2º",style:{background:T.orange}})),
       photo
     );
     // Paso 2: «Mi ciencia mezcla…» medicina + IA (dibujos de la escena «ámbitos»)
     const ART=window.CIENCIA_ART;
     if(ART){
       const card=k=>{ const a=ART.AMB.find(x=>x.k===k); return el("div",{class:"po-mc"},el("div",{class:"ill",style:{background:a.bg},html:ART.paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),el("p",{text:k==="med"?"Biomedicina":"Inteligencia artificial",style:{color:a.col}})); };
-      root.append(el("div",{class:"po-mix"},el("h3",{html:"Mi ciencia <b>mezcla</b>…"}),el("div",{class:"row"},card("med"),el("span",{class:"po-plus",text:"+"}),card("ia"))));
+      root.append(el("div",{class:"po-mix"},el("h3",{html:"Tengo un <b>grupo de investigación</b><br>en la UIC que mezcla…"}),el("div",{class:"row"},card("med"),el("span",{class:"po-plus",text:"+"}),card("ia")),el("p",{class:"end",html:"…para entender <b>enfermedades</b>."})));
     }
     box.append(root);
     root.addEventListener("click",()=>APP.next());
-    let step=0; const MAX=window.CIENCIA_ART?2:1;
+    // Pantalla fija, sin pasos: todo visible al entrar.
+    root.classList.add("static","on","mix");
+    let step=0; const MAX=0;
     const show=n=>{ step=n; root.classList.toggle("on",n>=1); root.classList.toggle("mix",n>=2); };
     return {
       next(){ if(step<MAX){ show(step+1); return true; } return false; },

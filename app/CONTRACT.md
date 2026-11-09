@@ -48,10 +48,9 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 | 9 | metodo | Método científico (ciclo de 5 pasos) | ciencia.js |
 | 25 | no-solo | «La ciencia es mucho más que experimentos» (transición) | ciencia.js |
 | 30 | ambitos | ¿Qué hace un científico? tarjetas con fotos reales; las DOS ÚLTIMAS son medicina y ordenadores/IA; hay una de historia | ciencia.js |
-| 35 | portada | «¿Y yo? Soy Uciel y soy científico» (sin logo) (ahora va DESPUÉS de ámbitos) | portada.js |
+| 35 | portada | (fija) «Soy Uciel y soy científico» + grupo de investigación en la UIC: biomedicina + IA para entender enfermedades | portada.js |
 | 37 | equipo | Mi equipo en la UIC: fotos, «La ciencia se hace en equipo» | portada.js |
-| 38 | grupo | ¿Qué hace mi grupo? Imagen del ARN doblado + genoma, IA, enfermedades y medicinas | grupo.js |
-| 39 | kresko | ¡Y tengo una empresa! Logo de Kresko RNA Tech + ARN en frutas, IA, alimentos que cuidan | kresko.js |
+| 39 | kresko | ¡Y tengo una empresa! (fija) Logo + imagen del deck: moléculas de plantas buenas para la piel y el sueño | kresko.js |
 | 40 | mi-trabajo | Lo que yo hago: niño → célula → ADN → 4 letras (colores del modelo) → «yo estudio estas letras y lo combino con IA» (sin ARN) | ciencia.js |
 | 50 | receta | El ADN es una receta (ejemplo: panellets) → la receta del perro (3 gomets) | perro.js |
 | 52 | familia-perro | Historia: mamá perra y papá perro → los cachorros reciben cada parte de mamá o de papá. Nos parecemos a nuestros padres | perro.js |

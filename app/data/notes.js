@@ -31,20 +31,11 @@ window.NOTES = {
     "Última pulsación: todas juntas → «¡La ciencia está en todas partes!»",
 
   portada:
-    "(2 pulsaciones.) Al entrar: «¿Y yo?» (pausa)\n\n" +
-    "1) «Soy Uciel… ¡y soy científico!» (Señala la foto.)\n\n" +
-    "2) Salen las dos tarjetas: «Mi ciencia mezcla dos cosas: la biomedicina… y la inteligencia artificial.»\n\n" +
+    "(Pantalla fija, sin pasos.) «Soy Uciel… ¡y soy científico!» (Señala la foto.) «Tengo un grupo de investigación en la UIC: mezclamos biomedicina + inteligencia artificial para entender enfermedades.»\n\n" +
     "Ensayar la señal de silencio: «Cuando yo diga “¡Científicos!”, ustedes dicen “¡A observar!” y levantan la mano.» Dos veces, la segunda más bajito.",
 
-  grupo:
-    "(3 pulsaciones: una idea por clic.) Al entrar: «¿Y qué hacemos en mi grupo?» Señalar el círculo: «Esto es una molécula por dentro: cada línea une dos partes. ¡Así se dobla, como un origami!»\n\n" +
-    "1) «Leemos el genoma: millones y millones de letras.» 2) «Son tantas que nos ayuda el ordenador, con inteligencia artificial, a buscar pistas.»\n\n" +
-    "3) «¿Para qué? Para entender enfermedades y ayudar a encontrar medicinas.» (Un minuto: es el puente al zoom de «¿De qué están hechos ustedes?».)",
-
   kresko:
-    "(3 pulsaciones, 30-40 segundos.) Al entrar, señalar el logo: «¡Y además tengo una empresa! Se llama Kresko.»\n\n" +
-    "1) «Las frutas y verduras frescas también tienen ARN, ¡como nosotros!» 2) «Con la inteligencia artificial buscamos los trocitos de ARN que nos hacen bien.»\n\n" +
-    "3) «Y con eso hacemos alimentos que ayudan a cuidar nuestro cuerpo.» Pregunta rápida: «¿Quién comió fruta hoy?» (manos arriba) y seguir.",
+    "(Pantalla fija, 20-30 segundos.) «¡Y además tengo una empresa! Se llama Kresko. Encontramos moléculas en las plantas que son buenas para nuestro cuerpo: ayudan a tener una piel más sana y a dormir mejor.»",
 
   equipo:
     "(2 pulsaciones.) Al entrar, solo yo: «Pero no trabajo solo: tengo un equipo en la UIC, una universidad de Barcelona. Somos el Grupo de Biología Computacional del ARN (UIC).»\n\n" +
