@@ -830,12 +830,14 @@ SC.push({id:"ambitos",title:"¿Qué hace la ciencia?",order:30,mount(box,APP){
   function change(s){ hist.push(st); apply(s,true); }
   const clone=s=>({rev:s.rev.slice(),focus:s.focus,fin:s.fin});
   function onCard(i){
+    // Táctil: tocar la tarjeta abierta (o cualquiera al final) avanza como la flecha →. En ordenador no cambia.
+    if(APP.touch&&(st.focus===i||st.fin)){ APP.next(); return; }
     const s=clone(st);
     if(s.focus===i){ s.focus=-1; if(s.rev.every(Boolean)) s.fin=true; change(s); return; }
     if(!s.rev[i]) s.rev[i]=1;
     s.focus=i; change(s);
   }
-  dim.addEventListener("click",()=>{ if(st.focus>=0){ const s=clone(st); s.focus=-1; if(s.rev.every(Boolean)) s.fin=true; change(s); } });
+  dim.addEventListener("click",ev=>{ if(st.focus>=0){ ev.stopPropagation(); const s=clone(st); s.focus=-1; if(s.rev.every(Boolean)) s.fin=true; change(s); } });
   apply(st,false);
   return {
     next(){

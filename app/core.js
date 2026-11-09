@@ -156,6 +156,7 @@ function layout(){
   }
   fit();
 }
+api.touch=window.matchMedia("(pointer: coarse)").matches; // pantalla táctil (móvil/tablet); en ordenador es false
 api.rotated=()=>document.documentElement.classList.contains("rot");
 function renderDots(){
   const nav=document.getElementById("dots"); nav.replaceChildren();
@@ -180,8 +181,9 @@ async function show(i){
   try{ history.replaceState(null,"","#"+s.id); }catch(e){}
   renderDots(); renderNotes();
 }
-function next(){ if(inst&&inst.next&&inst.next()) return; show(current+1); }
-function prev(){ if(inst&&inst.prev&&inst.prev()) return; show(current-1); }
+let navCount=0;
+function next(){ navCount++; if(inst&&inst.next&&inst.next()) return; show(current+1); }
+function prev(){ navCount++; if(inst&&inst.prev&&inst.prev()) return; show(current-1); }
 api.next=next; api.prev=prev;
 
 /* Escenas opcionales: si una escena define available() (devuelve boolean o Promise<boolean>), se comprueba al arrancar.
@@ -210,6 +212,17 @@ async function boot(){
   await probeOptional();
   stage=document.getElementById("stage");
   layout(); window.addEventListener("resize",layout);
+  // Pantallas táctiles (móvil/tablet): tocar la escena avanza, como la flecha →. En ordenador (ratón) no se activa.
+  // No avanza si se toca un botón, enlace, vídeo o tarjeta, ni si la escena ya avanzó o atendió el toque ella misma.
+  if(api.touch){
+    let before=0;
+    stage.addEventListener("click",()=>{ before=navCount; },true);
+    stage.addEventListener("click",e=>{
+      if(navCount!==before) return;
+      if(e.target.closest&&e.target.closest("button,a,input,select,textarea,video,[role=button]")) return;
+      next();
+    });
+  }
   document.addEventListener("keydown",e=>{
     if(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
     if(["ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); next(); }

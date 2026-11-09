@@ -424,7 +424,7 @@ SC.push({
     const gBr=svgFront.querySelector(".ar-branches");
     const layer=el("div",{style:{position:"absolute",inset:0}});
     const labels=el("div",{style:{position:"absolute",inset:0,pointerEvents:"none"}});
-    const big=el("div",{class:"ar-big fam-paper",hidden:true,onclick:e=>{e.stopPropagation(); if(isQ(step)) advance();}});
+    const big=el("div",{class:"ar-big fam-paper",hidden:true,onclick:e=>{e.stopPropagation(); if(isQ(step)) advance(); else if(APP.touch) APP.next();}});
     box.append(bg,svgFront,layer,labels,head,big);
 
     // ---- geometría ----
@@ -438,11 +438,14 @@ SC.push({
     for(const id of T.leaves){
       const badge=el("div",{class:"ar-badge",hidden:true});
       const c=el("div",{class:"ar-card","data-id":id,title:T.names[id],style:{left:(colX(id)-CW/2)+"px"},
-        onclick:e=>{ e.stopPropagation(); if(!c.classList.contains("ghost")) select(id); }},
+        onclick:e=>{ e.stopPropagation();
+          // Táctil: tocar la tarjeta ya elegida, o tocar mientras hay una pregunta, avanza como la flecha →. En ordenador no cambia.
+          if(APP.touch&&(selected===id||isQ(step))){ APP.next(); return; }
+          if(!c.classList.contains("ghost")) select(id); }},
         pic(APP,id,PIC_W,PIC_H),strip(APP,T.dna[id],SQ,SQG,true),badge);
       c.badge=badge; cards[id]=c; layer.append(c);
     }
-    box.addEventListener("click",()=>{ if(selected) select(null); });
+    box.addEventListener("click",ev=>{ if(selected){ ev.stopPropagation(); select(null); } });
 
     // ---- ramas (hacia arriba) ----
     function svgEl(tag,attrs){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
