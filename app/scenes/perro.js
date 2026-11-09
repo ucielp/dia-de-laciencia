@@ -322,10 +322,16 @@ S.push({id:"familia-perro",title:"Mamá, papá y los cachorros",order:52,mount(b
   }
   function fly(from,to,color,done){
     const my=gen;
-    const r=root.getBoundingClientRect(), s=r.width/1920||1;
-    const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
-    const x1=(a.left+a.width/2-r.left)/s, y1=(a.top+a.height/2-r.top)/s;
-    const x2=(b.left+b.width/2-r.left)/s, y2=(b.top+b.height/2-r.top)/s;
+    const r=root.getBoundingClientRect(), a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
+    let x1,y1,x2,y2;
+    if(APP.rotated&&APP.rotated()){ // móvil en vertical: la escena está girada 90°, deshacer el giro
+      const s=r.height/1920||1, loc=q=>[(q.top+q.height/2-r.top)/s,(r.right-(q.left+q.width/2))/s];
+      [x1,y1]=loc(a); [x2,y2]=loc(b);
+    } else {
+      const s=r.width/1920||1;
+      x1=(a.left+a.width/2-r.left)/s; y1=(a.top+a.height/2-r.top)/s;
+      x2=(b.left+b.width/2-r.left)/s; y2=(b.top+b.height/2-r.top)/s;
+    }
     const n=el("i",{class:"fp-fly",style:{left:(x1-36)+"px",top:(y1-36)+"px",background:color}});
     root.append(n);
     const dx=x2-x1, dy=y2-y1;

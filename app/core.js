@@ -135,6 +135,28 @@ function fit(){
   const s=Math.min(vp.clientWidth/W, vp.clientHeight/H);
   stage.style.transform=`translate(${(vp.clientWidth-W*s)/2}px,${(vp.clientHeight-H*s)/2}px) scale(${s})`;
 }
+// Móvil en vertical: girar toda la app 90° (clase .rot en index.html) y avisar una vez de que se puede girar el móvil.
+// La condición exige pantalla táctil y estrecha: en ordenador/proyector nunca se cumple y no cambia nada.
+const portraitPhone=window.matchMedia("(orientation: portrait) and (max-width: 600px) and (pointer: coarse)");
+let hintShown=false;
+function layout(){
+  const on=portraitPhone.matches, app=document.getElementById("app");
+  if(on){
+    document.documentElement.classList.add("rot");
+    app.style.width=window.innerHeight+"px"; app.style.height=window.innerWidth+"px";
+    if(!hintShown){
+      hintShown=true;
+      const h=el("div",{id:"turnHint",role:"status"},"↻ Gira el móvil para verlo más grande");
+      document.body.append(h);
+      setTimeout(()=>h.classList.add("off"),5000); setTimeout(()=>h.remove(),6000);
+    }
+  } else if(document.documentElement.classList.contains("rot")){
+    document.documentElement.classList.remove("rot");
+    app.style.width=""; app.style.height="";
+  }
+  fit();
+}
+api.rotated=()=>document.documentElement.classList.contains("rot");
 function renderDots(){
   const nav=document.getElementById("dots"); nav.replaceChildren();
   SCENES.forEach((s,i)=>nav.append(el("button",{class:"dot"+(i===current?" on":""),title:s.title,"aria-label":`Ir a: ${s.title}`,onclick:()=>{audio.click();show(i);}})));
@@ -187,7 +209,7 @@ async function boot(){
   SCENES.sort(byOrder);
   await probeOptional();
   stage=document.getElementById("stage");
-  fit(); window.addEventListener("resize",fit);
+  layout(); window.addEventListener("resize",layout);
   document.addEventListener("keydown",e=>{
     if(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
     if(["ArrowRight","PageDown"," "].includes(e.key)){ e.preventDefault(); next(); }
