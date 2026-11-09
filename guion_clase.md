@@ -63,9 +63,7 @@ Pantalla: un «?» gigante. Pulsar una vez y empieza la **música de misterio** 
    > «¿Qué ha pasado?» *(dejar 3–4 respuestas: ¡todas valen!)*
    > «¡Eso es lo que hacen los científicos: hacer preguntas!»
 
-**Receta: decidir tras la prueba en casa** (detalle en `imprimir/experimento_espuma.pdf`):
-- **Opción A · vinagre + bicarbonato:** en el frasco, 40–50 g de bicarbonato, un buen chorro de lavavajillas, colorante y un poco de agua; al final, 500–750 ml de vinagre de golpe desde una jarra. Rápida, pero la espuma baja pronto.
-- **Opción B · agua oxigenada 3% + levadura («pasta de dientes de elefante»):** en el frasco, 250–500 ml de agua oxigenada, lavavajillas y colorante; al final, la levadura disuelta en agua tibia (1 minuto antes). Tarda unos segundos en arrancar, pero crece más y dura más; sale tibia.
+**Receta: agua oxigenada + levadura («pasta de dientes de elefante»)** (detalle en `imprimir/en_casa/experimento_espuma.pdf`): en el frasco, 250–500 ml de agua oxigenada, un buen chorro de lavavajillas y colorante; al final, la levadura de panadería disuelta en agua tibia (1 minuto antes). Tarda unos segundos en arrancar; la espuma es densa y sale tibia.
 
 **Trucos:** frasco grande y transparente **en una mesa alta**, sobre bandeja y con un fondo liso detrás (los de atrás ven poco desde el suelo). Si el frasco es ancho, cargar mucho o meter una botella dentro. Gotas de colorante por las paredes de dentro = espuma a franjas. **Los niños, a 2 m como mínimo.**
 
@@ -126,6 +124,15 @@ Un minuto, dos pulsaciones. Es el puente entre «soy científico» y «lo que ha
 3. → **Foto del congreso**: «Y en los congresos nos juntamos con muchísimos científicos de otros sitios.» Que lo digan todos: **«¡La ciencia se hace en equipo!»** «Hoy ustedes también van a trabajar en equipo, en sus estaciones.»
 
 Ojo: la Clara del equipo es una **doctoranda** del grupo, no la Clara del cole. Si algún niño lo pregunta: «¡Es otra Clara!».
+
+### 3.7b grupo (1 minuto)
+
+Qué hace el grupo, en versión para niños. Tres pulsaciones, una idea por clic.
+
+1. Al entrar, señalar el círculo: «Esto es una molécula por dentro: cada línea une dos partes. ¡Así se dobla, como un origami!»
+2. → «Leemos el **genoma**: millones y millones de letras.»
+3. → «Son tantas que nos ayuda el ordenador, con **inteligencia artificial**, a buscar pistas.»
+4. → «¿Para qué? Para entender **enfermedades** y ayudar a encontrar **medicinas**.»
 
 ### 3.8 mi-trabajo (min 15–18)
 
@@ -305,7 +312,7 @@ Si falta un profe: los otros dos se reparten sus estaciones.
 
 ### Experimento de la espuma (`imprimir/experimento_espuma.pdf`)
 - Frasco grande **transparente** (3–5 L), alto y estrecho si se puede (o con una botella dentro).
-- Ingredientes para 2 o 3 veces (de la opción elegida tras la prueba en casa): vinagre + bicarbonato, **o** agua oxigenada 3% (farmacia) + levadura de panadería. Lavavajillas y colorante en las dos.
+- Ingredientes para 2 o 3 veces: agua oxigenada (farmacia) + levadura de panadería, lavavajillas y colorante.
 - Jarra para echar el último ingrediente.
 - Mesa alta, bandeja grande debajo del frasco y una segunda bandeja para retirarlo. Fondo liso detrás (cartulina o sábana).
 - **Bata y gafas.**

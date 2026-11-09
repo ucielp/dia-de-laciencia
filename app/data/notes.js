@@ -7,8 +7,8 @@ window.NOTES = {
     "Cuando la espuma salga del frasco, 2.ª pulsación: la música se apaga poco a poco y sale «¿Qué ha pasado?». Habla por primera vez: «¿Qué ha pasado?». Deja que digan lo que creen: ¡todas valen!",
 
   experimento:
-    "(3 pulsaciones; tecla I = cambiar los ingredientes: vinagre + bicarbonato o agua oxigenada + levadura.)\n\n" +
-    "Al entrar) «Hemos mezclado dos ingredientes.»\n\n" +
+    "(3 pulsaciones. Ingredientes: agua oxigenada + levadura.)\n\n" +
+    "Al entrar) «Hemos mezclado dos ingredientes: agua oxigenada y levadura.»\n\n" +
     "1) «Al mezclarse hacen un gas, como el aire: no se ve, pero hace burbujitas.»\n\n" +
     "2) «El jabón atrapa el gas dentro de burbujas, como una pompa.»\n\n" +
     "3) «Muchísimas burbujas juntas son espuma… ¡y ya no caben en el bote!» Pregunta: «¿Y si no ponemos jabón?» (que voten) «Los científicos hacen preguntas y lo comprueban.»",
@@ -35,6 +35,11 @@ window.NOTES = {
     "1) «Soy Uciel… ¡y soy científico!» (Señala la foto.)\n\n" +
     "2) Salen las dos tarjetas: «Mi ciencia mezcla dos cosas: la biomedicina… y la inteligencia artificial.»\n\n" +
     "Ensayar la señal de silencio: «Cuando yo diga “¡Científicos!”, ustedes dicen “¡A observar!” y levantan la mano.» Dos veces, la segunda más bajito.",
+
+  grupo:
+    "(3 pulsaciones: una idea por clic.) Al entrar: «¿Y qué hacemos en mi grupo?» Señalar el círculo: «Esto es una molécula por dentro: cada línea une dos partes. ¡Así se dobla, como un origami!»\n\n" +
+    "1) «Leemos el genoma: millones y millones de letras.» 2) «Son tantas que nos ayuda el ordenador, con inteligencia artificial, a buscar pistas.»\n\n" +
+    "3) «¿Para qué? Para entender enfermedades y ayudar a encontrar medicinas.» (Un minuto: es el puente al zoom de «¿De qué están hechos ustedes?».)",
 
   equipo:
     "(2 pulsaciones.) Al entrar, solo yo: «Pero no trabajo solo: tengo un equipo en la UIC, una universidad de Barcelona. Somos el Grupo de Biología Computacional del ARN (UIC).»\n\n" +

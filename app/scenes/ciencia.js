@@ -190,7 +190,7 @@ SC.push({id:"misterio",title:"¿Qué pasará?",order:5,mount(box,APP){
    ===================================================================================== */
 SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP){
   const {el}=APP, red=APP.reduced(), tm=timers(), pourTm=timers();
-  const VARS=[{a:"Un ingrediente",b:"Otro ingrediente"},{a:"Vinagre",b:"Bicarbonato"},{a:"Agua oxigenada",b:"Levadura"}];
+  const VARS=[{a:"Agua oxigenada",b:"Levadura"}]; // solo el experimento de levadura + agua oxigenada
   let vi=0;
   box.append(styleEl(APP,`
   .fx{position:absolute;inset:0;background:radial-gradient(circle at 72% 55%,#FFF8EA 0,#F4E6CC 60%,#E9D4AE 100%);overflow:hidden;cursor:pointer}
@@ -244,6 +244,7 @@ SC.push({id:"experimento",title:"¿Por qué sale espuma?",order:8,mount(box,APP)
     <path d="M56 212 H104 L90 268 H70 Z" fill="#4E8F2A" %F%/><rect x="72" y="264" width="16" height="22" rx="5" fill="#3E7520"/>`)});
   const swap=el("button",{class:"fx-swap",title:"Cambiar nombres de ingredientes (tecla I)","aria-label":"Cambiar nombres de ingredientes",
     html:`<svg viewBox="0 0 48 48"><path d="M10 18 A15 15 0 0 1 38 14" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M38 6 V15 H29" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 30 A15 15 0 0 1 10 34" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/><path d="M10 42 V33 H19" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`});
+  swap.hidden=true; // un único par de ingredientes: no hace falta el botón de cambiar
   root.append(cv,left,cup1,cup2,soapB,swap);
   /* ---- Mundo: bote, líquido, burbujas, espuma ---- */
   const JX0=1170,JX1=1610,JXC=1390,JTOP=390,JBOT=910,WALL=14,LIQ=170,TLMAX=JBOT+16-JTOP;
@@ -609,7 +610,7 @@ SC.push({id:"no-solo",title:"La ciencia es mucho más",order:25,mount(box,APP){
   const {el}=APP, red=APP.reduced(), tm=timers();
   box.append(styleEl(APP,`
   .ns{position:absolute;inset:0;background:radial-gradient(circle at 50% 62%,#FFF7E8 0,#F8E8CC 60%,#EED7B0 100%);overflow:hidden;cursor:pointer}
-  .ns-rays{position:absolute;left:-240px;top:-560px;width:2400px;height:2400px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(247,147,30,.13) 0 9deg,transparent 9deg 18deg);opacity:0;transition:opacity 1s;animation:nsSpin 80s linear infinite}
+  .ns-rays{position:absolute;left:-240px;top:-560px;width:2400px;height:2400px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(41,171,226,.12) 0 9deg,transparent 9deg 18deg);opacity:0;transition:opacity 1s;animation:nsSpin 80s linear infinite}
   .ns.open .ns-rays{opacity:1}
   @keyframes nsSpin{to{transform:rotate(360deg)}}
   .ns-l1{position:absolute;left:0;right:0;top:60px;text-align:center;font-family:var(--display);font-weight:600;font-size:96px;color:var(--ink);margin:0}
