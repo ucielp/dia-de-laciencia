@@ -235,12 +235,18 @@ function kidsSVG(APP,n,joined){
     if(!joined) sh.push(APP.L(`M${x-22} 116 L${x-34} 52`,skins[i%5],11),APP.L(`M${x+22} 116 L${x+34} 52`,skins[i%5],11));
     sh.push(APP.R(x-16,176,13,40,6,"#3E4A6B"),APP.R(x+3,176,13,40,6,"#3E4A6B"));
     sh.push(APP.R(x-28,104,56,82,22,shirts[i%5]));
+    const girl=i%2===0; // niñas y niños alternados
+    if(girl){
+      sh.push(APP.P(`M${x-28} 162 L${x-38} 194 L${x+38} 194 L${x+28} 162 Z`,shirts[(i+2)%5])); // falda
+      sh.push(APP.P(`M${x-30} 80 Q${x-34} 50 ${x} 48 Q${x+34} 50 ${x+30} 80 L${x+32} 116 Q${x+20} 122 ${x+14} 112 L${x-14} 112 Q${x-20} 122 ${x-32} 116 Z`,hairs[i%5])); // melena larga, detrás de la cara
+    }
     sh.push(APP.C(x,78,27,skins[i%5]),APP.P(`M${x-27} 76 Q${x-26} 50 ${x} 50 Q${x+26} 50 ${x+27} 76 Q${x+14} 62 ${x} 64 Q${x-14} 62 ${x-27} 76 Z`,hairs[i%5]));
+    if(girl) sh.push(APP.P(`M${x+10} 52 L${x+30} 42 L${x+28} 62 Z M${x+10} 52 L${x-8} 40 L${x-6} 60 Z`,"#E59AAE"),APP.C(x+11,52,5,"#D07890")); // lazo
     sh.push(APP.LN(`M${x-7} 90 Q${x} 96 ${x+7} 90`,"#7A4B35",3));
     eyes.push([x-9,80],[x+9,80]);
   }
   if(joined){ for(let i=0;i<n;i++){ const x=50+i*100; sh.push(APP.L(`M${x-24} 120 L${x-50} 150`,skins[i%5],11),APP.L(`M${x+24} 120 L${x+50} 150`,skins[i%5],11)); } }
-  return APP.paperSVG(sh,{vb:`0 40 ${W} 180`,eyes,eyeR:4.5,label:joined?"Niños dados de la mano":"Niños sosteniendo un cartel"});
+  return APP.paperSVG(sh,{vb:`0 40 ${W} 180`,eyes,eyeR:4.5,label:joined?"Niñas y niños dados de la mano":"Niñas y niños sosteniendo un cartel"});
 }
 /* Animales del EJEMPLO de «solo 1 diferencia»: reales pero FUERA del juego (conejo, liebre y tortuga),
    así el ejemplo no resuelve ninguna pareja del árbol. Mismo estilo «papel recortado» y encuadre que species.js. */

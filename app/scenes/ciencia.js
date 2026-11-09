@@ -942,6 +942,8 @@ SC.push({id:"mi-trabajo",title:"Lo que yo hago",order:40,mount(box,APP){
     <path d="M960 610 l14 28 31 4 -23 22 6 31 -28 -15 -28 15 6 -31 -23 -22 31 -4z" fill="#F2C230" %F%/>
     <rect x="934" y="500" width="52" height="56" rx="12" fill="#E8B48E"/>
     <circle cx="822" cy="410" r="32" fill="${SKIN}" %F%/><circle cx="1098" cy="410" r="32" fill="${SKIN}" %F%/>
+    <ellipse cx="790" cy="350" rx="56" ry="78" fill="#5A3E2B" transform="rotate(-24 790 350)" %F%/><ellipse cx="1130" cy="350" rx="56" ry="78" fill="#5A3E2B" transform="rotate(24 1130 350)" %F%/>
+    <path d="M830 300 l-36 -34 -6 50z M830 300 l-40 26 46 12z" fill="#E59AAE" %F%/><path d="M1090 300 l36 -34 6 50z M1090 300 l40 26 -46 12z" fill="#E59AAE" %F%/>
     <circle cx="960" cy="400" r="142" fill="${SKIN}" %F%/>
     <path d="M818 392 Q822 250 960 244 Q1098 250 1102 392 Q1070 318 1000 326 Q960 296 900 330 Q850 340 818 392Z" fill="#5A3E2B" %F%/>
     <g class="mt-blink"><circle cx="908" cy="412" r="16" fill="#2A2A30"/><circle cx="1012" cy="412" r="16" fill="#2A2A30"/><circle cx="903" cy="406" r="5" fill="#fff"/><circle cx="1007" cy="406" r="5" fill="#fff"/></g>
