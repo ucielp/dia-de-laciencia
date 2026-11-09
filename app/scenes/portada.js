@@ -13,9 +13,9 @@
       .po-r{opacity:0;transform:translateY(30px);transition:opacity .5s,transform .6s cubic-bezier(.3,1.5,.6,1)}
       .po.on .po-r{opacity:1;transform:none}
       .po.on .po-hi{transition-delay:.25s}.po.on .po-sub{transition-delay:.55s}.po.on .po-tag{transition-delay:.8s}
-      .po-hi{position:absolute;left:90px;top:110px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:var(--ink);margin:0}
+      .po-hi{position:absolute;left:90px;top:200px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:var(--ink);margin:0}
       .po-hi span{color:var(--orange)}
-      .po-sub{position:absolute;left:96px;top:270px;font-family:var(--display);font-weight:500;font-size:84px;line-height:1.05;color:var(--ink);margin:0}
+      .po-sub{position:absolute;left:96px;top:365px;font-family:var(--display);font-weight:500;font-size:84px;line-height:1.05;color:var(--ink);margin:0}
       .po-sub b{color:var(--blue);font-weight:700}
       .po-tag{position:absolute;left:96px;top:760px;display:flex;gap:18px}
       .po-tag p{margin:0;font-family:var(--display);font-weight:600;font-size:40px;padding:12px 30px;border-radius:999px;color:#fff}
@@ -36,6 +36,9 @@
       .po-mix .end{margin:22px 0 0;font-family:var(--display);font-weight:600;font-size:58px;line-height:1.12;color:var(--ink)}
       .po-mix .end b{color:var(--red,#E04B3A)}
       .po.static *{transition:none!important}
+      .po-has{position:absolute;left:96px;top:560px;margin:0;font-family:var(--display);font-weight:600;font-size:64px;line-height:1.2;color:var(--ink)}
+      .po-has b{color:var(--orange);font-weight:700}
+      .po-has b.g{color:#3E7D3A}
       .po-mix h3 b{color:var(--orange)}
       .po-mix .row{display:flex;align-items:center;gap:26px}
       .po-mc{width:430px;background:#FFFDF7;border-radius:30px;padding:14px 16px 10px;box-shadow:0 7px 0 rgba(90,74,48,.14),0 16px 30px rgba(90,74,48,.18);text-align:center}
@@ -61,12 +64,7 @@
       el("p",{class:"po-sub po-r",html:"y soy <b>científico</b>"}),
       photo
     );
-    // Paso 2: «Mi ciencia mezcla…» medicina + IA (dibujos de la escena «ámbitos»)
-    const ART=window.CIENCIA_ART;
-    if(ART){
-      const card=k=>{ const a=ART.AMB.find(x=>x.k===k); return el("div",{class:"po-mc"},el("div",{class:"ill",style:{background:a.bg},html:ART.paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),el("p",{text:k==="med"?"Biomedicina":"Inteligencia artificial",style:{color:a.col}})); };
-      root.append(el("div",{class:"po-mix"},el("h3",{html:"Tengo un <b>grupo de investigación</b><br>en la UIC que mezcla…"}),el("div",{class:"row"},card("med"),el("span",{class:"po-plus",text:"+"}),card("ia")),el("p",{class:"end",html:"…para entender <b>enfermedades</b>."})));
-    }
+    root.append(el("p",{class:"po-has",html:"Tengo un <b>grupo de investigación</b><br>y una <b class=\"g\">empresa</b>."}));
     box.append(root);
     root.addEventListener("click",()=>APP.next());
     // Pantalla fija, sin pasos: todo visible al entrar.
@@ -107,6 +105,18 @@
       .eq-name::before{content:"";display:inline-block;width:20px;height:20px;border-radius:50%;background:var(--c);margin-right:12px;vertical-align:2px}
       .eq.s0 .eq-name{font-size:60px}
       .eq.s2 .eq-name{font-size:40px;padding:6px 16px 8px}
+      .eq-mix{position:absolute;left:0;right:0;top:530px;display:flex;flex-direction:column;align-items:center}
+      .eq-mix h3{margin:0 0 20px;font-family:var(--display);font-weight:600;font-size:64px;line-height:1;color:var(--ink)}
+      .eq-mix h3 b{color:var(--orange)}
+      .eq-mix .row{display:flex;align-items:center;gap:34px}
+      .eq-mc{width:470px;background:#FFFDF7;border-radius:30px;padding:16px 18px 12px;box-shadow:0 7px 0 rgba(90,74,48,.14),0 16px 30px rgba(90,74,48,.18);text-align:center}
+      .eq-mc .ill{height:160px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+      .eq-mc .ill svg{height:150px;width:auto}
+      .eq-mc p{margin:8px 0 0;font-family:var(--display);font-weight:700;font-size:44px;white-space:nowrap;line-height:1.05}
+      .eq-plus{font-family:var(--display);font-weight:700;font-size:120px;color:var(--orange);line-height:1}
+      .eq-mix .end{margin:22px 0 0;font-family:var(--display);font-weight:600;font-size:64px;line-height:1;color:var(--ink)}
+      .eq-mix .end b{color:#E04B3A}
+      .eq *{transition:none!important}
       .eq.s2 .eq-name::before{display:none}
       .eq-group{position:absolute;left:70px;top:478px;width:960px;margin:0;background:#FFFDF7;padding:22px 22px 26px;box-sizing:border-box;border-radius:18px;box-shadow:0 8px 0 rgba(90,74,48,.14),0 18px 40px rgba(90,74,48,.25);transform:rotate(-2deg) translateY(60px) scale(.8);opacity:0;transition:transform .7s cubic-bezier(.3,1.4,.5,1),opacity .4s}
       .eq-group img{display:block;width:916px;height:515px;object-fit:cover;border-radius:10px;background:#E8E2D6}
@@ -118,7 +128,7 @@
       .eq.s2 .eq-msg{opacity:1;transform:none}
       @media (prefers-reduced-motion:reduce){.eq *{transition:none!important;animation:none!important}}
     `}));
-    const root=el("div",{class:"eq s0"});
+    const root=el("div",{class:"eq s2"});
     [[40,410,54,GOMET.rojo],[1840,470,48,T.green],[1760,980,64,GOMET.amarillo],[120,990,44,T.blue],[330,1030,30,T.orange],[1880,860,34,GOMET.azul],[50,860,30,T.green]]
       .forEach(([x,y,s,c])=>root.append(el("i",{class:"eq-dot",style:{left:x+"px",top:y+"px",width:s+"px",height:s+"px",background:c}})));
     root.append(el("h1",{class:"eq-title",html:"Mi <b>equipo</b> en la UIC"}),
@@ -127,36 +137,28 @@
     const cards=PEOPLE.map(([name,file,c],i)=>{
       const img=el("img",{src:`img/equipo/${file}.jpg`,alt:name,draggable:"false"});
       img.onerror=()=>{ img.style.visibility="hidden"; };
-      const p=el("div",{class:"eq-p"+(i===UI?"":" hid")},
+      const p=el("div",{class:"eq-p"},
         el("div",{class:"eq-ring"}),el("div",{class:"eq-ph"},img),el("div",{class:"eq-name",text:name}));
       p.style.setProperty("--c",c); p.style.setProperty("--rot",rots[i]+"deg");
       root.append(p); return p;
     });
-    const gimg=el("img",{src:"img/equipo/congreso.jpg",alt:"El equipo en un congreso de ciencia"});
-    gimg.onerror=()=>{ gimg.style.visibility="hidden"; };
-    root.append(el("figure",{class:"eq-group"},gimg),
-      el("p",{class:"eq-msg",html:"¡La ciencia se hace en <b>equipo</b>!"}));
+    // Debajo del equipo: «Mezclamos biomedicina + IA para entender enfermedades» (dibujos de la escena «ámbitos»)
+    const ART=window.CIENCIA_ART;
+    if(ART){
+      const card=k=>{ const a=ART.AMB.find(x=>x.k===k); return el("div",{class:"eq-mc"},el("div",{class:"ill",style:{background:a.bg},html:ART.paper("0 0 300 200",a.ill,'preserveAspectRatio="xMidYMid meet"')}),el("p",{text:k==="med"?"Biomedicina":"Inteligencia artificial",style:{color:a.col}})); };
+      root.append(el("div",{class:"eq-mix"},el("h3",{html:"Juntos <b>mezclamos</b>…"}),el("div",{class:"row"},card("med"),el("span",{class:"eq-plus",text:"+"}),card("ia")),el("p",{class:"end",html:"…para entender <b>enfermedades</b>."})));
+    }
     box.append(root);
     // Posiciones (centro x, centro y, diámetro) de cada estado
     const LAYOUT={
       0:i=>[960,590,460],
       1:i=>{ const r=i<4?0:1, c=i%4; return [960+(c-1.5)*400+(r?40:-40), r?775:405, 250]; },
-      2:i=>[960+(i-3.5)*226, 315, 140]
+      2:i=>[960+(i-3.5)*226, 350, 160]
     };
-    let step=0;
+    // Pantalla fija: todo el equipo de una, en fila.
     const place=s=>cards.forEach((p,i)=>{ const [x,y,d]=LAYOUT[s](i); Object.assign(p.style,{left:x+"px",top:y+"px",width:d+"px",height:d+"px"}); });
-    const set=s=>{
-      step=s; place(s);
-      cards.forEach((p,i)=>{ if(i===UI) return; p.classList.toggle("hid",s<1); const d=0.2+(i-1)*0.3; p.style.transitionDelay=(s===1&&!red)?`0s,0s,0s,0s,${d}s,${d}s`:""; });
-      root.classList.toggle("s0",s===0); root.classList.toggle("s2",s===2);
-      if(s===2) audio.ok();
-    };
-    place(0);
+    place(2);
     root.addEventListener("click",()=>APP.next());
-    return {
-      next(){ if(step<2){ set(step+1); return true; } return false; },
-      prev(){ if(step>0){ set(step-1); return true; } return false; },
-      destroy(){}
-    };
+    return { next(){ return false; }, prev(){ return false; }, destroy(){} };
   }
 });

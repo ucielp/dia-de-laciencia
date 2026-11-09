@@ -31,16 +31,15 @@ window.NOTES = {
     "Última pulsación: todas juntas → «¡La ciencia está en todas partes!»",
 
   portada:
-    "(Pantalla fija, sin pasos.) «Soy Uciel… ¡y soy científico!» (Señala la foto.) «Tengo un grupo de investigación en la UIC: mezclamos biomedicina + inteligencia artificial para entender enfermedades.»\n\n" +
+    "(Pantalla fija.) «Soy Uciel… ¡y soy científico!» (Señala la foto.) «Tengo un grupo de investigación y una empresa. ¡Ahora se los presento!»\n\n" +
     "Ensayar la señal de silencio: «Cuando yo diga “¡Científicos!”, ustedes dicen “¡A observar!” y levantan la mano.» Dos veces, la segunda más bajito.",
 
   kresko:
     "(Pantalla fija, 20-30 segundos.) «¡Y además tengo una empresa! Se llama Kresko. Encontramos moléculas en las plantas que son buenas para nuestro cuerpo: ayudan a tener una piel más sana y a dormir mejor.»",
 
   equipo:
-    "(2 pulsaciones.) Al entrar, solo yo: «Pero no trabajo solo: tengo un equipo en la UIC, una universidad de Barcelona. Somos el Grupo de Biología Computacional del ARN (UIC).»\n\n" +
-    "1) Salen uno a uno: «Les presento a Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia.» (Uciel + 7 = 8.)\n\n" +
-    "2) Foto del congreso: «Y en los congresos nos juntamos con muchísimos científicos de otros sitios. ¡La ciencia se hace en equipo!» «Hoy ustedes también van a trabajar en equipo.»",
+    "(Pantalla fija.) «Este es mi equipo en la UIC: Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia.»\n\n" +
+    "«Juntos mezclamos la biomedicina y la inteligencia artificial para entender enfermedades. ¡La ciencia se hace en equipo!»",
 
   "mi-trabajo":
     "(7 pulsaciones; en cada zoom, gesto de lupa con las manos y «¡zooooom!».)\n\n" +

@@ -24,8 +24,8 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 | 8–10 | **metodo** | El método científico en 5 pasos, con la espuma: observar, preguntar, imaginar (hipótesis), probar, conclusión. | suelo |
 | 10–11 | **no-solo** | Transición: la ciencia es mucho más. | suelo |
 | 11–13 | **ambitos** | Naturaleza, espacio, química, historia… y medicina + ordenadores/IA juntas. | suelo |
-| 13–14 | **portada** | «Soy Uciel y soy científico»: mi grupo de investigación en la UIC mezcla biomedicina + IA para entender enfermedades (pantalla fija). Se ensaya la señal de silencio. | suelo |
-| 14–15 | **equipo** | «Este es mi equipo»: el Grupo de Biología Computacional del ARN, uno a uno, y la foto del congreso. «¡La ciencia se hace en equipo!» | suelo |
+| 13–14 | **portada** | «Soy Uciel y soy científico. Tengo un grupo de investigación y una empresa» (pantalla fija). Se ensaya la señal de silencio. | suelo |
+| 14–15 | **equipo** | Todo el equipo de una + «Juntos mezclamos biomedicina + IA para entender enfermedades» (pantalla fija). | suelo |
 | 15 | **kresko** | «¡Y tengo una empresa!»: moléculas de plantas buenas para la piel y el sueño (pantalla fija, 20–30 s). | suelo |
 | 15–18 | **mi-trabajo** | Zoom: niño → célula → núcleo → ADN. Señalar el **modelo físico de ADN**. 4 letras → biblioteca (3.000 millones de letras) → IA. | suelo |
 | 18–20 | **receta** | Receta de los panellets → el ADN es una receta con trozos → la receta del perro: 3 trozos. | suelo |
@@ -110,18 +110,17 @@ Cierre: «¡La ciencia está en todas partes!»
 
 ### 3.6 portada (min 13–14)
 
-Una sola pantalla, sin pasos: todo aparece de entrada.
+Una sola pantalla, sin pasos.
 
-> «Soy Uciel… ¡y soy **científico**!» *(señalar mi foto)* «Tengo un **grupo de investigación** en la UIC, una universidad de Barcelona. Mezclamos **biomedicina + inteligencia artificial** para entender **enfermedades**.»
+> «Soy Uciel… ¡y soy **científico**!» *(señalar mi foto)* «Tengo un **grupo de investigación** y una **empresa**. ¡Ahora se los presento!»
 > «Los científicos necesitan silencio para pensar. Cuando yo diga “¡Científicos!”, ustedes dicen “¡A observar!” y levantan la mano. ¿Probamos?» *(ensayar dos veces: la segunda, más bajito)*
 
 ### 3.7 equipo (min 14–15)
 
-Un minuto, dos pulsaciones. Es el puente entre «soy científico» y «lo que hago».
+Una sola pantalla, sin pasos: todo el equipo aparece de una, con la mezcla debajo.
 
-1. Al entrar: «Pero yo no trabajo solo. Este es mi **equipo**: el **Grupo de Biología Computacional del ARN (UIC)**.»
-2. → Aparecen **uno a uno** (somos 8 contándome a mí): Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia. Decir cada nombre mientras sale (solo el nombre). «Cada uno sabe cosas distintas, y nos ayudamos.»
-3. → **Foto del congreso**: «Y en los congresos nos juntamos con muchísimos científicos de otros sitios.» Que lo digan todos: **«¡La ciencia se hace en equipo!»** «Hoy ustedes también van a trabajar en equipo, en sus estaciones.»
+> «Este es mi **equipo** en la UIC, una universidad de Barcelona: el **Grupo de Biología Computacional del ARN**.» *(decir los nombres rápido: Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia)*
+> «Juntos **mezclamos** la **biomedicina** y la **inteligencia artificial** para entender **enfermedades**. ¡La ciencia se hace en equipo!»
 
 Ojo: la Clara del equipo es una **doctoranda** del grupo, no la Clara del cole. Si algún niño lo pregunta: «¡Es otra Clara!».
 
