@@ -9,8 +9,8 @@ SC.push({id:"grupo",title:"¿Qué hace mi grupo?",order:38,mount(box,APP){
     .gr-title{position:absolute;left:0;right:0;top:44px;margin:0;text-align:center;font-family:var(--display);font-weight:700;font-size:96px;line-height:1;color:var(--ink)}
     .gr-title b{color:var(--orange);font-weight:700}
     .gr-sub{position:absolute;left:50%;top:160px;transform:translateX(-50%);margin:0;white-space:nowrap;font-family:var(--display);font-weight:500;font-size:40px;line-height:1;color:#fff;background:var(--blue);padding:12px 32px 14px;border-radius:999px;box-shadow:0 5px 0 rgba(31,42,68,.14)}
-    .gr-fig{position:absolute;left:90px;top:250px;width:740px;margin:0;display:flex;flex-direction:column;align-items:center;gap:20px}
-    .gr-fig .ph{width:640px;height:640px;border-radius:50%;overflow:hidden;background:#05040A;box-shadow:0 10px 0 rgba(31,42,68,.12),0 24px 50px rgba(31,42,68,.3)}
+    .gr-fig{position:absolute;left:90px;top:290px;width:740px;margin:0;display:flex;flex-direction:column;align-items:center;gap:20px}
+    .gr-fig .ph{width:700px;height:700px;border-radius:50%;overflow:hidden;background:#05040A;box-shadow:0 10px 0 rgba(31,42,68,.12),0 24px 50px rgba(31,42,68,.3)}
     .gr-fig img{width:100%;height:100%;display:block;object-fit:cover;animation:grSpin 160s linear infinite}
     @keyframes grSpin{to{transform:rotate(360deg)}}
     .gr-fig figcaption{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.15;color:var(--inkSoft);text-align:center;max-width:720px}
@@ -41,8 +41,7 @@ SC.push({id:"grupo",title:"¿Qué hace mi grupo?",order:38,mount(box,APP){
   root.append(
     el("h1",{class:"gr-title",html:"¿Qué hace mi <b>grupo</b>?"}),
     el("p",{class:"gr-sub",text:"Computational RNA Biology · UIC"}),
-    el("figure",{class:"gr-fig"},el("div",{class:"ph"},img),
-      el("figcaption",{html:"Así se <b>dobla</b> una molécula por dentro:<br>cada línea une dos partes."})));
+    el("figure",{class:"gr-fig"},el("div",{class:"ph"},img)));
   const list=el("div",{class:"gr-list"});
   const its=ITEMS.map(([k,c,h])=>{ const d=el("div",{class:"gr-it"},el("div",{class:"gr-ic",html:ICON[k]}),el("p",{html:h})); d.style.setProperty("--c",c); list.append(d); return d; });
   root.append(list); box.append(root);

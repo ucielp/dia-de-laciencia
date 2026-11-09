@@ -504,8 +504,10 @@ SC.push({
       const dot=svgEl("circle",{cx:x,cy:y,r:13,fill:col});
       g.append(...ups,bar,dot); gBr.append(g);
       if(anim&&!APP.reduced()){
-        for(const p of ups){ p.style.strokeDasharray="1 1"; p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:450,delay,easing:"ease-out",fill:"both"}); }
-        bar.style.strokeDasharray="1 1"; bar.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:420,delay:delay+400,easing:"ease-out",fill:"both"});
+        // Al terminar de «dibujarse», se quita el trazo discontinuo: si no, a algunos tamaños de pantalla quedan marquitas sueltas.
+        const solid=(p,a)=>a.finished.then(()=>{ a.cancel(); p.style.strokeDasharray=""; p.removeAttribute("pathLength"); }).catch(()=>{});
+        for(const p of ups){ p.style.strokeDasharray="1 1"; solid(p,p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:450,delay,easing:"ease-out",fill:"both"})); }
+        bar.style.strokeDasharray="1 1"; solid(bar,bar.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:420,delay:delay+400,easing:"ease-out",fill:"both"}));
         dot.style.transformOrigin=`${x}px ${y}px`;
         dot.animate([{transform:"scale(0)"},{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:380,delay:delay+750,fill:"both",easing:"ease-out"});
       }
@@ -514,7 +516,7 @@ SC.push({
       labels.replaceChildren();
       T.clades.forEach((cl,i)=>{
         let x,y;
-        if(cl.node){ x=nodeX(cl.node)+(cl.node==="dino"?-200:0); y=levelY(T.nodes[cl.node].level)-50; }
+        if(cl.node){ x=nodeX(cl.node)+(cl.node==="dino"?-235:0); y=levelY(T.nodes[cl.node].level)-50; }
         else { const k=T.leaves.indexOf(cl.members[0])-12; x=colX(cl.members[0]); y=levelY(1)+40-k*92; }
         const l=el("div",{class:"ar-lab",style:{left:x+"px",top:y+"px",background:cl.color},text:cl.label});
         labels.append(l); if(anim) pop(APP,l,i*250);
