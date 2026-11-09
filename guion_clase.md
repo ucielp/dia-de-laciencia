@@ -134,6 +134,15 @@ Qué hace el grupo, en versión para niños. Tres pulsaciones, una idea por clic
 3. → «Son tantas que nos ayuda el ordenador, con **inteligencia artificial**, a buscar pistas.»
 4. → «¿Para qué? Para entender **enfermedades** y ayudar a encontrar **medicinas**.»
 
+### 3.7c kresko (30–40 segundos)
+
+Mi empresa, **Kresko RNA Tech**, en versión para niños. Tres pulsaciones, una idea por clic.
+
+1. Al entrar, señalar el logo: «¡Y además tengo una **empresa**! Se llama **Kresko**.»
+2. → «Las **frutas y verduras frescas** también tienen **ARN**, ¡como nosotros!»
+3. → «Con la **inteligencia artificial** buscamos los trocitos de ARN que nos hacen bien.»
+4. → «Y con eso hacemos **alimentos** que ayudan a cuidar nuestro cuerpo.» Pregunta rápida: «¿Quién comió fruta hoy?» (manos arriba) y seguir.
+
 ### 3.8 mi-trabajo (min 15–18)
 
 En cada zoom, todos hacen el gesto de **acercar con las manos** (como una lupa) y dicen «¡zooooom!».

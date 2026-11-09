@@ -41,6 +41,11 @@ window.NOTES = {
     "1) «Leemos el genoma: millones y millones de letras.» 2) «Son tantas que nos ayuda el ordenador, con inteligencia artificial, a buscar pistas.»\n\n" +
     "3) «¿Para qué? Para entender enfermedades y ayudar a encontrar medicinas.» (Un minuto: es el puente al zoom de «¿De qué están hechos ustedes?».)",
 
+  kresko:
+    "(3 pulsaciones, 30-40 segundos.) Al entrar, señalar el logo: «¡Y además tengo una empresa! Se llama Kresko.»\n\n" +
+    "1) «Las frutas y verduras frescas también tienen ARN, ¡como nosotros!» 2) «Con la inteligencia artificial buscamos los trocitos de ARN que nos hacen bien.»\n\n" +
+    "3) «Y con eso hacemos alimentos que ayudan a cuidar nuestro cuerpo.» Pregunta rápida: «¿Quién comió fruta hoy?» (manos arriba) y seguir.",
+
   equipo:
     "(2 pulsaciones.) Al entrar, solo yo: «Pero no trabajo solo: tengo un equipo en la UIC, una universidad de Barcelona. Somos el Grupo de Biología Computacional del ARN (UIC).»\n\n" +
     "1) Salen uno a uno: «Les presento a Nicolás, Jorge, Santiago, Fernando, Meki, Clara y Júlia.» (Uciel + 7 = 8.)\n\n" +
