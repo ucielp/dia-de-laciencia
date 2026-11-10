@@ -2,7 +2,7 @@
 (function(){
 /* URL pública del laboratorio para casa (QR en el laboratorio). Cambiar SOLO aquí. */
 const LAB_URL="https://dia-de-la-ciencia.vercel.app/lab.html";
-const QR_SRC="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
+const QR_SRC="vendor/qrcode.min.js"; // copia local: funciona sin internet
 
 const S=(window.SCENES=window.SCENES||[]);
 const LS="dc-perros-clase";
@@ -598,7 +598,7 @@ S.push({id:"laboratorio",title:"Laboratorio de perros",order:60,mount(box,APP){
   if(window.qrcode) drawQR();
   else {
     let sc=document.querySelector("script[data-qr]");
-    if(!sc){ sc=document.createElement("script"); sc.src=QR_SRC; sc.async=true; sc.setAttribute("data-qr","1"); sc.setAttribute("crossorigin","anonymous"); document.head.append(sc); }
+    if(!sc){ sc=document.createElement("script"); sc.src=QR_SRC; sc.async=true; sc.setAttribute("data-qr","1"); document.head.append(sc); }
     sc.addEventListener("load",()=>{ if(alive&&window.qrcode) drawQR(); });
   }
 

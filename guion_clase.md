@@ -194,7 +194,7 @@ Pantalla sin pasos: «¡A trabajar! **Descubran su perro**». Se dice «¡al lab
 **Gemelos** (casi todos los perros están 2 veces en las hojas, así que salen seguro):
 > «¿Alguien más tiene este perro? ¡Levántenlo!» «¡Son **gemelos**! ¿Por qué? Porque tienen **la misma receta**. Hay gemelos de verdad en las personas: tienen el mismo ADN. ¿Conocen a alguno?»
 
-**QR:** «En casa, con este código, pueden descubrir **el nombre de su perro** y ver otra vez esta presentación.» (La página del laboratorio tiene un enlace a la presentación. El QR solo aparece si hay internet; si no, los profes pasan el enlace: `dia-de-la-ciencia.vercel.app/lab.html`.)
+**QR:** «En casa, con este código, pueden descubrir **el nombre de su perro** y ver otra vez esta presentación.» (La página del laboratorio tiene un enlace a la presentación. El QR sale siempre, también sin internet; en casa lo abren con el móvil. Si no, los profes pasan el enlace: `dia-de-la-ciencia.vercel.app/lab.html`.)
 
 Al terminar, **cada profe recoge las hojas de su clase** en una pila, con el nombre detrás. Así no se pisan en la actividad 2 y se las dan en clase.
 
@@ -341,7 +341,7 @@ Si falta un profe: los otros dos se reparten sus estaciones.
 - `imprimir/arbol_referencia.pdf` para los adultos (árbol + tabla de diferencias).
 
 ### Tecnología
-- Portátil con la app abierta en `#misterio` y probada **sin internet** (funciona en local; solo el QR del laboratorio necesita internet).
+- Portátil con la app abierta en `#misterio` y probada **sin internet**: descomprimir `dia_de_la_ciencia_offline.zip` (o copiar la carpeta `app/`) y abrir `index.html` con Chrome. Todo funciona sin conexión: fuentes, QR y vídeo.
 - Cable HDMI y adaptador, cargador, **regleta**.
 - **Altavoz pequeño**, recomendado: la música de misterio del principio, ladridos, revelaciones, el final y el vídeo (si lo hay); en un gimnasio los del portátil no se oyen.
 - Mando de presentaciones (opcional; la app funciona con las flechas).

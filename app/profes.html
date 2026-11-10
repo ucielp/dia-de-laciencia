@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Para los profes · Científicos por un día</title>
 <meta name="description" content="Material para los profes después del Día de la Ciencia: enlaces, cómo usar la presentación, ideas para seguir en clase y el guion completo.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;700;800&display=swap">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{
   --blue:#29ABE2; --orange:#F7931E; --green:#7AC143; --grey:#6D6E71;
@@ -512,7 +511,7 @@ footer p{margin:0 0 6px}
 <blockquote>
 <p>«¿Alguien más tiene este perro? ¡Levántenlo!» «¡Son <strong>gemelos</strong>! ¿Por qué? Porque tienen <strong>la misma receta</strong>. Hay gemelos de verdad en las personas: tienen el mismo ADN. ¿Conocen a alguno?»</p>
 </blockquote>
-<p><strong>QR:</strong> «En casa, con este código, pueden descubrir <strong>el nombre de su perro</strong> y ver otra vez esta presentación.» (La página del laboratorio tiene un enlace a la presentación. El QR solo aparece si hay internet; si no, los profes pasan el enlace: <code>dia-de-la-ciencia.vercel.app/lab.html</code>.)</p>
+<p><strong>QR:</strong> «En casa, con este código, pueden descubrir <strong>el nombre de su perro</strong> y ver otra vez esta presentación.» (La página del laboratorio tiene un enlace a la presentación. El QR sale siempre, también sin internet; en casa lo abren con el móvil. Si no, los profes pasan el enlace: <code>dia-de-la-ciencia.vercel.app/lab.html</code>.)</p>
 <p>Al terminar, <strong>cada profe recoge las hojas de su clase</strong> en una pila, con el nombre detrás. Así no se pisan en la actividad 2 y se las dan en clase.</p>
 <h4>3.14 parientes (min 40–42)</h4>
 <p>Siete pulsaciones. La idea para chicos de 6–7 años: <strong>es el juego de las diferencias</strong>. No hace falta que entiendan qué es una especie: basta con «pocas diferencias = familia cercana».</p>
@@ -660,7 +659,7 @@ footer p{margin:0 0 6px}
 </ul>
 <h4>Tecnología</h4>
 <ul>
-<li>Portátil con la app abierta en <code>#misterio</code> y probada <strong>sin internet</strong> (funciona en local; solo el QR del laboratorio necesita internet).</li>
+<li>Portátil con la app abierta en <code>#misterio</code> y probada <strong>sin internet</strong>: descomprimir <code>dia_de_la_ciencia_offline.zip</code> (o copiar la carpeta <code>app/</code>) y abrir <code>index.html</code> con Chrome. Todo funciona sin conexión: fuentes, QR y vídeo.</li>
 <li>Cable HDMI y adaptador, cargador, <strong>regleta</strong>.</li>
 <li><strong>Altavoz pequeño</strong>, recomendado: la música de misterio del principio, ladridos, revelaciones, el final y el vídeo (si lo hay); en un gimnasio los del portátil no se oyen.</li>
 <li>Mando de presentaciones (opcional; la app funciona con las flechas).</li>
@@ -741,7 +740,7 @@ footer p{margin:0 0 6px}
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="vendor/qrcode.min.js"></script>
 <script>
 (function(){
   document.querySelectorAll(".qr[data-qr]").forEach(function(box){
