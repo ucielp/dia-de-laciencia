@@ -84,10 +84,29 @@ function draw(shapes,o){
 
 
 const USED={ears:{rojo:17,azul:17,amarillo:18},coat:{rojo:17,azul:17,amarillo:18},tail:{rojo:17,azul:18,amarillo:17}}, SPARE=2;
-const ROWS=[["ears","Orejas",0.42],["coat","Cuerpo",0.2],["tail","Cola",0.46]];
+let ROWS=[["ears","Orejas",0.42],["coat","Cuerpo",0.2],["tail","Cola",0.46]];
+// ?parte=ears|coat|tail → una hoja por caja: solo esa parte, en horizontal y en grande
+const ONLY=new URLSearchParams(location.search).get("parte");
+if(ONLY){
+  const BIG={ears:1.05,coat:0.5,tail:1.35};
+  ROWS=ROWS.filter(r=>r[0]===ONLY).map(r=>[r[0],r[1],BIG[ONLY]]);
+  document.head.append(Object.assign(document.createElement("style"),{textContent:`
+    @page{size:A4 landscape;margin:12mm}
+    h1{font-size:54pt;text-align:center;letter-spacing:.5mm}
+    .sub{text-align:center;font-size:15pt;margin:1mm 0 6mm}
+    thead th{font-size:24pt;padding:5mm 1mm}
+    .dot{width:16mm;height:16mm;border-width:2.4mm}
+    tbody th{display:none}
+    td{height:112mm}
+    td b{font-size:26pt;margin-top:2mm}
+    td small{font-size:14pt}
+    .foot{display:none}`}));
+  document.querySelector("h1").textContent=ROWS[0][1].toUpperCase();
+  document.querySelector(".sub").textContent="¿Qué pieza va con cada gomet?";
+}
 const LBL={rojo:"Gomet rojo",azul:"Gomet azul",amarillo:"Gomet amarillo"};
 document.getElementById("t").innerHTML=
- `<thead><tr><th></th>${KEYS.map(k=>`<th><span class="dot" style="border-color:${GHEX[k]}"></span>${LBL[k].replace("Gomet ","")}</th>`).join("")}</tr></thead><tbody>`+
+ `<thead><tr>${ONLY?"":"<th></th>"}${KEYS.map(k=>`<th><span class="dot" style="border-color:${GHEX[k]}"></span>${LBL[k].replace("Gomet ","")}</th>`).join("")}</tr></thead><tbody>`+
  ROWS.map(([p,l,mm])=>`<tr><th>${l}</th>${KEYS.map(k=>`<td>${draw(PIECE[p](k),{vb:VB[p],eyes:p==="coat",mm,label:l+" "+NAME[p](k)})}<b>${NAME[p](k)}</b><small>recortar ${USED[p][k]+SPARE}</small></td>`).join("")}</tr>`).join("")+"</tbody>";
 document.getElementById("f").textContent="Cantidades: 52 niños + 2 de repuesto por color (igual que piezas_perro_geometrico.pdf). Cada mesa: 3 bandejas (orejas, cuerpos, colas), cada una con 3 compartimentos marcados con un gomet.";
 </script>
