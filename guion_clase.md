@@ -37,7 +37,8 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 | 40–42 | **parientes** | «Vamos a buscar las diferencias entre el ADN del perro y el del lobo»: casilla a casilla, 1. Perro y gallina: 6. ADN parecido = familia cercana. | estaciones (sentados) |
 | 42–44 | **busca-familia** | Cada estación es un animal: se abren los sobres (cartel + tira). Instrucciones. | ⏵ de pie |
 | 44–47 | **actividad-2** (separador) | **Actividad 2.** Buscan el grupo con solo 1 diferencia y se juntan en pareja. | de pie, todo el gimnasio |
-| 47–54 | **arbol** | Se dibujan las 5 parejas. La profe de los carteles morados los saca uno a uno. | de pie, en parejas |
+| 47–52 | **arbol** | Se dibujan las 5 parejas. La profe de los carteles morados los saca uno a uno. | de pie, en parejas |
+| 52–54 | **todos-familia** | «¡Todos somos familia!»: nosotros en el centro, los animales en anillos. Todos de la mano: «¡Somos familia!» | de pie, todos de la mano |
 | 54–60 | **cierre** | Sentados otra vez. Las 3 ideas del día. Desfile de perros. «¡Hoy han sido científicos!». Aplauso. | ⏵ suelo |
 | (salida) | **video** (opcional) | Solo si hay vídeo y da tiempo: se deja en bucle mientras salen. | salida |
 
@@ -228,7 +229,7 @@ Parejas correctas: **humano + chimpancé, perro + lobo, gato + león, ballena + 
 
 **Los 5 carteles de borde morado (murciélago, T-rex, cocodrilo, rana, tiburón) NO se reparten:** los guarda la profe de la clase de 16 para el árbol, con su guía `imprimir/guia_animales_profes.pdf` (una página: con qué grupo se junta cada animal y qué decir).
 
-### 3.17 arbol (min 47–54)
+### 3.17 arbol (min 47–52)
 
 Primer → la pantalla dibuja las 5 parejas. Luego la profe saca cada cartel morado, uno a uno, y lo enseña bien alto. Para cada animal: primer → la **pregunta** (los niños cuentan diferencias con su tira), segundo → la **respuesta** y la rama.
 
@@ -240,10 +241,20 @@ Primer → la pantalla dibuja las 5 parejas. Luego la profe saca cada cartel mor
 
 Si sale: «La ballena es prima del hipopótamo. ¡Parece de broma! Hace muchísimo tiempo, el abuelo de las ballenas andaba por la tierra.» Clic en un animal de la pantalla: sus diferencias con todos y su pariente más cercano (para responder dudas).
 
-Pregunta final, todos de la mano:
-> «Si vamos hacia atrás, hacia atrás, muy atrás… ¿qué pasa?» → «¡Todos los animales venimos de la misma familia! Y eso se sabe **leyendo el ADN**, con ordenadores. Que es lo que hago yo.»
+Al terminar el árbol, antes de pasar de pantalla:
+> «¿Dónde estamos **nosotros** en el árbol?» *(que lo busquen)* «¡Acá, al lado del **chimpancé**! Somos familia muy cercana.»
 
 Tiras, por si hay que comprobar algo (A azul, T roja, G verde, C naranja): humano GTATAC · chimpancé GCATAC · perro CGTCAC · lobo CGTAAC · gato CGATCG · león CGATCA · ballena TGGTAC · hipopótamo TGCTAC · gallina AACGGG · pingüino AACGGT · *murciélago CGATAC · T-rex AACGAC · cocodrilo TACGCA · rana TAACAG · tiburón ATGCTA* (en cursiva, los del adulto). Árbol y tabla de diferencias para los adultos: `imprimir/arbol_referencia.pdf`.
+
+### 3.17b todos-familia (2 minutos) · el cierre del juego
+
+Una sola pantalla: **«¡Todos somos familia!»**. En el centro, «nosotros»; alrededor, en anillos, los animales del juego: cerca el chimpancé, después los mamíferos, y lejos la gallina, el T-rex, la rana y el tiburón. Los anillos aparecen solos.
+
+> «Miren: en el centro estamos **nosotros**. Muy cerquita, el **chimpancé**. Un poco más lejos, el perro, el gato, la ballena… Y muy lejos, la gallina, el T-rex, la rana y el tiburón.»
+> «Si vamos hacia atrás, hacia atrás, muy atrás en el tiempo… ¡**todos** venimos de la misma familia! Unos son primos cercanos y otros, primos lejanísimos. ¡Hasta el tiburón es de la familia!»
+> «¿Y cómo lo sabemos? **Leyendo el ADN**, como hicieron ustedes hoy. Eso es lo que hago yo, con ordenadores.»
+
+**Final del juego (físico):** «Ahora, cada pareja dele la mano a otra pareja… ¡hasta que estemos **todos** de la mano!» *(una gran cadena por todo el gimnasio: los 15 animales unidos)* «¡Este es el **árbol de la vida**: todos conectados!» Un grito todos juntos: **«¡Somos familia!»** Luego se sueltan, dejan los carteles en el suelo y se sientan.
 
 ### 3.18 cierre (min 54–60)
 

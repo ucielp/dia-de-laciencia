@@ -641,4 +641,55 @@ SC.push({
     };
   }
 });
+// =====================================================================
+// 85 · todos-familia: cierre del juego. «Nosotros» en el centro y los animales del árbol en anillos
+// (cerca = familia cercana, lejos = familia lejana). Pantalla fija; los anillos aparecen solos al entrar.
+// =====================================================================
+SC.push({
+  id:"todos-familia", title:"¡Todos somos familia!", order:85,
+  mount(box,APP){
+    if(!need(box,APP)) return {};
+    const el=APP.el, NS="http://www.w3.org/2000/svg";
+    box.append(css(APP,`
+      .tf{position:absolute;inset:0;cursor:pointer}
+      .tf-h1{text-align:center}
+      .tf-svg{position:absolute;inset:0}
+      .tf-an{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+      .tf-an span{margin-top:-4px;font:600 30px/1 var(--display);color:var(--inkSoft)}
+      .tf-me{position:absolute;left:960px;top:625px;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0}
+      .tf-me b{font:700 44px/1 var(--display);color:var(--orange)}
+      .tf-lab{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font:700 32px/1 var(--display);color:#fff;padding:9px 20px;border-radius:999px}
+      .tf-msg{position:absolute;left:50%;top:985px;transform:translateX(-50%);white-space:nowrap;padding:18px 44px;font:600 50px/1.1 var(--display);color:var(--ink);text-align:center}
+      .tf-msg b{color:var(--orange)}
+    `));
+    const C={x:960,y:610};
+    const RINGS=[ // rx, ry, color, etiqueta, animales [id, ángulo en grados]
+      [330,190,"#5FA040","familia muy cercana",[["chimpance",0]]],
+      [580,290,"#E2A82A","familia",[["perro",200],["gato",155],["ballena",-28],["murcielago",28]]],
+      [830,395,"#9A9284","familia lejana",[["gallina",198],["trex",162],["rana",-17],["tiburon",17]]]
+    ];
+    const root=el("div",{class:"tf"});
+    const svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","0 0 1920 1080"); svg.setAttribute("class","tf-svg");
+    root.append(el("h1",{class:"fam-h1 tf-h1",html:"¡Todos somos <span>familia</span>!"}),svg);
+    const later=[];
+    RINGS.forEach(([rx,ry,col,lab,ans],r)=>{
+      const e=document.createElementNS(NS,"ellipse");
+      Object.entries({cx:C.x,cy:C.y,rx,ry,fill:"none",stroke:col,"stroke-width":8,"stroke-dasharray":"4 22","stroke-linecap":"round"}).forEach(([k,v])=>e.setAttribute(k,v));
+      svg.append(e);
+      const l=el("div",{class:"tf-lab",style:{left:C.x+"px",top:(C.y-ry)+"px",background:col},text:lab}); root.append(l);
+      later.push([l,r]);
+      for(const [id,ang] of ans){
+        const a=ang*Math.PI/180, x=C.x+rx*Math.cos(a), y=C.y+ry*Math.sin(a);
+        const d=el("div",{class:"tf-an",style:{left:x+"px",top:y+"px"}},pic(APP,id,170,140),el("span",{text:window.TREE.names[id]}));
+        root.append(d); later.push([d,r]);
+      }
+    });
+    root.append(el("div",{class:"tf-me"},el("div",{class:"fam-pic",style:{width:"220px",height:"198px"},html:kidsSVG(APP,2,true)}),el("b",{text:"¡nosotros!"})));
+    root.append(el("div",{class:"tf-msg fam-paper",html:"Todos los seres vivos somos <b>parientes</b>: unos cerca y otros lejos."}));
+    box.append(root);
+    later.forEach(([d,r],i)=>pop(APP,d,400+r*700+i*60));
+    root.addEventListener("click",()=>APP.next());
+    return { next(){ return false; }, prev(){ return false; }, destroy(){} };
+  }
+});
 })();

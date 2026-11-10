@@ -106,7 +106,12 @@ window.NOTES = {
     "T-rex: «¿Quién tiene 2?» → gallina y pingüino. ¡Las aves son dinosaurios!\n\n" +
     "Cocodrilo: «¿Quién tiene 3?» → gallina, pingüino y T-rex: primo de aves y dinosaurios.\n\n" +
     "Rana: «¿Cuántas diferencias tiene con ustedes?» 4 o más con todos → más lejos (anfibio). Tiburón: 5 o más → el más lejano (pez).\n\n" +
-    "Último clic: el árbol entero. Clic en un animal: sus diferencias con todos y su pariente más cercano.",
+    "Último clic: el árbol entero. «¿Dónde estamos nosotros? ¡Al lado del chimpancé!» Clic en un animal: sus diferencias con todos y su pariente más cercano.",
+
+  "todos-familia":
+    "(Pantalla fija, 2 min.) «En el centro estamos nosotros. Muy cerquita, el chimpancé. Un poco más lejos, el perro, el gato, la ballena… Y muy lejos, la gallina, el T-rex, la rana y el tiburón.»\n\n" +
+    "«Si vamos hacia atrás, muy atrás en el tiempo… ¡todos venimos de la misma familia! ¿Cómo lo sabemos? Leyendo el ADN, como ustedes hoy. Eso es lo que hago yo.»\n\n" +
+    "Final del juego: «Cada pareja dele la mano a otra… ¡hasta que estemos todos de la mano!» «¡Este es el árbol de la vida!» Todos juntos: «¡Somos familia!» Luego se sueltan, carteles al suelo y se sientan.",
 
   cierre:
     "«Hoy han sido científicos: uno, han hecho preguntas; dos, han visto que el ADN es una receta con muchos trozos; tres, han descubierto que si el ADN se parece, la familia es cercana.» (con los dedos)\n\n" +
