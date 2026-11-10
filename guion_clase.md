@@ -199,12 +199,16 @@ Al terminar, **cada profe recoge las hojas de su clase** en una pila, con el nom
 
 ### 3.14 parientes (min 40–42)
 
-Seis pulsaciones: cada comparación tiene una **introducción** (las dos tiras, una encima de otra) y, con el clic siguiente, el marco recorre las casillas.
+Siete pulsaciones. La idea para chicos de 6–7 años: **es el juego de las diferencias**. No hace falta que entiendan qué es una especie: basta con «pocas diferencias = familia cercana».
 
-> «Nuestro ADN tiene muchas partes. Unas dicen cómo son las orejas, el pelo y la cola: por eso sus perros eran distintos.» → «Otra parte dice “soy un perro”: es igual en **todos** los perros.»
-> → «**Vamos a buscar las diferencias entre el ADN del perro y el del lobo.** Comparen casilla por casilla.» → *(contar en voz alta con ellos)* «¡Solo 1! Parientes muy cercanos… pero especies distintas.»
-> → «Ahora, perro y gallina: ¿cuántas diferencias hay?» → «¡6! Familia lejana.»
-> «**Menos diferencias = más familia.**»
+> **Puente con la receta:** «¿Se acuerdan de la receta de su perro? Tenía trozos para las orejas, el pelo y la cola: por eso sus perros eran distintos.»
+> → «Pero hay otro trozo que es **igual en todos los perros**: dice “soy un perro”.» *(señalar los dos recuadros verdes)* «¿Son iguales? ¡Sí!»
+> → **¿El lobo es familia del perro?** «¿Se parece? Levanten la mano los que creen que sí.» *(votan)* «¿Cómo lo averiguamos? ¡Mirando su **ADN**, como detectives!»
+> → «¿Conocen el **juego de las diferencias**? Vamos a jugar: miramos letra por letra.» → *(el marco recorre las casillas; contar todos juntos en voz alta)* «¡Solo **1**! El lobo es familia muy cercana del perro… ¡como un **primo**!»
+> → «Y la gallina, ¿será familia del perro?» *(votan)* → *(cuentan)* «¡**6**! Familia lejana.»
+> «**Pocas diferencias… ¡familia cercana!**» *(que lo repitan todos)*
+
+Truco: si se pierden, levantar las dos tiras de papel del perro y del lobo, una encima de la otra, y señalar la letra distinta con el dedo.
 
 ### 3.15 busca-familia (min 42–44)
 

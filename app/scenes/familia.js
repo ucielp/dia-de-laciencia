@@ -122,6 +122,10 @@ SC.push({
       .par-card:after{content:"";position:absolute;bottom:-40px;left:50%;margin-left:-14px;border:14px solid transparent;border-top:26px solid #FFFDF7}
       .par-hint{position:absolute;left:1000px;top:58px;display:flex;align-items:center;gap:14px;background:var(--orange);color:#fff;font:700 52px/1 var(--display);padding:20px 34px;border-radius:999px;box-shadow:0 6px 0 rgba(150,80,0,.25)}
       .par-hint svg{width:44px;height:44px;flex:none}
+      .par-q{position:absolute;inset:0}
+      .par-q .duo{position:absolute;left:0;right:0;top:250px;display:flex;justify-content:center;align-items:center;gap:60px}
+      .par-q .duo>div{display:flex;flex-direction:column;align-items:center;gap:14px;font:700 64px/1 var(--display);color:var(--ink)}
+      .par-q .qm{font:700 260px/1 var(--display);color:var(--orange)}
       .par-pulse{animation:parPulse 1.2s ease-in-out infinite}
       @keyframes parPulse{50%{box-shadow:0 0 0 14px rgba(247,147,30,.45);border-color:var(--orange)}}
       @media (prefers-reduced-motion:reduce){.par-pulse{animation:none}}
@@ -143,6 +147,10 @@ SC.push({
     });
     const eq=el("div",{class:"par-eq",text:"="});
     two.append(eq);
+    // --- vista puente: «¿El lobo es familia del perro?» ---
+    const q=el("div",{class:"par-q"},el("div",{class:"duo"},
+      el("div",{},pic(APP,"perro",520,430),el("span",{text:"perro"})),el("span",{class:"qm",text:"?"}),
+      el("div",{},pic(APP,"lobo",520,430),el("span",{text:"lobo"}))));
     // --- vista 2: comparar ---
     const cmp=makeCompare(APP,{a:"perro",b:"lobo",picW:300,picH:248,sq:116,gap:24,rowGap:50});
     Object.assign(cmp.el.style,{left:"90px",top:"230px"});
@@ -150,9 +158,9 @@ SC.push({
     const count=el("div",{class:"par-count fam-paper"},el("small",{text:"diferencias"}),num);
     const msg=el("div",{class:"fam-msg",style:{top:"880px"}});
     const sum=el("div",{class:"par-sum"});
-    const hint=el("div",{class:"par-hint",html:'<svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="18" cy="18" r="12" fill="none" stroke="#fff" stroke-width="6"/><path d="M27 27 L39 39" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>'},el("span",{text:"Comparen casilla por casilla"}));
+    const hint=el("div",{class:"par-hint",html:'<svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="18" cy="18" r="12" fill="none" stroke="#fff" stroke-width="6"/><path d="M27 27 L39 39" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>'},el("span",{text:"¡Busquen las diferencias!"}));
     const scanBox=cmp.el.querySelector(".fam-scan");
-    box.append(bg,title,two,cmp.el,count,msg,sum,hint);
+    box.append(bg,title,two,q,cmp.el,count,msg,sum,hint);
 
     let step=0, token=0;
     const say=h=>{ msg.innerHTML=h; fadeIn(APP,msg,0,16); };
@@ -174,13 +182,13 @@ SC.push({
       const n=await cmp.run(()=>t===token,(k,a)=>{ num.textContent=k; if(a) bump(APP,num); },!anim);
       if(t===token) after(n);
     }
-    /* pasos: 0 muchas partes · 1 «soy un perro» · 2 perro-lobo (presentación) · 3 se buscan las diferencias
-       4 perro-gallina (presentación) · 5 se buscan las diferencias · 6 resumen */
+    /* pasos: 0 muchas partes · 1 «soy un perro» · 2 puente «¿el lobo es familia del perro?»
+       3 perro-lobo (presentación) · 4 se buscan las diferencias · 5 perro-gallina (presentación) · 6 se buscan · 7 resumen */
     let curB="lobo";
     function show(s,anim){
       token++; step=s; const t=token;
-      const cmpStep=s>=2&&s<=5, intro=s===2||s===4;
-      two.hidden=s>1; cmp.el.hidden=count.hidden=!cmpStep; sum.hidden=s!==6; hint.hidden=!intro;
+      const cmpStep=s>=3&&s<=6, intro=s===3||s===5;
+      two.hidden=s>1; q.hidden=s!==2; cmp.el.hidden=count.hidden=!cmpStep; sum.hidden=s!==7; hint.hidden=!intro;
       scanBox.classList.remove("par-pulse");
       msg.style.top=s<=1?"905px":"880px";
       if(s<=1){
@@ -188,17 +196,23 @@ SC.push({
         segDog.forEach(x=>{ x.style.visibility=s>=1?"visible":"hidden"; x.classList.toggle("same",s>=1); });
         eq.hidden=s<1;
         if(s===0) say("Unas partes dicen cómo son las <b>orejas</b>, el <b>pelo</b> y la <b>cola</b>. ¡Por eso son distintos!");
-        else { say("Esa parte es <b>igual</b> en todos los perros."); if(anim){ segDog.forEach((x,i)=>pop(APP,x,i*200)); pop(APP,eq,600); } }
+        else { say("Esa parte es <b>igual</b> en todos los perros: ¡por eso sabemos que son perros!"); if(anim){ segDog.forEach((x,i)=>pop(APP,x,i*200)); pop(APP,eq,600); } }
+        return;
+      }
+      if(s===2){
+        title.innerHTML="¿El lobo es <span>familia</span> del perro?";
+        say("¿Cómo lo averiguamos? ¡Mirando su <b>ADN</b>, como detectives!");
+        if(anim) pop(APP,q.querySelector(".qm"),300);
         return;
       }
       if(cmpStep){
-        const b=s<=3?"lobo":"gallina";
+        const b=s<=4?"lobo":"gallina";
         title.innerHTML=b==="lobo"?"Perro y <span>lobo</span>":"Perro y <span>gallina</span>";
         if(curB!==b){ cmp.setB(b,anim); curB=b; }
         cmp.clear(); num.textContent="?";
         if(intro){
           // presentación: las dos tiras, una encima de la otra; el marco espera en la primera casilla
-          say(b==="lobo"?"Vamos a buscar las <b>diferencias</b> entre el ADN del perro y el del lobo.":"Ahora, perro y gallina: ¿cuántas <b>diferencias</b> hay?");
+          say(b==="lobo"?"Como el <b>juego de las diferencias</b>: miramos letra por letra.":"Ahora, perro y gallina: ¿cuántas <b>diferencias</b> hay?");
           scanBox.style.transition="none"; scanBox.style.transform="translateX(0px)"; scanBox.style.opacity=1; void scanBox.offsetWidth; scanBox.style.transition="";
           scanBox.classList.add("par-pulse");
           if(anim) pop(APP,hint,b==="gallina"?500:150);
@@ -206,18 +220,18 @@ SC.push({
         }
         say("Casilla por casilla…");
         compare(anim,n=>{
-          if(b==="lobo"){ say(`¡Solo <b>1 diferencia</b>! Parientes muy cercanos… pero <b>especies distintas</b>.`); if(anim) APP.audio.ok(); }
-          else say(`¡<b>${n} diferencias</b>! Familia lejana.`);
+          if(b==="lobo"){ say(`¡Solo <b>1 diferencia</b>! El lobo es <b>familia muy cercana</b>… ¡como un primo!`); if(anim) APP.audio.ok(); }
+          else say(`¡<b>${n} diferencias</b>! La gallina es <b>familia lejana</b>.`);
         });
         return;
       }
       title.innerHTML="ADN parecido = <span>familia cercana</span>";
       buildSummary(anim);
-      say("<b>Menos diferencias</b> = más familia.");
+      say("<b>Pocas diferencias</b> = familia cercana.");
     }
     show(0,true);
     return {
-      next(){ if(step>=6) return false; show(step+1,true); return true; },
+      next(){ if(step>=7) return false; show(step+1,true); return true; },
       prev(){ if(step<=0) return false; show(step-1,false); return true; },
       destroy(){ token++; }
     };

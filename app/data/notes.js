@@ -81,12 +81,12 @@ window.NOTES = {
     "QR: «En casa, con este código, pueden descubrir el nombre de su perro y ver otra vez esta presentación.» Los profes recogen las hojas.",
 
   parientes:
-    "(6 pulsaciones.) «Nuestro ADN tiene muchas partes.» Unas dicen cómo son las orejas, el pelo y la cola: por eso sus perros eran distintos.\n\n" +
-    "1) Otra parte dice «soy un perro»: es igual en TODOS los perros.\n\n" +
-    "2) Perro y lobo: «Vamos a buscar las diferencias entre el ADN del perro y el del lobo.» «Comparen casilla por casilla.»\n\n" +
-    "3) El marco recorre las casillas (contar en voz alta con ellos): ¡solo 1 diferencia! Parientes muy cercanos, pero especies distintas.\n\n" +
-    "4) Perro y gallina: «¿Cuántas diferencias hay?» 5) Se cuentan: ¡6! Familia lejana.\n\n" +
-    "6) Resumen: «Menos diferencias = más familia.»",
+    "(7 pulsaciones.) Puente con la receta: «¿Se acuerdan de la receta de su perro? Tenía trozos para las orejas, el pelo y la cola: por eso sus perros eran distintos.»\n\n" +
+    "1) «Pero hay otro trozo que es IGUAL en todos los perros: dice “soy un perro”.» (Señalar los dos recuadros verdes.) «¿Son iguales? ¡Sí!»\n\n" +
+    "2) Puente: «¿Y el lobo? ¿Se parece al perro? ¿Será de su familia? Levanten la mano los que creen que sí.» (votan) «¿Cómo lo averiguamos? ¡Mirando su ADN, como detectives!»\n\n" +
+    "3) «¿Conocen el juego de las diferencias? Vamos a jugar: miramos letra por letra.» 4) El marco recorre las casillas: contar todos juntos en voz alta. «¡Solo 1! El lobo es familia muy cercana del perro… ¡como un primo!»\n\n" +
+    "5) «Y la gallina, ¿será familia del perro?» (votan) 6) Se cuentan: ¡6! «Familia lejana.»\n\n" +
+    "7) Resumen, que lo repitan: «Pocas diferencias… ¡familia cercana!»",
 
   "busca-familia":
     "(4 pulsaciones.) Mientras, los adultos abren los sobres: un cartel y una tira por estación.\n\n" +
