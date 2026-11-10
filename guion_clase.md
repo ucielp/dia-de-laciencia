@@ -38,7 +38,7 @@ El horario ya incluye margen. Con toda la clase junta, cada cambio de sitio cues
 | 42–44 | **busca-familia** | Cada estación es un animal: se abren los sobres (cartel + tira). Instrucciones. | ⏵ de pie |
 | 44–47 | **actividad-2** (separador) | **Actividad 2.** Buscan el grupo con solo 1 diferencia y se juntan en pareja. | de pie, todo el gimnasio |
 | 47–52 | **arbol** | Se dibujan las 5 parejas. La profe de los carteles morados los saca uno a uno. | de pie, en parejas |
-| 52–54 | **todos-familia** | «¡Todos somos familia!»: nosotros en el centro, los animales en anillos. Todos de la mano: «¡Somos familia!» | de pie, todos de la mano |
+| 52–54 | **todos-familia** | «¡Todos venimos de la misma familia!»: un solo tronco que se abre en ramas. Leyendo el ADN lo sabemos. Todos de la mano: «¡Somos familia!» | de pie, todos de la mano |
 | 54–60 | **cierre** | Sentados otra vez. Las 3 ideas del día. Desfile de perros. «¡Hoy han sido científicos!». Aplauso. | ⏵ suelo |
 | (salida) | **video** (opcional) | Solo si hay vídeo y da tiempo: se deja en bucle mientras salen. | salida |
 
@@ -241,20 +241,16 @@ Primer → la pantalla dibuja las 5 parejas. Luego la profe saca cada cartel mor
 
 Si sale: «La ballena es prima del hipopótamo. ¡Parece de broma! Hace muchísimo tiempo, el abuelo de las ballenas andaba por la tierra.» Clic en un animal de la pantalla: sus diferencias con todos y su pariente más cercano (para responder dudas).
 
-Al terminar el árbol, antes de pasar de pantalla:
-> «¿Dónde estamos **nosotros** en el árbol?» *(que lo busquen)* «¡Acá, al lado del **chimpancé**! Somos familia muy cercana.»
-
 Tiras, por si hay que comprobar algo (A azul, T roja, G verde, C naranja): humano GTATAC · chimpancé GCATAC · perro CGTCAC · lobo CGTAAC · gato CGATCG · león CGATCA · ballena TGGTAC · hipopótamo TGCTAC · gallina AACGGG · pingüino AACGGT · *murciélago CGATAC · T-rex AACGAC · cocodrilo TACGCA · rana TAACAG · tiburón ATGCTA* (en cursiva, los del adulto). Árbol y tabla de diferencias para los adultos: `imprimir/arbol_referencia.pdf`.
 
 ### 3.17b todos-familia (2 minutos) · el cierre del juego
 
-Una sola pantalla: **«¡Todos somos familia!»**. En el centro, «nosotros»; alrededor, en anillos, los animales del juego: cerca el chimpancé, después los mamíferos, y lejos la gallina, el T-rex, la rana y el tiburón. Los anillos aparecen solos.
+Una sola pantalla: **«¡Todos venimos de la misma familia!»**. Un solo tronco («hace muchísimo tiempo») que se abre en ramas, y en la punta de cada rama, un animal del juego. El árbol crece solo al entrar.
 
-> «Miren: en el centro estamos **nosotros**. Muy cerquita, el **chimpancé**. Un poco más lejos, el perro, el gato, la ballena… Y muy lejos, la gallina, el T-rex, la rana y el tiburón.»
-> «Si vamos hacia atrás, hacia atrás, muy atrás en el tiempo… ¡**todos** venimos de la misma familia! Unos son primos cercanos y otros, primos lejanísimos. ¡Hasta el tiburón es de la familia!»
-> «¿Y cómo lo sabemos? **Leyendo el ADN**, como hicieron ustedes hoy. Eso es lo que hago yo, con ordenadores.»
+> «Miren este árbol: **un solo tronco**. Hace muchísimo tiempo hubo una sola familia… y se fue abriendo en ramas: los mamíferos, las aves y los dinosaurios, la rana, el tiburón… ¡y también nosotros, los humanos!»
+> «¡**Todos** venimos de la misma familia! ¿Cómo lo sabemos? **Leyendo el ADN**, como ustedes hoy. Eso es lo que hago yo.»
 
-**Final del juego (físico):** «Ahora, cada pareja dele la mano a otra pareja… ¡hasta que estemos **todos** de la mano!» *(una gran cadena por todo el gimnasio: los 15 animales unidos)* «¡Este es el **árbol de la vida**: todos conectados!» Un grito todos juntos: **«¡Somos familia!»** Luego se sueltan, dejan los carteles en el suelo y se sientan.
+**Final del juego (físico):** «Ahora, cada pareja dele la mano a otra pareja… ¡hasta que estemos **todos** de la mano!» *(una gran cadena por todo el gimnasio)* «¡Así es el árbol de la vida: **todos conectados**!» Un grito todos juntos: **«¡Somos familia!»** Luego se sueltan, dejan los carteles en el suelo y se sientan.
 
 ### 3.18 cierre (min 54–60)
 

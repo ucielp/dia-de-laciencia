@@ -642,52 +642,67 @@ SC.push({
   }
 });
 // =====================================================================
-// 85 · todos-familia: cierre del juego. «Nosotros» en el centro y los animales del árbol en anillos
-// (cerca = familia cercana, lejos = familia lejana). Pantalla fija; los anillos aparecen solos al entrar.
+// 85 · todos-familia: cierre del juego. Un solo tronco (el origen común, hace muchísimo tiempo) que se abre
+// en ramas; en la punta de cada rama, un animal del juego (el humano es uno más). Pantalla fija: crece sola al entrar.
 // =====================================================================
 SC.push({
-  id:"todos-familia", title:"¡Todos somos familia!", order:85,
+  id:"todos-familia", title:"¡Todos venimos de la misma familia!", order:85,
   mount(box,APP){
     if(!need(box,APP)) return {};
-    const el=APP.el, NS="http://www.w3.org/2000/svg";
+    const el=APP.el, NS="http://www.w3.org/2000/svg", red=APP.reduced();
     box.append(css(APP,`
       .tf{position:absolute;inset:0;cursor:pointer}
-      .tf-h1{text-align:center}
+      .tf-h1{text-align:center;font-size:84px}
+      .tf-sub{position:absolute;left:0;right:0;top:150px;margin:0;text-align:center;font:600 50px/1.1 var(--display);color:var(--ink)}
+      .tf-sub b{color:var(--orange)}
       .tf-svg{position:absolute;inset:0}
-      .tf-an{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
-      .tf-an span{margin-top:-4px;font:600 30px/1 var(--display);color:var(--inkSoft)}
-      .tf-me{position:absolute;left:960px;top:625px;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0}
-      .tf-me b{font:700 44px/1 var(--display);color:var(--orange)}
-      .tf-lab{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font:700 32px/1 var(--display);color:#fff;padding:9px 20px;border-radius:999px}
-      .tf-msg{position:absolute;left:50%;top:985px;transform:translateX(-50%);white-space:nowrap;padding:18px 44px;font:600 50px/1.1 var(--display);color:var(--ink);text-align:center}
-      .tf-msg b{color:var(--orange)}
+      .tf-an{position:absolute;width:128px;height:128px;margin:-64px 0 0 -64px;border-radius:50%;background:#FFFDF7;box-shadow:0 5px 0 rgba(90,74,48,.12),0 10px 20px rgba(90,74,48,.16);display:flex;align-items:center;justify-content:center}
+      .tf-an .fam-pic{transform:translateY(-6px)}
+      .tf-an span{position:absolute;top:100%;margin-top:6px;white-space:nowrap;font:600 28px/1 var(--display);color:var(--inkSoft)}
+      .tf-root{position:absolute;left:1000px;top:985px;white-space:nowrap;font:700 36px/1 var(--display);color:#fff;background:#8C6A4A;padding:12px 26px;border-radius:999px;box-shadow:0 4px 0 rgba(90,74,48,.2)}
     `));
-    const C={x:960,y:610};
-    const RINGS=[ // rx, ry, color, etiqueta, animales [id, ángulo en grados]
-      [330,190,"#5FA040","familia muy cercana",[["chimpance",0]]],
-      [580,290,"#E2A82A","familia",[["perro",200],["gato",155],["ballena",-28],["murcielago",28]]],
-      [830,395,"#9A9284","familia lejana",[["gallina",198],["trex",162],["rana",-17],["tiburon",17]]]
+    // Animales en un arco; vecinos = parientes (como en el árbol del juego)
+    const GROUPS=[
+      ["#E08A2E",["humano","chimpance","perro","lobo","gato","leon","ballena","murcielago"]],
+      ["#5FA040",["gallina","trex"]],
+      ["#29ABE2",["rana"]],
+      ["#7B7E86",["tiburon"]]
     ];
-    const root=el("div",{class:"tf"});
+    const ids=GROUPS.flatMap(g=>g[1]), N=ids.length;
+    const C={x:960,y:790}, RX=800, RY=480, TOP={x:960,y:760}, BASE={x:960,y:1080};
+    // Repartidos a la misma distancia a lo largo del arco (si no, en los extremos se pisan)
+    const pt=t=>{ const a=t*Math.PI/180; return {x:C.x+RX*Math.cos(a),y:C.y-RY*Math.sin(a)}; };
+    const A0=184, A1=-4, M=400, acc=[0]; let prev=pt(A0);
+    for(let j=1;j<=M;j++){ const q=pt(A0+(A1-A0)*j/M); acc.push(acc[j-1]+Math.hypot(q.x-prev.x,q.y-prev.y)); prev=q; }
+    const pos={}; ids.forEach((id,i)=>{ const want=acc[M]*i/(N-1); let j=acc.findIndex(v=>v>=want); if(j<0) j=M; pos[id]=pt(A0+(A1-A0)*j/M); });
     const svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","0 0 1920 1080"); svg.setAttribute("class","tf-svg");
-    root.append(el("h1",{class:"fam-h1 tf-h1",html:"¡Todos somos <span>familia</span>!"}),svg);
-    const later=[];
-    RINGS.forEach(([rx,ry,col,lab,ans],r)=>{
-      const e=document.createElementNS(NS,"ellipse");
-      Object.entries({cx:C.x,cy:C.y,rx,ry,fill:"none",stroke:col,"stroke-width":8,"stroke-dasharray":"4 22","stroke-linecap":"round"}).forEach(([k,v])=>e.setAttribute(k,v));
-      svg.append(e);
-      const l=el("div",{class:"tf-lab",style:{left:C.x+"px",top:(C.y-ry)+"px",background:col},text:lab}); root.append(l);
-      later.push([l,r]);
-      for(const [id,ang] of ans){
-        const a=ang*Math.PI/180, x=C.x+rx*Math.cos(a), y=C.y+ry*Math.sin(a);
-        const d=el("div",{class:"tf-an",style:{left:x+"px",top:y+"px"}},pic(APP,id,170,140),el("span",{text:window.TREE.names[id]}));
-        root.append(d); later.push([d,r]);
-      }
+    const path=(d,w,col,delay,dur)=>{ const p=document.createElementNS(NS,"path");
+      Object.entries({d,stroke:col,"stroke-width":w,"stroke-linecap":"round",fill:"none"}).forEach(([k,v])=>p.setAttribute(k,v));
+      svg.append(p);
+      if(!red&&p.animate){ const L=p.getTotalLength?0:0; p.setAttribute("pathLength","1"); p.style.strokeDasharray="1 1";
+        const an=p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:dur,delay,easing:"ease-out",fill:"both"});
+        an.finished.then(()=>{ an.cancel(); p.style.strokeDasharray=""; p.removeAttribute("pathLength"); }).catch(()=>{}); }
+      return p; };
+    const curve=(a,b)=>`M${a.x} ${a.y} Q${a.x} ${(a.y+b.y)/2} ${b.x} ${b.y}`;
+    const BROWN="#8C6A4A";
+    path(`M${BASE.x} ${BASE.y} L${TOP.x} ${TOP.y}`,70,BROWN,100,500);           // tronco
+    const root=el("div",{class:"tf"});
+    root.append(el("h1",{class:"fam-h1 tf-h1",html:"¡Todos venimos de la misma <span>familia</span>!"}),
+      el("p",{class:"tf-sub",html:"¿Cómo lo sabemos? ¡Leyendo el <b>ADN</b>, como ustedes hoy!"}),svg);
+    let k=0;
+    GROUPS.forEach(([col,mem],g)=>{
+      const mx=mem.reduce((s,id)=>s+pos[id].x,0)/mem.length, my=mem.reduce((s,id)=>s+pos[id].y,0)/mem.length;
+      const fork=mem.length>1?{x:TOP.x+(mx-TOP.x)*.5,y:TOP.y+(my-TOP.y)*.5}:null;
+      if(fork) path(curve(TOP,fork),30,BROWN,600+g*120,450);
+      mem.forEach(id=>{
+        const from=fork||TOP, d=1050+g*120+k*70;
+        path(curve(from,pos[id]),fork?14:22,col,d,450);
+        const c=el("div",{class:"tf-an",style:{left:pos[id].x+"px",top:pos[id].y+"px"}},pic(APP,id,112,92),el("span",{text:window.TREE.names[id]}));
+        root.append(c); pop(APP,c,d+380); k++;
+      });
     });
-    root.append(el("div",{class:"tf-me"},el("div",{class:"fam-pic",style:{width:"220px",height:"198px"},html:kidsSVG(APP,2,true)}),el("b",{text:"¡nosotros!"})));
-    root.append(el("div",{class:"tf-msg fam-paper",html:"Todos los seres vivos somos <b>parientes</b>: unos cerca y otros lejos."}));
+    root.append(el("div",{class:"tf-root",text:"hace muchísimo tiempo"}));
     box.append(root);
-    later.forEach(([d,r],i)=>pop(APP,d,400+r*700+i*60));
     root.addEventListener("click",()=>APP.next());
     return { next(){ return false; }, prev(){ return false; }, destroy(){} };
   }

@@ -61,7 +61,7 @@ Escribe **solo tus archivos**. No toques `core.js` ni `index.html`; si necesitas
 | 75 | busca-familia | Instrucciones actividad 2 (10 grupos, parejas) | familia.js |
 | 77 | actividad-2 | Separador «¡A jugar! Actividad 2: busquen a su pareja» (aquí se hace la actividad; sin pasos) | familia.js |
 | 80 | arbol | Árbol: parejas + el adulto saca murciélago, T-rex, cocodrilo, rana, tiburón | familia.js |
-| 85 | todos-familia | (fija) ¡Todos somos familia! Nosotros en el centro y los animales del árbol en anillos (cercana → lejana) | familia.js |
+| 85 | todos-familia | (fija) ¡Todos venimos de la misma familia! Un tronco común que se abre en ramas con los animales del juego | familia.js |
 | 90 | cierre | ¡Hoy han sido científicos! | cierre.js |
 | 95 | video | OPCIONAL: «¡Así lo preparamos en casa!», vídeo `video/experimento.mp4` en bucle (clic = pausa). Si el archivo no existe, la escena no aparece y todo termina en cierre | video.js |
 
